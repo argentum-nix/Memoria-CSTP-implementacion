@@ -1,32 +1,39 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
+#include <iostream>
+
 class Vehicle
 {
 public:
     Vehicle();
     ~Vehicle();
-    void setVehicleID();
-    void setVehicleType();
-    void setVehicleLocation();
-    void setVehiclePrepTime();
-    void setVehicleTakeoffTime();
-    void setVehicleLandingTime();
+    void setVehicleID(int id);
+    void setVehicleType(int type);
+    void setVehicleCapacity(int q);
+    void setVehicleLocation(int node_id);
+    void setVehiclePrepTime(float td);
+    void setVehicleTakeoffTime(float tds);
+    void setVehicleLandingTime(float tat);
 
     int getVehicleID();
     int getVehicleType();
+    int getVehicleCapacity();
     int getVehicleLocation();
-    int getVehiclePrepTime();
-    int getVehicleTakeoffTime();
-    int getVehicleLandingTime();
+    float getVehiclePrepTime();
+    float getVehicleTakeoffTime();
+    float getVehicleLandingTime();
+
+    void printData();
 
 private:
     int veh_id_m;
-    char veh_type_e;
+    int veh_capacity_q;
+    int veh_type_e;
     int veh_curlocation;
-    int veh_preptime_TDme;
-    int veh_takeoff_TDSe;
-    int veh_land_TATe;
+    float veh_preptime_TDme;
+    float veh_takeoff_TDSe;
+    float veh_land_TATe;
 };
 
 #endif

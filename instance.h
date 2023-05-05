@@ -27,6 +27,15 @@ public:
     void printDeteriorationTimeMatrix();
     void printFactorSeverityMatrix();
 
+    void printCasualty(int id);
+    void printCasualtyVector();
+    void printHospital(int id);
+    void printHospitalVector();
+
+    void printVehicle(int id, int type);
+    void printAmbulances();
+    void printHelicopters();
+
 private:
     std::string instance_txt_name;
     std::string network_txt_name;

@@ -1,5 +1,4 @@
 #include "instance.h"
-#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -53,6 +52,59 @@ void Instance::printFactorSeverityMatrix()
     DEBUG(this->factor_severity_PG[1][0]);
     DEBUG(this->factor_severity_PG[2][0]);
 }
+
+void Instance::printHospital(int id)
+{
+    hospitals[id - 1].printData();
+}
+
+void Instance::printHospitalVector()
+{
+    for (unsigned int i = 1; i <= hospitals.size(); i++)
+    {
+        printHospital(i);
+    }
+}
+
+void Instance::printCasualty(int id)
+{
+    casualties[id - 1].printData();
+}
+
+void Instance::printCasualtyVector()
+{
+    for (unsigned int i = 1; i <= casualties.size(); i++)
+    {
+        printCasualty(i);
+    }
+}
+
+void Instance::printVehicle(int id, int type)
+{
+    if (type == 0)
+    {
+        ambulance_fleet[id - 1].printData();
+    }
+    else if (type == 1)
+    {
+        helicopter_fleet[id - 1].printData();
+    }
+}
+void Instance::printAmbulances()
+{
+    for (unsigned int i = 1; i <= ambulance_fleet.size(); i++)
+    {
+        printVehicle(i, 0);
+    }
+}
+void Instance::printHelicopters()
+{
+    for (unsigned int i = 1; i <= helicopter_fleet.size(); i++)
+    {
+        printVehicle(i, 1);
+    }
+}
+
 // Instance class destructor
 Instance::~Instance() {}
 
@@ -75,10 +127,8 @@ int Instance::loadNetwork()
         while (res[0] != '*')
         {
             getline(cin, res);
-            cout << res << endl;
         }
         cin >> count;
-        DEBUG(count);
         // resize the vectors to number of nodes in the network
 
         travel_time_ambulance.resize(count, vector<float>(count, 0.0));
@@ -205,34 +255,73 @@ int Instance::loadInstance()
             // Section 5: Hospitals
             else if (txt_section == 4)
             {
-                cout << "Hospitales:\n";
                 for (int line = 0; line < count; line++)
                 {
-                    cin >> a >> b >> c >> d;
+                    cin >> a >> b >> c >> d >> e;
+                    Hospital hospital;
+                    hospital.setHospitalID(a);
+                    hospital.setHospitalLocation(b);
+                    hospital.setHospitalMaxCapacity(1, c);
+                    hospital.setHospitalMaxCapacity(2, d);
+                    hospital.setHospitalMaxCapacity(3, e);
+                    hospital.setHospitalCurCapacity(1, c);
+                    hospital.setHospitalCurCapacity(2, d);
+                    hospital.setHospitalCurCapacity(3, e);
+                    this->hospitals.push_back(hospital);
                 }
             }
             // Section 5: Vehicles
             else if (txt_section == 5)
             {
-                cout << "Vehiculos:\n";
                 for (int line = 0; line < count; line++)
                 {
                     cin >> a >> b >> c >> d >> e >> f >> g;
+                    Vehicle vehicle;
+                    vehicle.setVehicleType(a);
+                    vehicle.setVehicleID(b);
+                    vehicle.setVehicleLocation(c);
+                    vehicle.setVehicleCapacity(d);
+                    vehicle.setVehiclePrepTime(e);
+                    vehicle.setVehicleLandingTime(f);
+                    vehicle.setVehicleTakeoffTime(g);
+                    if (vehicle.getVehicleType() == 0)
+                    {
+                        this->ambulance_fleet.push_back(vehicle);
+                    }
+                    else if (vehicle.getVehicleType() == 1)
+                    {
+                        this->helicopter_fleet.push_back(vehicle);
+                    }
                 }
             }
             // Section 7: Casualties
             else if (txt_section == 6)
             {
-                cout << "Victimas:\n";
                 for (int line = 0; line < count; line++)
                 {
-                    cin >> a >> b >> c >> d >> e >> f;
+                    cin >> a >> b >> c >> d >> e;
+                    Casualty casualty;
+                    casualty.setCasualtyLocation(a);
+                    casualty.setCasualtyID(b);
+                    casualty.setCasualtyAge(c);
+                    casualty.setCasualtyGravity(d);
+                    casualty.setCasualtyAppearTime(e);
+                    casualty.setCasualtyAssignedVehicle(-1);
+                    casualty.setCasualtyAssignedHospital(-1);
+                    this->casualties.push_back(casualty);
                 }
             }
         }
+
+        printAmbulances();
+        printHelicopters();
+        printHospitalVector();
+        printCasualtyVector();
+
         cin.rdbuf(cinbuf);
         in_file.close();
         return LOADING_OK;
     }
+
     return LOADING_FAILED;
 }

@@ -1,28 +1,30 @@
 #ifndef HOSPITAL_H
 #define HOSPITAL_H
 
+#include <vector>
+#include <iostream>
+
 class Hospital
 {
 public:
     Hospital();
     ~Hospital();
-    void setHospitalID();
-    void setHospitalLocation();
-    void setHospitalMaxCapacity();
-    void setHospitalCurCapacity(int g);
+    void setHospitalID(int id);
+    void setHospitalLocation(int node_id);
+    void setHospitalMaxCapacity(int g, int k);
+    void setHospitalCurCapacity(int g, int k);
 
     int getHospitalID();
-    int getHospitalLocation();
-    int getHospitalMaxCapacity();
+    int getHospitalMaxCapacity(int g);
     int getHospitalCurCapacity(int g);
+
+    void printData();
 
 private:
     int hosp_id_h;
     int hosp_location;
-    int hosp_maxcap_K;
-    int hosp_curcap_g1;
-    int hosp_curcap_g2;
-    int hosp_curcap_g3;
+    std::vector<int> hosp_maxcapacity{0, 0, 0};
+    std::vector<int> hosp_curcapacity{0, 0, 0};
 };
 
 #endif
