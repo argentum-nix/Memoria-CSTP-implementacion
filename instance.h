@@ -3,32 +3,44 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 #include "vehicle.h"
 #include "hospital.h"
 #include "casualty.h"
 
-#define LOADING_INSTANCE_FAILED -1
-#define LOADING_INSTANCE_OK 0
+#define LOADING_FAILED -1
+#define LOADING_OK 0
 
 #define DEBUG(x) cout << #x << " = " << x << endl
 
 class Instance
 {
 public:
-    Instance(std::string instance_name, std::string instance_directory);
+    Instance(std::string instance_directory, std::string instance_name, std::string network_name);
     ~Instance();
-    int loadData();
+    int loadInstance();
+    int loadNetwork();
+
+    void printStabilizationTimeMatrix();
+    void printDeteriorationParamMatrix();
+    void printDeteriorationTimeMatrix();
+    void printFactorSeverityMatrix();
 
 private:
-    std::string name;
-    std::string dir;
+    std::string instance_txt_name;
+    std::string network_txt_name;
+    std::string load_directory;
 
     float stabilization_time_tp[3][3];
     float deterioration_funct_params[3][3];
     float deterioration_time_pi[3][1];
     float factor_severity_PG[3][1];
 
+    std::map<int, int> node_id_correlation_map;
+
+    std::vector<std::vector<float>> travel_time_ambulance;
+    std::vector<std::vector<float>> travel_time_helicopter;
     std::vector<Vehicle> ambulance_fleet;
     std::vector<Vehicle> helicopter_fleet;
     std::vector<Hospital> hospitals;
