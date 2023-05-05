@@ -14,43 +14,73 @@ Instance::Instance(std::string instance_directory, std::string instance_name, st
     DEBUG(load_directory);
     DEBUG(network_txt_name);
 }
+void Instance::setDeteriorationTime(float time, int g)
+{
+    deterioration_time_pi[g][0] = time;
+}
+
+void Instance::setStabilizationTime(float st1, float st2, float st3, int g)
+{
+    stabilization_time_tp[g][0] = st1;
+    stabilization_time_tp[g][1] = st2;
+    stabilization_time_tp[g][2] = st3;
+}
+void Instance::setDetFunctParams(float kappa, float phi, float w, int g)
+{
+    deterioration_funct_params[g][0] = kappa;
+    deterioration_funct_params[g][1] = phi;
+    deterioration_funct_params[g][2] = w;
+}
+
+void Instance::setFactorSeverity(float factor, int g)
+{
+    factor_severity_PG[g][0] = factor;
+}
+
+void Instance::addHopsital(Hospital h)
+{
+    hospitals.push_back(h);
+}
+
+void Instance::addCasualty(Casualty c)
+{
+    casualties.push_back(c);
+}
+
+void Instance::addVehicle(Vehicle v)
+{
+    if (v.getVehicleType() == TYPE_AMBULANCE)
+    {
+        ambulance_fleet.push_back(v);
+    }
+    else if (v.getVehicleType() == TYPE_HELICOPTER)
+    {
+        helicopter_fleet.push_back(v);
+    }
+}
 
 void Instance::printStabilizationTimeMatrix()
 {
-    DEBUG(this->stabilization_time_tp[0][0]);
-    DEBUG(this->stabilization_time_tp[0][1]);
-    DEBUG(this->stabilization_time_tp[0][2]);
-    DEBUG(this->stabilization_time_tp[1][0]);
-    DEBUG(this->stabilization_time_tp[1][1]);
-    DEBUG(this->stabilization_time_tp[1][2]);
-    DEBUG(this->stabilization_time_tp[2][0]);
-    DEBUG(this->stabilization_time_tp[2][1]);
-    DEBUG(this->stabilization_time_tp[2][2]);
+    for (int i = 0; i < 3; i++)
+    {
+        cout << "Stabilization Time for g=:" << i + 1 << ": [" << stabilization_time_tp[i][0] << ", " << stabilization_time_tp[i][1] << ", " << stabilization_time_tp[i][2] << "]" << endl;
+    }
 }
 
 void Instance::printDeteriorationParamMatrix()
 {
-    DEBUG(this->deterioration_funct_params[0][0]);
-    DEBUG(this->deterioration_funct_params[0][1]);
-    DEBUG(this->deterioration_funct_params[0][2]);
-    DEBUG(this->deterioration_funct_params[1][0]);
-    DEBUG(this->deterioration_funct_params[1][1]);
-    DEBUG(this->deterioration_funct_params[1][2]);
-    DEBUG(this->deterioration_funct_params[2][0]);
-    DEBUG(this->deterioration_funct_params[2][1]);
-    DEBUG(this->deterioration_funct_params[2][2]);
+    for (int i = 0; i < 3; i++)
+    {
+        cout << "Deterioration Funct Params for g=:" << i + 1 << ": [" << deterioration_funct_params[i][0] << ", " << deterioration_funct_params[i][1] << ", " << deterioration_funct_params[i][2] << "]" << endl;
+    }
 }
 void Instance::printDeteriorationTimeMatrix()
 {
-    DEBUG(this->deterioration_time_pi[0][0]);
-    DEBUG(this->deterioration_time_pi[1][0]);
-    DEBUG(this->deterioration_time_pi[2][0]);
+    cout << "Deterioration Time for (g=1,g=2,g=3): [" << deterioration_time_pi[0][0] << ", " << deterioration_time_pi[1][0] << ", " << deterioration_time_pi[2][0] << "]" << endl;
 }
 void Instance::printFactorSeverityMatrix()
 {
-    DEBUG(this->factor_severity_PG[0][0]);
-    DEBUG(this->factor_severity_PG[1][0]);
-    DEBUG(this->factor_severity_PG[2][0]);
+    cout << "Severity values for (g=1,g=2,g=3): [" << factor_severity_PG[0][0] << ", " << factor_severity_PG[1][0] << ", " << factor_severity_PG[2][0] << "]" << endl;
 }
 
 void Instance::printHospital(int id)
@@ -81,11 +111,11 @@ void Instance::printCasualtyVector()
 
 void Instance::printVehicle(int id, int type)
 {
-    if (type == 0)
+    if (type == TYPE_AMBULANCE)
     {
         ambulance_fleet[id - 1].printData();
     }
-    else if (type == 1)
+    else if (type == TYPE_HELICOPTER)
     {
         helicopter_fleet[id - 1].printData();
     }
@@ -214,11 +244,8 @@ int Instance::loadInstance()
                 for (int line = 0; line < count; line++)
                 {
                     cin >> a >> b >> c;
-                    this->stabilization_time_tp[line][0] = a;
-                    this->stabilization_time_tp[line][1] = b;
-                    this->stabilization_time_tp[line][2] = c;
+                    setStabilizationTime(a, b, c, line);
                 }
-                printStabilizationTimeMatrix();
             }
             // Section 2: Factor of Severity PG
             else if (txt_section == 1)
@@ -226,9 +253,8 @@ int Instance::loadInstance()
                 for (int line = 0; line < count; line++)
                 {
                     cin >> a;
-                    this->factor_severity_PG[line][0] = a;
+                    setFactorSeverity(a, line);
                 }
-                printFactorSeverityMatrix();
             }
             // Section 3: Deterioration function parameters
             else if (txt_section == 2)
@@ -236,11 +262,8 @@ int Instance::loadInstance()
                 for (int line = 0; line < count; line++)
                 {
                     cin >> a >> b >> c;
-                    this->deterioration_funct_params[line][0] = a;
-                    this->deterioration_funct_params[line][1] = b;
-                    this->deterioration_funct_params[line][2] = c;
+                    setDetFunctParams(a, b, c, line);
                 }
-                printDeteriorationParamMatrix();
             }
             // Section 4: Deterioration time PI
             else if (txt_section == 3)
@@ -248,9 +271,8 @@ int Instance::loadInstance()
                 for (int line = 0; line < count; line++)
                 {
                     cin >> a;
-                    this->deterioration_time_pi[line][0] = a;
+                    setDeteriorationTime(a, line);
                 }
-                printDeteriorationTimeMatrix();
             }
             // Section 5: Hospitals
             else if (txt_section == 4)
@@ -267,7 +289,7 @@ int Instance::loadInstance()
                     hospital.setHospitalCurCapacity(1, c);
                     hospital.setHospitalCurCapacity(2, d);
                     hospital.setHospitalCurCapacity(3, e);
-                    this->hospitals.push_back(hospital);
+                    addHopsital(hospital);
                 }
             }
             // Section 5: Vehicles
@@ -284,14 +306,7 @@ int Instance::loadInstance()
                     vehicle.setVehiclePrepTime(e);
                     vehicle.setVehicleLandingTime(f);
                     vehicle.setVehicleTakeoffTime(g);
-                    if (vehicle.getVehicleType() == 0)
-                    {
-                        this->ambulance_fleet.push_back(vehicle);
-                    }
-                    else if (vehicle.getVehicleType() == 1)
-                    {
-                        this->helicopter_fleet.push_back(vehicle);
-                    }
+                    addVehicle(vehicle);
                 }
             }
             // Section 7: Casualties
@@ -308,11 +323,14 @@ int Instance::loadInstance()
                     casualty.setCasualtyAppearTime(e);
                     casualty.setCasualtyAssignedVehicle(-1);
                     casualty.setCasualtyAssignedHospital(-1);
-                    this->casualties.push_back(casualty);
+                    addCasualty(casualty);
                 }
             }
         }
-
+        printStabilizationTimeMatrix();
+        printDeteriorationParamMatrix();
+        printFactorSeverityMatrix();
+        printDeteriorationTimeMatrix();
         printAmbulances();
         printHelicopters();
         printHospitalVector();

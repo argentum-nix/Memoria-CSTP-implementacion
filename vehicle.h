@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+#define TYPE_HELICOPTER 1
+#define TYPE_AMBULANCE 0
+
 class Vehicle
 {
 public:

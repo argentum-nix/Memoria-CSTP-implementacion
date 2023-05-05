@@ -22,16 +22,23 @@ public:
     int loadInstance();
     int loadNetwork();
 
+    void setDeteriorationTime(float time, int g);
+    void setFactorSeverity(float factor, int g);
+    void setDetFunctParams(float kappa, float phi, float w, int g);
+    void setStabilizationTime(float st1, float st2, float st3, int g);
+
+    void addHopsital(Hospital h);
+    void addVehicle(Vehicle v);
+    void addCasualty(Casualty c);
+
     void printStabilizationTimeMatrix();
     void printDeteriorationParamMatrix();
     void printDeteriorationTimeMatrix();
     void printFactorSeverityMatrix();
-
     void printCasualty(int id);
     void printCasualtyVector();
     void printHospital(int id);
     void printHospitalVector();
-
     void printVehicle(int id, int type);
     void printAmbulances();
     void printHelicopters();

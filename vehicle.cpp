@@ -74,11 +74,11 @@ float Vehicle::getVehicleLandingTime()
 
 void Vehicle::printData()
 {
-    if (veh_type_e == 0)
+    if (veh_type_e == TYPE_AMBULANCE)
     {
         std::cout << "Vehicle ID: " << veh_id_m << " Type: Ambulance ";
     }
-    else if (veh_type_e == 1)
+    else if (veh_type_e == TYPE_HELICOPTER)
     {
         std::cout << "Vehicle ID: " << veh_id_m << " Type: Helicopter ";
     }
