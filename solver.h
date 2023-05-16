@@ -11,6 +11,6 @@ public:
 
 private:
     Instance *instance;
-}
+};
 
 #endif
