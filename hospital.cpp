@@ -39,6 +39,12 @@ int Hospital::getHospitalCurCapacity(int g)
 
 void Hospital::printData()
 {
-    std::cout << "Hospital ID: " << hosp_id_h << " Location: " << hosp_location << " Max Capacity: [" << hosp_maxcapacity[0] << ", " << hosp_maxcapacity[1] << ", " << hosp_maxcapacity[2] << "]";
-    std::cout << " Cur Capacity: [" << hosp_curcapacity[0] << ", " << hosp_curcapacity[1] << ", " << hosp_curcapacity[2] << "]" << std::endl;
+    std::cout << "Hospital ID: " << hosp_id_h;
+    std::cout << " Location: " << hosp_location;
+    std::cout << " Max Capacity: [" << hosp_maxcapacity[0] << ", ";
+    std::cout << hosp_maxcapacity[1] << ", ";
+    std::cout << hosp_maxcapacity[2] << "]";
+    std::cout << " Cur Capacity: [" << hosp_curcapacity[0] << ", ";
+    std::cout << hosp_curcapacity[1] << ", ";
+    std::cout << hosp_curcapacity[2] << "]" << std::endl;
 }

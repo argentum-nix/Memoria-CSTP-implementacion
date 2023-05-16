@@ -1,9 +1,7 @@
 #include "casualty.h"
 
-// Casualty class constructor
 Casualty::Casualty() {}
 
-// Casualty class destructor
 Casualty::~Casualty() {}
 
 void Casualty::setCasualtyID(int id)
@@ -93,7 +91,14 @@ float Casualty::getCasualtyTimeToHeliport()
 
 void Casualty::printData()
 {
-    std::cout << "Casualty ID: " << cas_id_k << " Age: " << cas_age_a << " Gravity: " << cas_curgravity_g << " Location: " << cas_curlocation;
-    std::cout << " Wait Time: " << cas_wait_time << " Appear Time: " << cas_appear_time << " Distance to Heliport: " << cas_time_to_heliport;
-    std::cout << " Vehicle: " << cas_assigned_veh << " Hospital: " << cas_assigned_hosp << " Priority: " << cas_priority_lambda << std::endl;
+    std::cout << "Casualty ID: " << cas_id_k;
+    std::cout << " Age: " << cas_age_a;
+    std::cout << " Gravity: " << cas_curgravity_g;
+    std::cout << " Location: " << cas_curlocation;
+    std::cout << " Wait Time: " << cas_wait_time;
+    std::cout << " Appear Time: " << cas_appear_time;
+    std::cout << " Distance to Heliport: " << cas_time_to_heliport;
+    std::cout << " Vehicle: " << cas_assigned_veh;
+    std::cout << " Hospital: " << cas_assigned_hosp;
+    std::cout << " Priority: " << cas_priority_lambda << std::endl;
 }

@@ -82,6 +82,9 @@ void Vehicle::printData()
     {
         std::cout << "Vehicle ID: " << veh_id_m << " Type: Helicopter ";
     }
-    std::cout << "Capacity: " << veh_capacity_q << " Location: " << veh_curlocation << " Prep Time: " << veh_preptime_TDme;
-    std::cout << " Takeoff Time: " << veh_takeoff_TDSe << " Landing Time: " << veh_land_TATe << std::endl;
+    std::cout << "Capacity: " << veh_capacity_q;
+    std::cout << " Location: " << veh_curlocation;
+    std::cout << " Prep Time: " << veh_preptime_TDme;
+    std::cout << " Takeoff Time: " << veh_takeoff_TDSe;
+    std::cout << " Landing Time: " << veh_land_TATe << std::endl;
 }

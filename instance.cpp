@@ -64,7 +64,10 @@ void Instance::printStabilizationTimeMatrix()
 {
     for (int i = 0; i < 3; i++)
     {
-        cout << "Stabilization Time for g=:" << i + 1 << ": [" << stabilization_time_tp[i][0] << ", " << stabilization_time_tp[i][1] << ", " << stabilization_time_tp[i][2] << "]" << endl;
+        cout << "Stabilization Time for g=:" << i + 1;
+        cout << ": [" << stabilization_time_tp[i][0] << ", ";
+        cout << stabilization_time_tp[i][1] << ", ";
+        cout << stabilization_time_tp[i][2] << "]" << endl;
     }
 }
 
@@ -72,12 +75,16 @@ void Instance::printDeteriorationParamMatrix()
 {
     for (int i = 0; i < 3; i++)
     {
-        cout << "Deterioration Funct Params for g=:" << i + 1 << ": [" << deterioration_funct_params[i][0] << ", " << deterioration_funct_params[i][1] << ", " << deterioration_funct_params[i][2] << "]" << endl;
+        cout << "Deterioration Funct Params for g=:" << i + 1;
+        cout << ": [" << deterioration_funct_params[i][0] << ", ";
+        cout << deterioration_funct_params[i][1] << ", ";
+        cout << deterioration_funct_params[i][2] << "]" << endl;
     }
 }
 void Instance::printDeteriorationTimeMatrix()
 {
-    cout << "Deterioration Time for (g1-2,g2-3): [" << deterioration_time_pi[0][0] << ", " << deterioration_time_pi[1][0] << "]" << endl;
+    cout << "Deterioration Time for (g1-2,g2-3): [" << deterioration_time_pi[0][0];
+    cout << ", " << deterioration_time_pi[1][0] << "]" << endl;
 }
 
 void Instance::printHospital(int id)

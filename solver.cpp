@@ -2,10 +2,10 @@
 #include <math.h>
 using namespace std;
 
-//  class constructor
 Solver::Solver(Instance *in)
 {
     instance = in;
+    // TODO: delete, temp.
     cout << calculatePriority(5, 1) << endl;
 }
 
