@@ -32,11 +32,6 @@ void Instance::setDetFunctParams(float kappa, float phi, float w, int g)
     deterioration_funct_params[g][2] = w;
 }
 
-void Instance::setFactorSeverity(float factor, int g)
-{
-    factor_severity_PG[g][0] = factor;
-}
-
 void Instance::addHopsital(Hospital h)
 {
     hospitals.push_back(h);
@@ -77,10 +72,6 @@ void Instance::printDeteriorationParamMatrix()
 void Instance::printDeteriorationTimeMatrix()
 {
     cout << "Deterioration Time for (g=1,g=2,g=3): [" << deterioration_time_pi[0][0] << ", " << deterioration_time_pi[1][0] << ", " << deterioration_time_pi[2][0] << "]" << endl;
-}
-void Instance::printFactorSeverityMatrix()
-{
-    cout << "Severity values for (g=1,g=2,g=3): [" << factor_severity_PG[0][0] << ", " << factor_severity_PG[1][0] << ", " << factor_severity_PG[2][0] << "]" << endl;
 }
 
 void Instance::printHospital(int id)
@@ -235,7 +226,7 @@ int Instance::loadInstance()
         {
             getline(cin, res);
         }
-        for (int txt_section = 0; txt_section < 7; txt_section++)
+        for (int txt_section = 0; txt_section < 6; txt_section++)
         {
             cin >> count;
             // Section 1: Time to Stabilize TP
@@ -247,17 +238,8 @@ int Instance::loadInstance()
                     setStabilizationTime(a, b, c, line);
                 }
             }
-            // Section 2: Factor of Severity PG
-            else if (txt_section == 1)
-            {
-                for (int line = 0; line < count; line++)
-                {
-                    cin >> a;
-                    setFactorSeverity(a, line);
-                }
-            }
             // Section 3: Deterioration function parameters
-            else if (txt_section == 2)
+            else if (txt_section == 1)
             {
                 for (int line = 0; line < count; line++)
                 {
@@ -266,7 +248,7 @@ int Instance::loadInstance()
                 }
             }
             // Section 4: Deterioration time PI
-            else if (txt_section == 3)
+            else if (txt_section == 2)
             {
                 for (int line = 0; line < count; line++)
                 {
@@ -275,7 +257,7 @@ int Instance::loadInstance()
                 }
             }
             // Section 5: Hospitals
-            else if (txt_section == 4)
+            else if (txt_section == 3)
             {
                 for (int line = 0; line < count; line++)
                 {
@@ -293,7 +275,7 @@ int Instance::loadInstance()
                 }
             }
             // Section 5: Vehicles
-            else if (txt_section == 5)
+            else if (txt_section == 4)
             {
                 for (int line = 0; line < count; line++)
                 {
@@ -310,7 +292,7 @@ int Instance::loadInstance()
                 }
             }
             // Section 7: Casualties
-            else if (txt_section == 6)
+            else if (txt_section == 5)
             {
                 for (int line = 0; line < count; line++)
                 {
@@ -329,7 +311,6 @@ int Instance::loadInstance()
         }
         printStabilizationTimeMatrix();
         printDeteriorationParamMatrix();
-        printFactorSeverityMatrix();
         printDeteriorationTimeMatrix();
         printAmbulances();
         printHelicopters();

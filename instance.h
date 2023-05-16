@@ -23,7 +23,6 @@ public:
     int loadNetwork();
 
     void setDeteriorationTime(float time, int g);
-    void setFactorSeverity(float factor, int g);
     void setDetFunctParams(float kappa, float phi, float w, int g);
     void setStabilizationTime(float st1, float st2, float st3, int g);
 
@@ -34,7 +33,6 @@ public:
     void printStabilizationTimeMatrix();
     void printDeteriorationParamMatrix();
     void printDeteriorationTimeMatrix();
-    void printFactorSeverityMatrix();
     void printCasualty(int id);
     void printCasualtyVector();
     void printHospital(int id);
@@ -50,8 +48,7 @@ private:
 
     float stabilization_time_tp[3][3];
     float deterioration_funct_params[3][3];
-    float deterioration_time_pi[3][1];
-    float factor_severity_PG[3][1];
+    float deterioration_time_pi[2][1];
 
     std::map<int, int> node_id_correlation_map;
 

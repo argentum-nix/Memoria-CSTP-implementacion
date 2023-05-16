@@ -1,0 +1,416 @@
+reset;
+
+model MFvictimas.mod; 
+data MFvictimas.dat;
+
+
+#OPCIONES DE RESOLUCIÓN
+option solver cplex;
+option show_stats 1;
+
+param contador1 default 0;
+param contador2 default 0;
+
+let contador1:= 1;
+let contador2:= 1;
+
+let contador1 := 1000001;
+let contador2 := 1000001;
+
+
+param G11 := 14.98;
+param G21 := 42;
+param G31 := 93.3;
+param G12 := 15.04;
+param G22 := 29.9;
+param G32 := 62.14;
+param G13 := 9.3;
+param G23 := 27.6;
+param G33 := 65;
+
+set VA default {}; #Victimas atendidas
+
+let TT:= 110;
+
+for {j in Victimas}{
+	let TE[j]:= TT-TA[j];
+}; 
+
+
+for {j in Victimas: GR[j,1]=1}{
+	if EDAD[j] = 1 then
+		let TP[j]:= G11;
+	else if EDAD[j] = 2 then
+		let TP[j]:= G12;
+	else
+		let TP[j]:= G13;
+};	
+
+for {j in Victimas: GR[j,2]=1}{
+	if EDAD[j] = 1 then
+		let TP[j]:= G21;
+	else if EDAD[j] = 2 then
+		let TP[j]:= G22;
+	else
+		let TP[j]:= G23;
+};	
+
+for {j in Victimas: GR[j,3]=1}{
+	if EDAD[j] = 1 then
+		let TP[j]:= G31;
+	else if EDAD[j] = 2 then
+		let TP[j]:= G32;
+	else
+		let TP[j]:= G33;
+};	
+
+
+
+#Calculo de los pesos
+#Gravedad 1	
+for {j in Victimas: GR[j,1]=1 and TE[j] > TEmax1}{
+	let GR[j,1] := 0;
+	let GR[j,2] := 1;
+	let TA[j] := TA[j] + 2880;
+	if EDAD[j] = 1 then
+		let TP[j]:= G21;
+	else if EDAD[j] = 2 then
+		let TP[j]:= G22;
+	else
+		let TP[j]:= G23;
+};	
+
+for {j in Victimas: GR[j,1]=1 and TE[j] <= TEmax1}{
+	let Peso2[j]:= 0.1+ 0.1*2.718281^(1+0.048*TE[j]/60);
+};
+
+
+#Gravedad 2
+for {j in Victimas: GR[j,2]=1 and TE[j] > TEmax2}{
+	let GR[j,2] := 0;
+	let GR[j,3] := 1;
+	let TE[j]:= TE[j] - TEmax2;
+	let TA[j] := TA[j] + 360;
+	if EDAD[j] = 1 then
+		let TP[j]:= G31;
+	else if EDAD[j] = 2 then
+		let TP[j]:= G32;
+	else
+		let TP[j]:= G33;
+
+};
+for {j in Victimas: GR[j,2]=1 and TE[j] <= TEmax2}{
+	let Peso2[j]:= 0.4+ 0.1*2.718281^(1.6+0.374*TE[j]/60);
+};
+
+
+# Gravedad 3
+for {j in Victimas: GR[j,3]=1}{
+	let Peso2[j]:= 4.5+ 0.1*2.718281^(1.8+0.4*TE[j]/60)
+};
+
+
+for{a in Victimas, g in G: GR[a,g]=1}{
+	printf"%s %s\n", a, g > gravedad_periodo1.txt;
+};
+
+
+display Peso2; 
+
+
+let EPSILON := 0.0000001;
+display EPSILON;
+
+
+#CÁLCULO DE PARÁMETRO SX
+	for {(i,j) in (H union Hf union Victimas) cross (H union Hf union Victimas), e in E}
+		if i in Victimas then
+			if j in Victimas then
+				let Sx[i,j,e] := S[PA[i],PA[j],e];
+			else
+				let Sx[i,j,e] := S[PA[i],j,e];
+		else
+			if j in Victimas then
+				let Sx[i,j,e] := S[i,PA[j],e];
+			else
+				let Sx[i,j,e] := S[i,j,e];
+	;
+
+	for{i in (H union Hf), j in Victimas}
+	{
+		let Sx[i,j,2] := S[i,NA[j],2];
+		let Sx[j,i,2] := S[NA[j],i,2];
+	};
+
+	for{i in Victimas, j in Victimas: NA[i] = NA[j]}
+	{
+		let Sx[i,j,2] := 0;
+		let Sx[j,i,2] := 0;
+	};
+
+	display Sx > velocidad.txt;
+
+
+let N:= H union Hf union Victimas;
+
+
+#let Peso2["V1"]:= 4.5 + 0.1*2.718281^(1.8+0.4*TE["V1"]/60);
+#let Peso2["V2"]:= 1.2 + 0.1*2.718281^(2+0.374*TE["V2"]/60);
+##let Peso2["V3"]:= 0.4+ 0.1*2.718281^(1.6+0.374*TE["V3"]/60);
+#let Peso2["V4"]:= 8 + 0.1*2.718281^(2+0.4*TE["V4"]/60);
+#let Peso2["V5"]:= 0.1+ 0.1*2.718281^(1+0.048*TE["V5"]/60);
+
+#display Sx;
+
+set victim default {} ordered;
+
+
+repeat while card(VA) < card(Victimas){
+	
+	#Aqui se agregan los nuevos valores al conjunto
+	if card(Victimas2) > 5 then
+		for{i in 1..5}{
+			let victim := {i2 in Victimas2: Peso2[i2] == max{i3 in Victimas2} Peso2[i3]};
+			let VT := VT union {first(victim)};
+			let Victimas2 := Victimas2 diff {first(victim)};
+			let victim := {};
+		}	
+	else
+		for{i in 1..card(Victimas2)}{
+			let victim := {i2 in Victimas2: Peso2[i2] == max{i3 in Victimas2} Peso2[i3]};
+			let VT := VT union {first(victim)};
+			let Victimas2 := Victimas2 diff {first(victim)};
+			let victim := {};	
+		}
+	;
+
+
+	let VA := VA union VT;
+	display VT;
+	
+	#CÁLCULO DE PARÁMETRO VMAX
+	let VMAX:= ceil((card(VT)/card(M))) + 1;
+	#let VMAX := 2;
+
+
+	let TCPU:=0;
+	#SOLVER
+
+	solve ;
+
+	let TCPU:= TCPU + _solve_user_time;
+    	printf "Tiempo= %f Acumulado= %f\n", _solve_user_time, TCPU;
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTADOS DE VARIABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	printf"\n";
+	printf"Datos de la ejecución:\n";
+	printf"\n";
+	printf"Victimas atendidas:\n";
+	display VT;
+
+	printf"\n";
+	printf"Valor de tiempo de inicio de operaciones TD[m]:\n";
+	display TD;
+	display TD > resultado_periodo1.txt;
+
+	display K;
+
+
+	printf"\n";
+	printf"VALOR MÁXIMO DE LAS VUELTAS:\n";
+	display VMAX;
+
+
+	printf"VALORES DE LAS VARIABLES DE DECISIÓN:\n";
+	printf"\n";
+
+
+	for{i in VT}{
+		printf"%s",i >tabla.txt;
+		for{g in G: GR[i,g]=1}{
+			printf"\t%s",g >tabla.txt;
+		};
+		printf"\t%s\t%s\t%s", Peso2[i], TP[i], TE[i]>tabla.txt;
+		for{m in M, v in V,j in N: x[j,i,m,v]=1}{
+			if ME[m,1] = 1 then{
+				printf"\t%s",C[i] - Sx[j,i,1] >tabla.txt;
+			}else{
+				printf"\t%s",C[i] - Sx[j,i,2] - t[i] >tabla.txt;
+			}
+		};	
+		printf"\t%s", C[i] >tabla.txt;
+		printf"\t%s",beta[i] >tabla.txt;
+		for{m in M, v in V: w[i,m,v]!=0}{
+			printf"\t%s",m>tabla.txt;
+		};
+		printf"\t%s",EDAD[i] >tabla.txt;
+		printf"\t%s",TA[i] >tabla.txt;
+		for{m in M, v in V, h in H: y[i,h,m,v]!=0}{
+			printf"\t%s",h>tabla.txt;
+		};
+		printf"\n" >tabla.txt;
+	};	
+	
+
+
+
+
+	printf"Valores x[i,j,m,v]:\n";
+	for {m in M, v in V, i in N, j in N: x[i,j,m,v]!=0 and i !=j}{
+		printf"x[%s,%s,%s,%s]=%f\n",i,j,m,v,x[i,j,m,v];
+		if ME[m,1] = 1 then
+			printf"Sx[%s,%s,%s] = %s\n", i,j,1, Sx[i,j,1] > resultado_periodo1.txt;
+		else
+			printf"Sx[%s,%s,%s] = %s\n", i,j,2, Sx[i,j,2] > resultado_periodo1.txt;
+	};
+	
+	for {m in M, v in V}{
+		for{i in N, j in N: x[i,j,m,v]!=0 and i in VT}{
+			if ME[m,1] = 1 then
+				printf"%s = %s\n",i, Sx[i,j,1] > tiempo_llegada.txt;
+			else
+				printf"%s = %s\n",i, Sx[i,j,2] > tiempo_llegada.txt;
+		};
+		for{i in N, j in N: x[i,j,m,v]!=0 and j in VT}{
+			if ME[m,1] = 1 then
+				printf"%s = %s\n",j, Sx[i,j,1] > tiempo_hos.txt;
+			else
+				printf"%s = %s\n",j, Sx[i,j,2] > tiempo_hos.txt;
+		};	
+	};
+	
+
+	for{i in VT}{
+		printf"%s = %s\n", i, TP[i] > tiempo_esta.txt;
+	};	
+	
+
+	printf"Vehiculos sin movimientos\n";
+	for {m in M, v in V, i in N, j in N: x[i,j,m,v]!=0 and i =j}
+		{printf"x[%s,%s,%s,%s]=%f\n",i,j,m,v,x[i,j,m,v]};
+
+	printf"\n";
+	printf"Valores y[j,h,m,v]:\n";	
+	for {m in M, v in V, a in VT, h in H: y[a,h,m,v]!=0}{
+		printf"y[%s,%s,%s,%s]=%f\n",a,h,m,v,y[a,h,m,v];
+		printf"t[%s] = %s\n",a,t[a] > resultado_periodo1.txt;
+	};
+
+	for {m in M, v in V, a in VT, h in H: y[a,h,m,v]!=0}{
+		printf"la victima %s termino en el hospital %s \n",a,h;
+	};
+
+	printf"\n";
+	printf"Valores z[h,m,v]:\n";	
+	for {h in H, m in M, v in V: z[h,m,v]!=0}{
+		printf"z[%s,%s,%s]=%f\n",h,m,v,z[h,m,v]};
+
+	for {h in H, m in M, v in V: z[h,m,v]!=0 and v = VMAX}{
+		let O[m] := h;
+	};
+
+
+
+	printf"\n";
+	printf"Valores w[j,m,v]:\n";
+	for {m in M, v in V, j in VT: w[j,m,v]!=0}{
+		printf"w[%s,%s,%s]=%f\n",j,m,v,w[j,m,v];
+	};
+
+	for {m in M, v in V, j in VT: w[j,m,v]!=0}{
+		printf"la victima %s fue transportada por el vehiculo %s \n",j,m;
+	};
+	
+	for {m in M, v in V, j in VT: w[j,m,v]!=0}{
+		printf"%s vehiculo %s \n",j,m > resultado_periodo1.txt;
+		printf"%s vuelta %s \n",j,v > resultado_periodo1.txt;
+		printf"%s vehiculo %s \n",j,m > vehiculoperiodo1.txt;
+		printf"%s vuelta %s \n",j,v > periodo_periodo1.txt;
+	};
+
+	
+	printf"\n";
+	printf"VALORES DE TIEMPO:\n";
+	printf"\n";
+	
+	
+	printf"Cálculo de tiempos para cada vuelta:\n";
+	display {m in M, v in V: T[m,v]!=0 } T[m,v];
+
+	for {m in M, v in V: T[m,v] > 0 and v = VMAX}{
+		if ME[m,1] = 1 then
+			let TD[m] := T[m,v];
+		else	
+			let TD[m] := T[m,v] + 0.75;
+	};
+
+
+
+	printf"Cálculo de tiempo de recolección para cada víctima:\n";
+	display {a in VT: C[a]>= 1e-6} C[a] > resultado_periodo1.txt;
+
+	for {a in VT}{
+	printf " %s %s\n", a, C[a] > estabilizacion_periodo1.txt;
+	};
+
+	printf"Tiempo que se demora la víctima j en llegar al hospital:\n";
+	display {a in VT: beta[a]>= 1e-6} beta[a] > resultado_periodo1.txt;
+
+	for {a in VT}{
+	printf " %s %s\n", a, beta[a] > beta_periodo1.txt;
+	};
+
+	printf"Hospitales ficticios utilizados:\n";
+	display {h in H: F[h]>= 1e-6} F[h];
+
+
+
+	for {m in M, v in V, a in VT, h in H: y[a,h,m,v]!=0 and GR[a,1]=1}{
+		if K[h,1] > 0 then
+			let K[h,1] := K[h,1] - 1;
+	};
+
+	for {m in M, v in V, a in VT, h in H: y[a,h,m,v]!=0 and GR[a,2]=1}{
+		if K[h,2] > 0 then
+			let K[h,2] := K[h,2] - 1;
+	};
+
+	for {m in M, v in V, a in VT, h in H: y[a,h,m,v]!=0 and GR[a,3]=1}{
+		if K[h,3] > 0 then
+			let K[h,3] := K[h,3] - 1;
+	};
+
+
+	printf"\n";
+	printf"Tiempo real en que cada victima llega al hospital:\n";
+	for {j in VT}{
+		let TV[j] := TT+ beta[j];
+	};
+
+	display TV;
+	printf"\n";
+	printf"Datos ha actualizar:\n";
+	display TD;
+	printf"\n";
+	display O;
+	printf"\n";
+	display K;
+	printf"\n";
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RESULTADOS FUNCIÓN OBJETIVOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	printf"VALORES INDIVIDUALES DE LA FUNCIÓN OBJETIVO:\n";
+	printf"\n";
+	printf"Tiempo total en que todas las víctimas son llevadas a los hospitales:\n";
+	display sum{j in VT} Peso2[j]*beta[j];
+	let {m in M, v in V, i in N, j in N} x[i,j,m,v]:= x[i,j,m,v].init0;
+	let {m in M, v in V, a in VT, h in H} y[a,h,m,v]:= y[a,h,m,v].init0;
+	let {h in H, m in M, v in V} z[h,m,v]:= z[h,m,v].init0;
+	let {m in M, v in V, j in VT} w[j,m,v]:= w[j,m,v].init0;
+
+	#Aqui se eliminan los valores del conjunto
+	let VT := {};
+};
+
+
+
+
