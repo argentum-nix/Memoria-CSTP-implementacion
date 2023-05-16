@@ -39,6 +39,15 @@ void Casualty::setCasualtyAssignedVehicle(int m)
     cas_assigned_veh = m;
 }
 
+void Casualty::setCasualtyWaitTime(int t)
+{
+    cas_wait_time = t;
+}
+void Casualty::setCasualtyTimeToHeliport(float d)
+{
+    cas_time_to_heliport = d;
+}
+
 int Casualty::getCasualtyID()
 {
     return cas_id_k;
@@ -73,9 +82,18 @@ int Casualty::getCasualtyAppearTime()
     return cas_appear_time;
 }
 
+int Casualty::getCasualtyWaitTime()
+{
+    return cas_wait_time;
+}
+float Casualty::getCasualtyTimeToHeliport()
+{
+    return cas_time_to_heliport;
+}
+
 void Casualty::printData()
 {
-    std::cout << "Casualty ID: " << cas_id_k << " Age: " << cas_age_a << " Gravity: " << cas_curgravity_g;
-    std::cout << " Location: " << cas_curlocation << " Priority: " << cas_priority_lambda << " Appear Time: " << cas_appear_time;
-    std::cout << " Vehicle: " << cas_assigned_veh << " Hospital: " << cas_assigned_hosp << std::endl;
+    std::cout << "Casualty ID: " << cas_id_k << " Age: " << cas_age_a << " Gravity: " << cas_curgravity_g << " Location: " << cas_curlocation;
+    std::cout << " Wait Time: " << cas_wait_time << " Appear Time: " << cas_appear_time << " Distance to Heliport: " << cas_time_to_heliport;
+    std::cout << " Vehicle: " << cas_assigned_veh << " Hospital: " << cas_assigned_hosp << " Priority: " << cas_priority_lambda << std::endl;
 }

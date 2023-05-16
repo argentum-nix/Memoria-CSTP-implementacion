@@ -23,8 +23,10 @@ public:
     int loadNetwork();
 
     void setDeteriorationTime(float time, int g);
-    void setDetFunctParams(float kappa, float phi, float w, int g);
+    void setDetFunctParams(float kappa, float phi, float w, float pg, int g);
     void setStabilizationTime(float st1, float st2, float st3, int g);
+
+    Casualty getCasualty(int id);
 
     void addHopsital(Hospital h);
     void addVehicle(Vehicle v);
@@ -47,7 +49,7 @@ private:
     std::string load_directory;
 
     float stabilization_time_tp[3][3];
-    float deterioration_funct_params[3][3];
+    float deterioration_funct_params[3][4];
     float deterioration_time_pi[2][1];
 
     std::map<int, int> node_id_correlation_map;

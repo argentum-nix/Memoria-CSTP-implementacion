@@ -17,6 +17,8 @@ public:
     void setCasualtyAppearTime(int time);
     void setCasualtyAssignedHospital(int h);
     void setCasualtyAssignedVehicle(int m);
+    void setCasualtyWaitTime(int t);
+    void setCasualtyTimeToHeliport(float d);
 
     int getCasualtyID();
     int getCasualtyGravity();
@@ -26,6 +28,8 @@ public:
     int getCasualtyAssignedHospital();
     int getCasualtyAssignedVehicle();
     int getCasualtyAppearTime();
+    int getCasualtyWaitTime();
+    float getCasualtyTimeToHeliport();
 
     void printData();
 
@@ -38,6 +42,8 @@ private:
     int cas_assigned_hosp;
     int cas_assigned_veh;
     int cas_appear_time;
+    int cas_wait_time;
+    float cas_time_to_heliport;
 };
 
 #endif

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "instance.h"
+#include "solver.h"
 using namespace std;
 
 int main(int argc, char const *argv[])
@@ -27,5 +27,6 @@ int main(int argc, char const *argv[])
         cout << "[ERROR]: Failed to load the instance txt." << endl;
         return 0;
     }
+    Solver solve(&cstp);
     return 0;
 }

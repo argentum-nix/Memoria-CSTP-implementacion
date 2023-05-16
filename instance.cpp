@@ -25,11 +25,17 @@ void Instance::setStabilizationTime(float st1, float st2, float st3, int g)
     stabilization_time_tp[g][1] = st2;
     stabilization_time_tp[g][2] = st3;
 }
-void Instance::setDetFunctParams(float kappa, float phi, float w, int g)
+void Instance::setDetFunctParams(float kappa, float phi, float w, float pg, int g)
 {
     deterioration_funct_params[g][0] = kappa;
     deterioration_funct_params[g][1] = phi;
     deterioration_funct_params[g][2] = w;
+    deterioration_funct_params[g][3] = pg;
+}
+
+Casualty Instance::getCasualty(int id)
+{
+    return casualties[id - 1];
 }
 
 void Instance::addHopsital(Hospital h)
@@ -71,7 +77,7 @@ void Instance::printDeteriorationParamMatrix()
 }
 void Instance::printDeteriorationTimeMatrix()
 {
-    cout << "Deterioration Time for (g=1,g=2,g=3): [" << deterioration_time_pi[0][0] << ", " << deterioration_time_pi[1][0] << ", " << deterioration_time_pi[2][0] << "]" << endl;
+    cout << "Deterioration Time for (g1-2,g2-3): [" << deterioration_time_pi[0][0] << ", " << deterioration_time_pi[1][0] << "]" << endl;
 }
 
 void Instance::printHospital(int id)
@@ -238,16 +244,16 @@ int Instance::loadInstance()
                     setStabilizationTime(a, b, c, line);
                 }
             }
-            // Section 3: Deterioration function parameters
+            // Section 2: Deterioration function parameters
             else if (txt_section == 1)
             {
                 for (int line = 0; line < count; line++)
                 {
-                    cin >> a >> b >> c;
-                    setDetFunctParams(a, b, c, line);
+                    cin >> a >> b >> c >> d;
+                    setDetFunctParams(a, b, c, d, line);
                 }
             }
-            // Section 4: Deterioration time PI
+            // Section 3: Deterioration time PI
             else if (txt_section == 2)
             {
                 for (int line = 0; line < count; line++)
@@ -256,7 +262,7 @@ int Instance::loadInstance()
                     setDeteriorationTime(a, line);
                 }
             }
-            // Section 5: Hospitals
+            // Section 4: Hospitals
             else if (txt_section == 3)
             {
                 for (int line = 0; line < count; line++)
@@ -291,20 +297,23 @@ int Instance::loadInstance()
                     addVehicle(vehicle);
                 }
             }
-            // Section 7: Casualties
+            // Section 6: Casualties
             else if (txt_section == 5)
             {
                 for (int line = 0; line < count; line++)
                 {
-                    cin >> a >> b >> c >> d >> e;
+                    cin >> a >> b >> c >> d >> e >> f >> g;
                     Casualty casualty;
                     casualty.setCasualtyLocation(a);
                     casualty.setCasualtyID(b);
                     casualty.setCasualtyAge(c);
                     casualty.setCasualtyGravity(d);
-                    casualty.setCasualtyAppearTime(e);
+                    casualty.setCasualtyWaitTime(e);
+                    casualty.setCasualtyAppearTime(f);
+                    casualty.setCasualtyTimeToHeliport(g);
                     casualty.setCasualtyAssignedVehicle(-1);
                     casualty.setCasualtyAssignedHospital(-1);
+                    casualty.setCasualtyPriority(0);
                     addCasualty(casualty);
                 }
             }
