@@ -14,9 +14,9 @@ Solver::~Solver() {}
 
 float Solver::calculatePriority(float te, int g)
 {
-    // aqui falta agregar declaracion de tiempo de espera de victima
     // en la condicion tienen que tiempo de espera de victima debe ser < te_max
     // todo: tiene sentido agregarlo???
+    // diferencia de resultados de prioridad es debido a que en modelo usaron euler 2.718281
     if (g == 1)
     {
         return 0.1 + 0.1 * exp(1 + 0.048 * te / 60);

@@ -8,7 +8,7 @@ class Solver
 public:
     Solver(Instance *in);
     ~Solver();
-    float calculatePriority(float te, int a);
+    float calculatePriority(float te, int g);
 
 private:
     Instance *instance;
