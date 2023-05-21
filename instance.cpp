@@ -55,15 +55,25 @@ void Instance::addVehicle(Vehicle v)
     }
 }
 
+int Instance::getDeteriorationTimeValue(int g)
+{
+    return deterioration_time_pi[g][1];
+}
+
 // Casualty-wrappers GET type
+int Instance::getCasualtyGravity(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyWaitTime();
+}
+
 int Instance::getCasualtyWaitingTime(int casualty_id)
 {
-    casualties[casualty_id - 1].getCasualtyWaitTime();
+    return casualties[casualty_id - 1].getCasualtyWaitTime();
 }
 
 int Instance::getCasualtyAppearTime(int casualty_id)
 {
-    casualties[casualty_id - 1].getCasualtyAppearTime();
+    return casualties[casualty_id - 1].getCasualtyAppearTime();
 }
 
 float Instance::getCasualtyStabilizationTime(int casualty_id)
@@ -76,7 +86,22 @@ float Instance::getCasualtyStabilizationTime(int casualty_id)
 // Casualty-wrappers UPDATE/SET type
 void Instance::updateCasualtyWaitingTime(int casualty_id, int t)
 {
-    casualties[casualty_id - 1].setCasualtyWaitTime(t);
+    return casualties[casualty_id - 1].setCasualtyWaitTime(t);
+}
+
+void Instance::updateCasualtyGravity(int casualty_id, int g)
+{
+    return casualties[casualty_id - 1].setCasualtyGravity(g);
+}
+
+void Instance::updateCasualtyAppearTime(int casualty_id, int t)
+{
+    return casualties[casualty_id - 1].setCasualtyAppearTime(t);
+}
+
+void Instance::updateCasualtyPriority(int casualty_id, int lambda)
+{
+    return casualties[casualty_id - 1].setCasualtyPriority(lambda);
 }
 
 void Instance::printStabilizationTimeMatrix()
@@ -291,6 +316,7 @@ int Instance::loadInstance()
             // Section 4: Hospitals
             else if (txt_section == 3)
             {
+                qty_hospitals = count;
                 for (int line = 0; line < count; line++)
                 {
                     cin >> a >> b >> c >> d >> e;
@@ -314,6 +340,14 @@ int Instance::loadInstance()
                     cin >> a >> b >> c >> d >> e >> f >> g;
                     Vehicle vehicle;
                     vehicle.setVehicleType(a);
+                    if (a == 0)
+                    {
+                        qty_ambulances++;
+                    }
+                    else if (a == 1)
+                    {
+                        qty_helicopters++;
+                    }
                     vehicle.setVehicleID(b);
                     vehicle.setVehicleLocation(c);
                     vehicle.setVehicleCapacity(d);
@@ -326,6 +360,7 @@ int Instance::loadInstance()
             // Section 6: Casualties
             else if (txt_section == 5)
             {
+                qty_casualties = count;
                 for (int line = 0; line < count; line++)
                 {
                     cin >> a >> b >> c >> d >> e >> f >> g;

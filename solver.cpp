@@ -21,10 +21,57 @@ void Solver::updateWaitingTime(int casualty_id)
     instance->updateCasualtyWaitingTime(casualty_id, TT - TA);
 }
 
+void Solver::updateStatesOfCasualties()
+{
+    // TODO: tiempo de espera maxima para pasar a siguiente LSI debe venir dentro de la instancia...
+    int TEmax1 = 1140;
+    int TEmax2 = 360;
+    for (int i = 0; i < instance->qty_casualties; i++)
+    {
+        // Case 1: Any victim of LSI 1 already waited enough to be considered LSI 2
+        int g = instance->getCasualtyGravity(i);
+        int te = instance->getCasualtyWaitingTime(i);
+        if (g == 1 && te > TEmax1)
+        {
+            instance->updateCasualtyGravity(i, 2);
+            instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
+        }
+        // Case 1: Any victim of LSI 2 already waited enough to be considered LSI 3
+        else if (g == 2 && te > TEmax2)
+        {
+            instance->updateCasualtyGravity(i, 3);
+            instance->updateCasualtyWaitingTime(i, instance->getCasualtyWaitingTime(i) - TEmax2);
+            instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
+        }
+    }
+}
+
+void Solver::updatePriorityOfCasualties()
+{
+    // TODO: tiempo de espera maxima para pasar a siguiente LSI debe venir dentro de la instancia...
+    int TEmax1 = 1140;
+    int TEmax2 = 360;
+    for (int i = 0; i < instance->qty_casualties; i++)
+    {
+        int g = instance->getCasualtyGravity(i);
+        int te = instance->getCasualtyWaitingTime(i);
+        if (g == 1 && te <= TEmax1)
+        {
+            instance->updateCasualtyPriority(i, calculatePriority(instance->getCasualtyWaitingTime(i), 1));
+        }
+        else if (g == 2 && te <= TEmax2)
+        {
+            instance->updateCasualtyPriority(i, calculatePriority(instance->getCasualtyWaitingTime(i), 2));
+        }
+        else if (g == 3)
+        {
+            instance->updateCasualtyPriority(i, calculatePriority(instance->getCasualtyWaitingTime(i), 3));
+        }
+    }
+}
+
 float Solver::calculatePriority(float te, int g)
 {
-    // en la condicion tienen que tiempo de espera de victima debe ser < te_max
-    // TODO: tiene sentido agregarlo???
     // diferencia de resultados de prioridad es debido a que en modelo usaron euler 2.718281
     if (g == 1)
     {

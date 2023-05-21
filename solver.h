@@ -10,6 +10,8 @@ public:
     ~Solver();
     float calculatePriority(float te, int g);
     void updateWaitingTime(int casualty_id);
+    void updateStatesOfCasualties();
+    void updatePriorityOfCasualties();
 
 private:
     Instance *instance;

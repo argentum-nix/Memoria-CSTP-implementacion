@@ -22,6 +22,11 @@ public:
     int loadInstance();
     int loadNetwork();
 
+    int qty_casualties;
+    int qty_ambulances = 0;
+    int qty_helicopters = 0;
+    int qty_hospitals;
+
     // Set Instance-Specific values
     void setDeteriorationTime(float time, int g);
     void setDetFunctParams(float kappa, float phi, float w, float pg, int g);
@@ -32,11 +37,19 @@ public:
     void addVehicle(Vehicle v);
     void addCasualty(Casualty c);
 
+    // Get Instance-Specific values
+    // int getStabilizationTimeValue(int g, int a);
+    int getDeteriorationTimeValue(int g);
+
     // Casualty-class wrappers
+    int getCasualtyGravity(int casualty_id);
     int getCasualtyWaitingTime(int casualty_id);
     int getCasualtyAppearTime(int casualty_id);
     float getCasualtyStabilizationTime(int casualty_id);
+    void updateCasualtyGravity(int casualty_id, int g);
     void updateCasualtyWaitingTime(int casualty_id, int t);
+    void updateCasualtyAppearTime(int casualty_id, int t);
+    void updateCasualtyPriority(int casualty_id, int lambda);
 
     // Vehicle-class wrappers
 
@@ -64,7 +77,8 @@ private:
     float deterioration_time_pi[2][1];
 
     std::map<int, int> node_id_correlation_map;
-
+    // PAIR: victim id, victim priority lambda
+    std::vector<std::pair<int, float>> priority_list;
     std::vector<std::vector<float>> travel_time_ambulance;
     std::vector<std::vector<float>> travel_time_helicopter;
     std::vector<Vehicle> ambulance_fleet;
