@@ -86,22 +86,27 @@ float Instance::getCasualtyStabilizationTime(int casualty_id)
 // Casualty-wrappers UPDATE/SET type
 void Instance::updateCasualtyWaitingTime(int casualty_id, int t)
 {
-    return casualties[casualty_id - 1].setCasualtyWaitTime(t);
+    casualties[casualty_id - 1].setCasualtyWaitTime(t);
 }
 
 void Instance::updateCasualtyGravity(int casualty_id, int g)
 {
-    return casualties[casualty_id - 1].setCasualtyGravity(g);
+    casualties[casualty_id - 1].setCasualtyGravity(g);
 }
 
 void Instance::updateCasualtyAppearTime(int casualty_id, int t)
 {
-    return casualties[casualty_id - 1].setCasualtyAppearTime(t);
+    casualties[casualty_id - 1].setCasualtyAppearTime(t);
 }
 
 void Instance::updateCasualtyPriority(int casualty_id, int lambda)
 {
-    return casualties[casualty_id - 1].setCasualtyPriority(lambda);
+    casualties[casualty_id - 1].setCasualtyPriority(lambda);
+}
+
+void Instance::updateHospitalBedCapacity(int hospital_id, int g, int beds)
+{
+    hospitals[hospital_id - 1].setHospitalCurCapacity(g, beds);
 }
 
 void Instance::printStabilizationTimeMatrix()

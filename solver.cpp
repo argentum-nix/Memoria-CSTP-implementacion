@@ -5,13 +5,13 @@ using namespace std;
 Solver::Solver(Instance *in)
 {
     instance = in;
-    // TODO: delete, temp.
-    cout << calculatePriority(5, 1) << endl;
+    updateWaitingTime(5);
 }
 
 // Solver class destructor
 Solver::~Solver() {}
 
+// update TE
 void Solver::updateWaitingTime(int casualty_id)
 {
     // TODO: 5 es el valor de inicio de periodo TT, instancia todavia no maneja estos valores.
@@ -86,4 +86,8 @@ float Solver::calculatePriority(float te, int g)
         return 4.5 + 0.1 * exp(1.8 + 0.4 * te / 60);
     }
     return 0;
+}
+
+void Solver::greedyAssignment()
+{
 }

@@ -54,6 +54,7 @@ public:
     // Vehicle-class wrappers
 
     // Hospital-class wrappers
+    void updateHospitalBedCapacity(int hospital_id, int g, int beds);
 
     // Print Instance-Specific values
     void printStabilizationTimeMatrix();

@@ -12,6 +12,7 @@ public:
     void updateWaitingTime(int casualty_id);
     void updateStatesOfCasualties();
     void updatePriorityOfCasualties();
+    void greedyAssignment();
 
 private:
     Instance *instance;
