@@ -33,11 +33,6 @@ void Instance::setDetFunctParams(float kappa, float phi, float w, float pg, int 
     deterioration_funct_params[g][3] = pg;
 }
 
-Casualty Instance::getCasualty(int id)
-{
-    return casualties[id - 1];
-}
-
 void Instance::addHopsital(Hospital h)
 {
     hospitals.push_back(h);
@@ -58,6 +53,30 @@ void Instance::addVehicle(Vehicle v)
     {
         helicopter_fleet.push_back(v);
     }
+}
+
+// Casualty-wrappers GET type
+int Instance::getCasualtyWaitingTime(int casualty_id)
+{
+    casualties[casualty_id - 1].getCasualtyWaitTime();
+}
+
+int Instance::getCasualtyAppearTime(int casualty_id)
+{
+    casualties[casualty_id - 1].getCasualtyAppearTime();
+}
+
+float Instance::getCasualtyStabilizationTime(int casualty_id)
+{
+    int g = casualties[casualty_id - 1].getCasualtyGravity();
+    int a = casualties[casualty_id - 1].getCasualtyAge();
+    return stabilization_time_tp[g - 1][a - 1];
+}
+
+// Casualty-wrappers UPDATE/SET type
+void Instance::updateCasualtyWaitingTime(int casualty_id, int t)
+{
+    casualties[casualty_id - 1].setCasualtyWaitTime(t);
 }
 
 void Instance::printStabilizationTimeMatrix()

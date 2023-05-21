@@ -22,16 +22,27 @@ public:
     int loadInstance();
     int loadNetwork();
 
+    // Set Instance-Specific values
     void setDeteriorationTime(float time, int g);
     void setDetFunctParams(float kappa, float phi, float w, float pg, int g);
     void setStabilizationTime(float st1, float st2, float st3, int g);
 
-    Casualty getCasualty(int id);
-
+    // Poblate Instance vectors with data
     void addHopsital(Hospital h);
     void addVehicle(Vehicle v);
     void addCasualty(Casualty c);
 
+    // Casualty-class wrappers
+    int getCasualtyWaitingTime(int casualty_id);
+    int getCasualtyAppearTime(int casualty_id);
+    float getCasualtyStabilizationTime(int casualty_id);
+    void updateCasualtyWaitingTime(int casualty_id, int t);
+
+    // Vehicle-class wrappers
+
+    // Hospital-class wrappers
+
+    // Print Instance-Specific values
     void printStabilizationTimeMatrix();
     void printDeteriorationParamMatrix();
     void printDeteriorationTimeMatrix();

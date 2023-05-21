@@ -12,10 +12,19 @@ Solver::Solver(Instance *in)
 // Solver class destructor
 Solver::~Solver() {}
 
+void Solver::updateWaitingTime(int casualty_id)
+{
+    // TODO: 5 es el valor de inicio de periodo TT, instancia todavia no maneja estos valores.
+    // Deberian venir dentro de la misma instancia.
+    int TT = 5;
+    int TA = instance->getCasualtyAppearTime(casualty_id);
+    instance->updateCasualtyWaitingTime(casualty_id, TT - TA);
+}
+
 float Solver::calculatePriority(float te, int g)
 {
     // en la condicion tienen que tiempo de espera de victima debe ser < te_max
-    // todo: tiene sentido agregarlo???
+    // TODO: tiene sentido agregarlo???
     // diferencia de resultados de prioridad es debido a que en modelo usaron euler 2.718281
     if (g == 1)
     {
