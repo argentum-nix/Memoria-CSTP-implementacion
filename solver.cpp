@@ -5,7 +5,30 @@ using namespace std;
 Solver::Solver(Instance *in)
 {
     instance = in;
-    updateWaitingTime(5);
+
+    float lambda;
+    for (int i = 1; i <= instance->qty_casualties; i++)
+    {
+        // Poblate the priority list with incoming victims
+        // TODO: check if id "i" already was instanced, if so, update its lambda or skip it entirely
+        lambda = calculatePriority(instance->getCasualtyWaitingTime(i), instance->getCasualtyGravity(i));
+        instance->updateCasualtyPriority(i, lambda);
+        // add new victim to priority_list
+        priority_list.push_back(make_pair(lambda, i));
+    }
+    // order the list from greater to smaller
+    sort(priority_list.rbegin(), priority_list.rend());
+    printPriorityList();
+}
+
+void Solver::printPriorityList()
+{
+    cout << "PRIORITY LIST: ";
+    for (int i = 0; i < instance->qty_casualties; i++)
+    {
+        cout << "(" << priority_list[i].first << " " << priority_list[i].second << "), ";
+    }
+    cout << endl;
 }
 
 // Solver class destructor
@@ -26,7 +49,7 @@ void Solver::updateStatesOfCasualties()
     // TODO: tiempo de espera maxima para pasar a siguiente LSI debe venir dentro de la instancia...
     int TEmax1 = 1140;
     int TEmax2 = 360;
-    for (int i = 0; i < instance->qty_casualties; i++)
+    for (int i = 1; i <= instance->qty_casualties; i++)
     {
         // Case 1: Any victim of LSI 1 already waited enough to be considered LSI 2
         int g = instance->getCasualtyGravity(i);
@@ -51,7 +74,7 @@ void Solver::updatePriorityOfCasualties()
     // TODO: tiempo de espera maxima para pasar a siguiente LSI debe venir dentro de la instancia...
     int TEmax1 = 1140;
     int TEmax2 = 360;
-    for (int i = 0; i < instance->qty_casualties; i++)
+    for (int i = 1; i <= instance->qty_casualties; i++)
     {
         int g = instance->getCasualtyGravity(i);
         int te = instance->getCasualtyWaitingTime(i);

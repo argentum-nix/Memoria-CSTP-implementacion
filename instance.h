@@ -78,8 +78,6 @@ private:
     float deterioration_time_pi[2][1];
 
     std::map<int, int> node_id_correlation_map;
-    // PAIR: victim id, victim priority lambda
-    std::vector<std::pair<int, float>> priority_list;
     std::vector<std::vector<float>> travel_time_ambulance;
     std::vector<std::vector<float>> travel_time_helicopter;
     std::vector<Vehicle> ambulance_fleet;

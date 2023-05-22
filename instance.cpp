@@ -63,7 +63,7 @@ int Instance::getDeteriorationTimeValue(int g)
 // Casualty-wrappers GET type
 int Instance::getCasualtyGravity(int casualty_id)
 {
-    return casualties[casualty_id - 1].getCasualtyWaitTime();
+    return casualties[casualty_id - 1].getCasualtyGravity();
 }
 
 int Instance::getCasualtyWaitingTime(int casualty_id)
