@@ -28,6 +28,11 @@ int Hospital::getHospitalID()
 {
     return hosp_id_h;
 }
+
+int Hospital::getHospitalLocation()
+{
+    return hosp_location;
+}
 int Hospital::getHospitalMaxCapacity(int g)
 {
     return hosp_maxcapacity[g - 1];

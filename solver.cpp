@@ -15,10 +15,18 @@ Solver::Solver(Instance *in)
         instance->updateCasualtyPriority(i, lambda);
         // add new victim to priority_list
         priority_list.push_back(make_pair(lambda, i));
+        // update waiting time
+        updateWaitingTime(i);
     }
     // order the list from greater to smaller
-    sort(priority_list.rbegin(), priority_list.rend());
+
+    sort(priority_list.rbegin(), priority_list.rend(), [](const auto &l, const auto &r)
+         { return (l.first == r.first) ? l.second > r.second : l.first < r.first; });
+    // sort(priority_list.rbegin(), priority_list.rend());
     printPriorityList();
+    cout << endl;
+    cout << "=GREEDY=" << endl;
+    greedyAssignment();
 }
 
 void Solver::printPriorityList()
@@ -26,7 +34,7 @@ void Solver::printPriorityList()
     cout << "PRIORITY LIST: ";
     for (int i = 0; i < instance->qty_casualties; i++)
     {
-        cout << "(" << priority_list[i].first << " " << priority_list[i].second << "), ";
+        cout << "(" << priority_list[i].first << ", " << priority_list[i].second << "), ";
     }
     cout << endl;
 }
@@ -113,4 +121,79 @@ float Solver::calculatePriority(float te, int g)
 
 void Solver::greedyAssignment()
 {
+    // TODO: Revisar los vehiculos y si ya se desocupan
+    int first_id, g, h_capacity;
+    int closest_h_amb = -1;
+    int closest_h_heli = -1;
+    float min_dh_amb = 999999;
+    float min_dh_heli = 999999;
+    float min_dv_amb = 999999;
+    float min_dv_heli = 999999;
+    int closest_amb = -1;
+    int closest_heli = -1;
+    for (int i = 0; i < int(priority_list.size()); i++)
+    {
+        // pick the first victim on top of the list
+        first_id = priority_list[i].second;
+        g = instance->getCasualtyGravity(first_id);
+        // Find the closest hospital that has de capacity to attend the casualty
+        min_dh_amb = 999999;
+        min_dh_heli = 999999;
+        for (int h = 1; h <= instance->qty_hospitals; h++)
+        {
+            h_capacity = instance->getHospitalCurCapacity(h, g);
+            // if this hospital can attend such gravity then
+            if (h_capacity > 0)
+            {
+                // find closest hospital for AMBULANCE
+                cout << "CASUALTY+AMBULANCE -> HOSPTAL /// DISTANCE BETWEEN " << instance->getCasualtyLocation(first_id) << " AND " << instance->getHospitalLocation(h) << " IS: ";
+                cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 0) << endl;
+                if (instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 0) < min_dh_amb)
+                {
+                    min_dh_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 0);
+                    closest_h_amb = h;
+                }
+                // find closest hospital for HELICOPTER
+                cout << "CASUALTY+HELICOPTER -> HOSPTAL /// DISTANCE BETWEEN " << instance->getCasualtyLocation(first_id) << " AND " << instance->getHospitalLocation(h) << " IS: ";
+                cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1) << endl;
+                if (instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1) < min_dh_heli)
+                {
+                    min_dh_heli = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1);
+                    closest_h_heli = h;
+                }
+            }
+        }
+        // Find an available vehicle, that takes the smallest time to get to the victim
+        // Case: ambulance
+        min_dv_amb = 999999;
+        for (int a = 1; a <= instance->qty_ambulances; a++)
+        {
+            cout << "AMBULANCE -> CASUALTY /// DISTANCE BETWEEN " << instance->getCasualtyLocation(first_id) << " AND " << instance->getVehicleLocation(a, 0) << " IS: ";
+            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(a, 0), 0) << endl;
+            if (instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(a, 0), 0) < min_dv_amb)
+            {
+                min_dv_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(a, 0), 0);
+                DEBUG(min_dv_amb);
+                closest_amb = a;
+            }
+        }
+        min_dv_heli = 999999;
+        // Case: helicopter
+        for (int h = 1; h <= instance->qty_helicopters; h++)
+        {
+            cout << "HELICOPTER -> CASUALTY /// DISTANCE BETWEEN " << instance->getCasualtyLocation(first_id) << " AND " << instance->getVehicleLocation(h, 1) << " IS: ";
+            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1) << endl;
+            if (instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1) < min_dv_heli)
+            {
+                min_dv_heli = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1);
+                closest_heli = h;
+            }
+        }
+
+        // falta sumar tiempo de inicio de operaciones de vehiculos y takeoff/arrival de helis
+        cout << "V" << first_id << endl;
+        cout << "AMBULANCE CASE: AMB ASSIGNED= " << closest_amb << " AMB ARRIVAL IN= " << min_dv_amb << " STABILIZATION IN= " << min_dv_amb + instance->getCasualtyStabilizationTime(first_id) << " HOSP CHECKIN= " << min_dv_amb + instance->getCasualtyStabilizationTime(first_id) + min_dh_amb << " HOSP ASSIGNED= " << closest_h_amb << endl;
+        cout << "HELICOPTER CASE: HELI ASSIGNED= " << closest_heli << " HELI ARRIVAL IN= " << min_dv_heli << " STABILIZATION IN= " << min_dv_heli + instance->getCasualtyStabilizationTime(first_id) << " HOSP CHECKIN= " << min_dv_heli + instance->getCasualtyStabilizationTime(first_id) + min_dh_heli << " HOSP ASSIGNED= " << closest_h_heli << endl;
+        cout << "================================" << endl;
+    }
 }

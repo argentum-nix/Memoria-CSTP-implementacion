@@ -40,8 +40,10 @@ public:
     // Get Instance-Specific values
     // int getStabilizationTimeValue(int g, int a);
     int getDeteriorationTimeValue(int g);
+    float getTimeBetweenNodes(int origin, int destination, int veh_type);
 
     // Casualty-class wrappers
+    int getCasualtyLocation(int casualty_id);
     int getCasualtyGravity(int casualty_id);
     int getCasualtyWaitingTime(int casualty_id);
     int getCasualtyAppearTime(int casualty_id);
@@ -52,8 +54,11 @@ public:
     void updateCasualtyPriority(int casualty_id, int lambda);
 
     // Vehicle-class wrappers
+    int getVehicleLocation(int veh_id, int veh_type);
 
     // Hospital-class wrappers
+    int getHospitalLocation(int hospital_id);
+    int getHospitalCurCapacity(int hospital_id, int g);
     void updateHospitalBedCapacity(int hospital_id, int g, int beds);
 
     // Print Instance-Specific values

@@ -66,6 +66,11 @@ int Instance::getCasualtyGravity(int casualty_id)
     return casualties[casualty_id - 1].getCasualtyGravity();
 }
 
+int Instance::getCasualtyLocation(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyLocation();
+}
+
 int Instance::getCasualtyWaitingTime(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyWaitTime();
@@ -81,6 +86,37 @@ float Instance::getCasualtyStabilizationTime(int casualty_id)
     int g = casualties[casualty_id - 1].getCasualtyGravity();
     int a = casualties[casualty_id - 1].getCasualtyAge();
     return stabilization_time_tp[g - 1][a - 1];
+}
+
+float Instance::getTimeBetweenNodes(int origin, int destination, int veh_type)
+{
+    int internal_origin_id = node_id_correlation_map[origin];
+    int internal_dest_id = node_id_correlation_map[destination];
+
+    // amb
+    if (veh_type == 0)
+    {
+        return travel_time_ambulance[internal_origin_id][internal_dest_id];
+    }
+    // heli
+    else if (veh_type == 1)
+    {
+        return travel_time_helicopter[internal_origin_id][internal_dest_id];
+    }
+    return -1;
+}
+// Vehicle-wrappers GET type
+int Instance::getVehicleLocation(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        return ambulance_fleet[veh_id - 1].getVehicleLocation();
+    }
+    else if (veh_type == 1)
+    {
+        return helicopter_fleet[veh_id - 1].getVehicleLocation();
+    }
+    return -1;
 }
 
 // Casualty-wrappers UPDATE/SET type
@@ -103,6 +139,19 @@ void Instance::updateCasualtyPriority(int casualty_id, int lambda)
 {
     casualties[casualty_id - 1].setCasualtyPriority(lambda);
 }
+
+// Hospital-wrappers GET type
+int Instance::getHospitalCurCapacity(int hospital_id, int g)
+{
+    return hospitals[hospital_id - 1].getHospitalCurCapacity(g);
+}
+
+int Instance::getHospitalLocation(int hospital_id)
+{
+    return hospitals[hospital_id - 1].getHospitalLocation();
+}
+
+// Hospital-wrappers UPDATE/SET type
 
 void Instance::updateHospitalBedCapacity(int hospital_id, int g, int beds)
 {

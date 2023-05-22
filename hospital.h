@@ -17,6 +17,7 @@ public:
     int getHospitalID();
     int getHospitalMaxCapacity(int g);
     int getHospitalCurCapacity(int g);
+    int getHospitalLocation();
 
     void printData();
 
