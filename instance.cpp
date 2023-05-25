@@ -119,6 +119,45 @@ int Instance::getVehicleLocation(int veh_id, int veh_type)
     return -1;
 }
 
+float Instance::getVehiclePrepTime(int veh_id, int veh_type)
+
+{
+    if (veh_type == 0)
+    {
+        return ambulance_fleet[veh_id - 1].getVehiclePrepTime();
+    }
+    else if (veh_type == 1)
+    {
+        return helicopter_fleet[veh_id - 1].getVehiclePrepTime();
+    }
+    return -1;
+}
+
+float Instance::getVehicleOccupiedUntilTime(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        return ambulance_fleet[veh_id - 1].getVehicleOccupiedUntilTime();
+    }
+    else if (veh_type == 1)
+    {
+        return helicopter_fleet[veh_id - 1].getVehicleOccupiedUntilTime();
+    }
+    return -1;
+}
+
+void Instance::updateVehicleOccupiedUntilTime(int veh_id, int veh_type, float t)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].setVehicleOccupiedUntilTime(t);
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].setVehicleOccupiedUntilTime(t);
+    }
+}
+
 // Casualty-wrappers UPDATE/SET type
 void Instance::updateCasualtyWaitingTime(int casualty_id, int t)
 {
@@ -408,6 +447,7 @@ int Instance::loadInstance()
                     vehicle.setVehiclePrepTime(e);
                     vehicle.setVehicleLandingTime(f);
                     vehicle.setVehicleTakeoffTime(g);
+                    vehicle.setVehicleOccupiedUntilTime(0);
                     addVehicle(vehicle);
                 }
             }

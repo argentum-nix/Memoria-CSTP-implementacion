@@ -18,6 +18,7 @@ public:
     void setVehiclePrepTime(float td);
     void setVehicleTakeoffTime(float tds);
     void setVehicleLandingTime(float tat);
+    void setVehicleOccupiedUntilTime(float t);
 
     int getVehicleID();
     int getVehicleType();
@@ -26,6 +27,7 @@ public:
     float getVehiclePrepTime();
     float getVehicleTakeoffTime();
     float getVehicleLandingTime();
+    float getVehicleOccupiedUntilTime();
 
     void printData();
 
@@ -37,6 +39,7 @@ private:
     float veh_preptime_TDme;
     float veh_takeoff_TDSe;
     float veh_land_TATe;
+    float occupied_until;
 };
 
 #endif

@@ -41,6 +41,11 @@ void Vehicle::setVehicleLandingTime(float tat)
     veh_land_TATe = tat;
 }
 
+void Vehicle::setVehicleOccupiedUntilTime(float t)
+{
+    occupied_until = t;
+}
+
 int Vehicle::getVehicleID()
 {
     return veh_id_m;
@@ -70,6 +75,11 @@ float Vehicle::getVehicleTakeoffTime()
 float Vehicle::getVehicleLandingTime()
 {
     return veh_land_TATe;
+}
+
+float Vehicle::getVehicleOccupiedUntilTime()
+{
+    return occupied_until;
 }
 
 void Vehicle::printData()

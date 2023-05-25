@@ -47,6 +47,7 @@
     "xlocnum": "cpp",
     "map": "cpp",
     "xtree": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "iomanip": "cpp"
   }
 }

@@ -55,6 +55,9 @@ public:
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);
+    float getVehiclePrepTime(int veh_id, int veh_type);
+    float getVehicleOccupiedUntilTime(int veh_id, int veh_type);
+    void updateVehicleOccupiedUntilTime(int veh_id, int veh_type, float t);
 
     // Hospital-class wrappers
     int getHospitalLocation(int hospital_id);
