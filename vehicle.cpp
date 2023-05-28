@@ -46,6 +46,16 @@ void Vehicle::setVehicleOccupiedUntilTime(float t)
     occupied_until = t;
 }
 
+void Vehicle::setVehicleRound(int round)
+{
+    total_rounds = round;
+}
+
+int Vehicle::getVehicleRound()
+{
+    return total_rounds;
+}
+
 int Vehicle::getVehicleID()
 {
     return veh_id_m;

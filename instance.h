@@ -46,6 +46,7 @@ public:
     int getCasualtyLocation(int casualty_id);
     int getCasualtyGravity(int casualty_id);
     int getCasualtyWaitingTime(int casualty_id);
+    int getCasualtyAge(int casualty_id);
     int getCasualtyAppearTime(int casualty_id);
     float getCasualtyTimeToHeliport(int casualty_id);
     float getCasualtyStabilizationTime(int casualty_id);
@@ -59,8 +60,10 @@ public:
     float getVehicleLandingTime(int veh_id, int veh_type);
     float getVehicleTakeoffTime(int veh_id, int veh_type);
     float getVehiclePrepTime(int veh_id, int veh_type);
+    int getVehicleRound(int veh_id, int veh_type);
     float getVehicleOccupiedUntilTime(int veh_id, int veh_type);
     void updateVehicleOccupiedUntilTime(int veh_id, int veh_type, float t);
+    void addVehicleRound(int veh_id, int veh_type);
 
     // Hospital-class wrappers
     int getHospitalLocation(int hospital_id);

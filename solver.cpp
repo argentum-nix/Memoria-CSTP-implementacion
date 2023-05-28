@@ -136,6 +136,7 @@ void Solver::greedyAssignment()
     int min_availability_amb = 999999;
     int next_available_amb = -1;
     float actual_time = -1;
+    float tot_sec = 0;
 
     for (int i = 0; i < int(priority_list.size()); i++)
     {
@@ -267,14 +268,30 @@ void Solver::greedyAssignment()
 
         // Puros prints de tabla de asignacion ambulancia o helicoptero
         cout << left << "V" << first_id << "    ";
+        cout << left << instance->getCasualtyGravity(first_id) << "    ";
+        cout << left << instance->getCasualtyAge(first_id) << "    ";
+        cout << left << priority_list[i].first << "    ";
+        cout << left << instance->getCasualtyStabilizationTime(first_id) << "    ";
         cout << left << "A" << closest_amb << "    ";
+        cout << left << "ROUND " << instance->getVehicleRound(closest_amb, 0) << "    ";
         cout << left << "MCC" << closest_h_amb << "    ";
         // current time == init period time in seconds
         int waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
-        float tot_sec = min_dv_amb * 60 + start_time + waiting_till;
-        cout << left << waiting_till << " (" << int(waiting_till * 60) / 3600 << ":" << int(waiting_till) % 60 << ":" << int(waiting_till * 60) % 60 << ")"
-             << "    ";
-        cout << left << min_dv_amb << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
+        // If there is some kind of wait, it should be added. The moment of assignment is starting time + all the wait
+        if (waiting_till != 0)
+        {
+            tot_sec = min_dv_amb * 60 + start_time + (waiting_till * 60 - start_time);
+            cout << left << waiting_till << " (" << int(waiting_till * 60) / 3600 << ":" << int(waiting_till) % 60 << ":" << int(waiting_till * 60) % 60 << ")"
+                 << "    ";
+        }
+        // If victim was assigned immediately, do not sum the wait. The moment of assignment is current_time
+        else
+        {
+            tot_sec = min_dv_amb * 60 + start_time;
+            cout << left << waiting_till << " (" << int(current_time) / 3600 << ":" << int(current_time / 60) % 60 << ":" << int(current_time) % 60 << ")"
+                 << "    ";
+        }
+        cout << left << min_dv_amb * 60 + waiting_till << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
         tot_sec += instance->getCasualtyStabilizationTime(first_id) * 60;
         cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
@@ -285,9 +302,10 @@ void Solver::greedyAssignment()
         cout << endl;
         cout << endl;
 
-        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y ocupar la cama
+        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada, ocupar la cama, y aumentar rondas de ambulancia
         instance->updateVehicleOccupiedUntilTime(closest_amb, 0, tot_sec);
         instance->updateHospitalBedCapacity(closest_h_amb, g, instance->getHospitalCurCapacity(closest_h_amb, g) - 1);
+        instance->addVehicleRound(closest_amb, 0);
 
         /*
         cout << left << "V" << first_id << "    ";
@@ -309,6 +327,7 @@ void Solver::greedyAssignment()
         // Asignar el tiempo hasta cual el helicoptero estara ocupado y ocupar la cama
         instance->updateVehicleOccupiedUntilTime(closest_heli, 1, tot_sec);
         instance->updateHospitalBedCapacity(closest_h_heli, g, instance->getHospitalCurCapacity(closest_h_heli, g) - 1);
+        instance->addVehicleRound(closest_heli, 1);
         */
     }
 }

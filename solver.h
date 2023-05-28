@@ -21,6 +21,7 @@ public:
     std::vector<std::pair<float, int>> priority_list;
     // 7:41, first period start
     int start_time = 27660;
+    int current_time = start_time;
 
 private:
     Instance *instance;

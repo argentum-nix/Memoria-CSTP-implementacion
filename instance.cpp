@@ -66,6 +66,11 @@ int Instance::getCasualtyGravity(int casualty_id)
     return casualties[casualty_id - 1].getCasualtyGravity();
 }
 
+int Instance::getCasualtyAge(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyAge();
+}
+
 int Instance::getCasualtyLocation(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyLocation();
@@ -147,6 +152,20 @@ float Instance::getVehicleLandingTime(int veh_id, int veh_type)
     }
     return -1;
 }
+
+int Instance::getVehicleRound(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        return ambulance_fleet[veh_id - 1].getVehicleRound();
+    }
+    else if (veh_type == 1)
+    {
+        return helicopter_fleet[veh_id - 1].getVehicleRound();
+    }
+    return -1;
+}
+
 float Instance::getVehicleTakeoffTime(int veh_id, int veh_type)
 {
     if (veh_type == 0)
@@ -182,6 +201,21 @@ void Instance::updateVehicleOccupiedUntilTime(int veh_id, int veh_type, float t)
     else if (veh_type == 1)
     {
         helicopter_fleet[veh_id - 1].setVehicleOccupiedUntilTime(t);
+    }
+}
+
+void Instance::addVehicleRound(int veh_id, int veh_type)
+{
+    int prev_round;
+    if (veh_type == 0)
+    {
+        prev_round = ambulance_fleet[veh_id - 1].getVehicleRound();
+        ambulance_fleet[veh_id - 1].setVehicleRound(prev_round + 1);
+    }
+    else if (veh_type == 1)
+    {
+        prev_round = helicopter_fleet[veh_id - 1].getVehicleRound();
+        helicopter_fleet[veh_id - 1].setVehicleRound(prev_round + 1);
     }
 }
 
@@ -475,6 +509,7 @@ int Instance::loadInstance()
                     vehicle.setVehicleLandingTime(f);
                     vehicle.setVehicleTakeoffTime(g);
                     vehicle.setVehicleOccupiedUntilTime(0);
+                    vehicle.setVehicleRound(0);
                     addVehicle(vehicle);
                 }
             }
