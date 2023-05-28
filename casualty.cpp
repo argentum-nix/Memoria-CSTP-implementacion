@@ -24,7 +24,7 @@ void Casualty::setCasualtyPriority(float lambda)
 {
     cas_priority_lambda = lambda;
 }
-void Casualty::setCasualtyAppearTime(int time)
+void Casualty::setCasualtyAppearTime(float time)
 {
     cas_appear_time = time;
 }
@@ -37,7 +37,7 @@ void Casualty::setCasualtyAssignedVehicle(int m)
     cas_assigned_veh = m;
 }
 
-void Casualty::setCasualtyWaitTime(int t)
+void Casualty::setCasualtyWaitTime(float t)
 {
     cas_wait_time = t;
 }
@@ -75,12 +75,12 @@ int Casualty::getCasualtyAssignedVehicle()
     return cas_assigned_veh;
 }
 
-int Casualty::getCasualtyAppearTime()
+float Casualty::getCasualtyAppearTime()
 {
     return cas_appear_time;
 }
 
-int Casualty::getCasualtyWaitTime()
+float Casualty::getCasualtyWaitTime()
 {
     return cas_wait_time;
 }

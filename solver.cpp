@@ -131,9 +131,10 @@ void Solver::greedyAssignment()
     float min_dv_amb = 999999;
     float min_dv_heli = 999999;
     int available_vehicles = 0;
+    float waiting_till = 0;
     int closest_amb = -1;
     int closest_heli = -1;
-    int min_availability_amb = 999999;
+    float min_availability_amb = 999999;
     int next_available_amb = -1;
     float actual_time = -1;
     float tot_sec = 0;
@@ -276,7 +277,7 @@ void Solver::greedyAssignment()
         cout << left << "ROUND " << instance->getVehicleRound(closest_amb, 0) << "    ";
         cout << left << "MCC" << closest_h_amb << "    ";
         // current time == init period time in seconds
-        int waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
+        waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
         // If there is some kind of wait, it should be added. The moment of assignment is starting time + all the wait
         if (waiting_till != 0)
         {

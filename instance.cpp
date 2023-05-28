@@ -79,12 +79,12 @@ float Instance::getCasualtyTimeToHeliport(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyTimeToHeliport();
 }
-int Instance::getCasualtyWaitingTime(int casualty_id)
+float Instance::getCasualtyWaitingTime(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyWaitTime();
 }
 
-int Instance::getCasualtyAppearTime(int casualty_id)
+float Instance::getCasualtyAppearTime(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyAppearTime();
 }
@@ -220,7 +220,7 @@ void Instance::addVehicleRound(int veh_id, int veh_type)
 }
 
 // Casualty-wrappers UPDATE/SET type
-void Instance::updateCasualtyWaitingTime(int casualty_id, int t)
+void Instance::updateCasualtyWaitingTime(int casualty_id, float t)
 {
     casualties[casualty_id - 1].setCasualtyWaitTime(t);
 }
@@ -230,7 +230,7 @@ void Instance::updateCasualtyGravity(int casualty_id, int g)
     casualties[casualty_id - 1].setCasualtyGravity(g);
 }
 
-void Instance::updateCasualtyAppearTime(int casualty_id, int t)
+void Instance::updateCasualtyAppearTime(int casualty_id, float t)
 {
     casualties[casualty_id - 1].setCasualtyAppearTime(t);
 }

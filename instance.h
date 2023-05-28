@@ -45,14 +45,14 @@ public:
     // Casualty-class wrappers
     int getCasualtyLocation(int casualty_id);
     int getCasualtyGravity(int casualty_id);
-    int getCasualtyWaitingTime(int casualty_id);
+    float getCasualtyWaitingTime(int casualty_id);
     int getCasualtyAge(int casualty_id);
-    int getCasualtyAppearTime(int casualty_id);
+    float getCasualtyAppearTime(int casualty_id);
     float getCasualtyTimeToHeliport(int casualty_id);
     float getCasualtyStabilizationTime(int casualty_id);
     void updateCasualtyGravity(int casualty_id, int g);
-    void updateCasualtyWaitingTime(int casualty_id, int t);
-    void updateCasualtyAppearTime(int casualty_id, int t);
+    void updateCasualtyWaitingTime(int casualty_id, float t);
+    void updateCasualtyAppearTime(int casualty_id, float t);
     void updateCasualtyPriority(int casualty_id, int lambda);
 
     // Vehicle-class wrappers
