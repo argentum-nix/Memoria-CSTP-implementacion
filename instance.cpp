@@ -70,7 +70,10 @@ int Instance::getCasualtyLocation(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyLocation();
 }
-
+float Instance::getCasualtyTimeToHeliport(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyTimeToHeliport();
+}
 int Instance::getCasualtyWaitingTime(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyWaitTime();
@@ -129,6 +132,30 @@ float Instance::getVehiclePrepTime(int veh_id, int veh_type)
     else if (veh_type == 1)
     {
         return helicopter_fleet[veh_id - 1].getVehiclePrepTime();
+    }
+    return -1;
+}
+float Instance::getVehicleLandingTime(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        return ambulance_fleet[veh_id - 1].getVehicleLandingTime();
+    }
+    else if (veh_type == 1)
+    {
+        return helicopter_fleet[veh_id - 1].getVehicleLandingTime();
+    }
+    return -1;
+}
+float Instance::getVehicleTakeoffTime(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        return ambulance_fleet[veh_id - 1].getVehicleTakeoffTime();
+    }
+    else if (veh_type == 1)
+    {
+        return helicopter_fleet[veh_id - 1].getVehicleTakeoffTime();
     }
     return -1;
 }

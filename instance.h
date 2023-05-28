@@ -47,6 +47,7 @@ public:
     int getCasualtyGravity(int casualty_id);
     int getCasualtyWaitingTime(int casualty_id);
     int getCasualtyAppearTime(int casualty_id);
+    float getCasualtyTimeToHeliport(int casualty_id);
     float getCasualtyStabilizationTime(int casualty_id);
     void updateCasualtyGravity(int casualty_id, int g);
     void updateCasualtyWaitingTime(int casualty_id, int t);
@@ -55,6 +56,8 @@ public:
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);
+    float getVehicleLandingTime(int veh_id, int veh_type);
+    float getVehicleTakeoffTime(int veh_id, int veh_type);
     float getVehiclePrepTime(int veh_id, int veh_type);
     float getVehicleOccupiedUntilTime(int veh_id, int veh_type);
     void updateVehicleOccupiedUntilTime(int veh_id, int veh_type, float t);

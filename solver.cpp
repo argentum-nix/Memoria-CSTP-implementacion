@@ -130,8 +130,13 @@ void Solver::greedyAssignment()
     float min_dh_heli = 999999;
     float min_dv_amb = 999999;
     float min_dv_heli = 999999;
+    int available_vehicles = 0;
     int closest_amb = -1;
     int closest_heli = -1;
+    int min_availability_amb = 999999;
+    int next_available_amb = -1;
+    float actual_time = -1;
+
     for (int i = 0; i < int(priority_list.size()); i++)
     {
         // pick the first victim on top of the list
@@ -140,6 +145,8 @@ void Solver::greedyAssignment()
         // Find the closest hospital that has de capacity to attend the casualty
         min_dh_amb = 999999;
         min_dh_heli = 999999;
+        closest_h_amb = -1;
+        closest_h_heli = -1;
         cout << "Searching for closest hospital with beds..." << endl;
         for (int h = 1; h <= instance->qty_hospitals; h++)
         {
@@ -158,10 +165,13 @@ void Solver::greedyAssignment()
                 /*
                 // find closest hospital for HELICOPTER trip
                 cout << "[Victim->Hospital in helicopter] " << instance->getCasualtyLocation(first_id) << " -> " << instance->getHospitalLocation(h) << " = ";
-                cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1) << endl;
-                if (instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1) < min_dh_heli)
+                cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1);
+                // time with landing and takeoff times added
+                actual_time =  instance->getVehicleLandingTime(closest_heli, 1) + instance->getVehicleTakeoffTime(closest_heli, 1) + instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1);
+                cout << " and with takeoff/landing: " << actual_time << endl;
+                if (actual_time < min_dh_heli)
                 {
-                    min_dh_heli = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(h), 1);
+                    min_dh_heli = actual_time;
                     closest_h_heli = h;
                 }
                 */
@@ -171,13 +181,16 @@ void Solver::greedyAssignment()
         // Case: ambulance
         cout << "Searching for closest vehicle to pick up the casualty..." << endl;
         min_dv_amb = 999999;
+        closest_amb = -1;
+        available_vehicles = 0;
         for (int a = 1; a <= instance->qty_ambulances; a++)
         {
-            cout << "[Pickup->Victim for A" << a << "] " << instance->getVehicleLocation(a, 0) << " -> " << instance->getCasualtyLocation(first_id) << " = ";
-            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(a, 0), 0) << endl;
-            // check if vehicle is already occupied
-            if (instance->getVehicleOccupiedUntilTime(a, 0) < current_time)
+            // check if vehicle is not occupied
+            if (instance->getVehicleOccupiedUntilTime(a, 0) < start_time)
             {
+                available_vehicles++;
+                cout << "[Pickup->Victim for A" << a << "] " << instance->getVehicleLocation(a, 0) << " -> " << instance->getCasualtyLocation(first_id) << " = ";
+                cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(a, 0), 0) << endl;
                 if (instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(a, 0), 0) < min_dv_amb)
                 {
                     min_dv_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(a, 0), 0);
@@ -185,24 +198,58 @@ void Solver::greedyAssignment()
                 }
             }
         }
+        min_availability_amb = 999999;
+        next_available_amb = -1;
+        if (available_vehicles == 0)
+        {
+            // find a vehicle that will be available first between all the occupied ones
+            // and assign the wait time alpha_k as the time between (vehicle's fin of route - start of period)
+            for (int a = 1; a <= instance->qty_ambulances; a++)
+            {
+                if (instance->getVehicleOccupiedUntilTime(a, 0) < min_availability_amb)
+                {
+                    min_availability_amb = instance->getVehicleOccupiedUntilTime(a, 0);
+                    next_available_amb = a;
+                }
+            }
+
+            cout << "All vehicles occcupied. Next available vehicle is A" << next_available_amb << " in " << (min_availability_amb) / 60;
+            cout << " (" << int(min_availability_amb) / 3600 << ":" << (int(min_availability_amb) / 60) % 60 << ":" << int(min_availability_amb) % 60 << ")" << endl;
+            closest_amb = next_available_amb;
+            // asignar valores de tiempos de viaje desde victima la hospital, y hacia la victima
+            // caso: con hospital disponible, sin vehiculos disponibles
+            if (closest_h_amb != -1)
+            {
+                min_dh_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(closest_h_amb), 0);
+            }
+            // caso: sin hospitales disponibles, sin vehiculos disponibles
+            else
+            {
+                cout << "No hospitals can attend this victim." << endl;
+            }
+            min_dv_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_amb, 0), 0);
+            // se asigna hasta que momento en segundos desde el inicio la victima espera su vehiculo
+            instance->updateCasualtyWaitingTime(first_id, min_availability_amb);
+        }
 
         /*
         // Mismo para helicoptero
         min_dv_heli = 999999;
+        closest_heli = -1;
         // Case: helicopter
         for (int h = 1; h <= instance->qty_helicopters; h++)
         {
             cout << "[Pickup->Victim for H" << h << "] " << instance->getVehicleLocation(h, 1) << " -> " << instance->getCasualtyLocation(first_id) << " = ";
-            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1) << endl;
-            if (instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1) < min_dv_heli)
+            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1);
+            actual_time = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1) + instance->getVehicleLandingTime(closest_heli, 1) + instance->getVehicleTakeoffTime(closest_heli, 1) + 2 * instance->getCasualtyTimeToHeliport(first_id);
+            cout << " and with takeoff/landing and 2x running: " << actual_time << endl;
+            if (actual_time < min_dv_heli)
             {
-                min_dv_heli = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(h, 1), 1);
+                min_dv_heli = actual_time;
                 closest_heli = h;
             }
         }
         */
-
-        // falta sumar tiempo de inicio de operaciones de vehiculos y takeoff/arrival de helis
 
         // Si es la primera asigancion de ambulancia, se debe agregar el tiempo de preparacion
         if (instance->getVehicleOccupiedUntilTime(closest_amb, 0) == 0)
@@ -211,7 +258,7 @@ void Solver::greedyAssignment()
         }
 
         /*
-        // mismo para helicoptero
+        // mismo para helicoptero + tiempos extra de helicoptero
         if (instance->getVehicleOccupiedUntilTime(closest_heli, 1) == 0)
         {
             min_dh_heli += instance->getVehiclePrepTime(closest_heli, 1);
@@ -222,7 +269,11 @@ void Solver::greedyAssignment()
         cout << left << "V" << first_id << "    ";
         cout << left << "A" << closest_amb << "    ";
         cout << left << "MCC" << closest_h_amb << "    ";
-        float tot_sec = min_dv_amb * 60 + 27660;
+        // current time == init period time in seconds
+        int waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
+        float tot_sec = min_dv_amb * 60 + start_time + waiting_till;
+        cout << left << waiting_till << " (" << int(waiting_till * 60) / 3600 << ":" << int(waiting_till) % 60 << ":" << int(waiting_till * 60) % 60 << ")"
+             << "    ";
         cout << left << min_dv_amb << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
         tot_sec += instance->getCasualtyStabilizationTime(first_id) * 60;
@@ -234,32 +285,29 @@ void Solver::greedyAssignment()
         cout << endl;
         cout << endl;
 
-        // Asignar el tiempo hasta cual la ambulancia estara ocupada
+        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y ocupar la cama
         instance->updateVehicleOccupiedUntilTime(closest_amb, 0, tot_sec);
-        // Ocupar la cama
         instance->updateHospitalBedCapacity(closest_h_amb, g, instance->getHospitalCurCapacity(closest_h_amb, g) - 1);
 
         /*
         cout << left << "V" << first_id << "    ";
         cout << left << "H" << closest_heli << "     ";
         cout << left << "MCC" << closest_h_heli << "    ";
-        tot_sec = min_dv_heli * 60 + 27660;
+        tot_sec = min_dv_heli * 60 +  start_time;
         cout << left << min_dv_heli << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
         tot_sec += instance->getCasualtyStabilizationTime(first_id) * 60;
-        cout << left << (tot_sec - 27660) / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
+        cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
         tot_sec += min_dh_heli * 60;
-        cout << left << (tot_sec - 27660) / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
+        cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
         cout << endl;
         cout << "================================" << endl;
         cout << endl;
 
-        // Asignar el tiempo hasta cual el helicoptero estara ocupado
+        // Asignar el tiempo hasta cual el helicoptero estara ocupado y ocupar la cama
         instance->updateVehicleOccupiedUntilTime(closest_heli, 1, tot_sec);
-
-        // Ocupar la cama
         instance->updateHospitalBedCapacity(closest_h_heli, g, instance->getHospitalCurCapacity(closest_h_heli, g) - 1);
         */
     }

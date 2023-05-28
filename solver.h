@@ -20,7 +20,7 @@ public:
     // PAIR: victim priority lambda,victim id
     std::vector<std::pair<float, int>> priority_list;
     // 7:41, first period start
-    int current_time = 27660;
+    int start_time = 27660;
 
 private:
     Instance *instance;
