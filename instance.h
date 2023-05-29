@@ -22,10 +22,11 @@ public:
     int loadInstance();
     int loadNetwork();
 
-    int qty_casualties;
+    int qty_casualties = 0;
     int qty_ambulances = 0;
     int qty_helicopters = 0;
-    int qty_hospitals;
+    int qty_hospitals = 0;
+    int qty_periods = 0;
 
     // Set Instance-Specific values
     void setDeteriorationTime(float time, int g);
@@ -41,6 +42,7 @@ public:
     // int getStabilizationTimeValue(int g, int a);
     int getDeteriorationTimeValue(int g);
     float getTimeBetweenNodes(int origin, int destination, int veh_type);
+    int getPeriod(int period_id);
 
     // Casualty-class wrappers
     int getCasualtyLocation(int casualty_id);
@@ -81,6 +83,7 @@ public:
     void printVehicle(int id, int type);
     void printAmbulances();
     void printHelicopters();
+    void printPeriods();
 
 private:
     std::string instance_txt_name;
@@ -91,6 +94,7 @@ private:
     float deterioration_funct_params[3][4];
     float deterioration_time_pi[2][1];
 
+    std::vector<int> period_timestamps;
     std::map<int, int> node_id_correlation_map;
     std::vector<std::vector<float>> travel_time_ambulance;
     std::vector<std::vector<float>> travel_time_helicopter;

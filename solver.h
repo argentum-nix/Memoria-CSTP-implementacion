@@ -11,7 +11,7 @@ public:
     ~Solver();
     float calculatePriority(float te, int g);
     void updateWaitingTime(int casualty_id);
-    void updateStatesOfCasualties();
+    void updateCasualtyState(int casualty_id);
     void updatePriorityOfCasualties();
     void greedyAssignment();
 
@@ -20,8 +20,8 @@ public:
     // PAIR: victim priority lambda,victim id
     std::vector<std::pair<float, int>> priority_list;
     // 7:41, first period start
-    int start_time = 27660;
-    int current_time = start_time;
+    int start_time;
+    int current_time;
 
 private:
     Instance *instance;

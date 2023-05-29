@@ -14,6 +14,7 @@ Instance::Instance(std::string instance_directory, std::string instance_name, st
     DEBUG(load_directory);
     DEBUG(network_txt_name);
 }
+
 void Instance::setDeteriorationTime(float time, int g)
 {
     deterioration_time_pi[g][0] = time;
@@ -113,6 +114,12 @@ float Instance::getTimeBetweenNodes(int origin, int destination, int veh_type)
     }
     return -1;
 }
+
+int Instance::getPeriod(int period_id)
+{
+    return period_timestamps[period_id];
+}
+
 // Vehicle-wrappers GET type
 int Instance::getVehicleLocation(int veh_id, int veh_type)
 {
@@ -337,6 +344,16 @@ void Instance::printHelicopters()
     }
 }
 
+void Instance::printPeriods()
+{
+    cout << "Periods: [";
+    for (unsigned int i = 0; i < period_timestamps.size(); i++)
+    {
+        cout << period_timestamps[i] << ", ";
+    }
+    cout << "]" << endl;
+}
+
 // Instance class destructor
 Instance::~Instance() {}
 
@@ -437,7 +454,7 @@ int Instance::loadInstance()
         {
             getline(cin, res);
         }
-        for (int txt_section = 0; txt_section < 6; txt_section++)
+        for (int txt_section = 0; txt_section < 7; txt_section++)
         {
             cin >> count;
             // Section 1: Time to Stabilize TP
@@ -513,8 +530,18 @@ int Instance::loadInstance()
                     addVehicle(vehicle);
                 }
             }
-            // Section 6: Casualties
+            // Section 6: Period timestamps
             else if (txt_section == 5)
+            {
+                for (int line = 0; line < count; line++)
+                {
+                    qty_periods = count;
+                    cin >> a;
+                    period_timestamps.push_back(a);
+                }
+            }
+            // Section 7: Casualties
+            else if (txt_section == 6)
             {
                 qty_casualties = count;
                 for (int line = 0; line < count; line++)
@@ -535,13 +562,14 @@ int Instance::loadInstance()
                 }
             }
         }
-        printStabilizationTimeMatrix();
-        printDeteriorationParamMatrix();
-        printDeteriorationTimeMatrix();
-        printAmbulances();
-        printHelicopters();
-        printHospitalVector();
-        printCasualtyVector();
+        // printStabilizationTimeMatrix();
+        // printDeteriorationParamMatrix();
+        // printDeteriorationTimeMatrix();
+        // printAmbulances();
+        // printHelicopters();
+        // printHospitalVector();
+        // printPeriods();
+        // printCasualtyVector();
 
         cin.rdbuf(cinbuf);
         in_file.close();

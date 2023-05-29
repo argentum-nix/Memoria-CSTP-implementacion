@@ -8,32 +8,66 @@ Solver::Solver(Instance *in)
     instance = in;
 
     float lambda;
-    for (int i = 1; i <= instance->qty_casualties; i++)
-    {
-        // Poblate the priority list with incoming victims
-        // TODO: check if id "i" already was instanced, if so, update its lambda or skip it entirely
-        lambda = calculatePriority(instance->getCasualtyWaitingTime(i), instance->getCasualtyGravity(i));
-        instance->updateCasualtyPriority(i, lambda);
-        // add new victim to priority_list
-        priority_list.push_back(make_pair(lambda, i));
-        // update waiting time
-        updateWaitingTime(i);
-    }
-    // order the list from greater to smaller
 
-    sort(priority_list.rbegin(), priority_list.rend(), [](const auto &l, const auto &r)
-         { return (l.first == r.first) ? l.second > r.second : l.first < r.first; });
-    // sort(priority_list.rbegin(), priority_list.rend());
-    printPriorityList();
-    cout << endl;
-    cout << "=GREEDY=" << endl;
-    greedyAssignment();
+    // for every period...
+    for (int i = 0; i < instance->qty_periods; i++)
+    {
+        // clean the priority list, because every period should start with new list
+        priority_list.clear();
+        // Asign time of start of operations, and save current period timestamp
+        if (i == 0)
+        {
+            start_time = instance->getPeriod(i);
+        }
+        current_time = instance->getPeriod(i);
+        cout << "CURRENT PERIOD: " << i << " TIMESTAMP: " << current_time << endl;
+        // create new prioririty list with current and prev periods
+        for (int i = 1; i <= instance->qty_casualties; i++)
+        {
+            // if new victim, add directly
+            if (instance->getCasualtyAppearTime(i) == current_time)
+            {
+                cout << "New casualty " << i << " added to the system." << endl;
+                lambda = calculatePriority(instance->getCasualtyWaitingTime(i), instance->getCasualtyGravity(i));
+                instance->updateCasualtyPriority(i, lambda);
+                priority_list.push_back(make_pair(lambda, i));
+            }
+            // if old victim from prev period that had to wait for pickup
+            else if (instance->getCasualtyAppearTime(i) < current_time && instance->getCasualtyWaitingTime(i) != 0)
+            {
+                // if the wait is so that the victim is still waiting at start of the new period
+                if (instance->getCasualtyWaitingTime(i) >= current_time)
+                {
+                    cout << "Old casualty " << i << " was updated and ready for new assignment." << endl;
+                    // reassign waiting time to the start of new period
+                    instance->updateCasualtyWaitingTime(i, current_time);
+                    // recalculate the victims gravity using its new wait time
+                    updateCasualtyState(i);
+                    // update lambda with new data
+                    lambda = calculatePriority(instance->getCasualtyWaitingTime(i), instance->getCasualtyGravity(i));
+                    instance->updateCasualtyPriority(i, lambda);
+                    priority_list.push_back(make_pair(lambda, i));
+                }
+            }
+        }
+        // order the list from greater to smaller
+        sort(priority_list.rbegin(), priority_list.rend(), [](const auto &l, const auto &r)
+             { return (l.first == r.first) ? l.second > r.second : l.first < r.first; });
+        // sort(priority_list.rbegin(), priority_list.rend());
+        printPriorityList();
+        cout << endl;
+        // greedy for current slice of victims
+        cout << "=GREEDY=" << endl;
+        greedyAssignment();
+        int temp;
+        cin >> temp;
+    }
 }
 
 void Solver::printPriorityList()
 {
     cout << "PRIORITY LIST: ";
-    for (int i = 0; i < instance->qty_casualties; i++)
+    for (unsigned int i = 0; i < priority_list.size(); i++)
     {
         cout << "(" << priority_list[i].first << ", " << priority_list[i].second << "), ";
     }
@@ -53,28 +87,26 @@ void Solver::updateWaitingTime(int casualty_id)
     instance->updateCasualtyWaitingTime(casualty_id, TT - TA);
 }
 
-void Solver::updateStatesOfCasualties()
+void Solver::updateCasualtyState(int casualty_id)
 {
-    // TODO: tiempo de espera maxima para pasar a siguiente LSI debe venir dentro de la instancia...
     int TEmax1 = 1140;
     int TEmax2 = 360;
-    for (int i = 1; i <= instance->qty_casualties; i++)
+    // Case 1: Victim of LSI 1 already waited enough to be considered LSI 2
+    int g = instance->getCasualtyGravity(casualty_id);
+    int te = instance->getCasualtyWaitingTime(casualty_id);
+    if (g == 1 && te > TEmax1)
     {
-        // Case 1: Any victim of LSI 1 already waited enough to be considered LSI 2
-        int g = instance->getCasualtyGravity(i);
-        int te = instance->getCasualtyWaitingTime(i);
-        if (g == 1 && te > TEmax1)
-        {
-            instance->updateCasualtyGravity(i, 2);
-            instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
-        }
-        // Case 1: Any victim of LSI 2 already waited enough to be considered LSI 3
-        else if (g == 2 && te > TEmax2)
-        {
-            instance->updateCasualtyGravity(i, 3);
-            instance->updateCasualtyWaitingTime(i, instance->getCasualtyWaitingTime(i) - TEmax2);
-            instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
-        }
+        cout << "V" << casualty_id << "deteriorated to GRAVITY 2" << endl;
+        instance->updateCasualtyGravity(casualty_id, 2);
+        // instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
+    }
+    // Case 1:Victim of LSI 2 already waited enough to be considered LSI 3
+    else if (g == 2 && te > TEmax2)
+    {
+        cout << "V" << casualty_id << "deteriorated to GRAVITY 3" << endl;
+        instance->updateCasualtyGravity(casualty_id, 3);
+        // instance->updateCasualtyWaitingTime(i, instance->getCasualtyWaitingTime(i) - TEmax2);
+        // instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
     }
 }
 
@@ -205,9 +237,11 @@ void Solver::greedyAssignment()
         if (available_vehicles == 0)
         {
             // find a vehicle that will be available first between all the occupied ones
-            // and assign the wait time alpha_k as the time between (vehicle's fin of route - start of period)
+            // and assign the wait time alpha_k
+            cout << "All vehicles occcupied." << endl;
             for (int a = 1; a <= instance->qty_ambulances; a++)
             {
+                cout << "[Ambulance A" << a << "] occupied until " << instance->getVehicleOccupiedUntilTime(a, 0) / 60 << endl;
                 if (instance->getVehicleOccupiedUntilTime(a, 0) < min_availability_amb)
                 {
                     min_availability_amb = instance->getVehicleOccupiedUntilTime(a, 0);
@@ -215,7 +249,7 @@ void Solver::greedyAssignment()
                 }
             }
 
-            cout << "All vehicles occcupied. Next available vehicle is A" << next_available_amb << " in " << (min_availability_amb) / 60;
+            cout << "->>>>Next available vehicle is A" << next_available_amb << " in " << (min_availability_amb) / 60;
             cout << " (" << int(min_availability_amb) / 3600 << ":" << (int(min_availability_amb) / 60) % 60 << ":" << int(min_availability_amb) % 60 << ")" << endl;
             closest_amb = next_available_amb;
             // asignar valores de tiempos de viaje desde victima la hospital, y hacia la victima
