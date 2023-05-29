@@ -11,8 +11,7 @@ public:
     ~Solver();
     float calculatePriority(float te, int g);
     void updateWaitingTime(int casualty_id);
-    void updateCasualtyState(int casualty_id);
-    void updatePriorityOfCasualties();
+    void updateCasualtyState(int casualty_id, int te);
     void greedyAssignment();
 
     void printPriorityList();

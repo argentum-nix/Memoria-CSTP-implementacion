@@ -43,6 +43,7 @@ public:
     int getDeteriorationTimeValue(int g);
     float getTimeBetweenNodes(int origin, int destination, int veh_type);
     int getPeriod(int period_id);
+    float getDetFunctParam(int param, int g);
 
     // Casualty-class wrappers
     int getCasualtyLocation(int casualty_id);

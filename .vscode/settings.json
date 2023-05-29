@@ -48,6 +48,7 @@
     "map": "cpp",
     "xtree": "cpp",
     "algorithm": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "thread": "cpp"
   }
 }

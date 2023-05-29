@@ -90,6 +90,12 @@ float Instance::getCasualtyAppearTime(int casualty_id)
     return casualties[casualty_id - 1].getCasualtyAppearTime();
 }
 
+float Instance::getDetFunctParam(int param, int g)
+{
+    // kappa
+    return deterioration_funct_params[g - 1][param];
+}
+
 float Instance::getCasualtyStabilizationTime(int casualty_id)
 {
     int g = casualties[casualty_id - 1].getCasualtyGravity();
