@@ -50,6 +50,7 @@ public:
     int getCasualtyGravity(int casualty_id);
     float getCasualtyWaitingTime(int casualty_id);
     int getCasualtyAge(int casualty_id);
+    int getCasualtyAssignedHospital(int casualty_id);
     float getCasualtyAppearTime(int casualty_id);
     float getCasualtyTimeToHeliport(int casualty_id);
     float getCasualtyStabilizationTime(int casualty_id);

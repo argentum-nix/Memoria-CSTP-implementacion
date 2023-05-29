@@ -2,6 +2,7 @@
 #define VEHICLE_H
 
 #include <iostream>
+#include <vector>
 
 #define TYPE_HELICOPTER 1
 #define TYPE_AMBULANCE 0
@@ -37,11 +38,12 @@ private:
     int veh_id_m;
     int veh_capacity_q;
     int veh_type_e;
-    int total_rounds;
-    int veh_curlocation;
     float veh_preptime_TDme;
     float veh_takeoff_TDSe;
     float veh_land_TATe;
+
+    int total_rounds;
+    int veh_curlocation;
     float occupied_until;
 };
 

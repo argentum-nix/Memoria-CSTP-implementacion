@@ -8,6 +8,7 @@ Solver::Solver(Instance *in)
     instance = in;
 
     float lambda;
+    int prev_hospital;
 
     // for every period...
     for (int p = 0; p < instance->qty_periods; p++)
@@ -48,6 +49,13 @@ Solver::Solver(Instance *in)
                     lambda = calculatePriority(instance->getCasualtyWaitingTime(i) - instance->getPeriod(p - 1), instance->getCasualtyGravity(i));
                     instance->updateCasualtyPriority(i, lambda);
                     priority_list.push_back(make_pair(lambda, i));
+                    // free the occupied bed
+                    prev_hospital = instance->getCasualtyAssignedHospital(i);
+                    instance->updateHospitalBedCapacity(prev_hospital, instance->getCasualtyGravity(i), instance->getHospitalCurCapacity(prev_hospital, g) + 1);
+                    // de-assign the hospital
+                    // free the occupied vehicle and make its available time equal to prev assignment
+                    // TODO
+                    // de-assign the vehicle
                 }
             }
         }

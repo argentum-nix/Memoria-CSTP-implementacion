@@ -76,6 +76,12 @@ int Instance::getCasualtyLocation(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyLocation();
 }
+
+int Instance::getCasualtyAssignedHospital(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyAssignedHospital();
+}
+
 float Instance::getCasualtyTimeToHeliport(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyTimeToHeliport();
