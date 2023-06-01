@@ -62,6 +62,14 @@ int Instance::getDeteriorationTimeValue(int g)
 }
 
 // Casualty-wrappers GET type
+int Instance::getCasualtyAssignedVehicle(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyAssignedVehicle();
+}
+int Instance::getCasualtyAssignedVehicleType(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyAssignedVehicleType();
+}
 int Instance::getCasualtyGravity(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyGravity();
@@ -113,7 +121,6 @@ float Instance::getTimeBetweenNodes(int origin, int destination, int veh_type)
 {
     int internal_origin_id = node_id_correlation_map[origin];
     int internal_dest_id = node_id_correlation_map[destination];
-
     // amb
     if (veh_type == 0)
     {
@@ -238,7 +245,25 @@ void Instance::addVehicleRound(int veh_id, int veh_type)
     }
 }
 
+void Instance::resetVehicleOccuipedUntil(int veh_id, int veh_type, float period_start)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].resetOccuipedToFirstAvailability(period_start);
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].resetOccuipedToFirstAvailability(period_start);
+    }
+}
+
 // Casualty-wrappers UPDATE/SET type
+
+void Instance::updateCasualtyHospital(int casualty_id, int hospital_id)
+{
+    casualties[casualty_id - 1].setCasualtyAssignedHospital(hospital_id);
+}
+
 void Instance::updateCasualtyWaitingTime(int casualty_id, float t)
 {
     casualties[casualty_id - 1].setCasualtyWaitTime(t);
@@ -259,6 +284,11 @@ void Instance::updateCasualtyPriority(int casualty_id, int lambda)
     casualties[casualty_id - 1].setCasualtyPriority(lambda);
 }
 
+void Instance::updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int veh_type)
+{
+    casualties[casualty_id - 1].setCasualtyAssignedVehicle(veh_id);
+    casualties[casualty_id - 1].setCasualtyAssignedVehicleType(veh_type);
+}
 // Hospital-wrappers GET type
 int Instance::getHospitalCurCapacity(int hospital_id, int g)
 {
@@ -376,6 +406,7 @@ Instance::~Instance() {}
 // Returns: int, LOADING_FAILED si hubo error en lectura de datos, LOADING_OK etoc
 int Instance::loadNetwork()
 {
+
     ifstream in_file(this->load_directory + this->network_txt_name + ".txt");
     if (in_file.is_open())
     {
@@ -391,7 +422,6 @@ int Instance::loadNetwork()
         }
         cin >> count;
         // resize the vectors to number of nodes in the network
-
         travel_time_ambulance.resize(count, vector<float>(count, 0.0));
         travel_time_helicopter.resize(count, vector<float>(count, 0.0));
         for (int i = 0; i < count; i++)
@@ -405,7 +435,7 @@ int Instance::loadNetwork()
 
         int node_orig, node_dest;
         float heli_time, amb_time;
-        for (int line; line < count * count; line++)
+        for (int line = 0; line < count * count; line++)
         {
             cin >> node_orig >> node_dest >> heli_time >> amb_time;
 

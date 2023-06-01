@@ -32,6 +32,8 @@ public:
     float getVehicleLandingTime();
     float getVehicleOccupiedUntilTime();
 
+    void resetOccuipedToFirstAvailability(int period_start);
+
     void printData();
 
 private:
@@ -44,7 +46,7 @@ private:
 
     int total_rounds;
     int veh_curlocation;
-    float occupied_until;
+    std::vector<float> occupied_until;
 };
 
 #endif

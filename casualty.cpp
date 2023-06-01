@@ -37,6 +37,11 @@ void Casualty::setCasualtyAssignedVehicle(int m)
     cas_assigned_veh = m;
 }
 
+void Casualty::setCasualtyAssignedVehicleType(int e)
+{
+    cas_assigned_veh_type = e;
+}
+
 void Casualty::setCasualtyWaitTime(float t)
 {
     cas_wait_time = t;
@@ -73,6 +78,11 @@ int Casualty::getCasualtyAssignedHospital()
 int Casualty::getCasualtyAssignedVehicle()
 {
     return cas_assigned_veh;
+}
+
+int Casualty::getCasualtyAssignedVehicleType()
+{
+    return cas_assigned_veh_type;
 }
 
 float Casualty::getCasualtyAppearTime()

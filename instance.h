@@ -22,6 +22,10 @@ public:
     int loadInstance();
     int loadNetwork();
 
+    std::string instance_txt_name;
+    std::string network_txt_name;
+    std::string load_directory;
+
     int qty_casualties = 0;
     int qty_ambulances = 0;
     int qty_helicopters = 0;
@@ -54,10 +58,15 @@ public:
     float getCasualtyAppearTime(int casualty_id);
     float getCasualtyTimeToHeliport(int casualty_id);
     float getCasualtyStabilizationTime(int casualty_id);
+    int getCasualtyAssignedVehicle(int casualty_id);
+    int getCasualtyAssignedVehicleType(int casualty_id);
+
+    void updateCasualtyHospital(int casualty_id, int hospital_id);
     void updateCasualtyGravity(int casualty_id, int g);
     void updateCasualtyWaitingTime(int casualty_id, float t);
     void updateCasualtyAppearTime(int casualty_id, float t);
     void updateCasualtyPriority(int casualty_id, int lambda);
+    void updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int veh_type);
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);
@@ -68,6 +77,7 @@ public:
     float getVehicleOccupiedUntilTime(int veh_id, int veh_type);
     void updateVehicleOccupiedUntilTime(int veh_id, int veh_type, float t);
     void addVehicleRound(int veh_id, int veh_type);
+    void resetVehicleOccuipedUntil(int veh_id, int veh_type, float period_start);
 
     // Hospital-class wrappers
     int getHospitalLocation(int hospital_id);
@@ -88,10 +98,6 @@ public:
     void printPeriods();
 
 private:
-    std::string instance_txt_name;
-    std::string network_txt_name;
-    std::string load_directory;
-
     float stabilization_time_tp[3][3];
     float deterioration_funct_params[3][4];
     float deterioration_time_pi[2][1];

@@ -8,7 +8,7 @@ Solver::Solver(Instance *in)
     instance = in;
 
     float lambda;
-    int prev_hospital;
+    int prev_hospital, g, prev_vehicle, veh_type;
 
     // for every period...
     for (int p = 0; p < instance->qty_periods; p++)
@@ -50,12 +50,16 @@ Solver::Solver(Instance *in)
                     instance->updateCasualtyPriority(i, lambda);
                     priority_list.push_back(make_pair(lambda, i));
                     // free the occupied bed
+                    g = instance->getCasualtyGravity(i);
                     prev_hospital = instance->getCasualtyAssignedHospital(i);
                     instance->updateHospitalBedCapacity(prev_hospital, instance->getCasualtyGravity(i), instance->getHospitalCurCapacity(prev_hospital, g) + 1);
                     // de-assign the hospital
+                    instance->updateCasualtyHospital(i, -1);
                     // free the occupied vehicle and make its available time equal to prev assignment
-                    // TODO
+                    prev_vehicle = instance->getCasualtyAssignedVehicle(i);
+                    veh_type = instance->getCasualtyAssignedVehicleType(i);
                     // de-assign the vehicle
+                    instance->resetVehicleOccuipedUntil(prev_vehicle, veh_type, current_time);
                 }
             }
         }
@@ -285,7 +289,6 @@ void Solver::greedyAssignment()
         cout << left << "A" << closest_amb << "    ";
         cout << left << "ROUND " << instance->getVehicleRound(closest_amb, 0) << "    ";
         cout << left << "MCC" << closest_h_amb << "    ";
-        // current time == init period time in seconds
         waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
         // If there is some kind of wait, it should be added. The moment of assignment is starting time + all the wait
         if (waiting_till != 0)
@@ -301,6 +304,7 @@ void Solver::greedyAssignment()
             cout << left << waiting_till << " (" << int(current_time) / 3600 << ":" << int(current_time / 60) % 60 << ":" << int(current_time) % 60 << ")"
                  << "    ";
         }
+
         cout << left << min_dv_amb * 60 + waiting_till << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
         tot_sec += instance->getCasualtyStabilizationTime(first_id) * 60;
@@ -312,10 +316,14 @@ void Solver::greedyAssignment()
         cout << endl;
         cout << endl;
 
-        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada, ocupar la cama, y aumentar rondas de ambulancia
+        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y aumentar rondas de ambulancia
         instance->updateVehicleOccupiedUntilTime(closest_amb, 0, tot_sec);
-        instance->updateHospitalBedCapacity(closest_h_amb, g, instance->getHospitalCurCapacity(closest_h_amb, g) - 1);
         instance->addVehicleRound(closest_amb, 0);
+        // Ocupar la cama de hospital asignado
+        instance->updateHospitalBedCapacity(closest_h_amb, g, instance->getHospitalCurCapacity(closest_h_amb, g) - 1);
+        // Asignar el hospital y vehiculo a la casualty
+        instance->updateCasualtyHospital(first_id, closest_h_amb);
+        instance->updateCasualtyAssignedVehicle(first_id, closest_amb, 0);
 
         /*
         cout << left << "V" << first_id << "    ";

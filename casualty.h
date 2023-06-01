@@ -17,6 +17,7 @@ public:
     void setCasualtyAppearTime(float time);
     void setCasualtyAssignedHospital(int h);
     void setCasualtyAssignedVehicle(int m);
+    void setCasualtyAssignedVehicleType(int e);
     void setCasualtyWaitTime(float t);
     void setCasualtyTimeToHeliport(float d);
 
@@ -27,6 +28,7 @@ public:
     float getCasualtyPriority();
     int getCasualtyAssignedHospital();
     int getCasualtyAssignedVehicle();
+    int getCasualtyAssignedVehicleType();
     float getCasualtyAppearTime();
     float getCasualtyWaitTime();
     float getCasualtyTimeToHeliport();
@@ -38,12 +40,14 @@ private:
     int cas_curgravity_g;
     int cas_age_a;
     int cas_curlocation;
+    float cas_appear_time;
+    float cas_time_to_heliport;
+
+    float cas_wait_time;
     float cas_priority_lambda;
     int cas_assigned_hosp;
     int cas_assigned_veh;
-    float cas_appear_time;
-    float cas_wait_time;
-    float cas_time_to_heliport;
+    int cas_assigned_veh_type;
 };
 
 #endif

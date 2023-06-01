@@ -43,7 +43,7 @@ void Vehicle::setVehicleLandingTime(float tat)
 
 void Vehicle::setVehicleOccupiedUntilTime(float t)
 {
-    occupied_until = t;
+    occupied_until.push_back(t);
 }
 
 void Vehicle::setVehicleRound(int round)
@@ -89,7 +89,22 @@ float Vehicle::getVehicleLandingTime()
 
 float Vehicle::getVehicleOccupiedUntilTime()
 {
-    return occupied_until;
+    return occupied_until.back();
+}
+
+void Vehicle::resetOccuipedToFirstAvailability(int period_start)
+{
+    int index = 0;
+    for (unsigned int i = 0; i < occupied_until.size(); i++)
+    {
+        if (occupied_until[i] >= period_start)
+        {
+            index = i;
+            break;
+        }
+    }
+    // delete all elements after the first availability that occurs on or after the period start time
+    occupied_until.erase(occupied_until.begin() + index + 1, occupied_until.end());
 }
 
 void Vehicle::printData()
