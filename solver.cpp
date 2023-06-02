@@ -255,11 +255,16 @@ void Solver::greedyAssignment()
             if (closest_h_amb != -1)
             {
                 min_dh_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(closest_h_amb), 0);
+                // Ocupar la cama de hospital asignado
+                instance->updateHospitalBedCapacity(closest_h_amb, instance->getCasualtyGravity(first_id), instance->getHospitalCurCapacity(closest_h_amb, instance->getCasualtyGravity(first_id)) - 1);
             }
             // caso: sin hospitales disponibles, sin vehiculos disponibles
             else
             {
-                cout << "No hospitals can attend this victim." << endl;
+                cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;
+                // TODO: Use special hospitals // dummies
+                // Skip this iteration, victim recieves no medical attention, F in the chat
+                continue;
             }
             min_dv_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_amb, 0), 0);
             // se asigna hasta que momento en segundos desde el inicio la victima espera su vehiculo
@@ -336,8 +341,6 @@ void Solver::greedyAssignment()
         // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y aumentar rondas de ambulancia
         instance->updateVehicleOccupiedUntilTime(closest_amb, 0, tot_sec);
         instance->addVehicleRound(closest_amb, 0);
-        // Ocupar la cama de hospital asignado
-        instance->updateHospitalBedCapacity(closest_h_amb, instance->getCasualtyGravity(first_id), instance->getHospitalCurCapacity(closest_h_amb, instance->getCasualtyGravity(first_id)) - 1);
         // Asignar el hospital y vehiculo a la casualty
         instance->updateCasualtyHospital(first_id, closest_h_amb);
 
