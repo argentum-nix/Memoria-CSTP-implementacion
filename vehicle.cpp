@@ -104,6 +104,7 @@ void Vehicle::resetOccuipedToFirstAvailability(int period_start)
         }
     }
     // delete all elements after the first availability that occurs on or after the period start time
+    total_rounds = index + 1;
     occupied_until.erase(occupied_until.begin() + index + 1, occupied_until.end());
 }
 

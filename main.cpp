@@ -1,5 +1,3 @@
-#include <chrono>
-#include <thread>
 #include <iostream>
 #include "solver.h"
 using namespace std;
@@ -29,7 +27,6 @@ int main(int argc, char const *argv[])
         cout << "[ERROR]: Failed to load the instance txt." << endl;
         return 0;
     }
-    this_thread::sleep_for(chrono::milliseconds(1000));
     Solver solve(&cstp);
     return 0;
 }
