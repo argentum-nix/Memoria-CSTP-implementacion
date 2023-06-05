@@ -13,6 +13,10 @@ public:
     void updateCasualtyState(int casualty_id, float te);
     void greedyAssignment(char fleet_mode);
 
+    std::pair<int, float> findClosestHospitalWithBeds(int casualty_id, int id_closest_veh, int veh_type);
+    std::pair<int, float> findClosestAvailableVehicle(int casualty_id, int veh_type);
+    std::pair<int, float> findFirstAvailableVehicle(int veh_type);
+
     void printPriorityList();
 
     // PAIR: victim priority lambda,victim id

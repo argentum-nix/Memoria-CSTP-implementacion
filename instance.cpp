@@ -581,7 +581,7 @@ int Instance::loadInstance()
                     vehicle.setVehiclePrepTime(f);
                     vehicle.setVehicleLandingTime(g);
                     vehicle.setVehicleTakeoffTime(h);
-                    vehicle.setVehicleOccupiedUntilTime(0);
+                    vehicle.setVehicleOccupiedUntilTime(d);
                     vehicle.setVehicleRound(1);
                     addVehicle(vehicle);
                 }
