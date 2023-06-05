@@ -21,12 +21,14 @@ public:
     void setVehicleLandingTime(float tat);
     void setVehicleOccupiedUntilTime(float t);
     void setVehicleRound(int round);
+    void setVehicleAppearTime(int t);
 
     int getVehicleID();
     int getVehicleType();
     int getVehicleCapacity();
     int getVehicleLocation();
     int getVehicleRound();
+    int getVehicleAppearTime();
     float getVehiclePrepTime();
     float getVehicleTakeoffTime();
     float getVehicleLandingTime();
@@ -40,6 +42,7 @@ private:
     int veh_id_m;
     int veh_capacity_q;
     int veh_type_e;
+    int veh_appear_time;
     float veh_preptime_TDme;
     float veh_takeoff_TDSe;
     float veh_land_TATe;

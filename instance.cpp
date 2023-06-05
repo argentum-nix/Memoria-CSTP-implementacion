@@ -136,7 +136,12 @@ float Instance::getTimeBetweenNodes(int origin, int destination, int veh_type)
 
 int Instance::getPeriod(int period_id)
 {
-    return period_timestamps[period_id];
+    return period_timestamps[period_id - 1];
+}
+
+float Instance::getSpeedDecrease(int period_id)
+{
+    return speed_decrease[period_id - 1];
 }
 
 // Vehicle-wrappers GET type
@@ -149,6 +154,19 @@ int Instance::getVehicleLocation(int veh_id, int veh_type)
     else if (veh_type == 1)
     {
         return helicopter_fleet[veh_id - 1].getVehicleLocation();
+    }
+    return -1;
+}
+
+int Instance::getVehicleAppearTime(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        return ambulance_fleet[veh_id - 1].getVehicleAppearTime();
+    }
+    else if (veh_type == 1)
+    {
+        return helicopter_fleet[veh_id - 1].getVehicleAppearTime();
     }
     return -1;
 }
@@ -300,6 +318,11 @@ int Instance::getHospitalLocation(int hospital_id)
     return hospitals[hospital_id - 1].getHospitalLocation();
 }
 
+int Instance::getHospitalAppearTime(int hospital_id)
+{
+    return hospitals[hospital_id - 1].getHospitalAppearTime();
+}
+
 // Hospital-wrappers UPDATE/SET type
 
 void Instance::updateHospitalBedCapacity(int hospital_id, int g, int beds)
@@ -339,7 +362,7 @@ void Instance::printHospital(int id)
     hospitals[id - 1].printData();
 }
 
-void Instance::printHospitalVector()
+void Instance::printHospitals()
 {
     for (unsigned int i = 1; i <= hospitals.size(); i++)
     {
@@ -352,7 +375,7 @@ void Instance::printCasualty(int id)
     casualties[id - 1].printData();
 }
 
-void Instance::printCasualtyVector()
+void Instance::printCasualties()
 {
     for (unsigned int i = 1; i <= casualties.size(); i++)
     {
@@ -360,29 +383,18 @@ void Instance::printCasualtyVector()
     }
 }
 
-void Instance::printVehicle(int id, int type)
-{
-    if (type == TYPE_AMBULANCE)
-    {
-        ambulance_fleet[id - 1].printData();
-    }
-    else if (type == TYPE_HELICOPTER)
-    {
-        helicopter_fleet[id - 1].printData();
-    }
-}
 void Instance::printAmbulances()
 {
     for (unsigned int i = 1; i <= ambulance_fleet.size(); i++)
     {
-        printVehicle(i, 0);
+        ambulance_fleet[i - 1].printData();
     }
 }
 void Instance::printHelicopters()
 {
     for (unsigned int i = 1; i <= helicopter_fleet.size(); i++)
     {
-        printVehicle(i, 1);
+        helicopter_fleet[i - 1].printData();
     }
 }
 
@@ -483,7 +495,7 @@ int Instance::loadInstance()
     ifstream in_file(this->load_directory + this->instance_txt_name + ".txt");
 
     // Auxiliary variables for inputs
-    float a, b, c, d, e, f, g;
+    float a, b, c, d, e, f, g, h;
     if (in_file.is_open())
     {
         streambuf *cinbuf = cin.rdbuf();
@@ -532,16 +544,17 @@ int Instance::loadInstance()
                 qty_hospitals = count;
                 for (int line = 0; line < count; line++)
                 {
-                    cin >> a >> b >> c >> d >> e;
+                    cin >> a >> b >> c >> d >> e >> f;
                     Hospital hospital;
                     hospital.setHospitalID(a);
                     hospital.setHospitalLocation(b);
-                    hospital.setHospitalMaxCapacity(1, c);
-                    hospital.setHospitalMaxCapacity(2, d);
-                    hospital.setHospitalMaxCapacity(3, e);
-                    hospital.setHospitalCurCapacity(1, c);
-                    hospital.setHospitalCurCapacity(2, d);
-                    hospital.setHospitalCurCapacity(3, e);
+                    hospital.setHospitalAppearTime(c);
+                    hospital.setHospitalMaxCapacity(1, d);
+                    hospital.setHospitalMaxCapacity(2, e);
+                    hospital.setHospitalMaxCapacity(3, f);
+                    hospital.setHospitalCurCapacity(1, d);
+                    hospital.setHospitalCurCapacity(2, e);
+                    hospital.setHospitalCurCapacity(3, f);
                     addHopsital(hospital);
                 }
             }
@@ -550,7 +563,7 @@ int Instance::loadInstance()
             {
                 for (int line = 0; line < count; line++)
                 {
-                    cin >> a >> b >> c >> d >> e >> f >> g;
+                    cin >> a >> b >> c >> d >> e >> f >> g >> h;
                     Vehicle vehicle;
                     vehicle.setVehicleType(a);
                     if (a == 0)
@@ -563,10 +576,11 @@ int Instance::loadInstance()
                     }
                     vehicle.setVehicleID(b);
                     vehicle.setVehicleLocation(c);
-                    vehicle.setVehicleCapacity(d);
-                    vehicle.setVehiclePrepTime(e);
-                    vehicle.setVehicleLandingTime(f);
-                    vehicle.setVehicleTakeoffTime(g);
+                    vehicle.setVehicleAppearTime(d);
+                    vehicle.setVehicleCapacity(e);
+                    vehicle.setVehiclePrepTime(f);
+                    vehicle.setVehicleLandingTime(g);
+                    vehicle.setVehicleTakeoffTime(h);
                     vehicle.setVehicleOccupiedUntilTime(0);
                     vehicle.setVehicleRound(1);
                     addVehicle(vehicle);
@@ -578,8 +592,9 @@ int Instance::loadInstance()
                 for (int line = 0; line < count; line++)
                 {
                     qty_periods = count;
-                    cin >> a;
+                    cin >> a >> b;
                     period_timestamps.push_back(a);
+                    speed_decrease.push_back(b);
                 }
             }
             // Section 7: Casualties
@@ -588,15 +603,15 @@ int Instance::loadInstance()
                 qty_casualties = count;
                 for (int line = 0; line < count; line++)
                 {
-                    cin >> a >> b >> c >> d >> e >> f >> g;
+                    cin >> a >> b >> c >> d >> e >> f;
                     Casualty casualty;
                     casualty.setCasualtyLocation(a);
                     casualty.setCasualtyID(b);
                     casualty.setCasualtyAge(c);
                     casualty.setCasualtyGravity(d);
                     casualty.setCasualtyWaitTime(e);
-                    casualty.setCasualtyAppearTime(f);
-                    casualty.setCasualtyTimeToHeliport(g);
+                    casualty.setCasualtyAppearTime(e);
+                    casualty.setCasualtyTimeToHeliport(f);
                     casualty.setCasualtyAssignedVehicle(-1);
                     casualty.setCasualtyAssignedHospital(-1);
                     casualty.setCasualtyPriority(0);
@@ -604,14 +619,15 @@ int Instance::loadInstance()
                 }
             }
         }
+        // Prints the input data
         // printStabilizationTimeMatrix();
         // printDeteriorationParamMatrix();
         // printDeteriorationTimeMatrix();
         // printAmbulances();
         // printHelicopters();
-        // printHospitalVector();
+        // printHospitals();
         // printPeriods();
-        // printCasualtyVector();
+        // printCasualties();
 
         cin.rdbuf(cinbuf);
         in_file.close();

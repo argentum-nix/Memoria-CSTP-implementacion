@@ -50,6 +50,10 @@ void Vehicle::setVehicleRound(int round)
 {
     total_rounds = round;
 }
+void Vehicle::setVehicleAppearTime(int t)
+{
+    veh_appear_time = t;
+}
 
 int Vehicle::getVehicleRound()
 {
@@ -92,6 +96,11 @@ float Vehicle::getVehicleOccupiedUntilTime()
     return occupied_until.back();
 }
 
+int Vehicle::getVehicleAppearTime()
+{
+    return veh_appear_time;
+}
+
 void Vehicle::resetOccuipedToFirstAvailability(int period_start)
 {
     int index = 0;
@@ -120,6 +129,7 @@ void Vehicle::printData()
     }
     std::cout << "Capacity: " << veh_capacity_q;
     std::cout << " Location: " << veh_curlocation;
+    std::cout << " Appear Time: " << veh_appear_time;
     std::cout << " Prep Time: " << veh_preptime_TDme;
     std::cout << " Takeoff Time: " << veh_takeoff_TDSe;
     std::cout << " Landing Time: " << veh_land_TATe << std::endl;

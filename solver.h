@@ -10,9 +10,8 @@ public:
     Solver(Instance *in);
     ~Solver();
     float calculatePriority(float te, int g);
-    void updateWaitingTime(int casualty_id);
     void updateCasualtyState(int casualty_id, float te);
-    void greedyAssignment();
+    void greedyAssignment(char fleet_mode);
 
     void printPriorityList();
 

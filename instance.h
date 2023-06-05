@@ -47,6 +47,7 @@ public:
     int getDeteriorationTimeValue(int g);
     float getTimeBetweenNodes(int origin, int destination, int veh_type);
     int getPeriod(int period_id);
+    float getSpeedDecrease(int period_id);
     float getDetFunctParam(int param, int g);
 
     // Casualty-class wrappers
@@ -70,6 +71,7 @@ public:
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);
+    int getVehicleAppearTime(int veh_id, int veh_type);
     float getVehicleLandingTime(int veh_id, int veh_type);
     float getVehicleTakeoffTime(int veh_id, int veh_type);
     float getVehiclePrepTime(int veh_id, int veh_type);
@@ -81,6 +83,7 @@ public:
 
     // Hospital-class wrappers
     int getHospitalLocation(int hospital_id);
+    int getHospitalAppearTime(int hospital_id);
     int getHospitalCurCapacity(int hospital_id, int g);
     void updateHospitalBedCapacity(int hospital_id, int g, int beds);
 
@@ -89,10 +92,9 @@ public:
     void printDeteriorationParamMatrix();
     void printDeteriorationTimeMatrix();
     void printCasualty(int id);
-    void printCasualtyVector();
+    void printCasualties();
     void printHospital(int id);
-    void printHospitalVector();
-    void printVehicle(int id, int type);
+    void printHospitals();
     void printAmbulances();
     void printHelicopters();
     void printPeriods();
@@ -102,6 +104,7 @@ private:
     float deterioration_funct_params[3][4];
     float deterioration_time_pi[2][1];
 
+    std::vector<float> speed_decrease;
     std::vector<int> period_timestamps;
     std::map<int, int> node_id_correlation_map;
     std::vector<std::vector<float>> travel_time_ambulance;

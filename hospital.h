@@ -13,17 +13,20 @@ public:
     void setHospitalLocation(int node_id);
     void setHospitalMaxCapacity(int g, int k);
     void setHospitalCurCapacity(int g, int k);
+    void setHospitalAppearTime(int t);
 
     int getHospitalID();
     int getHospitalMaxCapacity(int g);
     int getHospitalCurCapacity(int g);
     int getHospitalLocation();
+    int getHospitalAppearTime();
 
     void printData();
 
 private:
     int hosp_id_h;
     int hosp_location;
+    int hosp_appear_time;
     std::vector<int> hosp_maxcapacity{0, 0, 0};
     std::vector<int> hosp_curcapacity{0, 0, 0};
 };
