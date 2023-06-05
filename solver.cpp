@@ -110,7 +110,7 @@ Solver::Solver(Instance *in)
         cout << endl;
         // greedy for current slice of victims
         cout << "=GREEDY=" << endl;
-        greedyAssignment('P');
+        greedyAssignment('M');
     }
 }
 
