@@ -110,7 +110,7 @@ Solver::Solver(Instance *in)
         cout << endl;
         // greedy for current slice of victims
         cout << "=GREEDY=" << endl;
-        greedyAssignment('H');
+        greedyAssignment('P');
     }
 }
 
@@ -295,100 +295,168 @@ void Solver::greedyAssignment(char fleet_mode)
 {
     // TODO: Revisar los vehiculos y si ya se desocupan
     pair<int, float> res;
-    int first_id;
-    int closest_h_amb = -1;
-    int closest_h_heli = -1;
-    float min_dh_amb, min_dh_heli, min_dv_amb, min_dv_heli;
-    int available_vehicles = 0;
-    float waiting_till, appear_time;
-    int closest_amb = -1;
-    int closest_heli = -1;
-    float min_availability_amb = 999999;
-    int next_available_amb = -1;
-    float tot_sec = 0;
-
-    int veh_type = 0;
-    if (fleet_mode == 'A')
-    {
-        veh_type = TYPE_AMBULANCE;
-    }
-    else if (fleet_mode == 'H')
-    {
-        veh_type = TYPE_HELICOPTER;
-    }
+    int first_id, closest_h, closest_veh, available_vehicles, veh_type;
+    float min_dh_veh, min_dv_veh, waiting_till, appear_time, tot_sec;
+    float min_availability_amb, min_availability_heli, min_availability_veh;
+    int next_available_amb, next_available_heli, next_available_veh;
 
     for (int i = 0; i < int(priority_list.size()); i++)
     {
-        // pick the first victim on top of the list
+        // Pick the first victim on top of the list
         first_id = priority_list[i].second;
-        // Find the closest hospital that has de capacity to attend the casualty
-        min_dh_amb = 999999;
-        min_dh_heli = 999999;
-        closest_h_amb = -1;
-        closest_h_heli = -1;
-        min_dv_amb = 999999;
-        closest_amb = -1;
+        // Reset the values
+        closest_h = -1;
+        tot_sec = 0;
+        min_dv_veh = 999999;
+        min_dh_veh = 999999;
+        closest_veh = -1;
         available_vehicles = -1;
         min_availability_amb = 999999;
+        min_availability_heli = 999999;
         next_available_amb = -1;
+        next_available_heli = -1;
 
-        // Find an available vehicle, that takes the smallest time to get to the victim
-        // Case: ambulance
+        // 1. Ambulance mode. Only use ambulances for all trips.
+        if (fleet_mode == 'A')
+        {
+            veh_type = TYPE_AMBULANCE;
+        }
+        // 2. Helicopter mode. Only use helicopters for all trips.
+        else if (fleet_mode == 'H')
+        {
+            veh_type = TYPE_HELICOPTER;
+        }
+        // 3. Preferential mode. Use helicopters only when casualty is of gravity 3. Use ambulance eoc.
+        else if (fleet_mode == 'P')
+        {
+            if (instance->getCasualtyGravity(first_id) == 3)
+            {
+                cout << "[NOTICE: Preferential mode ON.]" << endl;
+                veh_type = TYPE_HELICOPTER;
+            }
+            else
+            {
+                veh_type = TYPE_AMBULANCE;
+            }
+        }
+        // 4. Mixed mode. Use helicopters when available, if not, use ambulances. If none available, choose whataver vehicle that is freed first
+        else if (fleet_mode == 'M')
+        {
+            veh_type = TYPE_HELICOPTER;
+        }
+
+        // STEP ONE: Find a vehicle to pick up the casualty
         cout << "Searching for closest vehicle to pick up the casualty..." << endl;
-        res = findClosestAvailableVehicle(first_id, veh_type);
-        closest_amb = res.first;
-        min_dv_amb = res.second;
+        if (fleet_mode == 'M')
+        {
+            cout << "[NOTICE: Mixed mode ON]" << endl;
+            res = findClosestAvailableVehicle(first_id, veh_type);
+            // If no helicopters are currently available, try to find an ambulance
+            if (res.first == -1)
+            {
+                veh_type = TYPE_AMBULANCE;
+                res = findClosestAvailableVehicle(first_id, veh_type);
+            }
+        }
+        // for H and A cases, use the corresponding type of vehicle directly
+        else
+        {
+            res = findClosestAvailableVehicle(first_id, veh_type);
+        }
+
+        closest_veh = res.first;
+        min_dv_veh = res.second;
 
         if (res.first == -1)
         {
             available_vehicles = 0;
         }
+
+        // If no vehicles are available
         if (available_vehicles == 0)
         {
             // find a vehicle that will be freed first between all the occupied ones (by default, available for operations currently)
-            // and assign the wait time alpha_k
-            cout << "All vehicles occcupied." << endl;
-            res = findFirstAvailableVehicle(veh_type);
-            next_available_amb = res.first;
-            min_availability_amb = res.second;
+            cout << "All vehicles are occcupied." << endl;
 
-            cout << "->>>>Next available vehicle is A" << next_available_amb << " in " << (min_availability_amb) / 60;
-            cout << " (" << int(min_availability_amb) / 3600 << ":" << (int(min_availability_amb) / 60) % 60 << ":" << int(min_availability_amb) % 60 << ")" << endl;
-            closest_amb = next_available_amb;
-        }
-
-        cout << "Searching for closest hospital with beds..." << endl;
-        res = findClosestHospitalWithBeds(first_id, closest_amb, veh_type);
-        closest_h_amb = res.first;
-        min_dh_amb = res.second;
-
-        if (available_vehicles == 0)
-        {
-            if (closest_h_amb != -1)
+            if (fleet_mode == 'M')
             {
-                min_dh_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getHospitalLocation(closest_h_amb), veh_type);
-                // Ocupar la cama de hospital asignado
-                instance->updateHospitalBedCapacity(closest_h_amb, instance->getCasualtyGravity(first_id), instance->getHospitalCurCapacity(closest_h_amb, instance->getCasualtyGravity(first_id)) - 1);
-                min_dv_amb = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_amb, veh_type), veh_type);
-                // se asigna hasta que momento en segundos desde el inicio la victima espera su vehiculo
-                instance->updateCasualtyWaitingTime(first_id, min_availability_amb);
+                // Find next available helicopter
+                res = findFirstAvailableVehicle(TYPE_HELICOPTER);
+                next_available_heli = res.first;
+                min_availability_heli = res.second;
+                // Find next available ambulance
+                res = findFirstAvailableVehicle(TYPE_AMBULANCE);
+                next_available_amb = res.first;
+                min_availability_amb = res.second;
+                // Select the vehicle that is freed first, save its type.
+                if (min_availability_amb < min_availability_heli)
+                {
+                    veh_type = TYPE_AMBULANCE;
+                    next_available_veh = next_available_amb;
+                    min_availability_veh = min_availability_amb;
+                }
+                else
+                {
+                    veh_type = TYPE_HELICOPTER;
+                    next_available_veh = next_available_heli;
+                    min_availability_veh = min_availability_heli;
+                }
+            }
+            // Pick the first available vehicle of the corresponding mode type
+            else
+            {
+                res = findFirstAvailableVehicle(veh_type);
+                next_available_veh = res.first;
+                min_availability_veh = res.second;
+            }
+
+            cout << "->>>>Next available vehicle is";
+            if (veh_type == TYPE_HELICOPTER)
+            {
+                cout << " H";
             }
             else
             {
-                cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;
-                // TODO: Use special hospitals // dummies
-                // Skip this iteration, victim recieves no medical attention, F in the chat
-                continue;
+                cout << " A";
+            }
+            cout << next_available_veh << " in " << (min_availability_veh) / 60;
+            cout << " (" << int(min_availability_veh) / 3600 << ":" << (int(min_availability_veh) / 60) % 60 << ":" << int(min_availability_veh) % 60 << ")" << endl;
+            closest_veh = next_available_veh;
+            min_dv_veh = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_veh, veh_type), veh_type);
+        }
+
+        // STEP TWO: Find a hospital
+        cout << "Searching for closest hospital with beds..." << endl;
+        res = findClosestHospitalWithBeds(first_id, closest_veh, veh_type);
+        closest_h = res.first;
+        min_dh_veh = res.second;
+
+        // If we have to wait for some vehicle to be freed, but there is a hospital available
+        if (closest_h != -1)
+        {
+            if (available_vehicles == 0)
+            {
+                // Save the wait time
+                instance->updateCasualtyWaitingTime(first_id, min_availability_veh);
             }
         }
-
-        // Si es la primera asigancion de veh, se debe agregar el tiempo de preparacion
-        if (instance->getVehicleOccupiedUntilTime(closest_amb, veh_type) == instance->getVehicleAppearTime(closest_amb, veh_type))
+        // If no hospital can attend the victim at all (if there is o no a vehicle available is of no importance)
+        else
         {
-            min_dh_amb += instance->getVehiclePrepTime(closest_amb, veh_type);
+            cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;
+            // TODO: Use special hospitals // dummies // or count
+            continue;
         }
 
-        // Puros prints de tabla de asignacion ambulancia o helicoptero
+        // STEP THREE: ADD EXTRA TIMES FOR FIRST ASSIGNMENT OF A VEHICLE
+
+        // Si es la primera asigancion de vehiculo, se debe agregar el tiempo de preparacion
+        if (instance->getVehicleOccupiedUntilTime(closest_veh, veh_type) == instance->getVehicleAppearTime(closest_veh, veh_type))
+        {
+            min_dh_veh += instance->getVehiclePrepTime(closest_veh, veh_type);
+        }
+
+        // STEP FOUR: PRINT THE ASSIGNMENT
         cout << left << "V" << first_id << "    ";
         cout << left << instance->getCasualtyGravity(first_id) << "    ";
         cout << left << instance->getCasualtyAge(first_id) << "    ";
@@ -396,14 +464,15 @@ void Solver::greedyAssignment(char fleet_mode)
         cout << left << instance->getCasualtyStabilizationTime(first_id) << "    ";
         if (veh_type == TYPE_AMBULANCE)
         {
-            cout << left << "A" << closest_amb << "    ";
+            cout << left << "A" << closest_veh << "    ";
         }
         else if (veh_type == TYPE_HELICOPTER)
         {
-            cout << left << "H" << closest_amb << "    ";
+            cout << left << "H" << closest_veh << "    ";
         }
-        cout << left << "ROUND " << instance->getVehicleRound(closest_amb, veh_type) << "    ";
-        cout << left << "MCC" << closest_h_amb << "    ";
+
+        cout << left << "ROUND " << instance->getVehicleRound(closest_veh, veh_type) << "    ";
+        cout << left << "MCC" << closest_h << "    ";
         appear_time = instance->getCasualtyAppearTime(first_id) / 60;
         cout << left << appear_time << " (" << int(appear_time * 60) / 3600 << ":" << int(appear_time) % 60 << ":" << int(appear_time * 60) % 60 << ")"
              << "    ";
@@ -414,7 +483,7 @@ void Solver::greedyAssignment(char fleet_mode)
             cout << left << waiting_till << " (" << int(waiting_till * 60) / 3600 << ":" << int(waiting_till) % 60 << ":" << int(waiting_till * 60) % 60 << ")"
                  << "    ";
             // If there is any wait, then the vehicle arrival is to be shifted by waiting (not timestamp, but actual duration, hence the -appear_time)
-            tot_sec = min_dv_amb * 60 + current_time + (waiting_till * 60 - appear_time * 60);
+            tot_sec = min_dv_veh * 60 + current_time + (waiting_till * 60 - appear_time * 60);
         }
         // If victim was assigned immediately, do not sum the wait. The moment of assignment is current_time
         else
@@ -423,7 +492,7 @@ void Solver::greedyAssignment(char fleet_mode)
                  << "    ";
             // And the time of arrival of the vehicle in seconds is current_time + the arrival (in min) * 60
             // The difference is that i do not sum the wait time to this value because the assignment was made at the same time as the victim appeared
-            tot_sec = min_dv_amb * 60 + current_time;
+            tot_sec = min_dv_veh * 60 + current_time;
         }
 
         cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
@@ -431,17 +500,21 @@ void Solver::greedyAssignment(char fleet_mode)
         tot_sec += instance->getCasualtyStabilizationTime(first_id) * 60;
         cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
-        tot_sec += min_dh_amb * 60;
+        tot_sec += min_dh_veh * 60;
         cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
              << "    ";
         cout << endl;
-        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y aumentar rondas de ambulancia
-        instance->updateVehicleOccupiedUntilTime(closest_amb, veh_type, tot_sec);
-        instance->addVehicleRound(closest_amb, veh_type);
-        // Asignar el hospital y vehiculo a la casualty
-        instance->updateCasualtyHospital(first_id, closest_h_amb);
 
-        instance->updateCasualtyAssignedVehicle(first_id, closest_amb, veh_type);
+        // STEP FIVE: SAVE THE ASSIGNMENT
+        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y aumentar rondas de ambulancia
+        instance->updateVehicleOccupiedUntilTime(closest_veh, veh_type, tot_sec);
+        instance->addVehicleRound(closest_veh, veh_type);
+        // Asignar el hospital y vehiculo a la casualty
+        instance->updateCasualtyHospital(first_id, closest_h);
+        // Ocupar la cama de hospital asignado
+        instance->updateHospitalBedCapacity(closest_h, instance->getCasualtyGravity(first_id), instance->getHospitalCurCapacity(closest_h, instance->getCasualtyGravity(first_id)) - 1);
+        // Guardar la asignacion de vehiculo
+        instance->updateCasualtyAssignedVehicle(first_id, closest_veh, veh_type);
         cout << endl;
     }
 }
