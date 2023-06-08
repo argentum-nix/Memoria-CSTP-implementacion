@@ -133,7 +133,7 @@ void Solver::updateCasualtyState(int casualty_id, float te)
     int pi2_3 = instance->getDeteriorationTimeValue(2);
     // Case 1: Victim of LSI 1 already waited enough to be considered LSI 2
     int g = instance->getCasualtyGravity(casualty_id);
-    cout << ". Waiting time in minutes is " << te / 60;
+    cout << ". Waiting time in minutes is " << te / 60 << " ";
     if (g == 1 && te / 60 > pi1_2)
     {
         cout << "V" << casualty_id << " deteriorated to GRAVITY 2" << endl;

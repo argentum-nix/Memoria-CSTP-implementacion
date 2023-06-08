@@ -58,7 +58,7 @@ void Instance::addVehicle(Vehicle v)
 
 int Instance::getDeteriorationTimeValue(int g)
 {
-    return deterioration_time_pi[g][1];
+    return deterioration_time_pi[g - 1][0];
 }
 
 // Casualty-wrappers GET type
@@ -622,7 +622,7 @@ int Instance::loadInstance()
         // Prints the input data
         // printStabilizationTimeMatrix();
         // printDeteriorationParamMatrix();
-        // printDeteriorationTimeMatrix();
+        printDeteriorationTimeMatrix();
         // printAmbulances();
         // printHelicopters();
         // printHospitals();
