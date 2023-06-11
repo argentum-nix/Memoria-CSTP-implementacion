@@ -60,10 +60,17 @@ Solver::Solver(Instance *in)
                     // free the occupied bed
                     g = instance->getCasualtyGravity(i);
                     prev_hospital = instance->getCasualtyAssignedHospital(i);
-                    instance->updateHospitalBedCapacity(prev_hospital, g, instance->getHospitalCurCapacity(prev_hospital, g) + 1);
-                    // de-assign the hospital
-                    instance->updateCasualtyHospital(i, -1);
-                    cout << " Freed bed at MCC" << prev_hospital << " for G=" << g;
+                    if (prev_hospital != -1)
+                    {
+                        instance->updateHospitalBedCapacity(prev_hospital, g, instance->getHospitalCurCapacity(prev_hospital, g) + 1);
+                        // de-assign the hospital
+                        instance->updateCasualtyHospital(i, -1);
+                        cout << " Freed bed at MCC" << prev_hospital << " for G=" << g;
+                    }
+                    else
+                    {
+                        cout << "This victim could not be assigned a hospital on prev iteration";
+                    }
                     // reassign waiting time to the start of new period
                     instance->updateCasualtyWaitingTime(i, current_time);
                     // reset the casualty gravity (if it was changed on current time or later in previous assignment)
@@ -81,11 +88,11 @@ Solver::Solver(Instance *in)
                     instance->resetVehicleOccuipedUntil(prev_vehicle, veh_type, current_time);
                     if (veh_type == 0)
                     {
-                        cout << ". Freed A" << prev_vehicle << endl;
+                        cout << ".Freed A" << prev_vehicle << endl;
                     }
                     else if (veh_type == 1)
                     {
-                        cout << ". Freed H" << prev_vehicle << endl;
+                        cout << ".Freed H" << prev_vehicle << endl;
                     }
                 }
             }
@@ -141,7 +148,7 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
     int pi2_3 = instance->getDeteriorationTimeValue(2);
     // Case 1: Victim of LSI 1 already waited enough to be considered LSI 2
     int g = instance->getCasualtyGravity(casualty_id);
-    cout << "Waiting time in minutes is " << te / 60 << " ";
+    cout << "Waiting time in minutes is " << te / 60 << ".";
     if (g == 1 && te / 60 > pi1_2)
     {
         cout << "V" << casualty_id << " deteriorated to GRAVITY 2 AT TIMESTAMP ";
@@ -170,7 +177,7 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
     }
     else
     {
-        cout << "OK NO CHANGE NEEDED" << endl;
+        cout << "OK NO CHANGE NEEDED";
     }
 }
 
@@ -448,6 +455,7 @@ void Solver::greedyAssignment(char fleet_mode)
             cout << " (" << int(min_availability_veh) / 3600 << ":" << (int(min_availability_veh) / 60) % 60 << ":" << int(min_availability_veh) % 60 << ")" << endl;
             closest_veh = next_available_veh;
             min_dv_veh = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_veh, veh_type), veh_type);
+            instance->updateCasualtyWaitingTime(first_id, min_availability_veh);
         }
         // Si es la primera asigancion de vehiculo, se debe agregar el tiempo de preparacion
         if (instance->getVehicleOccupiedUntilTime(closest_veh, veh_type) == instance->getVehicleAppearTime(closest_veh, veh_type))
@@ -480,22 +488,14 @@ void Solver::greedyAssignment(char fleet_mode)
         cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(first_id) * 60;
 
         // STEP THREE: Find a hospital
+        cout << endl;
         cout << "Searching for closest hospital with beds..." << endl;
         res = findClosestHospitalWithBeds(first_id, closest_veh, veh_type);
         closest_h = res.first;
         min_dh_veh = res.second;
 
-        // If we have to wait for some vehicle to be freed, but there is a hospital available
-        if (closest_h != -1)
-        {
-            if (available_vehicles == 0)
-            {
-                // Save the wait time
-                instance->updateCasualtyWaitingTime(first_id, min_availability_veh);
-            }
-        }
-        // If no hospital can attend the victim at all (if there is o no a vehicle available is of no importance)
-        else
+        // No hospitals available
+        if (closest_h == -1)
         {
             cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;
             // TODO: Use special hospitals // dummies // or count
@@ -543,6 +543,7 @@ void Solver::greedyAssignment(char fleet_mode)
         printTimestamp(cas_st_timestamp);
         // timestamp at which victim is admitted to the hospital
         printTimestamp(h_admit_timestamp);
+        cout << endl;
         cout << endl;
     }
 }
