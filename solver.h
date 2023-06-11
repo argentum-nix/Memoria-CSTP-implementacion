@@ -10,7 +10,7 @@ public:
     Solver(Instance *in);
     ~Solver();
     float calculatePriority(float te, int g);
-    void updateCasualtyState(int casualty_id, float te);
+    void updateCasualtyState(int casualty_id, float te, float change_timestamp);
     void greedyAssignment(char fleet_mode);
 
     std::pair<int, float> findClosestHospitalWithBeds(int casualty_id, int id_closest_veh, int veh_type);

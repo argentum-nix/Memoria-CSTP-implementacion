@@ -63,11 +63,12 @@ public:
     int getCasualtyAssignedVehicleType(int casualty_id);
 
     void updateCasualtyHospital(int casualty_id, int hospital_id);
-    void updateCasualtyGravity(int casualty_id, int g);
+    void updateCasualtyGravity(int casualty_id, int g, float t);
     void updateCasualtyWaitingTime(int casualty_id, float t);
     void updateCasualtyAppearTime(int casualty_id, float t);
     void updateCasualtyPriority(int casualty_id, int lambda);
     void updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int veh_type);
+    void resetCasualtyGravity(int casualty_id, float current_time);
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);

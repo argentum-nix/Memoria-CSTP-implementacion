@@ -66,8 +66,10 @@ Solver::Solver(Instance *in)
                     cout << " Freed bed at MCC" << prev_hospital << " for G=" << g;
                     // reassign waiting time to the start of new period
                     instance->updateCasualtyWaitingTime(i, current_time);
+                    // reset the casualty gravity (if it was changed on current time or later in previous assignment)
+                    instance->resetCasualtyGravity(i, current_time);
                     // recalculate the victims gravity using its new wait time (total of seconds of wait)
-                    updateCasualtyState(i, instance->getCasualtyWaitingTime(i) - instance->getCasualtyAppearTime(i));
+                    updateCasualtyState(i, instance->getCasualtyWaitingTime(i) - instance->getCasualtyAppearTime(i), current_time);
                     // update lambda with new data
                     lambda = calculatePriority(instance->getCasualtyWaitingTime(i) - instance->getCasualtyAppearTime(i), g);
                     instance->updateCasualtyPriority(i, lambda);
@@ -127,26 +129,48 @@ void Solver::printPriorityList()
 // Solver class destructor
 Solver::~Solver() {}
 
-void Solver::updateCasualtyState(int casualty_id, float te)
+void printTimestamp(float t)
+{
+    cout << left << t / 60.0 << " (" << int(t) / 3600 << ":" << (int(t) / 60) % 60 << ":" << int(t) % 60 << ")"
+         << "    ";
+}
+
+void Solver::updateCasualtyState(int casualty_id, float te, float change_timestamp)
 {
     int pi1_2 = instance->getDeteriorationTimeValue(1);
     int pi2_3 = instance->getDeteriorationTimeValue(2);
     // Case 1: Victim of LSI 1 already waited enough to be considered LSI 2
     int g = instance->getCasualtyGravity(casualty_id);
-    cout << ". Waiting time in minutes is " << te / 60 << " ";
+    cout << "Waiting time in minutes is " << te / 60 << " ";
     if (g == 1 && te / 60 > pi1_2)
     {
-        cout << "V" << casualty_id << " deteriorated to GRAVITY 2" << endl;
-        instance->updateCasualtyGravity(casualty_id, 2);
+        cout << "V" << casualty_id << " deteriorated to GRAVITY 2 AT TIMESTAMP ";
+        printTimestamp(change_timestamp);
+        cout << endl;
+        if (change_timestamp > current_time)
+        {
+            cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE!" << endl;
+        }
+        instance->updateCasualtyGravity(casualty_id, 2, change_timestamp);
         // instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
     }
     // Case 1:Victim of LSI 2 already waited enough to be considered LSI 3
     else if (g == 2 && te / 60 > pi2_3)
     {
-        cout << "V" << casualty_id << " deteriorated to GRAVITY 3." << endl;
-        instance->updateCasualtyGravity(casualty_id, 3);
+        cout << "V" << casualty_id << " deteriorated to GRAVITY 3 AT TIMESTAMP ";
+        printTimestamp(change_timestamp);
+        cout << endl;
+        if (change_timestamp > current_time)
+        {
+            cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE!" << endl;
+        }
+        instance->updateCasualtyGravity(casualty_id, 3, change_timestamp);
         // instance->updateCasualtyWaitingTime(i, instance->getCasualtyWaitingTime(i) - TEmax2);
         // instance->updateCasualtyAppearTime(i, instance->getCasualtyAppearTime(i) + instance->getDeteriorationTimeValue(g));
+    }
+    else
+    {
+        cout << "OK NO CHANGE NEEDED" << endl;
     }
 }
 
@@ -296,9 +320,11 @@ void Solver::greedyAssignment(char fleet_mode)
     // TODO: Revisar los vehiculos y si ya se desocupan
     pair<int, float> res;
     int first_id, closest_h, closest_veh, available_vehicles, veh_type;
-    float min_dh_veh, min_dv_veh, waiting_till, appear_time, tot_sec;
+    float min_dh_veh, min_dv_veh, waiting_till, appear_time;
     float min_availability_amb, min_availability_heli, min_availability_veh;
     int next_available_amb, next_available_heli, next_available_veh;
+
+    float cas_st_timestamp, veh_arrival_time, h_admit_timestamp;
 
     for (int i = 0; i < int(priority_list.size()); i++)
     {
@@ -306,7 +332,6 @@ void Solver::greedyAssignment(char fleet_mode)
         first_id = priority_list[i].second;
         // Reset the values
         closest_h = -1;
-        tot_sec = 0;
         min_dv_veh = 999999;
         min_dh_veh = 999999;
         closest_veh = -1;
@@ -424,8 +449,37 @@ void Solver::greedyAssignment(char fleet_mode)
             closest_veh = next_available_veh;
             min_dv_veh = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_veh, veh_type), veh_type);
         }
+        // Si es la primera asigancion de vehiculo, se debe agregar el tiempo de preparacion
+        if (instance->getVehicleOccupiedUntilTime(closest_veh, veh_type) == instance->getVehicleAppearTime(closest_veh, veh_type))
+        {
+            min_dv_veh += instance->getVehiclePrepTime(closest_veh, veh_type);
+        }
 
-        // STEP TWO: Find a hospital
+        // STEP TWO: Calculate Vehicle-arrival related timestamps
+        veh_arrival_time = 0;
+        cas_st_timestamp = 0;
+        appear_time = 0;
+        waiting_till = 0;
+        appear_time = instance->getCasualtyAppearTime(first_id) / 60;
+        waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
+        // If there is some kind of wait, it should be added. The moment of assignment is starting time + all the wait
+        if (waiting_till * 60 - appear_time * 60 != 0)
+        {
+            // If there is any wait, then the vehicle arrival is to be shifted by waiting (not timestamp, but actual duration, hence the -appear_time)
+            veh_arrival_time = min_dv_veh * 60 + current_time + (waiting_till * 60 - appear_time * 60);
+        }
+        // If victim was assigned immediately, do not sum the wait. The moment of assignment is current_time
+        else
+        {
+            // And the time of arrival of the vehicle in seconds is current_time + the arrival (in min) * 60
+            // The difference is that i do not sum the wait time to this value because the assignment was made at the same time as the victim appeared
+            veh_arrival_time = min_dv_veh * 60 + current_time;
+        }
+        // If casualty deteoriates when vehicle arrives, change its state to calculate correct stabilization time and assign hospital
+        updateCasualtyState(first_id, veh_arrival_time - appear_time * 60, veh_arrival_time);
+        cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(first_id) * 60;
+
+        // STEP THREE: Find a hospital
         cout << "Searching for closest hospital with beds..." << endl;
         res = findClosestHospitalWithBeds(first_id, closest_veh, veh_type);
         closest_h = res.first;
@@ -448,15 +502,22 @@ void Solver::greedyAssignment(char fleet_mode)
             continue;
         }
 
-        // STEP THREE: ADD EXTRA TIMES FOR FIRST ASSIGNMENT OF A VEHICLE
+        // STEP THREE: CALCULATE Hospital-related timestamp
+        h_admit_timestamp = cas_st_timestamp + min_dh_veh * 60;
 
-        // Si es la primera asigancion de vehiculo, se debe agregar el tiempo de preparacion
-        if (instance->getVehicleOccupiedUntilTime(closest_veh, veh_type) == instance->getVehicleAppearTime(closest_veh, veh_type))
-        {
-            min_dh_veh += instance->getVehiclePrepTime(closest_veh, veh_type);
-        }
+        // STEP FOUR: SAVE THE ASSIGNMENT
+        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y aumentar rondas de ambulancia
+        instance->updateVehicleOccupiedUntilTime(closest_veh, veh_type, h_admit_timestamp);
+        instance->addVehicleRound(closest_veh, veh_type);
+        // Asignar el hospital y vehiculo a la casualty
+        instance->updateCasualtyHospital(first_id, closest_h);
+        // Ocupar la cama de hospital asignado
+        instance->updateHospitalBedCapacity(closest_h, instance->getCasualtyGravity(first_id), instance->getHospitalCurCapacity(closest_h, instance->getCasualtyGravity(first_id)) - 1);
+        // Guardar la asignacion de vehiculo
+        instance->updateCasualtyAssignedVehicle(first_id, closest_veh, veh_type);
+        cout << endl;
 
-        // STEP FOUR: PRINT THE ASSIGNMENT
+        // STEP FIVE: PRINT THE FINAL ASSIGNMENT
         cout << left << "V" << first_id << "    ";
         cout << left << instance->getCasualtyGravity(first_id) << "    ";
         cout << left << instance->getCasualtyAge(first_id) << "    ";
@@ -473,48 +534,15 @@ void Solver::greedyAssignment(char fleet_mode)
 
         cout << left << "ROUND " << instance->getVehicleRound(closest_veh, veh_type) << "    ";
         cout << left << "MCC" << closest_h << "    ";
-        appear_time = instance->getCasualtyAppearTime(first_id) / 60;
-        cout << left << appear_time << " (" << int(appear_time * 60) / 3600 << ":" << int(appear_time) % 60 << ":" << int(appear_time * 60) % 60 << ")"
-             << "    ";
-        waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
-        // If there is some kind of wait, it should be added. The moment of assignment is starting time + all the wait
-        if (waiting_till * 60 - appear_time * 60 != 0)
-        {
-            cout << left << waiting_till << " (" << int(waiting_till * 60) / 3600 << ":" << int(waiting_till) % 60 << ":" << int(waiting_till * 60) % 60 << ")"
-                 << "    ";
-            // If there is any wait, then the vehicle arrival is to be shifted by waiting (not timestamp, but actual duration, hence the -appear_time)
-            tot_sec = min_dv_veh * 60 + current_time + (waiting_till * 60 - appear_time * 60);
-        }
-        // If victim was assigned immediately, do not sum the wait. The moment of assignment is current_time
-        else
-        {
-            cout << left << waiting_till << " (" << int(current_time) / 3600 << ":" << int(current_time / 60) % 60 << ":" << int(current_time) % 60 << ")"
-                 << "    ";
-            // And the time of arrival of the vehicle in seconds is current_time + the arrival (in min) * 60
-            // The difference is that i do not sum the wait time to this value because the assignment was made at the same time as the victim appeared
-            tot_sec = min_dv_veh * 60 + current_time;
-        }
-
-        cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
-             << "    ";
-        tot_sec += instance->getCasualtyStabilizationTime(first_id) * 60;
-        cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
-             << "    ";
-        tot_sec += min_dh_veh * 60;
-        cout << left << tot_sec / 60.0 << " (" << int(tot_sec) / 3600 << ":" << (int(tot_sec) / 60) % 60 << ":" << int(tot_sec) % 60 << ")"
-             << "    ";
-        cout << endl;
-
-        // STEP FIVE: SAVE THE ASSIGNMENT
-        // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y aumentar rondas de ambulancia
-        instance->updateVehicleOccupiedUntilTime(closest_veh, veh_type, tot_sec);
-        instance->addVehicleRound(closest_veh, veh_type);
-        // Asignar el hospital y vehiculo a la casualty
-        instance->updateCasualtyHospital(first_id, closest_h);
-        // Ocupar la cama de hospital asignado
-        instance->updateHospitalBedCapacity(closest_h, instance->getCasualtyGravity(first_id), instance->getHospitalCurCapacity(closest_h, instance->getCasualtyGravity(first_id)) - 1);
-        // Guardar la asignacion de vehiculo
-        instance->updateCasualtyAssignedVehicle(first_id, closest_veh, veh_type);
+        // time in which victim appears in the system
+        printTimestamp(appear_time * 60);
+        printTimestamp(waiting_till * 60);
+        // timestamp at which a vehicle comes to rescue the victim
+        printTimestamp(veh_arrival_time);
+        // timestamp at which victim was stabilized
+        printTimestamp(cas_st_timestamp);
+        // timestamp at which victim is admitted to the hospital
+        printTimestamp(h_admit_timestamp);
         cout << endl;
     }
 }

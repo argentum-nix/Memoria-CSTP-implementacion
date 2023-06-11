@@ -51,6 +51,11 @@ void Casualty::setCasualtyTimeToHeliport(float d)
     cas_time_to_heliport = d;
 }
 
+void Casualty::addGravityChangeTimestamp(float t)
+{
+    g_change_timestamps.push_back(t);
+}
+
 int Casualty::getCasualtyID()
 {
     return cas_id_k;
@@ -97,6 +102,17 @@ float Casualty::getCasualtyWaitTime()
 float Casualty::getCasualtyTimeToHeliport()
 {
     return cas_time_to_heliport;
+}
+
+float Casualty::getLastGravityChange()
+{
+    return g_change_timestamps.back();
+}
+
+void Casualty::resetGravityChange()
+{
+    g_change_timestamps.pop_back();
+    cas_curgravity_g--;
 }
 
 void Casualty::printData()
