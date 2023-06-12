@@ -2,6 +2,7 @@
 #define VICTIM_H
 
 #include <iostream>
+#include <vector>
 
 class Casualty
 {
@@ -20,6 +21,7 @@ public:
     void setCasualtyAssignedVehicleType(int e);
     void setCasualtyWaitTime(float t);
     void setCasualtyTimeToHeliport(float d);
+    void addGravityChangeTimestamp(float t);
 
     int getCasualtyID();
     int getCasualtyGravity();
@@ -32,6 +34,9 @@ public:
     float getCasualtyAppearTime();
     float getCasualtyWaitTime();
     float getCasualtyTimeToHeliport();
+    float getLastGravityChange();
+
+    void resetGravityChange();
 
     void printData();
 
@@ -48,6 +53,7 @@ private:
     int cas_assigned_hosp;
     int cas_assigned_veh;
     int cas_assigned_veh_type;
+    std::vector<float> g_change_timestamps;
 };
 
 #endif

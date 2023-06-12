@@ -287,9 +287,18 @@ void Instance::updateCasualtyWaitingTime(int casualty_id, float t)
     casualties[casualty_id - 1].setCasualtyWaitTime(t);
 }
 
-void Instance::updateCasualtyGravity(int casualty_id, int g)
+void Instance::updateCasualtyGravity(int casualty_id, int g, float t)
 {
     casualties[casualty_id - 1].setCasualtyGravity(g);
+    casualties[casualty_id - 1].addGravityChangeTimestamp(t);
+}
+
+void Instance::resetCasualtyGravity(int casualty_id, float current_time)
+{
+    if (casualties[casualty_id - 1].getLastGravityChange() >= current_time)
+    {
+        casualties[casualty_id - 1].resetGravityChange();
+    }
 }
 
 void Instance::updateCasualtyAppearTime(int casualty_id, float t)
@@ -615,6 +624,7 @@ int Instance::loadInstance()
                     casualty.setCasualtyAssignedVehicle(-1);
                     casualty.setCasualtyAssignedHospital(-1);
                     casualty.setCasualtyPriority(0);
+                    casualty.addGravityChangeTimestamp(e);
                     addCasualty(casualty);
                 }
             }
