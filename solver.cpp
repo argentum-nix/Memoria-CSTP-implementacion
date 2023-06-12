@@ -121,6 +121,18 @@ Solver::Solver(Instance *in)
         cout << "=GREEDY=" << endl;
         greedyAssignment('M');
     }
+    // para ver victimas que quedaron sin hospital
+    int count_unatt = 0;
+    cout << "Victims without assignment:" << endl;
+    for (int i = 1; i <= instance->qty_casualties; i++)
+    {
+        if (instance->getCasualtyAssignedHospital(i) == -1)
+        {
+            cout << "UNATTENDED VICTIM V" << i << endl;
+            count_unatt++;
+        }
+    }
+    cout << "TOTAL: " << count_unatt << endl;
 }
 
 void Solver::printPriorityList()
@@ -335,6 +347,7 @@ void Solver::greedyAssignment(char fleet_mode)
 
     for (int i = 0; i < int(priority_list.size()); i++)
     {
+        cout << endl;
         // Pick the first victim on top of the list
         first_id = priority_list[i].second;
         // Reset the values
@@ -488,7 +501,6 @@ void Solver::greedyAssignment(char fleet_mode)
         cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(first_id) * 60;
 
         // STEP THREE: Find a hospital
-        cout << endl;
         cout << "Searching for closest hospital with beds..." << endl;
         res = findClosestHospitalWithBeds(first_id, closest_veh, veh_type);
         closest_h = res.first;
