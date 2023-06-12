@@ -481,26 +481,18 @@ void Solver::greedyAssignment(char fleet_mode)
         cas_st_timestamp = 0;
         appear_time = 0;
         waiting_till = 0;
-        appear_time = instance->getCasualtyAppearTime(first_id) / 60;
-        waiting_till = instance->getCasualtyWaitingTime(first_id) / 60;
-        // If there is some kind of wait, it should be added. The moment of assignment is starting time + all the wait
-        if (waiting_till * 60 - appear_time * 60 != 0)
-        {
-            // If there is any wait, then the vehicle arrival is to be shifted by waiting (not timestamp, but actual duration, hence the -appear_time)
-            veh_arrival_time = min_dv_veh * 60 + current_time + (waiting_till * 60 - appear_time * 60);
-        }
-        // If victim was assigned immediately, do not sum the wait. The moment of assignment is current_time
-        else
-        {
-            // And the time of arrival of the vehicle in seconds is current_time + the arrival (in min) * 60
-            // The difference is that i do not sum the wait time to this value because the assignment was made at the same time as the victim appeared
-            veh_arrival_time = min_dv_veh * 60 + current_time;
-        }
+        appear_time = instance->getCasualtyAppearTime(first_id);
+        waiting_till = instance->getCasualtyWaitingTime(first_id);
+        // Assign the vehicle arrival time - it will either be based on period start if the victim is assigned immediately
+        // Or it will be based on shifted value of appearance+wait, which was saved in waiting_till at some point
+        veh_arrival_time = min_dv_veh * 60 + waiting_till;
         // If casualty deteoriates when vehicle arrives, change its state to calculate correct stabilization time and assign hospital
-        updateCasualtyState(first_id, veh_arrival_time - appear_time * 60, veh_arrival_time);
+        updateCasualtyState(first_id, veh_arrival_time - appear_time, veh_arrival_time);
+        // Get the timestamp at which the casualty is stabilized (based on real gravity at arrival of medical group)
         cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(first_id) * 60;
 
-        // STEP THREE: Find a hospital
+        // STEP THREE: Find a hospital (using the actual gravity of the victim at arrival of the medical group, not the initial one)
+        cout << endl;
         cout << "Searching for closest hospital with beds..." << endl;
         res = findClosestHospitalWithBeds(first_id, closest_veh, veh_type);
         closest_h = res.first;
@@ -547,8 +539,8 @@ void Solver::greedyAssignment(char fleet_mode)
         cout << left << "ROUND " << instance->getVehicleRound(closest_veh, veh_type) << "    ";
         cout << left << "MCC" << closest_h << "    ";
         // time in which victim appears in the system
-        printTimestamp(appear_time * 60);
-        printTimestamp(waiting_till * 60);
+        printTimestamp(appear_time);
+        printTimestamp(waiting_till);
         // timestamp at which a vehicle comes to rescue the victim
         printTimestamp(veh_arrival_time);
         // timestamp at which victim was stabilized
