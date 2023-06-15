@@ -35,7 +35,7 @@ public:
     float getVehicleOccupiedUntilTime();
 
     void resetOccuipedToFirstAvailability(int period_start);
-
+    void temporaryDeassign();
     void printData();
 
 private:
@@ -47,8 +47,8 @@ private:
     float veh_takeoff_TDSe;
     float veh_land_TATe;
 
-    int total_rounds;
-    int veh_curlocation;
+    std::vector<int> total_rounds;
+    std::vector<int> veh_curlocation;
     std::vector<float> occupied_until;
 };
 

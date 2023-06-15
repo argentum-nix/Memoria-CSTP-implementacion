@@ -75,6 +75,11 @@ int Instance::getCasualtyGravity(int casualty_id)
     return casualties[casualty_id - 1].getCasualtyGravity();
 }
 
+float Instance::getCasualtyPriority(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyPriority();
+}
+
 int Instance::getCasualtyAge(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyAge();
@@ -102,6 +107,23 @@ float Instance::getCasualtyWaitingTime(int casualty_id)
 float Instance::getCasualtyAppearTime(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyAppearTime();
+}
+
+float Instance::getCasualtyVehAssignedTime(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyAssignedRouteTime();
+}
+float Instance::getCasualtyVehArrivedTime(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyVehArrivedTime();
+}
+float Instance::getCasualtyStabilizedTime(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyStabilizedTime();
+}
+float Instance::getCasualtyAdmittedAtHopsitalTime(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyAdmittedAtHospitalTime();
 }
 
 float Instance::getDetFunctParam(int param, int g)
@@ -301,9 +323,38 @@ void Instance::resetCasualtyGravity(int casualty_id, float current_time)
     }
 }
 
+void Instance::temporaryDeassignCasualty(int casualty_id)
+{
+    casualties[casualty_id - 1].temporaryDeassign();
+}
+
+void Instance::temporaryDeassignHospital(int hospital_id, int g)
+{
+    hospitals[hospital_id - 1].temporaryDeassign(g);
+}
+void Instance::temporaryDeassignVehicle(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].temporaryDeassign();
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].temporaryDeassign();
+    }
+}
+
 void Instance::updateCasualtyAppearTime(int casualty_id, float t)
 {
     casualties[casualty_id - 1].setCasualtyAppearTime(t);
+}
+
+void Instance::updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t)
+{
+    casualties[casualty_id - 1].setCasualtyAssignedRouteTime(assign_t);
+    casualties[casualty_id - 1].setCasualtyVehArrivedTime(arrive_t);
+    casualties[casualty_id - 1].setCasualtyStabilizedTime(st_t);
+    casualties[casualty_id - 1].setCasualtyAdmittedAtHospitalTime(h_t);
 }
 
 void Instance::updateCasualtyPriority(int casualty_id, int lambda)

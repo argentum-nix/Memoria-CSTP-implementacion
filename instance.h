@@ -61,14 +61,25 @@ public:
     float getCasualtyStabilizationTime(int casualty_id);
     int getCasualtyAssignedVehicle(int casualty_id);
     int getCasualtyAssignedVehicleType(int casualty_id);
+    float getCasualtyPriority(int casualty_id);
+
+    float getCasualtyVehAssignedTime(int casualty_id);
+    float getCasualtyVehArrivedTime(int casualty_id);
+    float getCasualtyStabilizedTime(int casualty_id);
+    float getCasualtyAdmittedAtHopsitalTime(int casualty_id);
 
     void updateCasualtyHospital(int casualty_id, int hospital_id);
     void updateCasualtyGravity(int casualty_id, int g, float t);
     void updateCasualtyWaitingTime(int casualty_id, float t);
     void updateCasualtyAppearTime(int casualty_id, float t);
+    void updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t);
     void updateCasualtyPriority(int casualty_id, int lambda);
     void updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int veh_type);
     void resetCasualtyGravity(int casualty_id, float current_time);
+
+    void temporaryDeassignCasualty(int casualty_id);
+    void temporaryDeassignHospital(int hospital_id, int g);
+    void temporaryDeassignVehicle(int veh_id, int veh_type);
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);

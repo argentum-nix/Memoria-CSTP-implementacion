@@ -21,6 +21,7 @@ public:
     int getHospitalLocation();
     int getHospitalAppearTime();
 
+    void temporaryDeassign(int g);
     void printData();
 
 private:

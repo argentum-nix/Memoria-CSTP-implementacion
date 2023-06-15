@@ -11,7 +11,12 @@ public:
     ~Solver();
     float calculatePriority(float te, int g);
     void updateCasualtyState(int casualty_id, float te, float change_timestamp);
-    void greedyAssignment(char fleet_mode);
+    void greedyAssignment(char fleet_mode, int cursor);
+    int checkIfHighST(int casualty_id);
+    void printTimestamp(float t);
+
+    float calculateSolutionQuality();
+    void printCasualtyRouteRow(int casualty_id);
 
     std::pair<int, float> findClosestHospitalWithBeds(int casualty_id, int id_closest_veh, int veh_type);
     std::pair<int, float> findClosestAvailableVehicle(int casualty_id, int veh_type);

@@ -51,6 +51,11 @@ int Hospital::getHospitalAppearTime()
     return hosp_appear_time;
 }
 
+void Hospital::temporaryDeassign(int g)
+{
+    hosp_curcapacity[g - 1]--;
+}
+
 void Hospital::printData()
 {
     std::cout << "Hospital ID: " << hosp_id_h;

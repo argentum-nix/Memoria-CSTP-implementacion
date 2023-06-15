@@ -21,11 +21,6 @@ void Vehicle::setVehicleCapacity(int q)
     veh_capacity_q = q;
 }
 
-void Vehicle::setVehicleLocation(int node_id)
-{
-    veh_curlocation = node_id;
-}
-
 void Vehicle::setVehiclePrepTime(float td)
 {
     veh_preptime_TDme = td;
@@ -41,6 +36,10 @@ void Vehicle::setVehicleLandingTime(float tat)
     veh_land_TATe = tat;
 }
 
+void Vehicle::setVehicleAppearTime(int t)
+{
+    veh_appear_time = t;
+}
 void Vehicle::setVehicleOccupiedUntilTime(float t)
 {
     occupied_until.push_back(t);
@@ -48,16 +47,11 @@ void Vehicle::setVehicleOccupiedUntilTime(float t)
 
 void Vehicle::setVehicleRound(int round)
 {
-    total_rounds = round;
+    total_rounds.push_back(round);
 }
-void Vehicle::setVehicleAppearTime(int t)
+void Vehicle::setVehicleLocation(int node_id)
 {
-    veh_appear_time = t;
-}
-
-int Vehicle::getVehicleRound()
-{
-    return total_rounds;
+    veh_curlocation.push_back(node_id);
 }
 
 int Vehicle::getVehicleID()
@@ -74,10 +68,6 @@ int Vehicle::getVehicleType()
 {
     return veh_type_e;
 }
-int Vehicle::getVehicleLocation()
-{
-    return veh_curlocation;
-}
 float Vehicle::getVehiclePrepTime()
 {
     return veh_preptime_TDme;
@@ -90,15 +80,22 @@ float Vehicle::getVehicleLandingTime()
 {
     return veh_land_TATe;
 }
+int Vehicle::getVehicleAppearTime()
+{
+    return veh_appear_time;
+}
 
 float Vehicle::getVehicleOccupiedUntilTime()
 {
     return occupied_until.back();
 }
-
-int Vehicle::getVehicleAppearTime()
+int Vehicle::getVehicleLocation()
 {
-    return veh_appear_time;
+    return veh_curlocation.back();
+}
+int Vehicle::getVehicleRound()
+{
+    return total_rounds.back();
 }
 
 void Vehicle::resetOccuipedToFirstAvailability(int period_start)
@@ -113,8 +110,28 @@ void Vehicle::resetOccuipedToFirstAvailability(int period_start)
         }
     }
     // delete all elements after the first availability that occurs on or after the period start time
-    total_rounds = index + 1;
+    total_rounds.erase(total_rounds.begin() + index + 1, total_rounds.end());
     occupied_until.erase(occupied_until.begin() + index + 1, occupied_until.end());
+}
+
+void Vehicle::temporaryDeassign()
+{
+    int cursor = 0;
+    if (int(total_rounds.size()) > 1)
+    {
+        cursor = total_rounds.size() - 1;
+        total_rounds.push_back(total_rounds[cursor - 1]);
+    }
+    if (int(veh_curlocation.size()) > 1)
+    {
+        cursor = veh_curlocation.size() - 1;
+        veh_curlocation.push_back(veh_curlocation[cursor - 1]);
+    }
+    if (int(occupied_until.size()) > 1)
+    {
+        cursor = occupied_until.size() - 1;
+        occupied_until.push_back(occupied_until[cursor - 1]);
+    }
 }
 
 void Vehicle::printData()
@@ -128,7 +145,7 @@ void Vehicle::printData()
         std::cout << "Vehicle ID: " << veh_id_m << " Type: Helicopter ";
     }
     std::cout << "Capacity: " << veh_capacity_q;
-    std::cout << " Location: " << veh_curlocation;
+    std::cout << " Location: " << veh_curlocation.back();
     std::cout << " Appear Time: " << veh_appear_time;
     std::cout << " Prep Time: " << veh_preptime_TDme;
     std::cout << " Takeoff Time: " << veh_takeoff_TDSe;
