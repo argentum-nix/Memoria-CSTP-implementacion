@@ -166,14 +166,12 @@ Solver::Solver(Instance *in)
                         choosen_amb = z;
                     }
                 }
-                cout << "Choosing ambulance A " << choosen_amb << "with min_av= " << min_availability_veh << " cl= " << min_dh_veh << " of priority " << min_amb_priority << endl;
+                cout << "Choosing ambulance A" << choosen_amb << " with min_av= " << min_availability_veh << " cl= " << min_dh_veh << " of priority " << min_amb_priority << endl;
                 // starting from current victim and all the assignments after them, should be "deassigned" (with intention of trying a potentionally better solution)
                 for (int u = k; u < int(priority_list.size()); u++)
                 {
                     int c = priority_list[u].second;
-                    cout << "cout c=" << c << endl;
                     prev_g = instance->getCasualtyGravity(c);
-                    cout << "prevg " << prev_g << endl;
                     prev_v = instance->getCasualtyAssignedVehicle(c);
                     prev_v_type = instance->getCasualtyAssignedVehicleType(c);
                     prev_h = instance->getCasualtyAssignedHospital(c);
@@ -184,23 +182,28 @@ Solver::Solver(Instance *in)
                     instance->temporaryDeassignHospital(prev_h, prev_g);
                     instance->temporaryDeassignVehicle(prev_v, prev_v_type);
                     printCasualtyRouteRow(c);
+                    cout << endl;
                 }
+                cout << endl;
+                cout << endl;
                 // asign to current casualty the ambulance we chose, just how Greedy does it
-                instance->updateCasualtyWaitingTime(k, min_availability_veh);
+                cout << "Assigning the new route to the eligible casualty V" << cursor << ". Before:" << endl;
+                printCasualtyRouteRow(cursor);
+                instance->updateCasualtyWaitingTime(cursor, min_availability_veh);
                 if (instance->getVehicleOccupiedUntilTime(choosen_amb, 0) == instance->getVehicleAppearTime(choosen_amb, 0))
                 {
                     min_dv_veh += instance->getVehiclePrepTime(choosen_amb, 0);
                 }
-                appear_time = instance->getCasualtyAppearTime(k);
-                waiting_till = instance->getCasualtyWaitingTime(k);
+                appear_time = instance->getCasualtyAppearTime(cursor);
+                waiting_till = instance->getCasualtyWaitingTime(cursor);
                 // Assign the vehicle arrival time - it will either be based on period start if the victim is assigned immediately
                 // Or it will be based on shifted value of appearance+wait, which was saved in waiting_till at some point
                 veh_arrival_time = min_dv_veh * 60 + waiting_till;
                 // If casualty deteoriates when vehicle arrives, change its state to calculate correct stabilization time and assign hospital
-                updateCasualtyState(k, veh_arrival_time - appear_time, veh_arrival_time);
+                updateCasualtyState(cursor, veh_arrival_time - appear_time, veh_arrival_time);
                 // Get the timestamp at which the casualty is stabilized (based on real gravity at arrival of medical group)
-                cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(k) * 60;
-                res = findClosestHospitalWithBeds(k, choosen_amb, 0);
+                cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(cursor) * 60;
+                res = findClosestHospitalWithBeds(cursor, choosen_amb, 0);
                 closest_h = res.first;
                 min_dh_veh = res.second;
                 // STEP THREE: CALCULATE Hospital-related timestamp
@@ -210,17 +213,17 @@ Solver::Solver(Instance *in)
                 instance->updateVehicleOccupiedUntilTime(choosen_amb, 0, h_admit_timestamp);
                 instance->addVehicleRound(choosen_amb, 0);
                 // Asignar el hospital y vehiculo a la casualty
-                instance->updateCasualtyHospital(k, closest_h);
+                instance->updateCasualtyHospital(cursor, closest_h);
                 // Ocupar la cama de hospital asignado
-                instance->updateHospitalBedCapacity(closest_h, instance->getCasualtyGravity(k), instance->getHospitalCurCapacity(closest_h, instance->getCasualtyGravity(k)) - 1);
+                instance->updateHospitalBedCapacity(closest_h, instance->getCasualtyGravity(cursor), instance->getHospitalCurCapacity(closest_h, instance->getCasualtyGravity(cursor)) - 1);
                 // Guardar la asignacion de vehiculo
-                instance->updateCasualtyAssignedVehicle(k, choosen_amb, 0);
+                instance->updateCasualtyAssignedVehicle(cursor, choosen_amb, 0);
 
-                cout << "Eligible casualty was assigned an ambulance. New route is: " << endl;
-                printCasualtyRouteRow(k);
-
+                cout << "After: " << endl;
+                printCasualtyRouteRow(cursor);
                 cout << endl;
-                cout << "STARTING SLICED GREEDY FROM VICTIM V" << k << endl;
+
+                cout << "STARTING SLICED GREEDY FROM VICTIM V" << cursor << ", PRIORITY LIST POSITION =" << k << endl;
                 // run greedy with a slice of victims
                 greedyAssignment('M', k + 1);
                 // compare the solutions
@@ -281,7 +284,7 @@ void Solver::printCasualtyRouteRow(int casualty_id)
     }
     cout << left << "ROUND " << instance->getVehicleRound(instance->getCasualtyAssignedVehicle(casualty_id), instance->getCasualtyAssignedVehicleType(casualty_id)) << "    ";
     cout << left << "MCC" << instance->getCasualtyAssignedHospital(casualty_id) << "    ";
-    printTimestamp(instance->getCasualtyVehAssignedTime(casualty_id));
+    printTimestamp(instance->getCasualtyWaitingTime(casualty_id));
     printTimestamp(instance->getCasualtyVehArrivedTime(casualty_id));
     printTimestamp(instance->getCasualtyStabilizedTime(casualty_id));
     printTimestamp(instance->getCasualtyAdmittedAtHopsitalTime(casualty_id));
@@ -295,7 +298,6 @@ float Solver::calculateSolutionQuality()
     int c;
     for (unsigned int i = 0; i < priority_list.size(); i++)
     {
-        cout << "TOI HACIENDO VICTIMA " << c << endl;
         p = priority_list[i].first;
         c = priority_list[i].second;
         quality += p * (instance->getCasualtyAdmittedAtHopsitalTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
@@ -484,13 +486,18 @@ pair<int, float> Solver::findClosestAvailableVehicle(int casualty_id, int veh_ty
                 cout << " H";
             }
             cout << v << "] " << instance->getVehicleLocation(v, veh_type) << " -> " << instance->getCasualtyLocation(casualty_id) << " = ";
-            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getVehicleLocation(v, 0), 0) << endl;
+            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getVehicleLocation(v, veh_type), veh_type) << endl;
             actual_time = instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getVehicleLocation(v, veh_type), veh_type);
-            // If helicopter, add landing, takeoff and 2x running to and from the casualty location on foot
+            // If helicopter, add landing, takeoff and running to the casualty location on foot
             if (veh_type == TYPE_HELICOPTER)
             {
                 actual_time += instance->getVehicleLandingTime(v, veh_type) + instance->getVehicleTakeoffTime(v, veh_type);
-                actual_time += 2 * instance->getCasualtyTimeToHeliport(casualty_id);
+                actual_time += instance->getCasualtyTimeToHeliport(casualty_id);
+            }
+            // if its first operating of the vehicle, add the prep time too
+            if (instance->getVehicleOccupiedUntilTime(v, veh_type) == instance->getVehicleAppearTime(v, veh_type))
+            {
+                actual_time += instance->getVehiclePrepTime(v, veh_type);
             }
             if (actual_time < min_dv)
             {
@@ -638,12 +645,6 @@ void Solver::greedyAssignment(char fleet_mode, int cursor)
             min_dv_veh = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_veh, veh_type), veh_type);
             instance->updateCasualtyWaitingTime(first_id, min_availability_veh);
         }
-        // Si es la primera asigancion de vehiculo, se debe agregar el tiempo de preparacion
-        if (instance->getVehicleOccupiedUntilTime(closest_veh, veh_type) == instance->getVehicleAppearTime(closest_veh, veh_type))
-        {
-            min_dv_veh += instance->getVehiclePrepTime(closest_veh, veh_type);
-        }
-
         // STEP TWO: Calculate Vehicle-arrival related timestamps
         veh_arrival_time = 0;
         cas_st_timestamp = 0;
@@ -676,6 +677,13 @@ void Solver::greedyAssignment(char fleet_mode, int cursor)
 
         // STEP THREE: CALCULATE Hospital-related timestamp
         h_admit_timestamp = cas_st_timestamp + min_dh_veh * 60;
+        // if heli, add the running back with victim to the heliport, takeoff, and landing at hospital time
+        if (veh_type == TYPE_HELICOPTER)
+        {
+            h_admit_timestamp += instance->getCasualtyTimeToHeliport(first_id) * 60;
+            h_admit_timestamp += instance->getVehicleLandingTime(closest_veh, veh_type) * 60;
+            h_admit_timestamp += instance->getVehicleTakeoffTime(closest_veh, veh_type) * 60;
+        }
 
         // STEP FOUR: SAVE THE ASSIGNMENT
         // Asignar el nuevo tiempo hasta cual la ambulancia estara ocupada y aumentar rondas de ambulancia
@@ -693,7 +701,7 @@ void Solver::greedyAssignment(char fleet_mode, int cursor)
         cout << left << "V" << first_id << "    ";
         cout << left << instance->getCasualtyGravity(first_id) << "    ";
         cout << left << instance->getCasualtyAge(first_id) << "    ";
-        cout << left << priority_list[i].first << "    ";
+        cout << left << instance->getCasualtyPriority(first_id) << "    ";
         cout << left << instance->getCasualtyStabilizationTime(first_id) << "    ";
         if (veh_type == TYPE_AMBULANCE)
         {

@@ -73,7 +73,7 @@ public:
     void updateCasualtyWaitingTime(int casualty_id, float t);
     void updateCasualtyAppearTime(int casualty_id, float t);
     void updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t);
-    void updateCasualtyPriority(int casualty_id, int lambda);
+    void updateCasualtyPriority(int casualty_id, float lambda);
     void updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int veh_type);
     void resetCasualtyGravity(int casualty_id, float current_time);
 

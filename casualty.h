@@ -22,7 +22,6 @@ public:
     void setCasualtyAssignedVehicleType(int e);
     void setCasualtyWaitTime(float t);
     void setCasualtyTimeToHeliport(float d);
-    void setCasualtyAssignedRouteTime(float t);
     void setCasualtyVehArrivedTime(float t);
     void setCasualtyStabilizedTime(float t);
     void setCasualtyAdmittedAtHospitalTime(float t);
@@ -40,7 +39,6 @@ public:
     float getCasualtyWaitTime();
     float getCasualtyTimeToHeliport();
     float getLastGravityChange();
-    float getCasualtyAssignedRouteTime();
     float getCasualtyVehArrivedTime();
     float getCasualtyStabilizedTime();
     float getCasualtyAdmittedAtHospitalTime();

@@ -52,10 +52,6 @@ void Casualty::addGravityChangeTimestamp(float t)
 {
     g_change_timestamps.push_back(t);
 }
-void Casualty::setCasualtyAssignedRouteTime(float t)
-{
-    cas_wait_time.push_back(t);
-}
 void Casualty::setCasualtyVehArrivedTime(float t)
 {
     cas_arrival_time.push_back(t);
@@ -69,10 +65,6 @@ void Casualty::setCasualtyAdmittedAtHospitalTime(float t)
     cas_h_time.push_back(t);
 }
 
-float Casualty::getCasualtyAssignedRouteTime()
-{
-    return cas_wait_time.back();
-}
 float Casualty::getCasualtyVehArrivedTime()
 {
     return cas_arrival_time.back();

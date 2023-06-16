@@ -109,10 +109,6 @@ float Instance::getCasualtyAppearTime(int casualty_id)
     return casualties[casualty_id - 1].getCasualtyAppearTime();
 }
 
-float Instance::getCasualtyVehAssignedTime(int casualty_id)
-{
-    return casualties[casualty_id - 1].getCasualtyAssignedRouteTime();
-}
 float Instance::getCasualtyVehArrivedTime(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyVehArrivedTime();
@@ -351,13 +347,13 @@ void Instance::updateCasualtyAppearTime(int casualty_id, float t)
 
 void Instance::updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t)
 {
-    casualties[casualty_id - 1].setCasualtyAssignedRouteTime(assign_t);
+    casualties[casualty_id - 1].setCasualtyWaitTime(assign_t);
     casualties[casualty_id - 1].setCasualtyVehArrivedTime(arrive_t);
     casualties[casualty_id - 1].setCasualtyStabilizedTime(st_t);
     casualties[casualty_id - 1].setCasualtyAdmittedAtHospitalTime(h_t);
 }
 
-void Instance::updateCasualtyPriority(int casualty_id, int lambda)
+void Instance::updateCasualtyPriority(int casualty_id, float lambda)
 {
     casualties[casualty_id - 1].setCasualtyPriority(lambda);
 }
@@ -672,10 +668,14 @@ int Instance::loadInstance()
                     casualty.setCasualtyWaitTime(e);
                     casualty.setCasualtyAppearTime(e);
                     casualty.setCasualtyTimeToHeliport(f);
-                    casualty.setCasualtyAssignedVehicle(-1);
-                    casualty.setCasualtyAssignedHospital(-1);
-                    casualty.setCasualtyPriority(0);
                     casualty.addGravityChangeTimestamp(e);
+                    casualty.setCasualtyAssignedVehicle(-1);
+                    casualty.setCasualtyAssignedVehicleType(-1);
+                    casualty.setCasualtyAssignedHospital(-1);
+                    casualty.setCasualtyVehArrivedTime(-1);
+                    casualty.setCasualtyStabilizedTime(-1);
+                    casualty.setCasualtyAdmittedAtHospitalTime(-1);
+                    casualty.setCasualtyPriority(-1);
                     addCasualty(casualty);
                 }
             }

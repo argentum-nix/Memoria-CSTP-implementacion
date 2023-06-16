@@ -87,23 +87,23 @@ PRIORITY LIST: (5.10496, 1), (5.10496, 2), (5.10496, 3), (5.10496, 4), (5.10496,
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
-[Pickup->Victim for H1] 300001 -> 39060 = 27.4631
-[Pickup->Victim for H2] 300001 -> 39060 = 27.4631
-Waiting time in minutes is 32.4631.OK NO CHANGE NEEDED
+[Pickup->Victim for H1] 300001 -> 39060 = 1.88
+[Pickup->Victim for H2] 300001 -> 39060 = 1.88
+Waiting time in minutes is 27.4631.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 39060 -> 100001 = 2.1 and with takeoff/landing: 3.6
 
-V1    3    1    5.10496    93.3    H2    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    493.463 (8:13:27)    586.763 (9:46:45)    590.363 (9:50:21)    
+V1    3    1    5.10496    93.3    H2    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    488.463 (8:8:27)    581.763 (9:41:45)    587.725 (9:47:43)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
-[Pickup->Victim for H1] 300001 -> 41040 = 22.2964
-Waiting time in minutes is 27.2964.OK NO CHANGE NEEDED
+[Pickup->Victim for H1] 300001 -> 41040 = 1.5
+Waiting time in minutes is 22.2964.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 41040 -> 100001 = 1.93 and with takeoff/landing: 3.43
 
-V2    3    3    5.10496    65    H1    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    488.296 (8:8:17)    553.296 (9:13:17)    556.726 (9:16:43)    
+V2    3    3    5.10496    65    H1    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    483.296 (8:3:17)    548.296 (9:8:17)    556.717 (9:16:43)    
 
 
 Searching for closest vehicle to pick up the casualty...
@@ -112,11 +112,11 @@ Searching for closest vehicle to pick up the casualty...
 [Pickup->Victim for A2] 100001 -> 42010 = 29.1853
 [Pickup->Victim for A3] 100001 -> 42010 = 29.1853
 [Pickup->Victim for A4] 100003 -> 42010 = 36.6416
-Waiting time in minutes is 30.1853.OK NO CHANGE NEEDED
+Waiting time in minutes is 29.1853.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 42010 -> 100001 = 29.1853 and with takeoff/landing: 29.1853
 
-V3    3    2    5.10496    62.14    A1    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    491.185 (8:11:11)    553.325 (9:13:19)    582.511 (9:42:30)    
+V3    3    2    5.10496    62.14    A1    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    490.185 (8:10:11)    552.325 (9:12:19)    581.511 (9:41:30)    
 
 
 Searching for closest vehicle to pick up the casualty...
@@ -124,1197 +124,2542 @@ Searching for closest vehicle to pick up the casualty...
 [Pickup->Victim for A2] 100001 -> 42010 = 29.1853
 [Pickup->Victim for A3] 100001 -> 42010 = 29.1853
 [Pickup->Victim for A4] 100003 -> 42010 = 36.6416
-Waiting time in minutes is 30.1853.OK NO CHANGE NEEDED
+Waiting time in minutes is 29.1853.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 42010 -> 100001 = 29.1853 and with takeoff/landing: 29.1853
 
-V4    3    2    5.10496    62.14    A2    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    491.185 (8:11:11)    553.325 (9:13:19)    582.511 (9:42:30)    
+V4    3    2    5.10496    62.14    A2    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    490.185 (8:10:11)    552.325 (9:12:19)    581.511 (9:41:30)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 [Pickup->Victim for A3] 100001 -> 41070 = 24.0742
 [Pickup->Victim for A4] 100003 -> 41070 = 31.5305
-Waiting time in minutes is 25.0742.OK NO CHANGE NEEDED
+Waiting time in minutes is 24.0742.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 41070 -> 100001 = 24.0742 and with takeoff/landing: 24.0742
 
-V5    3    2    5.10496    62.14    A3    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    486.074 (8:6:4)    548.214 (9:8:12)    572.288 (9:32:17)    
+V5    3    2    5.10496    62.14    A3    ROUND 2    MCC1    461 (7:41:0)    461 (7:41:0)    485.074 (8:5:4)    547.214 (9:7:12)    571.288 (9:31:17)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 [Pickup->Victim for A4] 100003 -> 39060 = 32.6362
-Waiting time in minutes is 33.6362.OK NO CHANGE NEEDED
+Waiting time in minutes is 32.6362.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 39060 -> 100001 = 27.4631 and with takeoff/landing: 27.4631
 [Victim->Hospital in ambulance] 39060 -> 100002 = 20.9609 and with takeoff/landing: 20.9609
 [Victim->Hospital in ambulance] 39060 -> 100003 = 32.6362 and with takeoff/landing: 32.6362
 
-V6    2    2    0.895303    29.9    A4    ROUND 2    MCC2    461 (7:41:0)    461 (7:41:0)    494.636 (8:14:38)    524.536 (8:44:32)    545.497 (9:5:29)    
+V6    2    2    0.895303    29.9    A4    ROUND 2    MCC2    461 (7:41:0)    461 (7:41:0)    493.636 (8:13:38)    523.536 (8:43:32)    544.497 (9:4:29)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 556.726
-[Helicopter H2] occupied until 590.363
-[Ambulance A1] occupied until 582.511
-[Ambulance A2] occupied until 582.511
-[Ambulance A3] occupied until 572.288
-[Ambulance A4] occupied until 545.497
-->>>>Next available vehicle is A4 in 545.497 (9:5:29)
-Waiting time in minutes is 117.133.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 556.717
+[Helicopter H2] occupied until 587.725
+[Ambulance A1] occupied until 581.511
+[Ambulance A2] occupied until 581.511
+[Ambulance A3] occupied until 571.288
+[Ambulance A4] occupied until 544.497
+->>>>Next available vehicle is A4 in 544.497 (9:4:29)
+Waiting time in minutes is 116.133.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 39060 -> 100001 = 27.4631 and with takeoff/landing: 27.4631
 [Victim->Hospital in ambulance] 39060 -> 100002 = 20.9609 and with takeoff/landing: 20.9609
 [Victim->Hospital in ambulance] 39060 -> 100003 = 32.6362 and with takeoff/landing: 32.6362
 
-V7    2    1    0.895303    42    A4    ROUND 3    MCC2    461 (7:41:0)    545.497 (9:5:29)    578.133 (9:38:7)    620.133 (10:20:7)    641.094 (10:41:5)    
+V7    2    1    0.895303    42    A4    ROUND 3    MCC2    461 (7:41:0)    544.497 (9:4:29)    577.133 (9:37:7)    619.133 (10:19:7)    640.094 (10:40:5)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 556.726
-[Helicopter H2] occupied until 590.363
-[Ambulance A1] occupied until 582.511
-[Ambulance A2] occupied until 582.511
-[Ambulance A3] occupied until 572.288
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is H1 in 556.726 (9:16:43)
-Waiting time in minutes is 97.2264.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 556.717
+[Helicopter H2] occupied until 587.725
+[Ambulance A1] occupied until 581.511
+[Ambulance A2] occupied until 581.511
+[Ambulance A3] occupied until 571.288
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is H1 in 556.717 (9:16:43)
+Waiting time in minutes is 97.2167.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 36030 -> 100001 = 1.93 and with takeoff/landing: 3.43
 [Victim->Hospital in helicopter] 36030 -> 100002 = 1.29 and with takeoff/landing: 2.79
 [Victim->Hospital in helicopter] 36030 -> 100003 = 2.43 and with takeoff/landing: 3.93
 
-V8    2    1    0.895303    42    H1    ROUND 3    MCC2    461 (7:41:0)    556.726 (9:16:43)    558.226 (9:18:13)    600.226 (10:0:13)    603.016 (10:3:0)    
+V8    2    1    0.895303    42    H1    ROUND 3    MCC2    461 (7:41:0)    556.717 (9:16:43)    558.217 (9:18:13)    600.217 (10:0:13)    605.453 (10:5:27)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 603.016
-[Helicopter H2] occupied until 590.363
-[Ambulance A1] occupied until 582.511
-[Ambulance A2] occupied until 582.511
-[Ambulance A3] occupied until 572.288
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is A3 in 572.288 (9:32:17)
-Waiting time in minutes is 133.918.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 605.453
+[Helicopter H2] occupied until 587.725
+[Ambulance A1] occupied until 581.511
+[Ambulance A2] occupied until 581.511
+[Ambulance A3] occupied until 571.288
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is A3 in 571.288 (9:31:17)
+Waiting time in minutes is 132.918.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 36030 -> 100001 = 22.6298 and with takeoff/landing: 22.6298
 [Victim->Hospital in ambulance] 36030 -> 100002 = 18.2058 and with takeoff/landing: 18.2058
 [Victim->Hospital in ambulance] 36030 -> 100003 = 30.0861 and with takeoff/landing: 30.0861
 
-V9    2    2    0.895303    29.9    A3    ROUND 3    MCC2    461 (7:41:0)    572.288 (9:32:17)    594.918 (9:54:55)    624.818 (10:24:49)    643.024 (10:43:1)    
+V9    2    2    0.895303    29.9    A3    ROUND 3    MCC2    461 (7:41:0)    571.288 (9:31:17)    593.918 (9:53:55)    623.818 (10:23:49)    642.024 (10:42:1)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 603.016
-[Helicopter H2] occupied until 590.363
-[Ambulance A1] occupied until 582.511
-[Ambulance A2] occupied until 582.511
-[Ambulance A3] occupied until 643.024
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is A1 in 582.511 (9:42:30)
-Waiting time in minutes is 149.14.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 605.453
+[Helicopter H2] occupied until 587.725
+[Ambulance A1] occupied until 581.511
+[Ambulance A2] occupied until 581.511
+[Ambulance A3] occupied until 642.024
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is A1 in 581.511 (9:41:30)
+Waiting time in minutes is 148.14.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 59088 -> 100001 = 27.6298 and with takeoff/landing: 27.6298
 [Victim->Hospital in ambulance] 59088 -> 100002 = 21.1276 and with takeoff/landing: 21.1276
 [Victim->Hospital in ambulance] 59088 -> 100003 = 34.525 and with takeoff/landing: 34.525
 
-V10    2    2    0.895303    29.9    A1    ROUND 3    MCC2    461 (7:41:0)    582.511 (9:42:30)    610.14 (10:10:8)    640.04 (10:40:2)    661.168 (11:1:10)    
+V10    2    2    0.895303    29.9    A1    ROUND 3    MCC2    461 (7:41:0)    581.511 (9:41:30)    609.14 (10:9:8)    639.04 (10:39:2)    660.168 (11:0:10)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 603.016
-[Helicopter H2] occupied until 590.363
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 582.511
-[Ambulance A3] occupied until 643.024
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is A2 in 582.511 (9:42:30)
-Waiting time in minutes is 146.418.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 605.453
+[Helicopter H2] occupied until 587.725
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 581.511
+[Ambulance A3] occupied until 642.024
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is A2 in 581.511 (9:41:30)
+Waiting time in minutes is 145.418.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 41050 -> 100001 = 24.9075 and with takeoff/landing: 24.9075
 [Victim->Hospital in ambulance] 41050 -> 100002 = 20.4836 and with takeoff/landing: 20.4836
 [Victim->Hospital in ambulance] 41050 -> 100003 = 32.3638 and with takeoff/landing: 32.3638
 
-V11    2    2    0.895303    29.9    A2    ROUND 3    MCC2    461 (7:41:0)    582.511 (9:42:30)    607.418 (10:7:25)    637.318 (10:37:19)    657.802 (10:57:48)    
+V11    2    2    0.895303    29.9    A2    ROUND 3    MCC2    461 (7:41:0)    581.511 (9:41:30)    606.418 (10:6:25)    636.318 (10:36:19)    656.802 (10:56:48)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 603.016
-[Helicopter H2] occupied until 590.363
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 643.024
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is H2 in 590.363 (9:50:21)
-Waiting time in minutes is 131.163.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 605.453
+[Helicopter H2] occupied until 587.725
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 656.802
+[Ambulance A3] occupied until 642.024
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is H2 in 587.725 (9:47:43)
+Waiting time in minutes is 128.525.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 38080 -> 100001 = 1.76 and with takeoff/landing: 3.26
 [Victim->Hospital in helicopter] 38080 -> 100002 = 1.12 and with takeoff/landing: 2.62
 [Victim->Hospital in helicopter] 38080 -> 100003 = 2.21 and with takeoff/landing: 3.71
 
-V12    2    2    0.895303    29.9    H2    ROUND 3    MCC2    461 (7:41:0)    590.363 (9:50:21)    592.163 (9:52:9)    622.063 (10:22:3)    624.683 (10:24:40)    
+V12    2    2    0.895303    29.9    H2    ROUND 3    MCC2    461 (7:41:0)    587.725 (9:47:43)    589.525 (9:49:31)    619.425 (10:19:25)    625.366 (10:25:21)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 603.016
-[Helicopter H2] occupied until 624.683
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 643.024
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is H1 in 603.016 (10:3:0)
-Waiting time in minutes is 143.566.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 605.453
+[Helicopter H2] occupied until 625.366
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 656.802
+[Ambulance A3] occupied until 642.024
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is H1 in 605.453 (10:5:27)
+Waiting time in minutes is 146.003.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
 [Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
 [Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
 
-V13    2    1    0.895303    42    H1    ROUND 4    MCC2    461 (7:41:0)    603.016 (10:3:0)    604.566 (10:4:33)    646.566 (10:46:33)    650.056 (10:50:3)    
+V13    2    1    0.895303    42    H1    ROUND 4    MCC2    461 (7:41:0)    605.453 (10:5:27)    607.003 (10:7:0)    649.003 (10:49:0)    657.696 (10:57:41)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 650.056
-[Helicopter H2] occupied until 624.683
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 643.024
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is H2 in 624.683 (10:24:40)
-Waiting time in minutes is 165.253.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 657.696
+[Helicopter H2] occupied until 625.366
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 656.802
+[Ambulance A3] occupied until 642.024
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is H2 in 625.366 (10:25:21)
+Waiting time in minutes is 165.936.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 36010 -> 100001 = 1.64 and with takeoff/landing: 3.14
 [Victim->Hospital in helicopter] 36010 -> 100002 = 1 and with takeoff/landing: 2.5
 [Victim->Hospital in helicopter] 36010 -> 100003 = 2.16 and with takeoff/landing: 3.66
 
-V14    2    3    0.895303    27.6    H2    ROUND 4    MCC2    461 (7:41:0)    624.683 (10:24:40)    626.253 (10:26:15)    653.853 (10:53:51)    656.353 (10:56:21)    
+V14    2    3    0.895303    27.6    H2    ROUND 4    MCC2    461 (7:41:0)    625.366 (10:25:21)    626.936 (10:26:56)    654.536 (10:54:32)    660.948 (11:0:56)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 650.056
-[Helicopter H2] occupied until 656.353
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 643.024
-[Ambulance A4] occupied until 641.094
-->>>>Next available vehicle is A4 in 641.094 (10:41:5)
-Waiting time in minutes is 218.125.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 657.696
+[Helicopter H2] occupied until 660.948
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 656.802
+[Ambulance A3] occupied until 642.024
+[Ambulance A4] occupied until 640.094
+->>>>Next available vehicle is A4 in 640.094 (10:40:5)
+Waiting time in minutes is 217.125.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 42060 -> 100001 = 30.5742 and with takeoff/landing: 30.5742
 [Victim->Hospital in ambulance] 42060 -> 100002 = 26.1502 and with takeoff/landing: 26.1502
 [Victim->Hospital in ambulance] 42060 -> 100003 = 38.0305 and with takeoff/landing: 38.0305
 
-V15    2    2    0.895303    29.9    A4    ROUND 4    MCC2    461 (7:41:0)    641.094 (10:41:5)    679.125 (11:19:7)    709.025 (11:49:1)    735.175 (12:15:10)    
+V15    2    2    0.895303    29.9    A4    ROUND 4    MCC2    461 (7:41:0)    640.094 (10:40:5)    678.125 (11:18:7)    708.025 (11:48:1)    734.175 (12:14:10)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 650.056
-[Helicopter H2] occupied until 656.353
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 643.024
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is A3 in 643.024 (10:43:1)
-Waiting time in minutes is 212.598.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 657.696
+[Helicopter H2] occupied until 660.948
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 656.802
+[Ambulance A3] occupied until 642.024
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is A3 in 642.024 (10:42:1)
+Waiting time in minutes is 211.598.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 42060 -> 100001 = 30.5742 and with takeoff/landing: 30.5742
 [Victim->Hospital in ambulance] 42060 -> 100002 = 26.1502 and with takeoff/landing: 26.1502
 [Victim->Hospital in ambulance] 42060 -> 100003 = 38.0305 and with takeoff/landing: 38.0305
 
-V16    2    2    0.895303    29.9    A3    ROUND 4    MCC2    461 (7:41:0)    643.024 (10:43:1)    673.598 (11:13:35)    703.498 (11:43:29)    729.648 (12:9:38)    
+V16    2    2    0.895303    29.9    A3    ROUND 4    MCC2    461 (7:41:0)    642.024 (10:42:1)    672.598 (11:12:35)    702.498 (11:42:29)    728.648 (12:8:38)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 650.056
-[Helicopter H2] occupied until 656.353
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is H1 in 650.056 (10:50:3)
-Waiting time in minutes is 190.556.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 657.696
+[Helicopter H2] occupied until 660.948
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 656.802
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is A2 in 656.802 (10:56:48)
+Waiting time in minutes is 218.432.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 36030 -> 100001 = 1.93 and with takeoff/landing: 3.43
-[Victim->Hospital in helicopter] 36030 -> 100002 = 1.29 and with takeoff/landing: 2.79
-[Victim->Hospital in helicopter] 36030 -> 100003 = 2.43 and with takeoff/landing: 3.93
+[Victim->Hospital in ambulance] 36030 -> 100001 = 22.6298 and with takeoff/landing: 22.6298
+[Victim->Hospital in ambulance] 36030 -> 100002 = 18.2058 and with takeoff/landing: 18.2058
+[Victim->Hospital in ambulance] 36030 -> 100003 = 30.0861 and with takeoff/landing: 30.0861
 
-V17    2    2    0.895303    29.9    H1    ROUND 5    MCC2    461 (7:41:0)    650.056 (10:50:3)    651.556 (10:51:33)    681.456 (11:21:27)    684.246 (11:24:14)    
+V17    2    2    0.895303    29.9    A2    ROUND 4    MCC2    461 (7:41:0)    656.802 (10:56:48)    679.432 (11:19:25)    709.332 (11:49:19)    727.537 (12:7:32)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 684.246
-[Helicopter H2] occupied until 656.353
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is H2 in 656.353 (10:56:21)
-Waiting time in minutes is 196.943.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 657.696
+[Helicopter H2] occupied until 660.948
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 727.537
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is H1 in 657.696 (10:57:41)
+Waiting time in minutes is 198.286.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 41050 -> 100001 = 2.1 and with takeoff/landing: 3.6
 [Victim->Hospital in helicopter] 41050 -> 100002 = 1.46 and with takeoff/landing: 2.96
 [Victim->Hospital in helicopter] 41050 -> 100003 = 2.57 and with takeoff/landing: 4.07
 
-V18    2    2    0.895303    29.9    H2    ROUND 5    MCC2    461 (7:41:0)    656.353 (10:56:21)    657.943 (10:57:56)    687.843 (11:27:50)    690.803 (11:30:48)    
+V18    2    2    0.895303    29.9    H1    ROUND 5    MCC2    461 (7:41:0)    657.696 (10:57:41)    659.286 (10:59:17)    689.186 (11:29:11)    698.729 (11:38:43)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 684.246
-[Helicopter H2] occupied until 690.803
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 657.802
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is A2 in 657.802 (10:57:48)
-Waiting time in minutes is 223.265.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 698.729
+[Helicopter H2] occupied until 660.948
+[Ambulance A1] occupied until 660.168
+[Ambulance A2] occupied until 727.537
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is A1 in 660.168 (11:0:10)
+Waiting time in minutes is 225.631.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 41030 -> 100001 = 26.4631 and with takeoff/landing: 26.4631
 [Victim->Hospital in ambulance] 41030 -> 100002 = 22.0391 and with takeoff/landing: 22.0391
 [Victim->Hospital in ambulance] 41030 -> 100003 = 33.9194 and with takeoff/landing: 33.9194
 
-V19    2    2    0.895303    29.9    A2    ROUND 4    MCC2    461 (7:41:0)    657.802 (10:57:48)    684.265 (11:24:15)    714.165 (11:54:9)    736.204 (12:16:12)    
+V19    2    2    0.895303    29.9    A1    ROUND 4    MCC2    461 (7:41:0)    660.168 (11:0:10)    686.631 (11:26:37)    716.531 (11:56:31)    738.57 (12:18:34)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 684.246
-[Helicopter H2] occupied until 690.803
-[Ambulance A1] occupied until 661.168
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is A1 in 661.168 (11:1:10)
-Waiting time in minutes is 221.853.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 698.729
+[Helicopter H2] occupied until 660.948
+[Ambulance A1] occupied until 738.57
+[Ambulance A2] occupied until 727.537
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is H2 in 660.948 (11:0:56)
+Waiting time in minutes is 201.518.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
-[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
-[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+[Victim->Hospital in helicopter] 36010 -> 100001 = 1.64 and with takeoff/landing: 3.14
+[Victim->Hospital in helicopter] 36010 -> 100002 = 1 and with takeoff/landing: 2.5
+[Victim->Hospital in helicopter] 36010 -> 100003 = 2.16 and with takeoff/landing: 3.66
 
-V20    2    2    0.895303    29.9    A1    ROUND 4    MCC2    461 (7:41:0)    661.168 (11:1:10)    682.853 (11:22:51)    712.753 (11:52:45)    727.681 (12:7:40)    
+V20    2    2    0.895303    29.9    H2    ROUND 5    MCC2    461 (7:41:0)    660.948 (11:0:56)    662.518 (11:2:31)    692.418 (11:32:25)    698.83 (11:38:49)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 684.246
-[Helicopter H2] occupied until 690.803
-[Ambulance A1] occupied until 727.681
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is H1 in 684.246 (11:24:14)
-Waiting time in minutes is 224.746.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 698.729
+[Helicopter H2] occupied until 698.83
+[Ambulance A1] occupied until 738.57
+[Ambulance A2] occupied until 727.537
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is H1 in 698.729 (11:38:43)
+Waiting time in minutes is 239.229.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 37090 -> 100001 = 1.93 and with takeoff/landing: 3.43
 [Victim->Hospital in helicopter] 37090 -> 100002 = 1.29 and with takeoff/landing: 2.79
 [Victim->Hospital in helicopter] 37090 -> 100003 = 2.43 and with takeoff/landing: 3.93
 
-V21    2    1    0.895303    42    H1    ROUND 6    MCC2    461 (7:41:0)    684.246 (11:24:14)    685.746 (11:25:44)    727.746 (12:7:44)    730.536 (12:10:32)    
+V21    2    1    0.895303    42    H1    ROUND 6    MCC2    461 (7:41:0)    698.729 (11:38:43)    700.229 (11:40:13)    742.229 (12:22:13)    749.964 (12:29:57)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 730.536
-[Helicopter H2] occupied until 690.803
-[Ambulance A1] occupied until 727.681
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is H2 in 690.803 (11:30:48)
-Waiting time in minutes is 232.053.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 749.964
+[Helicopter H2] occupied until 698.83
+[Ambulance A1] occupied until 738.57
+[Ambulance A2] occupied until 727.537
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is H2 in 698.83 (11:38:49)
+Waiting time in minutes is 240.08.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 47020 -> 100001 = 3.73 and with takeoff/landing: 5.23
 [Victim->Hospital in helicopter] 47020 -> 100002 = 3.09 and with takeoff/landing: 4.59
 [Victim->Hospital in helicopter] 47020 -> 100003 = 4.15 and with takeoff/landing: 5.65
 
-V22    2    1    0.895303    42    H2    ROUND 6    MCC2    461 (7:41:0)    690.803 (11:30:48)    693.053 (11:33:3)    735.053 (12:15:3)    739.643 (12:19:38)    
+V22    2    1    0.895303    42    H2    ROUND 6    MCC2    461 (7:41:0)    698.83 (11:38:49)    701.08 (11:41:4)    743.08 (12:23:4)    752.279 (12:32:16)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 730.536
-[Helicopter H2] occupied until 739.643
-[Ambulance A1] occupied until 727.681
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is A1 in 727.681 (12:7:40)
-Waiting time in minutes is 294.2.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 749.964
+[Helicopter H2] occupied until 752.279
+[Ambulance A1] occupied until 738.57
+[Ambulance A2] occupied until 727.537
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is A2 in 727.537 (12:7:32)
+Waiting time in minutes is 294.056.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 42030 -> 100001 = 27.5187 and with takeoff/landing: 27.5187
 [Victim->Hospital in ambulance] 42030 -> 100002 = 23.0947 and with takeoff/landing: 23.0947
 [Victim->Hospital in ambulance] 42030 -> 100003 = 34.975 and with takeoff/landing: 34.975
 
-V23    2    2    0.895303    29.9    A1    ROUND 5    MCC2    461 (7:41:0)    727.681 (12:7:40)    755.2 (12:35:12)    785.1 (13:5:6)    808.195 (13:28:11)    
+V23    2    2    0.895303    29.9    A2    ROUND 5    MCC2    461 (7:41:0)    727.537 (12:7:32)    755.056 (12:35:3)    784.956 (13:4:57)    808.051 (13:28:3)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 730.536
-[Helicopter H2] occupied until 739.643
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 729.648
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is A3 in 729.648 (12:9:38)
-Waiting time in minutes is 295.111.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 749.964
+[Helicopter H2] occupied until 752.279
+[Ambulance A1] occupied until 738.57
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 728.648
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is A3 in 728.648 (12:8:38)
+Waiting time in minutes is 294.111.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 41030 -> 100001 = 26.4631 and with takeoff/landing: 26.4631
 [Victim->Hospital in ambulance] 41030 -> 100002 = 22.0391 and with takeoff/landing: 22.0391
 [Victim->Hospital in ambulance] 41030 -> 100003 = 33.9194 and with takeoff/landing: 33.9194
 
-V24    2    2    0.895303    29.9    A3    ROUND 5    MCC2    461 (7:41:0)    729.648 (12:9:38)    756.111 (12:36:6)    786.011 (13:6:0)    808.051 (13:28:3)    
+V24    2    2    0.895303    29.9    A3    ROUND 5    MCC2    461 (7:41:0)    728.648 (12:8:38)    755.111 (12:35:6)    785.011 (13:5:0)    807.051 (13:27:3)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 730.536
-[Helicopter H2] occupied until 739.643
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is H1 in 730.536 (12:10:32)
-Waiting time in minutes is 271.126.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 749.964
+[Helicopter H2] occupied until 752.279
+[Ambulance A1] occupied until 738.57
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 807.051
+[Ambulance A4] occupied until 734.175
+->>>>Next available vehicle is A4 in 734.175 (12:14:10)
+Waiting time in minutes is 303.928.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 41020 -> 100001 = 2.1 and with takeoff/landing: 3.6
-[Victim->Hospital in helicopter] 41020 -> 100002 = 1.46 and with takeoff/landing: 2.96
-[Victim->Hospital in helicopter] 41020 -> 100003 = 2.57 and with takeoff/landing: 4.07
+[Victim->Hospital in ambulance] 41020 -> 100001 = 23.2964 and with takeoff/landing: 23.2964
+[Victim->Hospital in ambulance] 41020 -> 100002 = 18.8724 and with takeoff/landing: 18.8724
+[Victim->Hospital in ambulance] 41020 -> 100003 = 30.7527 and with takeoff/landing: 30.7527
 
-V25    2    2    0.895303    29.9    H1    ROUND 7    MCC2    461 (7:41:0)    730.536 (12:10:32)    732.126 (12:12:7)    762.026 (12:42:1)    764.986 (12:44:59)    
+V25    2    2    0.895303    29.9    A4    ROUND 5    MCC2    461 (7:41:0)    734.175 (12:14:10)    764.928 (12:44:55)    794.828 (13:14:49)    813.7 (13:33:42)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 764.986
-[Helicopter H2] occupied until 739.643
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 735.175
-->>>>Next available vehicle is A4 in 735.175 (12:15:10)
-Waiting time in minutes is 305.65.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 749.964
+[Helicopter H2] occupied until 752.279
+[Ambulance A1] occupied until 738.57
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 807.051
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is A1 in 738.57 (12:18:34)
+Waiting time in minutes is 301.589.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 36020 -> 100001 = 24.0187 and with takeoff/landing: 24.0187
 [Victim->Hospital in ambulance] 36020 -> 100002 = 18.0391 and with takeoff/landing: 18.0391
 [Victim->Hospital in ambulance] 36020 -> 100003 = 31.475 and with takeoff/landing: 31.475
 
-V26    2    1    0.895303    42    A4    ROUND 5    MCC2    461 (7:41:0)    735.175 (12:15:10)    766.65 (12:46:38)    808.65 (13:28:38)    826.689 (13:46:41)    
+V26    2    1    0.895303    42    A1    ROUND 5    MCC2    461 (7:41:0)    738.57 (12:18:34)    762.589 (12:42:35)    804.589 (13:24:35)    822.628 (13:42:37)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 764.986
-[Helicopter H2] occupied until 739.643
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 736.204
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is A2 in 736.204 (12:16:12)
-Waiting time in minutes is 305.723.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 749.964
+[Helicopter H2] occupied until 752.279
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 807.051
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is H1 in 749.964 (12:29:57)
+Waiting time in minutes is 290.514.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 42050 -> 100001 = 30.5187 and with takeoff/landing: 30.5187
-[Victim->Hospital in ambulance] 42050 -> 100003 = 37.975 and with takeoff/landing: 37.975
+[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
 
-V27    2    2    0.895303    29.9    A2    ROUND 5    MCC1    461 (7:41:0)    736.204 (12:16:12)    766.723 (12:46:43)    796.623 (13:16:37)    827.141 (13:47:8)    
+V27    2    2    0.895303    29.9    H1    ROUND 7    MCC1    461 (7:41:0)    749.964 (12:29:57)    751.514 (12:31:30)    781.414 (13:1:24)    790.747 (13:10:44)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 764.986
-[Helicopter H2] occupied until 739.643
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is H2 in 739.643 (12:19:38)
-Waiting time in minutes is 280.173.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 790.747
+[Helicopter H2] occupied until 752.279
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 807.051
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is H2 in 752.279 (12:32:16)
+Waiting time in minutes is 292.809.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 42010 -> 100001 = 2.42 and with takeoff/landing: 3.92
 [Victim->Hospital in helicopter] 42010 -> 100003 = 2.89 and with takeoff/landing: 4.39
 
-V28    2    2    0.895303    29.9    H2    ROUND 7    MCC1    461 (7:41:0)    739.643 (12:19:38)    741.173 (12:21:10)    771.073 (12:51:4)    774.993 (12:54:59)    
+V28    2    2    0.895303    29.9    H2    ROUND 7    MCC1    461 (7:41:0)    752.279 (12:32:16)    753.809 (12:33:48)    783.709 (13:3:42)    790.88 (13:10:52)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 764.986
-[Helicopter H2] occupied until 774.993
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is H1 in 764.986 (12:44:59)
-Waiting time in minutes is 306.636.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 790.747
+[Helicopter H2] occupied until 790.88
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 807.051
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is H1 in 790.747 (13:10:44)
+Waiting time in minutes is 332.397.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 4230 -> 100001 = 0.3 and with takeoff/landing: 1.8
 [Victim->Hospital in helicopter] 4230 -> 100003 = 0.91 and with takeoff/landing: 2.41
 
-V29    2    2    0.895303    29.9    H1    ROUND 8    MCC1    461 (7:41:0)    764.986 (12:44:59)    767.636 (12:47:38)    797.536 (13:17:32)    799.336 (13:19:20)    
+V29    2    2    0.895303    29.9    H1    ROUND 8    MCC1    461 (7:41:0)    790.747 (13:10:44)    793.397 (13:13:23)    823.297 (13:43:17)    838.255 (13:58:15)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 799.336
-[Helicopter H2] occupied until 774.993
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is H2 in 774.993 (12:54:59)
-Waiting time in minutes is 315.493.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 838.255
+[Helicopter H2] occupied until 790.88
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 807.051
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is H2 in 790.88 (13:10:52)
+Waiting time in minutes is 331.38.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 36020 -> 100001 = 1.93 and with takeoff/landing: 3.43
 [Victim->Hospital in helicopter] 36020 -> 100003 = 2.43 and with takeoff/landing: 3.93
 
-V30    2    2    0.895303    29.9    H2    ROUND 8    MCC1    461 (7:41:0)    774.993 (12:54:59)    776.493 (12:56:29)    806.393 (13:26:23)    809.823 (13:29:49)    
+V30    2    2    0.895303    29.9    H2    ROUND 8    MCC1    461 (7:41:0)    790.88 (13:10:52)    792.38 (13:12:22)    822.28 (13:42:16)    829.863 (13:49:51)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 799.336
-[Helicopter H2] occupied until 809.823
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is H1 in 799.336 (13:19:20)
-Waiting time in minutes is 339.866.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 838.255
+[Helicopter H2] occupied until 829.863
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 807.051
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is A3 in 807.051 (13:27:3)
+Waiting time in minutes is 373.569.V31 deteriorated to GRAVITY 3 AT TIMESTAMP 834.569 (13:54:34)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
 Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 42030 -> 100001 = 2.42 and with takeoff/landing: 3.92
-[Victim->Hospital in helicopter] 42030 -> 100003 = 2.89 and with takeoff/landing: 4.39
+[Victim->Hospital in ambulance] 42030 -> 100001 = 27.5187 and with takeoff/landing: 27.5187
 
-V31    2    2    0.895303    29.9    H1    ROUND 9    MCC1    461 (7:41:0)    799.336 (13:19:20)    800.866 (13:20:51)    830.766 (13:50:45)    834.686 (13:54:41)    
+V31    3    2    0.895303    62.14    A3    ROUND 6    MCC1    461 (7:41:0)    807.051 (13:27:3)    834.569 (13:54:34)    896.709 (14:56:42)    924.228 (15:24:13)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 834.686
-[Helicopter H2] occupied until 809.823
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 808.051
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is A3 in 808.051 (13:28:3)
+[Helicopter H1] occupied until 838.255
+[Helicopter H2] occupied until 829.863
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 808.051
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is A2 in 808.051 (13:28:3)
 Waiting time in minutes is 371.236.V32 deteriorated to GRAVITY 3 AT TIMESTAMP 832.236 (13:52:14)    
 IT WAS AN IN-ROUTE GRAVITY CHANGE!
 
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 37090 -> 100001 = 24.1853 and with takeoff/landing: 24.1853
 
-V32    3    3    0.895303    65    A3    ROUND 6    MCC1    461 (7:41:0)    808.051 (13:28:3)    832.236 (13:52:14)    897.236 (14:57:14)    921.421 (15:21:25)    
+V32    3    3    0.895303    65    A2    ROUND 6    MCC1    461 (7:41:0)    808.051 (13:28:3)    832.236 (13:52:14)    897.236 (14:57:14)    921.421 (15:21:25)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 834.686
-[Helicopter H2] occupied until 809.823
-[Ambulance A1] occupied until 808.195
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is A1 in 808.195 (13:28:11)
-Waiting time in minutes is 371.991.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 838.255
+[Helicopter H2] occupied until 829.863
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 813.7
+->>>>Next available vehicle is A4 in 813.7 (13:33:42)
+Waiting time in minutes is 384.953.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 37050 -> 100001 = 24.7964 and with takeoff/landing: 24.7964
 [Victim->Hospital in ambulance] 37050 -> 100002 = 16.9053 and with takeoff/landing: 16.9053
 [Victim->Hospital in ambulance] 37050 -> 100003 = 32.2527 and with takeoff/landing: 32.2527
 
-V33    1    3    0.371828    9.3    A1    ROUND 6    MCC2    461 (7:41:0)    808.195 (13:28:11)    832.991 (13:52:59)    842.291 (14:2:17)    859.196 (14:19:11)    
+V33    1    3    0.371828    9.3    A4    ROUND 6    MCC2    461 (7:41:0)    813.7 (13:33:42)    845.953 (14:5:57)    855.253 (14:15:15)    872.158 (14:32:9)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 834.686
-[Helicopter H2] occupied until 809.823
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is H2 in 809.823 (13:29:49)
-Waiting time in minutes is 350.623.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 838.255
+[Helicopter H2] occupied until 829.863
+[Ambulance A1] occupied until 822.628
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 872.158
+->>>>Next available vehicle is A1 in 822.628 (13:42:37)
+Waiting time in minutes is 386.424.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 37050 -> 100001 = 1.76 and with takeoff/landing: 3.26
-[Victim->Hospital in helicopter] 37050 -> 100002 = 1.12 and with takeoff/landing: 2.62
-[Victim->Hospital in helicopter] 37050 -> 100003 = 2.21 and with takeoff/landing: 3.71
+[Victim->Hospital in ambulance] 37050 -> 100001 = 24.7964 and with takeoff/landing: 24.7964
+[Victim->Hospital in ambulance] 37050 -> 100002 = 16.9053 and with takeoff/landing: 16.9053
+[Victim->Hospital in ambulance] 37050 -> 100003 = 32.2527 and with takeoff/landing: 32.2527
 
-V34    1    2    0.371828    15.04    H2    ROUND 9    MCC2    461 (7:41:0)    809.823 (13:29:49)    811.623 (13:31:37)    826.663 (13:46:39)    829.283 (13:49:16)    
+V34    1    2    0.371828    15.04    A1    ROUND 6    MCC2    461 (7:41:0)    822.628 (13:42:37)    847.424 (14:7:25)    862.464 (14:22:27)    879.37 (14:39:22)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 834.686
-[Helicopter H2] occupied until 829.283
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 826.689
-->>>>Next available vehicle is A4 in 826.689 (13:46:41)
-Waiting time in minutes is 397.164.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 838.255
+[Helicopter H2] occupied until 829.863
+[Ambulance A1] occupied until 879.37
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 872.158
+->>>>Next available vehicle is H2 in 829.863 (13:49:51)
+Waiting time in minutes is 370.363.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 36020 -> 100001 = 24.0187 and with takeoff/landing: 24.0187
-[Victim->Hospital in ambulance] 36020 -> 100002 = 18.0391 and with takeoff/landing: 18.0391
-[Victim->Hospital in ambulance] 36020 -> 100003 = 31.475 and with takeoff/landing: 31.475
+[Victim->Hospital in helicopter] 36020 -> 100001 = 1.93 and with takeoff/landing: 3.43
+[Victim->Hospital in helicopter] 36020 -> 100002 = 1.29 and with takeoff/landing: 2.79
+[Victim->Hospital in helicopter] 36020 -> 100003 = 2.43 and with takeoff/landing: 3.93
 
-V35    1    2    0.371828    15.04    A4    ROUND 6    MCC2    461 (7:41:0)    826.689 (13:46:41)    858.164 (14:18:9)    873.204 (14:33:12)    891.243 (14:51:14)    
+V35    1    2    0.371828    15.04    H2    ROUND 9    MCC2    461 (7:41:0)    829.863 (13:49:51)    831.363 (13:51:21)    846.403 (14:6:24)    853.346 (14:13:20)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 834.686
-[Helicopter H2] occupied until 829.283
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 827.141
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is A2 in 827.141 (13:47:8)
-Waiting time in minutes is 393.604.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 838.255
+[Helicopter H2] occupied until 853.346
+[Ambulance A1] occupied until 879.37
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 872.158
+->>>>Next available vehicle is H1 in 838.255 (13:58:15)
+Waiting time in minutes is 379.135.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 39060 -> 100001 = 27.4631 and with takeoff/landing: 27.4631
-[Victim->Hospital in ambulance] 39060 -> 100002 = 20.9609 and with takeoff/landing: 20.9609
-[Victim->Hospital in ambulance] 39060 -> 100003 = 32.6362 and with takeoff/landing: 32.6362
+[Victim->Hospital in helicopter] 39060 -> 100001 = 2.1 and with takeoff/landing: 3.6
+[Victim->Hospital in helicopter] 39060 -> 100002 = 1.47 and with takeoff/landing: 2.97
+[Victim->Hospital in helicopter] 39060 -> 100003 = 2.51 and with takeoff/landing: 4.01
 
-V36    1    1    0.371828    14.98    A2    ROUND 6    MCC2    461 (7:41:0)    827.141 (13:47:8)    854.604 (14:14:36)    869.584 (14:29:35)    890.545 (14:50:32)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 834.686
-[Helicopter H2] occupied until 829.283
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is H2 in 829.283 (13:49:16)
-Waiting time in minutes is 369.833.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
-[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
-[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
-
-V37    1    2    0.371828    15.04    H2    ROUND 10    MCC2    461 (7:41:0)    829.283 (13:49:16)    830.833 (13:50:49)    845.873 (14:5:52)    849.363 (14:9:21)    
+V36    1    1    0.371828    14.98    H1    ROUND 9    MCC2    461 (7:41:0)    838.255 (13:58:15)    840.135 (14:0:8)    855.115 (14:15:6)    860.447 (14:20:26)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 834.686
-[Helicopter H2] occupied until 849.363
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is H1 in 834.686 (13:54:41)
-Waiting time in minutes is 375.236.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 860.447
+[Helicopter H2] occupied until 853.346
+[Ambulance A1] occupied until 879.37
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 872.158
+->>>>Next available vehicle is H2 in 853.346 (14:13:20)
+Waiting time in minutes is 393.896.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
 [Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
 [Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
 
-V38    1    2    0.371828    15.04    H1    ROUND 10    MCC2    461 (7:41:0)    834.686 (13:54:41)    836.236 (13:56:14)    851.276 (14:11:16)    854.766 (14:14:45)    
+V37    1    2    0.371828    15.04    H2    ROUND 10    MCC2    461 (7:41:0)    853.346 (14:13:20)    854.896 (14:14:53)    869.936 (14:29:56)    878.629 (14:38:37)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 854.766
-[Helicopter H2] occupied until 849.363
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is H2 in 849.363 (14:9:21)
-Waiting time in minutes is 389.913.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 860.447
+[Helicopter H2] occupied until 878.629
+[Ambulance A1] occupied until 879.37
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 872.158
+->>>>Next available vehicle is H1 in 860.447 (14:20:26)
+Waiting time in minutes is 400.997.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
 [Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
 [Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
 
-V39    1    2    0.371828    15.04    H2    ROUND 11    MCC2    461 (7:41:0)    849.363 (14:9:21)    850.913 (14:10:54)    865.953 (14:25:57)    869.443 (14:29:26)    
+V38    1    2    0.371828    15.04    H1    ROUND 10    MCC2    461 (7:41:0)    860.447 (14:20:26)    861.997 (14:21:59)    877.037 (14:37:2)    885.73 (14:45:43)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 854.766
-[Helicopter H2] occupied until 869.443
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is H1 in 854.766 (14:14:45)
-Waiting time in minutes is 395.316.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
-[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
-[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
-
-V40    1    2    0.371828    15.04    H1    ROUND 11    MCC2    461 (7:41:0)    854.766 (14:14:45)    856.316 (14:16:18)    871.356 (14:31:21)    874.846 (14:34:50)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 874.846
-[Helicopter H2] occupied until 869.443
-[Ambulance A1] occupied until 859.196
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is A1 in 859.196 (14:19:11)
-Waiting time in minutes is 423.104.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 40040 -> 100001 = 24.9075 and with takeoff/landing: 24.9075
-[Victim->Hospital in ambulance] 40040 -> 100002 = 18.4053 and with takeoff/landing: 18.4053
-[Victim->Hospital in ambulance] 40040 -> 100003 = 32.3638 and with takeoff/landing: 32.3638
-
-V41    1    2    0.371828    15.04    A1    ROUND 7    MCC2    461 (7:41:0)    859.196 (14:19:11)    884.104 (14:44:6)    899.144 (14:59:8)    917.549 (15:17:32)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 874.846
-[Helicopter H2] occupied until 869.443
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is H2 in 869.443 (14:29:26)
-Waiting time in minutes is 411.013.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 24010 -> 100001 = 0.55 and with takeoff/landing: 2.05
-[Victim->Hospital in helicopter] 24010 -> 100002 = 0.22 and with takeoff/landing: 1.72
-[Victim->Hospital in helicopter] 24010 -> 100003 = 1 and with takeoff/landing: 2.5
-
-V42    1    1    0.371828    14.98    H2    ROUND 12    MCC2    461 (7:41:0)    869.443 (14:29:26)    872.013 (14:32:0)    886.993 (14:46:59)    888.713 (14:48:42)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 874.846
-[Helicopter H2] occupied until 888.713
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is H1 in 874.846 (14:34:50)
-Waiting time in minutes is 415.396.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
-[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
-[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
-
-V43    1    1    0.371828    14.98    H1    ROUND 12    MCC2    461 (7:41:0)    874.846 (14:34:50)    876.396 (14:36:23)    891.376 (14:51:22)    894.866 (14:54:51)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 894.866
-[Helicopter H2] occupied until 888.713
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is H2 in 888.713 (14:48:42)
-Waiting time in minutes is 429.303.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 41050 -> 100001 = 2.1 and with takeoff/landing: 3.6
-[Victim->Hospital in helicopter] 41050 -> 100002 = 1.46 and with takeoff/landing: 2.96
-[Victim->Hospital in helicopter] 41050 -> 100003 = 2.57 and with takeoff/landing: 4.07
-
-V44    1    2    0.371828    15.04    H2    ROUND 13    MCC2    461 (7:41:0)    888.713 (14:48:42)    890.303 (14:50:18)    905.343 (15:5:20)    908.303 (15:8:18)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 894.866
-[Helicopter H2] occupied until 908.303
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 890.545
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is A2 in 890.545 (14:50:32)
-Waiting time in minutes is 451.231.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
-[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
-[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
-
-V45    1    2    0.371828    15.04    A2    ROUND 7    MCC2    461 (7:41:0)    890.545 (14:50:32)    912.231 (15:12:13)    927.271 (15:27:16)    942.199 (15:42:11)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 894.866
-[Helicopter H2] occupied until 908.303
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 891.243
-->>>>Next available vehicle is A4 in 891.243 (14:51:14)
-Waiting time in minutes is 459.384.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
-[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
-[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
-
-V46    1    2    0.371828    15.04    A4    ROUND 7    MCC2    461 (7:41:0)    891.243 (14:51:14)    920.385 (15:20:23)    935.424 (15:35:25)    950.352 (15:50:21)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 894.866
-[Helicopter H2] occupied until 908.303
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is H1 in 894.866 (14:54:51)
-Waiting time in minutes is 435.436.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 36010 -> 100001 = 1.64 and with takeoff/landing: 3.14
-[Victim->Hospital in helicopter] 36010 -> 100002 = 1 and with takeoff/landing: 2.5
-[Victim->Hospital in helicopter] 36010 -> 100003 = 2.16 and with takeoff/landing: 3.66
-
-V47    1    1    0.371828    14.98    H1    ROUND 13    MCC2    461 (7:41:0)    894.866 (14:54:51)    896.436 (14:56:26)    911.416 (15:11:24)    913.916 (15:13:54)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 913.916
-[Helicopter H2] occupied until 908.303
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is H2 in 908.303 (15:8:18)
-Waiting time in minutes is 449.163.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 45020 -> 100001 = 3 and with takeoff/landing: 4.5
-[Victim->Hospital in helicopter] 45020 -> 100002 = 2.37 and with takeoff/landing: 3.87
-[Victim->Hospital in helicopter] 45020 -> 100003 = 3.43 and with takeoff/landing: 4.93
-
-V48    1    2    0.371828    15.04    H2    ROUND 14    MCC2    461 (7:41:0)    908.303 (15:8:18)    910.163 (15:10:9)    925.203 (15:25:12)    929.073 (15:29:4)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 913.916
-[Helicopter H2] occupied until 929.073
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is H1 in 913.916 (15:13:54)
-Waiting time in minutes is 456.406.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 10010 -> 100001 = 0.6 and with takeoff/landing: 2.1
-[Victim->Hospital in helicopter] 10010 -> 100002 = 1.16 and with takeoff/landing: 2.66
-[Victim->Hospital in helicopter] 10010 -> 100003 = 0.04 and with takeoff/landing: 1.54
-
-V49    1    2    0.371828    15.04    H1    ROUND 14    MCC3    461 (7:41:0)    913.916 (15:13:54)    917.406 (15:17:24)    932.446 (15:32:26)    933.986 (15:33:59)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 933.986
-[Helicopter H2] occupied until 929.073
-[Ambulance A1] occupied until 917.549
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is A1 in 917.549 (15:17:32)
-Waiting time in minutes is 461.068.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 16020 -> 100001 = 4.51866 and with takeoff/landing: 4.51866
-[Victim->Hospital in ambulance] 16020 -> 100002 = 7.53911 and with takeoff/landing: 7.53911
-[Victim->Hospital in ambulance] 16020 -> 100003 = 14.6416 and with takeoff/landing: 14.6416
-
-V50    1    2    0.371828    15.04    A1    ROUND 8    MCC1    461 (7:41:0)    917.549 (15:17:32)    922.068 (15:22:4)    937.108 (15:37:6)    941.627 (15:41:37)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 933.986
-[Helicopter H2] occupied until 929.073
-[Ambulance A1] occupied until 941.627
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 921.421
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is A3 in 921.421 (15:21:25)
-Waiting time in minutes is 489.384.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 38030 -> 100001 = 28.9631 and with takeoff/landing: 28.9631
-[Victim->Hospital in ambulance] 38030 -> 100002 = 19.3498 and with takeoff/landing: 19.3498
-[Victim->Hospital in ambulance] 38030 -> 100003 = 31.9695 and with takeoff/landing: 31.9695
-
-V51    1    2    0.371828    15.04    A3    ROUND 7    MCC2    461 (7:41:0)    921.421 (15:21:25)    950.384 (15:50:23)    965.424 (16:5:25)    984.774 (16:24:46)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 933.986
-[Helicopter H2] occupied until 929.073
-[Ambulance A1] occupied until 941.627
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is H2 in 929.073 (15:29:4)
-Waiting time in minutes is 469.623.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
-[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
-[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
-
-V52    1    2    0.371828    15.04    H2    ROUND 15    MCC2    461 (7:41:0)    929.073 (15:29:4)    930.623 (15:30:37)    945.663 (15:45:39)    949.153 (15:49:9)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 933.986
-[Helicopter H2] occupied until 949.153
-[Ambulance A1] occupied until 941.627
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is H1 in 933.986 (15:33:59)
-Waiting time in minutes is 474.866.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 40030 -> 100001 = 2.1 and with takeoff/landing: 3.6
-[Victim->Hospital in helicopter] 40030 -> 100002 = 1.47 and with takeoff/landing: 2.97
-[Victim->Hospital in helicopter] 40030 -> 100003 = 2.51 and with takeoff/landing: 4.01
-
-V53    1    2    0.371828    15.04    H1    ROUND 15    MCC2    461 (7:41:0)    933.986 (15:33:59)    935.866 (15:35:51)    950.906 (15:50:54)    953.876 (15:53:52)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 953.876
-[Helicopter H2] occupied until 949.153
-[Ambulance A1] occupied until 941.627
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is A1 in 941.627 (15:41:37)
-Waiting time in minutes is 502.312.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
-[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
-[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
-
-V54    1    1    0.371828    14.98    A1    ROUND 9    MCC2    461 (7:41:0)    941.627 (15:41:37)    963.312 (16:3:18)    978.292 (16:18:17)    993.22 (16:33:13)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 953.876
-[Helicopter H2] occupied until 949.153
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 942.199
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is A2 in 942.199 (15:42:11)
-Waiting time in minutes is 502.884.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
-[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
-[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
-
-V55    1    3    0.371828    9.3    A2    ROUND 8    MCC2    461 (7:41:0)    942.199 (15:42:11)    963.884 (16:3:53)    973.184 (16:13:11)    988.112 (16:28:6)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 953.876
-[Helicopter H2] occupied until 949.153
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 988.112
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is H2 in 949.153 (15:49:9)
-Waiting time in minutes is 489.703.OK NO CHANGE NEEDED
-Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
-[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
-[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
-
-V56    1    2    0.371828    15.04    H2    ROUND 16    MCC2    461 (7:41:0)    949.153 (15:49:9)    950.703 (15:50:42)    965.743 (16:5:44)    969.233 (16:9:13)    
-
-
-Searching for closest vehicle to pick up the casualty...
-[NOTICE: Mixed mode ON]
-All vehicles are occcupied.
-[Helicopter H1] occupied until 953.876
-[Helicopter H2] occupied until 969.233
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 988.112
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 950.352
-->>>>Next available vehicle is A4 in 950.352 (15:50:21)
-Waiting time in minutes is 527.327.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 885.73
+[Helicopter H2] occupied until 878.629
+[Ambulance A1] occupied until 879.37
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 872.158
+->>>>Next available vehicle is A4 in 872.158 (14:32:9)
+Waiting time in minutes is 449.133.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 42050 -> 100001 = 30.5187 and with takeoff/landing: 30.5187
 [Victim->Hospital in ambulance] 42050 -> 100002 = 26.0947 and with takeoff/landing: 26.0947
 [Victim->Hospital in ambulance] 42050 -> 100003 = 37.975 and with takeoff/landing: 37.975
 
-V57    1    2    0.371828    15.04    A4    ROUND 8    MCC2    461 (7:41:0)    950.352 (15:50:21)    988.327 (16:28:19)    1003.37 (16:43:22)    1029.46 (17:9:27)    
+V39    1    2    0.371828    15.04    A4    ROUND 7    MCC2    461 (7:41:0)    872.158 (14:32:9)    910.133 (15:10:7)    925.173 (15:25:10)    951.268 (15:51:16)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 953.876
-[Helicopter H2] occupied until 969.233
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 988.112
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 1029.46
-->>>>Next available vehicle is H1 in 953.876 (15:53:52)
-Waiting time in minutes is 494.426.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 885.73
+[Helicopter H2] occupied until 878.629
+[Ambulance A1] occupied until 879.37
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is H2 in 878.629 (14:38:37)
+Waiting time in minutes is 419.179.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
+[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V40    1    2    0.371828    15.04    H2    ROUND 11    MCC2    461 (7:41:0)    878.629 (14:38:37)    880.179 (14:40:10)    895.219 (14:55:13)    903.912 (15:3:54)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 885.73
+[Helicopter H2] occupied until 903.912
+[Ambulance A1] occupied until 879.37
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is A1 in 879.37 (14:39:22)
+Waiting time in minutes is 443.277.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 40040 -> 100001 = 24.9075 and with takeoff/landing: 24.9075
+[Victim->Hospital in ambulance] 40040 -> 100002 = 18.4053 and with takeoff/landing: 18.4053
+[Victim->Hospital in ambulance] 40040 -> 100003 = 32.3638 and with takeoff/landing: 32.3638
+
+V41    1    2    0.371828    15.04    A1    ROUND 7    MCC2    461 (7:41:0)    879.37 (14:39:22)    904.277 (15:4:16)    919.317 (15:19:19)    937.723 (15:37:43)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 885.73
+[Helicopter H2] occupied until 903.912
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is H1 in 885.73 (14:45:43)
+Waiting time in minutes is 427.3.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 24010 -> 100001 = 0.55 and with takeoff/landing: 2.05
+[Victim->Hospital in helicopter] 24010 -> 100002 = 0.22 and with takeoff/landing: 1.72
+[Victim->Hospital in helicopter] 24010 -> 100003 = 1 and with takeoff/landing: 2.5
+
+V42    1    1    0.371828    14.98    H1    ROUND 11    MCC2    461 (7:41:0)    885.73 (14:45:43)    888.3 (14:48:17)    903.28 (15:3:16)    909.55 (15:9:32)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 909.55
+[Helicopter H2] occupied until 903.912
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is H2 in 903.912 (15:3:54)
+Waiting time in minutes is 444.462.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
+[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V43    1    1    0.371828    14.98    H2    ROUND 12    MCC2    461 (7:41:0)    903.912 (15:3:54)    905.462 (15:5:27)    920.442 (15:20:26)    929.135 (15:29:8)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 909.55
+[Helicopter H2] occupied until 929.135
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is H1 in 909.55 (15:9:32)
+Waiting time in minutes is 450.14.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 41050 -> 100001 = 2.1 and with takeoff/landing: 3.6
+[Victim->Hospital in helicopter] 41050 -> 100002 = 1.46 and with takeoff/landing: 2.96
+[Victim->Hospital in helicopter] 41050 -> 100003 = 2.57 and with takeoff/landing: 4.07
+
+V44    1    2    0.371828    15.04    H1    ROUND 12    MCC2    461 (7:41:0)    909.55 (15:9:32)    911.14 (15:11:8)    926.18 (15:26:10)    935.723 (15:35:43)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 935.723
+[Helicopter H2] occupied until 929.135
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 921.421
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is A2 in 921.421 (15:21:25)
+Waiting time in minutes is 482.107.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
+[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
+[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+
+V45    1    2    0.371828    15.04    A2    ROUND 7    MCC2    461 (7:41:0)    921.421 (15:21:25)    943.107 (15:43:6)    958.147 (15:58:8)    973.075 (16:13:4)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 935.723
+[Helicopter H2] occupied until 929.135
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 924.228
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is A3 in 924.228 (15:24:13)
+Waiting time in minutes is 484.913.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
+[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
+[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+
+V46    1    2    0.371828    15.04    A3    ROUND 7    MCC2    461 (7:41:0)    924.228 (15:24:13)    945.913 (15:45:54)    960.953 (16:0:57)    975.881 (16:15:52)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 935.723
+[Helicopter H2] occupied until 929.135
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is H2 in 929.135 (15:29:8)
+Waiting time in minutes is 469.705.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 36010 -> 100001 = 1.64 and with takeoff/landing: 3.14
+[Victim->Hospital in helicopter] 36010 -> 100002 = 1 and with takeoff/landing: 2.5
+[Victim->Hospital in helicopter] 36010 -> 100003 = 2.16 and with takeoff/landing: 3.66
+
+V47    1    1    0.371828    14.98    H2    ROUND 13    MCC2    461 (7:41:0)    929.135 (15:29:8)    930.705 (15:30:42)    945.685 (15:45:41)    952.098 (15:52:5)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 935.723
+[Helicopter H2] occupied until 952.098
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is H1 in 935.723 (15:35:43)
+Waiting time in minutes is 476.583.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 45020 -> 100001 = 3 and with takeoff/landing: 4.5
+[Victim->Hospital in helicopter] 45020 -> 100002 = 2.37 and with takeoff/landing: 3.87
+[Victim->Hospital in helicopter] 45020 -> 100003 = 3.43 and with takeoff/landing: 4.93
+
+V48    1    2    0.371828    15.04    H1    ROUND 13    MCC2    461 (7:41:0)    935.723 (15:35:43)    937.583 (15:37:34)    952.623 (15:52:37)    961.838 (16:1:50)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 961.838
+[Helicopter H2] occupied until 952.098
+[Ambulance A1] occupied until 937.723
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is A1 in 937.723 (15:37:43)
+Waiting time in minutes is 486.315.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 10010 -> 100001 = 9.59246 and with takeoff/landing: 9.59246
+[Victim->Hospital in ambulance] 10010 -> 100002 = 20.5391 and with takeoff/landing: 20.5391
+[Victim->Hospital in ambulance] 10010 -> 100003 = 3.1917 and with takeoff/landing: 3.1917
+
+V49    1    2    0.371828    15.04    A1    ROUND 8    MCC3    461 (7:41:0)    937.723 (15:37:43)    947.315 (15:47:18)    962.355 (16:2:21)    965.547 (16:5:32)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 961.838
+[Helicopter H2] occupied until 952.098
+[Ambulance A1] occupied until 965.547
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 951.268
+->>>>Next available vehicle is A4 in 951.268 (15:51:16)
+Waiting time in minutes is 504.909.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 16020 -> 100001 = 4.51866 and with takeoff/landing: 4.51866
+[Victim->Hospital in ambulance] 16020 -> 100002 = 7.53911 and with takeoff/landing: 7.53911
+[Victim->Hospital in ambulance] 16020 -> 100003 = 14.6416 and with takeoff/landing: 14.6416
+
+V50    1    2    0.371828    15.04    A4    ROUND 8    MCC1    461 (7:41:0)    951.268 (15:51:16)    965.909 (16:5:54)    980.949 (16:20:56)    985.468 (16:25:28)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 961.838
+[Helicopter H2] occupied until 952.098
+[Ambulance A1] occupied until 965.547
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 985.468
+->>>>Next available vehicle is H2 in 952.098 (15:52:5)
+Waiting time in minutes is 493.078.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 38030 -> 100001 = 1.88 and with takeoff/landing: 3.38
+[Victim->Hospital in helicopter] 38030 -> 100002 = 1.27 and with takeoff/landing: 2.77
+[Victim->Hospital in helicopter] 38030 -> 100003 = 2.29 and with takeoff/landing: 3.79
+
+V51    1    2    0.371828    15.04    H2    ROUND 14    MCC2    461 (7:41:0)    952.098 (15:52:5)    954.078 (15:54:4)    969.118 (16:9:7)    976.463 (16:16:27)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 961.838
+[Helicopter H2] occupied until 976.463
+[Ambulance A1] occupied until 965.547
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 985.468
+->>>>Next available vehicle is H1 in 961.838 (16:1:50)
+Waiting time in minutes is 502.388.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
+[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V52    1    2    0.371828    15.04    H1    ROUND 14    MCC2    461 (7:41:0)    961.838 (16:1:50)    963.388 (16:3:23)    978.428 (16:18:25)    987.121 (16:27:7)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 987.121
+[Helicopter H2] occupied until 976.463
+[Ambulance A1] occupied until 965.547
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 985.468
+->>>>Next available vehicle is A1 in 965.547 (16:5:32)
+Waiting time in minutes is 530.288.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 40030 -> 100001 = 25.7409 and with takeoff/landing: 25.7409
+[Victim->Hospital in ambulance] 40030 -> 100002 = 19.2387 and with takeoff/landing: 19.2387
+[Victim->Hospital in ambulance] 40030 -> 100003 = 33.1972 and with takeoff/landing: 33.1972
+
+V53    1    2    0.371828    15.04    A1    ROUND 9    MCC2    461 (7:41:0)    965.547 (16:5:32)    991.288 (16:31:17)    1006.33 (16:46:19)    1025.57 (17:5:33)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 987.121
+[Helicopter H2] occupied until 976.463
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 973.075
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 985.468
+->>>>Next available vehicle is A2 in 973.075 (16:13:4)
+Waiting time in minutes is 533.76.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
+[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
+[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+
+V54    1    1    0.371828    14.98    A2    ROUND 8    MCC2    461 (7:41:0)    973.075 (16:13:4)    994.76 (16:34:45)    1009.74 (16:49:44)    1024.67 (17:4:40)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 987.121
+[Helicopter H2] occupied until 976.463
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 975.881
+[Ambulance A4] occupied until 985.468
+->>>>Next available vehicle is A3 in 975.881 (16:15:52)
+Waiting time in minutes is 536.567.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 36010 -> 100001 = 21.6853 and with takeoff/landing: 21.6853
+[Victim->Hospital in ambulance] 36010 -> 100002 = 14.928 and with takeoff/landing: 14.928
+[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+
+V55    1    3    0.371828    9.3    A3    ROUND 8    MCC2    461 (7:41:0)    975.881 (16:15:52)    997.567 (16:37:33)    1006.87 (16:46:51)    1021.79 (17:1:47)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 987.121
+[Helicopter H2] occupied until 976.463
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 1021.79
+[Ambulance A4] occupied until 985.468
+->>>>Next available vehicle is H2 in 976.463 (16:16:27)
+Waiting time in minutes is 517.013.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
+[Victim->Hospital in helicopter] 42050 -> 100002 = 1.99 and with takeoff/landing: 3.49
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V56    1    2    0.371828    15.04    H2    ROUND 15    MCC2    461 (7:41:0)    976.463 (16:16:27)    978.013 (16:18:0)    993.053 (16:33:3)    1001.75 (16:41:44)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 987.121
+[Helicopter H2] occupied until 1001.75
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 1021.79
+[Ambulance A4] occupied until 985.468
+->>>>Next available vehicle is A4 in 985.468 (16:25:28)
+Waiting time in minutes is 562.443.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 42050 -> 100001 = 30.5187 and with takeoff/landing: 30.5187
+[Victim->Hospital in ambulance] 42050 -> 100002 = 26.0947 and with takeoff/landing: 26.0947
+[Victim->Hospital in ambulance] 42050 -> 100003 = 37.975 and with takeoff/landing: 37.975
+
+V57    1    2    0.371828    15.04    A4    ROUND 9    MCC2    461 (7:41:0)    985.468 (16:25:28)    1023.44 (17:3:26)    1038.48 (17:18:28)    1064.58 (17:44:34)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 987.121
+[Helicopter H2] occupied until 1001.75
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 1021.79
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is H1 in 987.121 (16:27:7)
+Waiting time in minutes is 527.671.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 42060 -> 100001 = 2.63 and with takeoff/landing: 4.13
 [Victim->Hospital in helicopter] 42060 -> 100002 = 1.99 and with takeoff/landing: 3.49
 [Victim->Hospital in helicopter] 42060 -> 100003 = 3.1 and with takeoff/landing: 4.6
 
-V58    1    2    0.371828    15.04    H1    ROUND 16    MCC2    461 (7:41:0)    953.876 (15:53:52)    955.426 (15:55:25)    970.466 (16:10:27)    973.956 (16:13:57)    
+V58    1    2    0.371828    15.04    H1    ROUND 15    MCC2    461 (7:41:0)    987.121 (16:27:7)    988.671 (16:28:40)    1003.71 (16:43:42)    1009.83 (16:49:50)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 973.956
-[Helicopter H2] occupied until 969.233
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 988.112
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 1029.46
-->>>>Next available vehicle is H2 in 969.233 (16:9:13)
-Waiting time in minutes is 510.113.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 1009.83
+[Helicopter H2] occupied until 1001.75
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 1021.79
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is H2 in 1001.75 (16:41:44)
+Waiting time in minutes is 542.627.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 40040 -> 100001 = 2.1 and with takeoff/landing: 3.6
 [Victim->Hospital in helicopter] 40040 -> 100003 = 2.51 and with takeoff/landing: 4.01
 
-V59    1    2    0.371828    15.04    H2    ROUND 17    MCC1    461 (7:41:0)    969.233 (16:9:13)    971.113 (16:11:6)    986.153 (16:26:9)    989.753 (16:29:45)    
+V59    1    2    0.371828    15.04    H2    ROUND 16    MCC1    461 (7:41:0)    1001.75 (16:41:44)    1003.63 (16:43:37)    1018.67 (16:58:39)    1028.15 (17:8:9)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 973.956
-[Helicopter H2] occupied until 989.753
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 988.112
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 1029.46
-->>>>Next available vehicle is H1 in 973.956 (16:13:57)
-Waiting time in minutes is 514.596.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 1009.83
+[Helicopter H2] occupied until 1028.15
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 1021.79
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is H1 in 1009.83 (16:49:50)
+Waiting time in minutes is 550.474.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in helicopter] 41030 -> 100001 = 2.19 and with takeoff/landing: 3.69
 [Victim->Hospital in helicopter] 41030 -> 100003 = 2.65 and with takeoff/landing: 4.15
 
-V60    1    2    0.371828    15.04    H1    ROUND 17    MCC1    461 (7:41:0)    973.956 (16:13:57)    975.596 (16:15:35)    990.636 (16:30:38)    994.326 (16:34:19)    
+V60    1    2    0.371828    15.04    H1    ROUND 16    MCC1    461 (7:41:0)    1009.83 (16:49:50)    1011.47 (16:51:28)    1026.51 (17:6:30)    1033.85 (17:13:50)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 994.326
-[Helicopter H2] occupied until 989.753
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 988.112
-[Ambulance A3] occupied until 984.774
-[Ambulance A4] occupied until 1029.46
-->>>>Next available vehicle is A3 in 984.774 (16:24:46)
-Waiting time in minutes is 547.793.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 1033.85
+[Helicopter H2] occupied until 1028.15
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 1021.79
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is A3 in 1021.79 (17:1:47)
+Waiting time in minutes is 584.813.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 36020 -> 100001 = 24.0187 and with takeoff/landing: 24.0187
 [Victim->Hospital in ambulance] 36020 -> 100003 = 31.475 and with takeoff/landing: 31.475
 
-V61    1    2    0.371828    15.04    A3    ROUND 8    MCC1    461 (7:41:0)    984.774 (16:24:46)    1008.79 (16:48:47)    1023.83 (17:3:49)    1047.85 (17:27:51)    
+V61    1    2    0.371828    15.04    A3    ROUND 9    MCC1    461 (7:41:0)    1021.79 (17:1:47)    1045.81 (17:25:48)    1060.85 (17:40:51)    1084.87 (18:4:52)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 994.326
-[Helicopter H2] occupied until 989.753
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 988.112
-[Ambulance A3] occupied until 1047.85
-[Ambulance A4] occupied until 1029.46
-->>>>Next available vehicle is A2 in 988.112 (16:28:6)
-Waiting time in minutes is 552.853.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 1033.85
+[Helicopter H2] occupied until 1028.15
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1024.67
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is A2 in 1024.67 (17:4:40)
+Waiting time in minutes is 589.409.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
 [Victim->Hospital in ambulance] 37020 -> 100001 = 25.7409 and with takeoff/landing: 25.7409
 [Victim->Hospital in ambulance] 37020 -> 100003 = 32.0806 and with takeoff/landing: 32.0806
 
-V62    1    1    0.371828    14.98    A2    ROUND 9    MCC1    461 (7:41:0)    988.112 (16:28:6)    1013.85 (16:53:51)    1028.83 (17:8:49)    1054.57 (17:34:34)    
+V62    1    1    0.371828    14.98    A2    ROUND 9    MCC1    461 (7:41:0)    1024.67 (17:4:40)    1050.41 (17:30:24)    1065.39 (17:45:23)    1091.13 (18:11:7)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 994.326
-[Helicopter H2] occupied until 989.753
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 1054.57
-[Ambulance A3] occupied until 1047.85
-[Ambulance A4] occupied until 1029.46
-->>>>Next available vehicle is H2 in 989.753 (16:29:45)
-Waiting time in minutes is 530.553.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 1033.85
+[Helicopter H2] occupied until 1028.15
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is A1 in 1025.57 (17:5:33)
+Waiting time in minutes is 590.307.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in helicopter] 37020 -> 100001 = 1.76 and with takeoff/landing: 3.26
-[Victim->Hospital in helicopter] 37020 -> 100003 = 2.21 and with takeoff/landing: 3.71
+[Victim->Hospital in ambulance] 37020 -> 100001 = 25.7409 and with takeoff/landing: 25.7409
+[Victim->Hospital in ambulance] 37020 -> 100003 = 32.0806 and with takeoff/landing: 32.0806
 
-V63    1    2    0.371828    15.04    H2    ROUND 18    MCC1    461 (7:41:0)    989.753 (16:29:45)    991.553 (16:31:33)    1006.59 (16:46:35)    1009.85 (16:49:51)    
+V63    1    2    0.371828    15.04    A1    ROUND 10    MCC1    461 (7:41:0)    1025.57 (17:5:33)    1051.31 (17:31:18)    1066.35 (17:46:20)    1092.09 (18:12:5)    
 
 
 Searching for closest vehicle to pick up the casualty...
 [NOTICE: Mixed mode ON]
 All vehicles are occcupied.
-[Helicopter H1] occupied until 994.326
-[Helicopter H2] occupied until 1009.85
-[Ambulance A1] occupied until 993.22
-[Ambulance A2] occupied until 1054.57
-[Ambulance A3] occupied until 1047.85
-[Ambulance A4] occupied until 1029.46
-->>>>Next available vehicle is A1 in 993.22 (16:33:13)
-Waiting time in minutes is 542.905.OK NO CHANGE NEEDED
+[Helicopter H1] occupied until 1033.85
+[Helicopter H2] occupied until 1028.15
+[Ambulance A1] occupied until 1092.09
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is H2 in 1028.15 (17:8:9)
+Waiting time in minutes is 569.723.OK NO CHANGE NEEDED
 Searching for closest hospital with beds...
-[Victim->Hospital in ambulance] 24090 -> 100001 = 10.6853 and with takeoff/landing: 10.6853
-[Victim->Hospital in ambulance] 24090 -> 100003 = 21.9139 and with takeoff/landing: 21.9139
+[Victim->Hospital in helicopter] 24090 -> 100001 = 0.55 and with takeoff/landing: 2.05
+[Victim->Hospital in helicopter] 24090 -> 100003 = 1 and with takeoff/landing: 2.5
 
-V64    1    2    0.371828    15.04    A1    ROUND 10    MCC1    461 (7:41:0)    993.22 (16:33:13)    1003.91 (16:43:54)    1018.95 (16:58:56)    1029.63 (17:9:37)    
+V64    1    2    0.371828    15.04    H2    ROUND 17    MCC1    461 (7:41:0)    1028.15 (17:8:9)    1030.72 (17:10:43)    1045.76 (17:25:45)    1050.89 (17:30:53)    
 
 Terminated greedy routes. Entering in Metaheuristic
 Trying for victim 1
-TOI HACIENDO VICTIMA 1
-TOI HACIENDO VICTIMA 1
-TOI HACIENDO VICTIMA 2
-TOI HACIENDO VICTIMA 3
-TOI HACIENDO VICTIMA 4
-TOI HACIENDO VICTIMA 5
-TOI HACIENDO VICTIMA 6
-TOI HACIENDO VICTIMA 7
-TOI HACIENDO VICTIMA 8
-TOI HACIENDO VICTIMA 9
-TOI HACIENDO VICTIMA 10
-TOI HACIENDO VICTIMA 11
-TOI HACIENDO VICTIMA 12
-TOI HACIENDO VICTIMA 13
-TOI HACIENDO VICTIMA 14
-TOI HACIENDO VICTIMA 15
-TOI HACIENDO VICTIMA 16
-TOI HACIENDO VICTIMA 17
-TOI HACIENDO VICTIMA 18
-TOI HACIENDO VICTIMA 19
-TOI HACIENDO VICTIMA 20
-TOI HACIENDO VICTIMA 21
-TOI HACIENDO VICTIMA 22
-TOI HACIENDO VICTIMA 23
-TOI HACIENDO VICTIMA 24
-TOI HACIENDO VICTIMA 25
-TOI HACIENDO VICTIMA 26
-TOI HACIENDO VICTIMA 27
-TOI HACIENDO VICTIMA 28
-TOI HACIENDO VICTIMA 29
-TOI HACIENDO VICTIMA 30
-TOI HACIENDO VICTIMA 31
-TOI HACIENDO VICTIMA 32
-TOI HACIENDO VICTIMA 33
-TOI HACIENDO VICTIMA 34
-TOI HACIENDO VICTIMA 35
-TOI HACIENDO VICTIMA 36
-TOI HACIENDO VICTIMA 37
-TOI HACIENDO VICTIMA 38
-TOI HACIENDO VICTIMA 39
-TOI HACIENDO VICTIMA 40
-TOI HACIENDO VICTIMA 41
-TOI HACIENDO VICTIMA 42
-TOI HACIENDO VICTIMA 43
-TOI HACIENDO VICTIMA 44
-TOI HACIENDO VICTIMA 45
-TOI HACIENDO VICTIMA 46
-TOI HACIENDO VICTIMA 47
-TOI HACIENDO VICTIMA 48
-TOI HACIENDO VICTIMA 49
-TOI HACIENDO VICTIMA 50
-TOI HACIENDO VICTIMA 51
-TOI HACIENDO VICTIMA 52
-TOI HACIENDO VICTIMA 53
-TOI HACIENDO VICTIMA 54
-TOI HACIENDO VICTIMA 55
-TOI HACIENDO VICTIMA 56
-TOI HACIENDO VICTIMA 57
-TOI HACIENDO VICTIMA 58
-TOI HACIENDO VICTIMA 59
-TOI HACIENDO VICTIMA 60
-TOI HACIENDO VICTIMA 61
-TOI HACIENDO VICTIMA 62
-TOI HACIENDO VICTIMA 63
-Eligible for reasignment. Current solution quality: 15100
-Choosing ambulance A 5with min_av= 33960 cl= 0 of priority 27172.2
-cout c=1
-prevg 3
+Eligible for reasignment. Current solution quality: 15653.6
+Choosing ambulance A5 with min_av= 33960 cl= 0 of priority 27172.2
 Deassigning casualty. Before: 
-V1    3    1    5    93.3    H2    ROUND 18    MCC1    461 (7:41:0)    493.463 (8:13:27)    586.763 (9:46:45)    590.363 (9:50:21)    
+V1    3    1    5.10496    93.3    H2    ROUND 17    MCC1    461 (7:41:0)    488.463 (8:8:27)    581.763 (9:41:45)    587.725 (9:47:43)    
 After: 
-CHAO
+V1    3    1    -1    93.3    H-1    ROUND -1    MCC-1    461 (7:41:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V2    3    3    5.10496    65    H1    ROUND 16    MCC1    461 (7:41:0)    483.296 (8:3:17)    548.296 (9:8:17)    556.717 (9:16:43)    
+After: 
+V2    3    3    -1    65    H-1    ROUND -1    MCC-1    461 (7:41:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V3    3    2    5.10496    62.14    H1    ROUND 10    MCC1    461 (7:41:0)    490.185 (8:10:11)    552.325 (9:12:19)    581.511 (9:41:30)    
+After: 
+V3    3    2    -1    62.14    H-1    ROUND -1    MCC-1    461 (7:41:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V4    3    2    5.10496    62.14    H2    ROUND 9    MCC1    461 (7:41:0)    490.185 (8:10:11)    552.325 (9:12:19)    581.511 (9:41:30)    
+After: 
+V4    3    2    -1    62.14    H-1    ROUND -1    MCC-1    461 (7:41:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V5    3    2    5.10496    62.14    H3    ROUND 9    MCC1    461 (7:41:0)    485.074 (8:5:4)    547.214 (9:7:12)    571.288 (9:31:17)    
+After: 
+V5    3    2    -1    62.14    H-1    ROUND -1    MCC-1    461 (7:41:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V6    2    2    0.895303    29.9    H4    ROUND 9    MCC2    461 (7:41:0)    493.636 (8:13:38)    523.536 (8:43:32)    544.497 (9:4:29)    
+After: 
+V6    2    2    -1    29.9    H-1    ROUND -1    MCC-1    461 (7:41:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V7    2    1    0.895303    42    H4    ROUND 8    MCC2    544.497 (9:4:29)    577.133 (9:37:7)    619.133 (10:19:7)    640.094 (10:40:5)    
+After: 
+V7    2    1    -1    42    H-1    ROUND -1    MCC-1    544.497 (9:4:29)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V8    2    1    0.895303    42    H1    ROUND 15    MCC2    556.717 (9:16:43)    558.217 (9:18:13)    600.217 (10:0:13)    605.453 (10:5:27)    
+After: 
+V8    2    1    -1    42    H-1    ROUND -1    MCC-1    556.717 (9:16:43)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V9    2    2    0.895303    29.9    H3    ROUND 8    MCC2    571.288 (9:31:17)    593.918 (9:53:55)    623.818 (10:23:49)    642.024 (10:42:1)    
+After: 
+V9    2    2    -1    29.9    H-1    ROUND -1    MCC-1    571.288 (9:31:17)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V10    2    2    0.895303    29.9    H1    ROUND 9    MCC2    581.511 (9:41:30)    609.14 (10:9:8)    639.04 (10:39:2)    660.168 (11:0:10)    
+After: 
+V10    2    2    -1    29.9    H-1    ROUND -1    MCC-1    581.511 (9:41:30)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V11    2    2    0.895303    29.9    H2    ROUND 8    MCC2    581.511 (9:41:30)    606.418 (10:6:25)    636.318 (10:36:19)    656.802 (10:56:48)    
+After: 
+V11    2    2    -1    29.9    H-1    ROUND -1    MCC-1    581.511 (9:41:30)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V12    2    2    0.895303    29.9    H2    ROUND 16    MCC2    587.725 (9:47:43)    589.525 (9:49:31)    619.425 (10:19:25)    625.366 (10:25:21)    
+After: 
+V12    2    2    -1    29.9    H-1    ROUND -1    MCC-1    587.725 (9:47:43)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V13    2    1    0.895303    42    H1    ROUND 16    MCC2    605.453 (10:5:27)    607.003 (10:7:0)    649.003 (10:49:0)    657.696 (10:57:41)    
+After: 
+V13    2    1    -1    42    H-1    ROUND -1    MCC-1    605.453 (10:5:27)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V14    2    3    0.895303    27.6    H2    ROUND 17    MCC2    625.366 (10:25:21)    626.936 (10:26:56)    654.536 (10:54:32)    660.948 (11:0:56)    
+After: 
+V14    2    3    -1    27.6    H-1    ROUND -1    MCC-1    625.366 (10:25:21)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V15    2    2    0.895303    29.9    H4    ROUND 9    MCC2    640.094 (10:40:5)    678.125 (11:18:7)    708.025 (11:48:1)    734.175 (12:14:10)    
+After: 
+V15    2    2    -1    29.9    H-1    ROUND -1    MCC-1    640.094 (10:40:5)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V16    2    2    0.895303    29.9    H3    ROUND 9    MCC2    642.024 (10:42:1)    672.598 (11:12:35)    702.498 (11:42:29)    728.648 (12:8:38)    
+After: 
+V16    2    2    -1    29.9    H-1    ROUND -1    MCC-1    642.024 (10:42:1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V17    2    2    0.895303    29.9    H2    ROUND 9    MCC2    656.802 (10:56:48)    679.432 (11:19:25)    709.332 (11:49:19)    727.537 (12:7:32)    
+After: 
+V17    2    2    -1    29.9    H-1    ROUND -1    MCC-1    656.802 (10:56:48)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V18    2    2    0.895303    29.9    H1    ROUND 15    MCC2    657.696 (10:57:41)    659.286 (10:59:17)    689.186 (11:29:11)    698.729 (11:38:43)    
+After: 
+V18    2    2    -1    29.9    H-1    ROUND -1    MCC-1    657.696 (10:57:41)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V19    2    2    0.895303    29.9    H1    ROUND 10    MCC2    660.168 (11:0:10)    686.631 (11:26:37)    716.531 (11:56:31)    738.57 (12:18:34)    
+After: 
+V19    2    2    -1    29.9    H-1    ROUND -1    MCC-1    660.168 (11:0:10)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V20    2    2    0.895303    29.9    H2    ROUND 16    MCC2    660.948 (11:0:56)    662.518 (11:2:31)    692.418 (11:32:25)    698.83 (11:38:49)    
+After: 
+V20    2    2    -1    29.9    H-1    ROUND -1    MCC-1    660.948 (11:0:56)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V21    2    1    0.895303    42    H1    ROUND 16    MCC2    698.729 (11:38:43)    700.229 (11:40:13)    742.229 (12:22:13)    749.964 (12:29:57)    
+After: 
+V21    2    1    -1    42    H-1    ROUND -1    MCC-1    698.729 (11:38:43)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V22    2    1    0.895303    42    H2    ROUND 17    MCC2    698.83 (11:38:49)    701.08 (11:41:4)    743.08 (12:23:4)    752.279 (12:32:16)    
+After: 
+V22    2    1    -1    42    H-1    ROUND -1    MCC-1    698.83 (11:38:49)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V23    2    2    0.895303    29.9    H2    ROUND 8    MCC2    727.537 (12:7:32)    755.056 (12:35:3)    784.956 (13:4:57)    808.051 (13:28:3)    
+After: 
+V23    2    2    -1    29.9    H-1    ROUND -1    MCC-1    727.537 (12:7:32)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V24    2    2    0.895303    29.9    H3    ROUND 8    MCC2    728.648 (12:8:38)    755.111 (12:35:6)    785.011 (13:5:0)    807.051 (13:27:3)    
+After: 
+V24    2    2    -1    29.9    H-1    ROUND -1    MCC-1    728.648 (12:8:38)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V25    2    2    0.895303    29.9    H4    ROUND 8    MCC2    734.175 (12:14:10)    764.928 (12:44:55)    794.828 (13:14:49)    813.7 (13:33:42)    
+After: 
+V25    2    2    -1    29.9    H-1    ROUND -1    MCC-1    734.175 (12:14:10)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V26    2    1    0.895303    42    H1    ROUND 9    MCC2    738.57 (12:18:34)    762.589 (12:42:35)    804.589 (13:24:35)    822.628 (13:42:37)    
+After: 
+V26    2    1    -1    42    H-1    ROUND -1    MCC-1    738.57 (12:18:34)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V27    2    2    0.895303    29.9    H1    ROUND 15    MCC1    749.964 (12:29:57)    751.514 (12:31:30)    781.414 (13:1:24)    790.747 (13:10:44)    
+After: 
+V27    2    2    -1    29.9    H-1    ROUND -1    MCC-1    749.964 (12:29:57)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V28    2    2    0.895303    29.9    H2    ROUND 16    MCC1    752.279 (12:32:16)    753.809 (12:33:48)    783.709 (13:3:42)    790.88 (13:10:52)    
+After: 
+V28    2    2    -1    29.9    H-1    ROUND -1    MCC-1    752.279 (12:32:16)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V29    2    2    0.895303    29.9    H1    ROUND 16    MCC1    790.747 (13:10:44)    793.397 (13:13:23)    823.297 (13:43:17)    838.255 (13:58:15)    
+After: 
+V29    2    2    -1    29.9    H-1    ROUND -1    MCC-1    790.747 (13:10:44)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V30    2    2    0.895303    29.9    H2    ROUND 17    MCC1    790.88 (13:10:52)    792.38 (13:12:22)    822.28 (13:42:16)    829.863 (13:49:51)    
+After: 
+V30    2    2    -1    29.9    H-1    ROUND -1    MCC-1    790.88 (13:10:52)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V31    3    2    0.895303    62.14    H3    ROUND 9    MCC1    807.051 (13:27:3)    834.569 (13:54:34)    896.709 (14:56:42)    924.228 (15:24:13)    
+After: 
+V31    2    2    -1    29.9    H-1    ROUND -1    MCC-1    807.051 (13:27:3)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V32    3    3    0.895303    65    H2    ROUND 9    MCC1    808.051 (13:28:3)    832.236 (13:52:14)    897.236 (14:57:14)    921.421 (15:21:25)    
+After: 
+V32    2    3    -1    27.6    H-1    ROUND -1    MCC-1    808.051 (13:28:3)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V33    1    3    0.371828    9.3    H4    ROUND 9    MCC2    813.7 (13:33:42)    845.953 (14:5:57)    855.253 (14:15:15)    872.158 (14:32:9)    
+After: 
+V33    1    3    -1    9.3    H-1    ROUND -1    MCC-1    813.7 (13:33:42)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V34    1    2    0.371828    15.04    H1    ROUND 10    MCC2    822.628 (13:42:37)    847.424 (14:7:25)    862.464 (14:22:27)    879.37 (14:39:22)    
+After: 
+V34    1    2    -1    15.04    H-1    ROUND -1    MCC-1    822.628 (13:42:37)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V35    1    2    0.371828    15.04    H2    ROUND 16    MCC2    829.863 (13:49:51)    831.363 (13:51:21)    846.403 (14:6:24)    853.346 (14:13:20)    
+After: 
+V35    1    2    -1    15.04    H-1    ROUND -1    MCC-1    829.863 (13:49:51)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V36    1    1    0.371828    14.98    H1    ROUND 15    MCC2    838.255 (13:58:15)    840.135 (14:0:8)    855.115 (14:15:6)    860.447 (14:20:26)    
+After: 
+V36    1    1    -1    14.98    H-1    ROUND -1    MCC-1    838.255 (13:58:15)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V37    1    2    0.371828    15.04    H2    ROUND 17    MCC2    853.346 (14:13:20)    854.896 (14:14:53)    869.936 (14:29:56)    878.629 (14:38:37)    
+After: 
+V37    1    2    -1    15.04    H-1    ROUND -1    MCC-1    853.346 (14:13:20)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V38    1    2    0.371828    15.04    H1    ROUND 16    MCC2    860.447 (14:20:26)    861.997 (14:21:59)    877.037 (14:37:2)    885.73 (14:45:43)    
+After: 
+V38    1    2    -1    15.04    H-1    ROUND -1    MCC-1    860.447 (14:20:26)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V39    1    2    0.371828    15.04    H4    ROUND 8    MCC2    872.158 (14:32:9)    910.133 (15:10:7)    925.173 (15:25:10)    951.268 (15:51:16)    
+After: 
+V39    1    2    -1    15.04    H-1    ROUND -1    MCC-1    872.158 (14:32:9)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V40    1    2    0.371828    15.04    H2    ROUND 16    MCC2    878.629 (14:38:37)    880.179 (14:40:10)    895.219 (14:55:13)    903.912 (15:3:54)    
+After: 
+V40    1    2    -1    15.04    H-1    ROUND -1    MCC-1    878.629 (14:38:37)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V41    1    2    0.371828    15.04    H1    ROUND 9    MCC2    879.37 (14:39:22)    904.277 (15:4:16)    919.317 (15:19:19)    937.723 (15:37:43)    
+After: 
+V41    1    2    -1    15.04    H-1    ROUND -1    MCC-1    879.37 (14:39:22)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V42    1    1    0.371828    14.98    H1    ROUND 15    MCC2    885.73 (14:45:43)    888.3 (14:48:17)    903.28 (15:3:16)    909.55 (15:9:32)    
+After: 
+V42    1    1    -1    14.98    H-1    ROUND -1    MCC-1    885.73 (14:45:43)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V43    1    1    0.371828    14.98    H2    ROUND 17    MCC2    903.912 (15:3:54)    905.462 (15:5:27)    920.442 (15:20:26)    929.135 (15:29:8)    
+After: 
+V43    1    1    -1    14.98    H-1    ROUND -1    MCC-1    903.912 (15:3:54)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V44    1    2    0.371828    15.04    H1    ROUND 16    MCC2    909.55 (15:9:32)    911.14 (15:11:8)    926.18 (15:26:10)    935.723 (15:35:43)    
+After: 
+V44    1    2    -1    15.04    H-1    ROUND -1    MCC-1    909.55 (15:9:32)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V45    1    2    0.371828    15.04    H2    ROUND 8    MCC2    921.421 (15:21:25)    943.107 (15:43:6)    958.147 (15:58:8)    973.075 (16:13:4)    
+After: 
+V45    1    2    -1    15.04    H-1    ROUND -1    MCC-1    921.421 (15:21:25)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V46    1    2    0.371828    15.04    H3    ROUND 8    MCC2    924.228 (15:24:13)    945.913 (15:45:54)    960.953 (16:0:57)    975.881 (16:15:52)    
+After: 
+V46    1    2    -1    15.04    H-1    ROUND -1    MCC-1    924.228 (15:24:13)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V47    1    1    0.371828    14.98    H2    ROUND 16    MCC2    929.135 (15:29:8)    930.705 (15:30:42)    945.685 (15:45:41)    952.098 (15:52:5)    
+After: 
+V47    1    1    -1    14.98    H-1    ROUND -1    MCC-1    929.135 (15:29:8)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V48    1    2    0.371828    15.04    H1    ROUND 15    MCC2    935.723 (15:35:43)    937.583 (15:37:34)    952.623 (15:52:37)    961.838 (16:1:50)    
+After: 
+V48    1    2    -1    15.04    H-1    ROUND -1    MCC-1    935.723 (15:35:43)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V49    1    2    0.371828    15.04    H1    ROUND 10    MCC3    937.723 (15:37:43)    947.315 (15:47:18)    962.355 (16:2:21)    965.547 (16:5:32)    
+After: 
+V49    1    2    -1    15.04    H-1    ROUND -1    MCC-1    937.723 (15:37:43)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V50    1    2    0.371828    15.04    H4    ROUND 9    MCC1    951.268 (15:51:16)    965.909 (16:5:54)    980.949 (16:20:56)    985.468 (16:25:28)    
+After: 
+V50    1    2    -1    15.04    H-1    ROUND -1    MCC-1    951.268 (15:51:16)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V51    1    2    0.371828    15.04    H2    ROUND 17    MCC2    952.098 (15:52:5)    954.078 (15:54:4)    969.118 (16:9:7)    976.463 (16:16:27)    
+After: 
+V51    1    2    -1    15.04    H-1    ROUND -1    MCC-1    952.098 (15:52:5)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V52    1    2    0.371828    15.04    H1    ROUND 16    MCC2    961.838 (16:1:50)    963.388 (16:3:23)    978.428 (16:18:25)    987.121 (16:27:7)    
+After: 
+V52    1    2    -1    15.04    H-1    ROUND -1    MCC-1    961.838 (16:1:50)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V53    1    2    0.371828    15.04    H1    ROUND 9    MCC2    965.547 (16:5:32)    991.288 (16:31:17)    1006.33 (16:46:19)    1025.57 (17:5:33)    
+After: 
+V53    1    2    -1    15.04    H-1    ROUND -1    MCC-1    965.547 (16:5:32)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V54    1    1    0.371828    14.98    H2    ROUND 9    MCC2    973.075 (16:13:4)    994.76 (16:34:45)    1009.74 (16:49:44)    1024.67 (17:4:40)    
+After: 
+V54    1    1    -1    14.98    H-1    ROUND -1    MCC-1    973.075 (16:13:4)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V55    1    3    0.371828    9.3    H3    ROUND 9    MCC2    975.881 (16:15:52)    997.567 (16:37:33)    1006.87 (16:46:51)    1021.79 (17:1:47)    
+After: 
+V55    1    3    -1    9.3    H-1    ROUND -1    MCC-1    975.881 (16:15:52)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V56    1    2    0.371828    15.04    H2    ROUND 16    MCC2    976.463 (16:16:27)    978.013 (16:18:0)    993.053 (16:33:3)    1001.75 (16:41:44)    
+After: 
+V56    1    2    -1    15.04    H-1    ROUND -1    MCC-1    976.463 (16:16:27)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V57    1    2    0.371828    15.04    H4    ROUND 8    MCC2    985.468 (16:25:28)    1023.44 (17:3:26)    1038.48 (17:18:28)    1064.58 (17:44:34)    
+After: 
+V57    1    2    -1    15.04    H-1    ROUND -1    MCC-1    985.468 (16:25:28)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V58    1    2    0.371828    15.04    H1    ROUND 15    MCC2    987.121 (16:27:7)    988.671 (16:28:40)    1003.71 (16:43:42)    1009.83 (16:49:50)    
+After: 
+V58    1    2    -1    15.04    H-1    ROUND -1    MCC-1    987.121 (16:27:7)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V59    1    2    0.371828    15.04    H2    ROUND 17    MCC1    1001.75 (16:41:44)    1003.63 (16:43:37)    1018.67 (16:58:39)    1028.15 (17:8:9)    
+After: 
+V59    1    2    -1    15.04    H-1    ROUND -1    MCC-1    1001.75 (16:41:44)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V60    1    2    0.371828    15.04    H1    ROUND 16    MCC1    1009.83 (16:49:50)    1011.47 (16:51:28)    1026.51 (17:6:30)    1033.85 (17:13:50)    
+After: 
+V60    1    2    -1    15.04    H-1    ROUND -1    MCC-1    1009.83 (16:49:50)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V61    1    2    0.371828    15.04    H3    ROUND 8    MCC1    1021.79 (17:1:47)    1045.81 (17:25:48)    1060.85 (17:40:51)    1084.87 (18:4:52)    
+After: 
+V61    1    2    -1    15.04    H-1    ROUND -1    MCC-1    1021.79 (17:1:47)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V62    1    1    0.371828    14.98    H2    ROUND 8    MCC1    1024.67 (17:4:40)    1050.41 (17:30:24)    1065.39 (17:45:23)    1091.13 (18:11:7)    
+After: 
+V62    1    1    -1    14.98    H-1    ROUND -1    MCC-1    1024.67 (17:4:40)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V63    1    2    0.371828    15.04    H1    ROUND 10    MCC1    1025.57 (17:5:33)    1051.31 (17:31:18)    1066.35 (17:46:20)    1092.09 (18:12:5)    
+After: 
+V63    1    2    -1    15.04    H-1    ROUND -1    MCC-1    1025.57 (17:5:33)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V64    1    2    0.371828    15.04    H2    ROUND 16    MCC1    1028.15 (17:8:9)    1030.72 (17:10:43)    1045.76 (17:25:45)    1050.89 (17:30:53)    
+After: 
+V64    1    2    -1    15.04    H-1    ROUND -1    MCC-1    1028.15 (17:8:9)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+
+
+Assigning the new route to the eligible casualty V1. Before:
+V1    3    1    -1    93.3    H-1    ROUND -1    MCC-1    461 (7:41:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+Waiting time in minutes is 126.961.OK NO CHANGE NEEDED[Victim->Hospital in ambulance] 39060 -> 100001 = 27.4631 and with takeoff/landing: 27.4631
+After: 
+V1    3    1    -1    93.3    H5    ROUND 2    MCC1    566 (9:26:0)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+STARTING SLICED GREEDY FROM VICTIM V1, PRIORITY LIST POSITION =0
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1009.83
+[Helicopter H2] occupied until 1050.89
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is H1 in 1009.83 (16:49:50)
+Waiting time in minutes is 550.334.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 41040 -> 100001 = 1.93 and with takeoff/landing: 3.43
+
+V2    3    3    -1    65    H1    ROUND 16    MCC1    461 (7:41:0)    1009.83 (16:49:50)    1011.33 (16:51:20)    1076.33 (17:56:20)    1084.75 (18:4:45)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1084.75
+[Helicopter H2] occupied until 1050.89
+[Ambulance A1] occupied until 1025.57
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is A1 in 1025.57 (17:5:33)
+Waiting time in minutes is 593.752.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 42010 -> 100001 = 29.1853 and with takeoff/landing: 29.1853
+
+V3    3    2    -1    62.14    A1    ROUND 10    MCC1    461 (7:41:0)    1025.57 (17:5:33)    1054.75 (17:34:45)    1116.89 (18:36:53)    1146.08 (19:6:4)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1084.75
+[Helicopter H2] occupied until 1050.89
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is H2 in 1050.89 (17:30:53)
+Waiting time in minutes is 591.421.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42010 -> 100001 = 2.42 and with takeoff/landing: 3.92
+
+V4    3    2    -1    62.14    H2    ROUND 18    MCC1    461 (7:41:0)    1050.89 (17:30:53)    1052.42 (17:32:25)    1114.56 (18:34:33)    1121.73 (18:41:43)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1084.75
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1064.58
+->>>>Next available vehicle is A4 in 1064.58 (17:44:34)
+Waiting time in minutes is 635.108.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 41070 -> 100001 = 24.0742 and with takeoff/landing: 24.0742
+
+V5    3    2    -1    62.14    A4    ROUND 10    MCC1    461 (7:41:0)    1064.58 (17:44:34)    1096.11 (18:16:6)    1158.25 (19:18:14)    1182.32 (19:42:19)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1084.75
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is H1 in 1084.75 (18:4:45)
+Waiting time in minutes is 625.634.V6 deteriorated to GRAVITY 3 AT TIMESTAMP 1086.63 (18:6:38)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 39060 -> 100001 = 2.1 and with takeoff/landing: 3.6
+
+V6    3    2    -1    62.14    H1    ROUND 17    MCC1    461 (7:41:0)    1084.75 (18:4:45)    1086.63 (18:6:38)    1148.77 (19:8:46)    1154.74 (19:14:44)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 651.335.V7 deteriorated to GRAVITY 3 AT TIMESTAMP 1112.34 (18:32:20)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V7 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 646.502.V8 deteriorated to GRAVITY 3 AT TIMESTAMP 1107.5 (18:27:30)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V8 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 646.502.V9 deteriorated to GRAVITY 3 AT TIMESTAMP 1107.5 (18:27:30)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V9 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 651.502.V10 deteriorated to GRAVITY 3 AT TIMESTAMP 1112.5 (18:32:30)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V10 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 648.779.V11 deteriorated to GRAVITY 3 AT TIMESTAMP 1109.78 (18:29:46)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V11 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 650.113.V12 deteriorated to GRAVITY 3 AT TIMESTAMP 1111.11 (18:31:6)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V12 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 654.391.V13 deteriorated to GRAVITY 3 AT TIMESTAMP 1115.39 (18:35:23)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V13 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 645.557.V14 deteriorated to GRAVITY 3 AT TIMESTAMP 1106.56 (18:26:33)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V14 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 654.446.V15 deteriorated to GRAVITY 3 AT TIMESTAMP 1115.45 (18:35:26)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V15 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 654.446.V16 deteriorated to GRAVITY 3 AT TIMESTAMP 1115.45 (18:35:26)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V16 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 646.502.V17 deteriorated to GRAVITY 3 AT TIMESTAMP 1107.5 (18:27:30)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V17 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 648.779.V18 deteriorated to GRAVITY 3 AT TIMESTAMP 1109.78 (18:29:46)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V18 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 650.335.V19 deteriorated to GRAVITY 3 AT TIMESTAMP 1111.34 (18:31:20)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V19 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 645.557.V20 deteriorated to GRAVITY 3 AT TIMESTAMP 1106.56 (18:26:33)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V20 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 648.057.V21 deteriorated to GRAVITY 3 AT TIMESTAMP 1109.06 (18:29:3)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V21 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 664.224.V22 deteriorated to GRAVITY 3 AT TIMESTAMP 1125.22 (18:45:13)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V22 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 651.391.V23 deteriorated to GRAVITY 3 AT TIMESTAMP 1112.39 (18:32:23)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V23 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 650.335.V24 deteriorated to GRAVITY 3 AT TIMESTAMP 1111.34 (18:31:20)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V24 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 647.168.V25 deteriorated to GRAVITY 3 AT TIMESTAMP 1108.17 (18:28:10)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V25 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 647.891.V26 deteriorated to GRAVITY 3 AT TIMESTAMP 1108.89 (18:28:53)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V26 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 654.391.V27 deteriorated to GRAVITY 3 AT TIMESTAMP 1115.39 (18:35:23)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V27 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 653.057.V28 deteriorated to GRAVITY 3 AT TIMESTAMP 1114.06 (18:34:3)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V28 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 632.631.V29 deteriorated to GRAVITY 3 AT TIMESTAMP 1093.63 (18:13:37)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V29 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 647.891.V30 deteriorated to GRAVITY 3 AT TIMESTAMP 1108.89 (18:28:53)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V30 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 651.391.V31 deteriorated to GRAVITY 3 AT TIMESTAMP 1112.39 (18:32:23)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V31 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 648.057.V32 deteriorated to GRAVITY 3 AT TIMESTAMP 1109.06 (18:29:3)    
+IT WAS AN IN-ROUTE GRAVITY CHANGE!
+
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V32 G=3
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1084.87
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1084.87 (18:4:52)
+Waiting time in minutes is 648.668.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 37050 -> 100001 = 24.7964 and with takeoff/landing: 24.7964
+[Victim->Hospital in ambulance] 37050 -> 100003 = 32.2527 and with takeoff/landing: 32.2527
+
+V33    1    3    -1    9.3    A3    ROUND 10    MCC1    461 (7:41:0)    1084.87 (18:4:52)    1109.67 (18:29:40)    1118.97 (18:38:58)    1143.76 (19:3:45)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1091.13
+[Ambulance A3] occupied until 1143.76
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A2 in 1091.13 (18:11:7)
+Waiting time in minutes is 654.926.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 37050 -> 100001 = 24.7964 and with takeoff/landing: 24.7964
+[Victim->Hospital in ambulance] 37050 -> 100003 = 32.2527 and with takeoff/landing: 32.2527
+
+V34    1    2    -1    15.04    A2    ROUND 10    MCC1    461 (7:41:0)    1091.13 (18:11:7)    1115.93 (18:35:55)    1130.97 (18:50:57)    1155.76 (19:15:45)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1121.73
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1155.76
+[Ambulance A3] occupied until 1143.76
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is H2 in 1121.73 (18:41:43)
+Waiting time in minutes is 662.232.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 36020 -> 100001 = 1.93 and with takeoff/landing: 3.43
+[Victim->Hospital in helicopter] 36020 -> 100003 = 2.43 and with takeoff/landing: 3.93
+
+V35    1    2    -1    15.04    H2    ROUND 19    MCC1    461 (7:41:0)    1121.73 (18:41:43)    1123.23 (18:43:13)    1138.27 (18:58:16)    1145.85 (19:5:51)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1145.85
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1155.76
+[Ambulance A3] occupied until 1143.76
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A3 in 1143.76 (19:3:45)
+Waiting time in minutes is 710.228.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 39060 -> 100001 = 27.4631 and with takeoff/landing: 27.4631
+[Victim->Hospital in ambulance] 39060 -> 100003 = 32.6362 and with takeoff/landing: 32.6362
+
+V36    1    1    -1    14.98    A3    ROUND 11    MCC1    461 (7:41:0)    1143.76 (19:3:45)    1171.23 (19:31:13)    1186.21 (19:46:12)    1213.67 (20:13:40)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1145.85
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1155.76
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is H2 in 1145.85 (19:5:51)
+Waiting time in minutes is 686.405.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V37    1    2    -1    15.04    H2    ROUND 20    MCC1    461 (7:41:0)    1145.85 (19:5:51)    1147.4 (19:7:24)    1162.44 (19:22:26)    1171.78 (19:31:46)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1171.78
+[Ambulance A1] occupied until 1146.08
+[Ambulance A2] occupied until 1155.76
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A1 in 1146.08 (19:6:4)
+Waiting time in minutes is 715.596.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 42050 -> 100001 = 30.5187 and with takeoff/landing: 30.5187
+[Victim->Hospital in ambulance] 42050 -> 100003 = 37.975 and with takeoff/landing: 37.975
+
+V38    1    2    -1    15.04    A1    ROUND 11    MCC1    461 (7:41:0)    1146.08 (19:6:4)    1176.6 (19:36:35)    1191.64 (19:51:38)    1222.15 (20:22:9)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1154.74
+[Helicopter H2] occupied until 1171.78
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1155.76
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is H1 in 1154.74 (19:14:44)
+Waiting time in minutes is 695.286.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100001 = 2.63 and with takeoff/landing: 4.13
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V39    1    2    -1    15.04    H1    ROUND 18    MCC1    461 (7:41:0)    1154.74 (19:14:44)    1156.29 (19:16:17)    1171.33 (19:31:19)    1180.66 (19:40:39)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1180.66
+[Helicopter H2] occupied until 1171.78
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1155.76
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A2 in 1155.76 (19:15:45)
+Waiting time in minutes is 725.281.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 42050 -> 100001 = 30.5187 and with takeoff/landing: 30.5187
+[Victim->Hospital in ambulance] 42050 -> 100003 = 37.975 and with takeoff/landing: 37.975
+
+V40    1    2    -1    15.04    A2    ROUND 11    MCC1    461 (7:41:0)    1155.76 (19:15:45)    1186.28 (19:46:16)    1201.32 (20:1:19)    1231.84 (20:31:50)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1180.66
+[Helicopter H2] occupied until 1171.78
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is H2 in 1171.78 (19:31:46)
+Waiting time in minutes is 712.658.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 40040 -> 100001 = 2.1 and with takeoff/landing: 3.6
+[Victim->Hospital in helicopter] 40040 -> 100003 = 2.51 and with takeoff/landing: 4.01
+
+V41    1    2    -1    15.04    H2    ROUND 21    MCC1    461 (7:41:0)    1171.78 (19:31:46)    1173.66 (19:33:39)    1188.7 (19:48:41)    1198.18 (19:58:11)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1180.66
+[Helicopter H2] occupied until 1198.18
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is H1 in 1180.66 (19:40:39)
+Waiting time in minutes is 722.23.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 24010 -> 100003 = 1 and with takeoff/landing: 2.5
+
+V42    1    1    -1    14.98    H1    ROUND 19    MCC3    461 (7:41:0)    1180.66 (19:40:39)    1183.23 (19:43:13)    1198.21 (19:58:12)    1205.26 (20:5:15)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1205.26
+[Helicopter H2] occupied until 1198.18
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1182.32
+->>>>Next available vehicle is A4 in 1182.32 (19:42:19)
+Waiting time in minutes is 759.297.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 42050 -> 100003 = 37.975 and with takeoff/landing: 37.975
+
+V43    1    1    -1    14.98    A4    ROUND 11    MCC3    461 (7:41:0)    1182.32 (19:42:19)    1220.3 (20:20:17)    1235.28 (20:35:16)    1273.25 (21:13:15)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1205.26
+[Helicopter H2] occupied until 1198.18
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is H2 in 1198.18 (19:58:11)
+Waiting time in minutes is 738.774.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 41050 -> 100003 = 2.57 and with takeoff/landing: 4.07
+
+V44    1    2    -1    15.04    H2    ROUND 22    MCC3    461 (7:41:0)    1198.18 (19:58:11)    1199.77 (19:59:46)    1214.81 (20:14:48)    1225.47 (20:25:28)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1205.26
+[Helicopter H2] occupied until 1225.47
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is H1 in 1205.26 (20:5:15)
+Waiting time in minutes is 745.83.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 36010 -> 100003 = 2.16 and with takeoff/landing: 3.66
+
+V45    1    2    -1    15.04    H1    ROUND 20    MCC3    461 (7:41:0)    1205.26 (20:5:15)    1206.83 (20:6:49)    1221.87 (20:21:52)    1229.44 (20:29:26)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1229.44
+[Helicopter H2] occupied until 1225.47
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1213.67
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is A3 in 1213.67 (20:13:40)
+Waiting time in minutes is 774.356.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+
+V46    1    2    -1    15.04    A3    ROUND 12    MCC3    461 (7:41:0)    1213.67 (20:13:40)    1235.36 (20:35:21)    1250.4 (20:50:23)    1279.54 (21:19:32)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1229.44
+[Helicopter H2] occupied until 1225.47
+[Ambulance A1] occupied until 1222.15
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is A1 in 1222.15 (20:22:9)
+Waiting time in minutes is 782.839.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+
+V47    1    1    -1    14.98    A1    ROUND 12    MCC3    461 (7:41:0)    1222.15 (20:22:9)    1243.84 (20:43:50)    1258.82 (20:58:49)    1287.96 (21:27:57)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1229.44
+[Helicopter H2] occupied until 1225.47
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is H2 in 1225.47 (20:25:28)
+Waiting time in minutes is 766.327.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 45020 -> 100003 = 3.43 and with takeoff/landing: 4.93
+
+V48    1    2    -1    15.04    H2    ROUND 23    MCC3    461 (7:41:0)    1225.47 (20:25:28)    1227.33 (20:27:19)    1242.37 (20:42:22)    1252.64 (20:52:38)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1229.44
+[Helicopter H2] occupied until 1252.64
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is H1 in 1229.44 (20:29:26)
+Waiting time in minutes is 771.932.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 10010 -> 100003 = 0.04 and with takeoff/landing: 1.54
+
+V49    1    2    -1    15.04    H1    ROUND 21    MCC3    461 (7:41:0)    1229.44 (20:29:26)    1232.93 (20:32:55)    1247.97 (20:47:58)    1254.29 (20:54:17)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1254.29
+[Helicopter H2] occupied until 1252.64
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1231.84
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is A2 in 1231.84 (20:31:50)
+Waiting time in minutes is 775.359.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 16020 -> 100003 = 14.6416 and with takeoff/landing: 14.6416
+
+V50    1    2    -1    15.04    A2    ROUND 12    MCC3    461 (7:41:0)    1231.84 (20:31:50)    1236.36 (20:36:21)    1251.4 (20:51:23)    1266.04 (21:6:2)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1254.29
+[Helicopter H2] occupied until 1252.64
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1266.04
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is H2 in 1252.64 (20:52:38)
+Waiting time in minutes is 793.622.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 38030 -> 100003 = 2.29 and with takeoff/landing: 3.79
+
+V51    1    2    -1    15.04    H2    ROUND 24    MCC3    461 (7:41:0)    1252.64 (20:52:38)    1254.62 (20:54:37)    1269.66 (21:9:39)    1278.03 (21:18:1)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1254.29
+[Helicopter H2] occupied until 1278.03
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1266.04
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is H1 in 1254.29 (20:54:17)
+Waiting time in minutes is 794.841.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V52    1    2    -1    15.04    H1    ROUND 22    MCC3    461 (7:41:0)    1254.29 (20:54:17)    1255.84 (20:55:50)    1270.88 (21:10:52)    1280.68 (21:20:41)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1280.68
+[Helicopter H2] occupied until 1278.03
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1266.04
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is A2 in 1266.04 (21:6:2)
+Waiting time in minutes is 830.781.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 40030 -> 100003 = 33.1972 and with takeoff/landing: 33.1972
+
+V53    1    2    -1    15.04    A2    ROUND 13    MCC3    461 (7:41:0)    1266.04 (21:6:2)    1291.78 (21:31:46)    1306.82 (21:46:49)    1340.02 (22:20:1)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1280.68
+[Helicopter H2] occupied until 1278.03
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1273.25
+->>>>Next available vehicle is A4 in 1273.25 (21:13:15)
+Waiting time in minutes is 841.394.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 36010 -> 100003 = 29.1416 and with takeoff/landing: 29.1416
+
+V54    1    1    -1    14.98    A4    ROUND 12    MCC3    461 (7:41:0)    1273.25 (21:13:15)    1302.39 (21:42:23)    1317.37 (21:57:22)    1346.52 (22:26:30)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1280.68
+[Helicopter H2] occupied until 1278.03
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is H2 in 1278.03 (21:18:1)
+Waiting time in minutes is 818.598.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 36010 -> 100003 = 2.16 and with takeoff/landing: 3.66
+
+V55    1    3    -1    9.3    H2    ROUND 25    MCC3    461 (7:41:0)    1278.03 (21:18:1)    1279.6 (21:19:35)    1288.9 (21:28:53)    1296.47 (21:36:28)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1280.68
+[Helicopter H2] occupied until 1296.47
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1279.54
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is A3 in 1279.54 (21:19:32)
+Waiting time in minutes is 849.057.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 42050 -> 100003 = 37.975 and with takeoff/landing: 37.975
+
+V56    1    2    -1    15.04    A3    ROUND 13    MCC3    461 (7:41:0)    1279.54 (21:19:32)    1310.06 (21:50:3)    1325.1 (22:5:5)    1363.07 (22:43:4)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1280.68
+[Helicopter H2] occupied until 1296.47
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is H1 in 1280.68 (21:20:41)
+Waiting time in minutes is 821.234.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 42050 -> 100003 = 3.1 and with takeoff/landing: 4.6
+
+V57    1    2    -1    15.04    H1    ROUND 23    MCC3    461 (7:41:0)    1280.68 (21:20:41)    1282.23 (21:22:14)    1297.27 (21:37:16)    1307.08 (21:47:4)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1307.08
+[Helicopter H2] occupied until 1296.47
+[Ambulance A1] occupied until 1287.96
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is A1 in 1287.96 (21:27:57)
+Waiting time in minutes is 857.535.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 42060 -> 100003 = 38.0305 and with takeoff/landing: 38.0305
+
+V58    1    2    -1    15.04    A1    ROUND 13    MCC3    461 (7:41:0)    1287.96 (21:27:57)    1318.54 (21:58:32)    1333.58 (22:13:34)    1371.61 (22:51:36)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1307.08
+[Helicopter H2] occupied until 1296.47
+[Ambulance A1] occupied until 1371.61
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is H2 in 1296.47 (21:36:28)
+Waiting time in minutes is 837.35.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 40040 -> 100003 = 2.51 and with takeoff/landing: 4.01
+
+V59    1    2    -1    15.04    H2    ROUND 26    MCC3    461 (7:41:0)    1296.47 (21:36:28)    1298.35 (21:38:21)    1313.39 (21:53:23)    1323.29 (22:3:17)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1307.08
+[Helicopter H2] occupied until 1323.29
+[Ambulance A1] occupied until 1371.61
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is H1 in 1307.08 (21:47:4)
+Waiting time in minutes is 847.717.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 41030 -> 100003 = 2.65 and with takeoff/landing: 4.15
+
+V60    1    2    -1    15.04    H1    ROUND 24    MCC3    461 (7:41:0)    1307.08 (21:47:4)    1308.72 (21:48:43)    1323.76 (22:3:45)    1331.55 (22:11:32)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1331.55
+[Helicopter H2] occupied until 1323.29
+[Ambulance A1] occupied until 1371.61
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is H2 in 1323.29 (22:3:17)
+Waiting time in minutes is 863.786.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 36020 -> 100003 = 2.43 and with takeoff/landing: 3.93
+
+V61    1    2    -1    15.04    H2    ROUND 27    MCC3    461 (7:41:0)    1323.29 (22:3:17)    1324.79 (22:4:47)    1339.83 (22:19:49)    1347.91 (22:27:54)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1331.55
+[Helicopter H2] occupied until 1347.91
+[Ambulance A1] occupied until 1371.61
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is H1 in 1331.55 (22:11:32)
+Waiting time in minutes is 872.349.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in helicopter] 37020 -> 100003 = 2.21 and with takeoff/landing: 3.71
+
+V62    1    1    -1    14.98    H1    ROUND 25    MCC3    461 (7:41:0)    1331.55 (22:11:32)    1333.35 (22:13:20)    1348.33 (22:28:19)    1355.76 (22:35:45)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1355.76
+[Helicopter H2] occupied until 1347.91
+[Ambulance A1] occupied until 1371.61
+[Ambulance A2] occupied until 1340.02
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is A2 in 1340.02 (22:20:1)
+Waiting time in minutes is 904.759.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+[Victim->Hospital in ambulance] 37020 -> 100003 = 32.0806 and with takeoff/landing: 32.0806
+
+V63    1    2    -1    15.04    A2    ROUND 14    MCC3    461 (7:41:0)    1340.02 (22:20:1)    1365.76 (22:45:45)    1380.8 (23:0:47)    1412.88 (23:32:52)    
+
+
+Searching for closest vehicle to pick up the casualty...
+[NOTICE: Mixed mode ON]
+All vehicles are occcupied.
+[Helicopter H1] occupied until 1355.76
+[Helicopter H2] occupied until 1347.91
+[Ambulance A1] occupied until 1371.61
+[Ambulance A2] occupied until 1412.88
+[Ambulance A3] occupied until 1363.07
+[Ambulance A4] occupied until 1346.52
+->>>>Next available vehicle is A4 in 1346.52 (22:26:30)
+Waiting time in minutes is 907.429.OK NO CHANGE NEEDED
+Searching for closest hospital with beds...
+No hospitals can attend this victim. Victim: V64 G=1
+Current solution is BETTER than prev sol: 10397.8 vs 15653.6
+Trying for victim 2
+Eligible for reasignment. Current solution quality: 10397.8
+Choosing ambulance A5 with min_av= 33960 cl= 27.4631 of priority 27172.2
+Deassigning casualty. Before: 
+V2    3    3    -1    65    H1    ROUND 25    MCC1    1009.83 (16:49:50)    1011.33 (16:51:20)    1076.33 (17:56:20)    1084.75 (18:4:45)    
+After: 
+V2    3    3    5.10496    65    H-1    ROUND -1    MCC-1    1009.83 (16:49:50)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V3    3    2    -1    62.14    H1    ROUND 13    MCC1    1025.57 (17:5:33)    1054.75 (17:34:45)    1116.89 (18:36:53)    1146.08 (19:6:4)    
+After: 
+V3    3    2    5.10496    62.14    H-1    ROUND -1    MCC-1    1025.57 (17:5:33)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V4    3    2    -1    62.14    H2    ROUND 27    MCC1    1050.89 (17:30:53)    1052.42 (17:32:25)    1114.56 (18:34:33)    1121.73 (18:41:43)    
+After: 
+V4    3    2    5.10496    62.14    H-1    ROUND -1    MCC-1    1050.89 (17:30:53)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V5    3    2    -1    62.14    H4    ROUND 12    MCC1    1064.58 (17:44:34)    1096.11 (18:16:6)    1158.25 (19:18:14)    1182.32 (19:42:19)    
+After: 
+V5    3    2    5.10496    62.14    H-1    ROUND -1    MCC-1    1064.58 (17:44:34)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V6    3    2    -1    62.14    H1    ROUND 24    MCC1    1084.75 (18:4:45)    1086.63 (18:6:38)    1148.77 (19:8:46)    1154.74 (19:14:44)    
+After: 
+V6    2    2    0.895303    29.9    H-1    ROUND -1    MCC-1    1084.75 (18:4:45)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+
+Deassigning casualty. Before: 
+V7    3    1    -1    93.3    H-1    ROUND -1    MCC-1    1084.87 (18:4:52)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    -0.0166667 (0:0:-1)    
+After: 
