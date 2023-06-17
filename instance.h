@@ -76,8 +76,9 @@ public:
     void updateCasualtyPriority(int casualty_id, float lambda);
     void updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int veh_type);
     void resetCasualtyGravity(int casualty_id, float current_time);
+    void resetCasualtyLastAssignment(int casualty_id);
+    void saveCasualtyLastAssignment(int casualty_id);
 
-    void temporaryDeassignCasualty(int casualty_id);
     void temporaryDeassignHospital(int hospital_id, int g);
     void temporaryDeassignVehicle(int veh_id, int veh_type);
 
@@ -90,14 +91,20 @@ public:
     int getVehicleRound(int veh_id, int veh_type);
     float getVehicleOccupiedUntilTime(int veh_id, int veh_type);
     void updateVehicleOccupiedUntilTime(int veh_id, int veh_type, float t);
+    void updateVehicleLocation(int veh_id, int veh_type, int hospital_id);
     void addVehicleRound(int veh_id, int veh_type);
     void resetVehicleOccuipedUntil(int veh_id, int veh_type, float period_start);
+
+    void resetVehicleLastAssignment(int veh_id, int veh_type);
+    void snapshotVehicleLastAssignment(int veh_id, int veh_type);
+    void saveVehicleLastAssignment(int veh_id, int veh_type);
 
     // Hospital-class wrappers
     int getHospitalLocation(int hospital_id);
     int getHospitalAppearTime(int hospital_id);
     int getHospitalCurCapacity(int hospital_id, int g);
     void updateHospitalBedCapacity(int hospital_id, int g, int beds);
+    void resetTemporaryDeassignHospital(int hospital_id, int g);
 
     // Print Instance-Specific values
     void printStabilizationTimeMatrix();

@@ -22,6 +22,7 @@ public:
     int getHospitalAppearTime();
 
     void temporaryDeassign(int g);
+    void resetTemporaryDeassign(int g);
     void printData();
 
 private:

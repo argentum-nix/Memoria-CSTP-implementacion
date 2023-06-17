@@ -8,10 +8,7 @@ void Casualty::setCasualtyID(int id)
 {
     cas_id_k = id;
 }
-void Casualty::setCasualtyGravity(int g)
-{
-    cas_curgravity_g.push_back(g);
-}
+
 void Casualty::setCasualtyAge(int a)
 {
     cas_age_a = a;
@@ -30,53 +27,67 @@ void Casualty::setCasualtyTimeToHeliport(float d)
 }
 void Casualty::setCasualtyPriority(float lambda)
 {
-    cas_priority_lambda.push_back(lambda);
+    cas_priority_lambda = lambda;
+}
+void Casualty::setCasualtyGravity(int g)
+{
+    cas_prev_prev_g = cas_prev_g;
+    cas_prev_g = cas_curgravity_g;
+    cas_curgravity_g = g;
 }
 void Casualty::setCasualtyAssignedHospital(int h)
 {
-    cas_assigned_hosp.push_back(h);
+    cas_prev_hosp = cas_assigned_hosp;
+    cas_assigned_hosp = h;
 }
 void Casualty::setCasualtyAssignedVehicle(int m)
 {
-    cas_assigned_veh.push_back(m);
+    cas_prev_veh = cas_assigned_veh;
+    cas_assigned_veh = m;
 }
 void Casualty::setCasualtyAssignedVehicleType(int e)
 {
-    cas_assigned_veh_type.push_back(e);
+    cas_prev_veh_type = cas_assigned_veh_type;
+    cas_assigned_veh_type = e;
 }
 void Casualty::setCasualtyWaitTime(float t)
 {
-    cas_wait_time.push_back(t);
+    cas_prev_wait_time = cas_wait_time;
+    cas_wait_time = t;
 }
 void Casualty::addGravityChangeTimestamp(float t)
 {
-    g_change_timestamps.push_back(t);
+    cas_prev_g_change_timestamp = cas_g_change_timestamp;
+    cas_g_change_timestamp = t;
 }
 void Casualty::setCasualtyVehArrivedTime(float t)
 {
-    cas_arrival_time.push_back(t);
+    cas_prev_arrival_time = cas_arrival_time;
+    cas_arrival_time = t;
 }
 void Casualty::setCasualtyStabilizedTime(float t)
 {
-    cas_st_time.push_back(t);
+    cas_prev_st_time = cas_st_time;
+    cas_st_time = t;
 }
 void Casualty::setCasualtyAdmittedAtHospitalTime(float t)
 {
-    cas_h_time.push_back(t);
+    cas_prev_h_time = cas_h_time;
+    cas_h_time = t;
 }
 
 float Casualty::getCasualtyVehArrivedTime()
 {
-    return cas_arrival_time.back();
+    return cas_arrival_time;
 }
 float Casualty::getCasualtyStabilizedTime()
 {
-    return cas_st_time.back();
+    return cas_st_time;
 }
 
 float Casualty::getCasualtyAdmittedAtHospitalTime()
 {
-    return cas_h_time.back();
+    return cas_h_time;
 }
 
 int Casualty::getCasualtyID()
@@ -101,98 +112,100 @@ float Casualty::getCasualtyTimeToHeliport()
 }
 int Casualty::getCasualtyGravity()
 {
-    return cas_curgravity_g.back();
+    return cas_curgravity_g;
 }
 float Casualty::getCasualtyPriority()
 {
-    return cas_priority_lambda.back();
+    return cas_priority_lambda;
 }
 int Casualty::getCasualtyAssignedHospital()
 {
-    return cas_assigned_hosp.back();
+    return cas_assigned_hosp;
 }
 int Casualty::getCasualtyAssignedVehicle()
 {
-    return cas_assigned_veh.back();
+    return cas_assigned_veh;
 }
 int Casualty::getCasualtyAssignedVehicleType()
 {
-    return cas_assigned_veh_type.back();
+    return cas_assigned_veh_type;
 }
 float Casualty::getCasualtyWaitTime()
 {
-    return cas_wait_time.back();
+    return cas_wait_time;
 }
 float Casualty::getLastGravityChange()
 {
-    return g_change_timestamps.back();
+    return cas_g_change_timestamp;
 }
 void Casualty::resetGravityChange()
 {
-    g_change_timestamps.pop_back();
-    cas_curgravity_g.pop_back();
+    cas_g_change_timestamp = cas_prev_g_change_timestamp;
+    cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
 }
 
-void Casualty::temporaryDeassign()
+void Casualty::resetLastAssignment()
 {
-    int cursor = 0;
-    if (cas_curgravity_g.size() > 1)
-    {
-        cursor = cas_curgravity_g.size() - 1;
-        cas_curgravity_g.push_back(cas_curgravity_g[cursor - 1]);
-    }
-    if (cas_priority_lambda.size() > 1)
-    {
-        cursor = cas_priority_lambda.size() - 1;
-        cas_priority_lambda.push_back(cas_priority_lambda[cursor - 1]);
-    }
-    if (cas_assigned_veh.size() > 1)
-    {
-        cursor = cas_assigned_veh.size() - 1;
-        cas_assigned_veh.push_back(cas_assigned_veh[cursor - 1]);
-    }
-    if (cas_assigned_veh_type.size() > 1)
-    {
-        cursor = cas_assigned_veh_type.size() - 1;
-        cas_assigned_veh_type.push_back(cas_assigned_veh_type[cursor - 1]);
-    }
-    if (cas_assigned_hosp.size() > 1)
-    {
-        cursor = cas_assigned_hosp.size() - 1;
-        cas_assigned_hosp.push_back(cas_assigned_hosp[cursor - 1]);
-    }
-    if (cas_wait_time.size() > 1)
-    {
-        cursor = cas_wait_time.size() - 1;
-        cas_wait_time.push_back(cas_wait_time[cursor - 1]);
-    }
-    if (cas_arrival_time.size() > 1)
-    {
-        cursor = cas_arrival_time.size() - 1;
-        cas_arrival_time.push_back(cas_arrival_time[cursor - 1]);
-    }
-    if (cas_st_time.size() > 1)
-    {
-        cursor = cas_st_time.size() - 1;
-        cas_st_time.push_back(cas_st_time[cursor - 1]);
-    }
-    if (cas_h_time.size() > 1)
-    {
-        cursor = cas_h_time.size() - 1;
-        cas_h_time.push_back(cas_h_time[cursor - 1]);
-    }
+    // reset gravity
+    cas_curgravity_g = cas_prev_g;
+    cas_prev_g = cas_prev_prev_g;
+
+    // id of assigned vehicle
+    cas_assigned_veh = cas_prev_veh;
+    cas_prev_veh = cas_prev_prev_veh;
+
+    // type of vehicle assigned
+    cas_assigned_veh_type = cas_prev_veh_type;
+    cas_prev_veh_type = cas_prev_prev_veh_type;
+
+    // assigned hospital
+    cas_assigned_hosp = cas_prev_hosp;
+    cas_prev_hosp = cas_prev_prev_hosp;
+
+    // victim has to wait until X to vehicle to be assigned to it
+    cas_wait_time = cas_prev_wait_time;
+    cas_prev_wait_time = cas_prev_prev_wait_time;
+
+    // the vehicle arrives at victims location at X
+    cas_arrival_time = cas_prev_arrival_time;
+    cas_prev_arrival_time = cas_prev_prev_arrival_time = -1;
+
+    // victim is stabilized at X
+    cas_st_time = cas_prev_st_time;
+    cas_prev_st_time = cas_prev_prev_st_time;
+
+    // victim is admitted to hospital at X
+    cas_h_time = cas_prev_h_time;
+    cas_prev_h_time = cas_prev_prev_h_time;
+
+    // timestamp of last gravity change
+    cas_g_change_timestamp = cas_prev_g_change_timestamp;
+    cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
+}
+
+void Casualty::saveLastAssignment()
+{
+    cas_prev_g = cas_prev_prev_g;
+    cas_prev_veh = cas_prev_prev_veh;
+    cas_prev_veh_type = cas_prev_prev_veh_type;
+    cas_prev_hosp = cas_prev_prev_hosp;
+    cas_prev_wait_time = cas_prev_prev_wait_time;
+    cas_prev_arrival_time = cas_prev_prev_arrival_time;
+    cas_prev_st_time = cas_prev_prev_st_time;
+    cas_prev_h_time = cas_prev_prev_h_time;
+    cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
 }
 
 void Casualty::printData()
 {
     std::cout << "Casualty ID: " << cas_id_k;
     std::cout << " Age: " << cas_age_a;
-    std::cout << " Gravity: " << cas_curgravity_g.back();
+    std::cout << " Gravity: " << cas_curgravity_g;
     std::cout << " Location: " << cas_curlocation;
-    std::cout << " Wait Time: " << cas_wait_time.back();
+    std::cout << " Wait Time: " << cas_wait_time;
     std::cout << " Appear Time: " << cas_appear_time;
     std::cout << " Distance to Heliport: " << cas_time_to_heliport;
-    std::cout << " Vehicle: " << cas_assigned_veh.back();
-    std::cout << " Hospital: " << cas_assigned_hosp.back();
-    std::cout << " Priority: " << cas_priority_lambda.back() << std::endl;
+    std::cout << " Vehicle: " << cas_assigned_veh;
+    std::cout << " Hospital: " << cas_assigned_hosp;
+    std::cout << " Priority: " << cas_priority_lambda << std::endl;
 }

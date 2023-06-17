@@ -42,13 +42,14 @@ void Vehicle::setVehicleAppearTime(int t)
 }
 void Vehicle::setVehicleOccupiedUntilTime(float t)
 {
-    occupied_until.push_back(t);
+    veh_occupied_until.push_back(t);
 }
 
 void Vehicle::setVehicleRound(int round)
 {
-    total_rounds.push_back(round);
+    veh_total_rounds.push_back(round);
 }
+
 void Vehicle::setVehicleLocation(int node_id)
 {
     veh_curlocation.push_back(node_id);
@@ -87,7 +88,7 @@ int Vehicle::getVehicleAppearTime()
 
 float Vehicle::getVehicleOccupiedUntilTime()
 {
-    return occupied_until.back();
+    return veh_occupied_until.back();
 }
 int Vehicle::getVehicleLocation()
 {
@@ -95,43 +96,66 @@ int Vehicle::getVehicleLocation()
 }
 int Vehicle::getVehicleRound()
 {
-    return total_rounds.back();
+    return veh_total_rounds.back();
 }
 
 void Vehicle::resetOccuipedToFirstAvailability(int period_start)
 {
     int index = 0;
-    for (unsigned int i = 0; i < occupied_until.size(); i++)
+    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
     {
-        if (occupied_until[i] >= period_start)
+        if (veh_occupied_until[i] >= period_start)
         {
             index = i;
             break;
         }
     }
     // delete all elements after the first availability that occurs on or after the period start time
-    total_rounds.erase(total_rounds.begin() + index + 1, total_rounds.end());
-    occupied_until.erase(occupied_until.begin() + index + 1, occupied_until.end());
+    veh_total_rounds.erase(veh_total_rounds.begin() + index + 1, veh_total_rounds.end());
+    veh_occupied_until.erase(veh_occupied_until.begin() + index + 1, veh_occupied_until.end());
 }
 
-void Vehicle::temporaryDeassign()
+void Vehicle::printOccupiedVector()
 {
-    int cursor = 0;
-    if (int(total_rounds.size()) > 1)
+    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
     {
-        cursor = total_rounds.size() - 1;
-        total_rounds.push_back(total_rounds[cursor - 1]);
+        std::cout << veh_occupied_until[i] << " ";
     }
-    if (int(veh_curlocation.size()) > 1)
-    {
-        cursor = veh_curlocation.size() - 1;
-        veh_curlocation.push_back(veh_curlocation[cursor - 1]);
-    }
-    if (int(occupied_until.size()) > 1)
-    {
-        cursor = occupied_until.size() - 1;
-        occupied_until.push_back(occupied_until[cursor - 1]);
-    }
+    std::cout << std::endl;
+}
+
+// es la funcion que se usa antes de probar nuevas rutas
+void Vehicle::snapshotLastAssinment()
+{
+    // save previous states as copies
+    veh_prev_total_rounds = veh_total_rounds;
+    veh_prev_curlocation = veh_curlocation;
+    veh_prev_occupied_until = veh_occupied_until;
+    // slice the vector - we only want the slice of solution between start and cursor
+    veh_curlocation.pop_back();
+    veh_occupied_until.pop_back();
+    veh_prev_total_rounds.pop_back();
+}
+
+// esta funcion se usa para deshacer nuevas rutas de metaheuristica y volver a la original con que se hizo un snapshpt
+void Vehicle::resetLastAssignment()
+{
+    // copye prev solution to current, empty the prevs, reset the cursors
+    veh_curlocation = veh_prev_curlocation;
+    veh_occupied_until = veh_prev_occupied_until;
+    veh_total_rounds = veh_prev_total_rounds;
+    veh_prev_curlocation.clear();
+    veh_prev_occupied_until.clear();
+    veh_prev_total_rounds.clear();
+}
+
+void Vehicle::saveLastAssignment()
+{
+    // empty the prev-state containers
+    // cur-state is the one we do not modify ("save")
+    veh_prev_curlocation.clear();
+    veh_prev_occupied_until.clear();
+    veh_prev_total_rounds.clear();
 }
 
 void Vehicle::printData()

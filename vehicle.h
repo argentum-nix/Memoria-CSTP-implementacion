@@ -35,8 +35,14 @@ public:
     float getVehicleOccupiedUntilTime();
 
     void resetOccuipedToFirstAvailability(int period_start);
-    void temporaryDeassign();
+
     void printData();
+    void printOccupiedVector();
+
+    // metaheuristic-specific functions for trying new solutions
+    void snapshotLastAssinment();
+    void resetLastAssignment();
+    void saveLastAssignment();
 
 private:
     int veh_id_m;
@@ -47,9 +53,14 @@ private:
     float veh_takeoff_TDSe;
     float veh_land_TATe;
 
-    std::vector<int> total_rounds;
+    int cursor_location;
+    int cursor_occupied_until;
+    std::vector<int> veh_total_rounds;
+    std::vector<int> veh_prev_total_rounds;
+    std::vector<int> veh_prev_curlocation;
     std::vector<int> veh_curlocation;
-    std::vector<float> occupied_until;
+    std::vector<float> veh_prev_occupied_until;
+    std::vector<float> veh_occupied_until;
 };
 
 #endif

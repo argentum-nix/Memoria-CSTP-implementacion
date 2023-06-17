@@ -53,6 +53,11 @@ int Hospital::getHospitalAppearTime()
 
 void Hospital::temporaryDeassign(int g)
 {
+    hosp_curcapacity[g - 1]++;
+}
+
+void Hospital::resetTemporaryDeassign(int g)
+{
     hosp_curcapacity[g - 1]--;
 }
 
