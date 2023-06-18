@@ -43,6 +43,7 @@ public:
     void snapshotLastAssinment();
     void resetLastAssignment();
     void saveLastAssignment();
+    void clearResetFlag();
 
 private:
     int veh_id_m;
@@ -53,6 +54,7 @@ private:
     float veh_takeoff_TDSe;
     float veh_land_TATe;
 
+    int was_already_reset = 0;
     int cursor_location;
     int cursor_occupied_until;
     std::vector<int> veh_total_rounds;

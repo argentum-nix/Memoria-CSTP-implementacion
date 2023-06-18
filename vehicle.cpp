@@ -47,6 +47,15 @@ void Vehicle::setVehicleOccupiedUntilTime(float t)
 
 void Vehicle::setVehicleRound(int round)
 {
+    std::cout << "SET ROUND " << round << " TO VEHICLE ";
+    if (veh_type_e == 0)
+    {
+        std::cout << "A" << veh_id_m << std::endl;
+    }
+    else if (veh_type_e == 1)
+    {
+        std::cout << "H" << veh_id_m << std::endl;
+    }
     veh_total_rounds.push_back(round);
 }
 
@@ -131,22 +140,40 @@ void Vehicle::snapshotLastAssinment()
     veh_prev_total_rounds = veh_total_rounds;
     veh_prev_curlocation = veh_curlocation;
     veh_prev_occupied_until = veh_occupied_until;
-    // slice the vector - we only want the slice of solution between start and cursor
-    veh_curlocation.pop_back();
-    veh_occupied_until.pop_back();
-    veh_prev_total_rounds.pop_back();
+    // we want only the previous solution (if it exists at all)
+    if (veh_curlocation.size() > 1)
+    {
+        veh_curlocation.pop_back();
+    }
+    if (veh_occupied_until.size() > 1)
+    {
+        veh_occupied_until.pop_back();
+    }
+    if (veh_total_rounds.size() > 1)
+    {
+        veh_total_rounds.pop_back();
+    }
+}
+
+void Vehicle::clearResetFlag()
+{
+    was_already_reset = 0;
 }
 
 // esta funcion se usa para deshacer nuevas rutas de metaheuristica y volver a la original con que se hizo un snapshpt
 void Vehicle::resetLastAssignment()
 {
-    // copye prev solution to current, empty the prevs, reset the cursors
-    veh_curlocation = veh_prev_curlocation;
-    veh_occupied_until = veh_prev_occupied_until;
-    veh_total_rounds = veh_prev_total_rounds;
-    veh_prev_curlocation.clear();
-    veh_prev_occupied_until.clear();
-    veh_prev_total_rounds.clear();
+    if (was_already_reset != 1)
+    {
+        // copye prev solution to current, empty the prevs, reset the cursors
+        veh_curlocation = veh_prev_curlocation;
+        veh_occupied_until = veh_prev_occupied_until;
+        veh_total_rounds = veh_prev_total_rounds;
+        veh_prev_curlocation.clear();
+        veh_prev_occupied_until.clear();
+        veh_prev_total_rounds.clear();
+    }
+    was_already_reset = 1;
 }
 
 void Vehicle::saveLastAssignment()

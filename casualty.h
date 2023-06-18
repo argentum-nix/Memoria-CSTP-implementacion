@@ -25,7 +25,7 @@ public:
     void setCasualtyVehArrivedTime(float t);
     void setCasualtyStabilizedTime(float t);
     void setCasualtyAdmittedAtHospitalTime(float t);
-    void addGravityChangeTimestamp(float t);
+    void addGravityChangeTimestamp(float t, int inroute_flag);
 
     int getCasualtyID();
     int getCasualtyGravity();
@@ -47,6 +47,7 @@ public:
     void printData();
 
     // metaheuristic-specific functions for trying new solutions
+    void clearResetFlag();
     void resetLastAssignment();
     void saveLastAssignment();
 
@@ -60,6 +61,7 @@ private:
 
     // Changing values (assignment-specific)
     float cas_priority_lambda;
+    int g_inroute_flag = 0;
 
     // current gravity
     int cas_curgravity_g;

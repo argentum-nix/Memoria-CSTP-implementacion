@@ -132,6 +132,8 @@ Solver::Solver(Instance *in)
         // greedy for current slice of victims
         cout << "=GREEDY=" << endl;
         greedyAssignment('M', 0);
+
+        // METAHEURISTIC PROCEDURE
         int cursor, amb_loc, cas_loc, choosen_amb, closest_h;
         int prev_v, prev_v_type, prev_h, prev_g;
         float closeness, availability, amb_priority;
@@ -143,6 +145,20 @@ Solver::Solver(Instance *in)
         cout << "Terminated greedy routes. Entering in Metaheuristic" << endl;
         for (int k = 0; k < int(priority_list.size()); k++)
         {
+            // FIRST: CLEAN ALL THE FLAGS FOR RESETTING SOLUTIONS
+            for (int i = 1; i < instance->qty_casualties; i++)
+            {
+                instance->clearCasualtyResetFlag(i);
+            }
+            for (int i = 1; i < instance->qty_ambulances; i++)
+            {
+                instance->clearVehicleResetFlag(i, TYPE_AMBULANCE);
+            }
+            for (int i = 1; i < instance->qty_helicopters; i++)
+            {
+                instance->clearVehicleResetFlag(i, TYPE_HELICOPTER);
+            }
+
             cursor = priority_list[k].second;
             cout << "Trying for victim " << cursor << endl;
             if (checkIfHighST(cursor))
@@ -152,11 +168,10 @@ Solver::Solver(Instance *in)
                 // liberate all resources - vehicles and hospitals
                 for (int u = k; u < int(priority_list.size()); u++)
                 {
-                    int c = priority_list[u].second;
-                    prev_g = instance->getCasualtyGravity(c);
-                    prev_v = instance->getCasualtyAssignedVehicle(c);
-                    prev_v_type = instance->getCasualtyAssignedVehicleType(c);
-                    prev_h = instance->getCasualtyAssignedHospital(c);
+                    prev_g = instance->getCasualtyGravity(priority_list[u].second);
+                    prev_v = instance->getCasualtyAssignedVehicle(priority_list[u].second);
+                    prev_v_type = instance->getCasualtyAssignedVehicleType(priority_list[u].second);
+                    prev_h = instance->getCasualtyAssignedHospital(priority_list[u].second);
                     instance->temporaryDeassignHospital(prev_h, prev_g);
                     instance->snapshotVehicleLastAssignment(prev_v, prev_v_type);
                 }
@@ -229,16 +244,25 @@ Solver::Solver(Instance *in)
                     cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
                     for (int c = k; c < int(priority_list.size()); c++)
                     {
-                        cout << "c=" << c << endl;
+                        cout << "Resetting victim V" << priority_list[c].second << " on index " << c << " in priority list." << endl;
                         prev_g = instance->getCasualtyGravity(priority_list[c].second);
                         prev_v = instance->getCasualtyAssignedVehicle(priority_list[c].second);
                         prev_v_type = instance->getCasualtyAssignedVehicleType(priority_list[c].second);
                         prev_h = instance->getCasualtyAssignedHospital(priority_list[c].second);
+
+                        cout << "BEFORE: " << endl;
+                        printCasualtyRouteRow(priority_list[c].second);
+
                         instance->resetTemporaryDeassignHospital(prev_h, prev_g);
+                        // should be reassigned only once
                         instance->resetVehicleLastAssignment(prev_v, prev_v_type);
                         instance->resetCasualtyLastAssignment(priority_list[c].second);
                     }
-                    cout << "aaaaaah xd" << endl;
+                    cout << "AFTER: " << endl;
+                    for (int c = k; c < int(priority_list.size()); c++)
+                    {
+                        printCasualtyRouteRow(priority_list[c].second);
+                    }
                 }
                 else
                 {
@@ -346,8 +370,12 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
         if (change_timestamp > current_time)
         {
             cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE!" << endl;
+            instance->updateCasualtyGravity(casualty_id, 2, change_timestamp, 1);
         }
-        instance->updateCasualtyGravity(casualty_id, 2, change_timestamp);
+        else
+        {
+            instance->updateCasualtyGravity(casualty_id, 2, change_timestamp, 0);
+        }
     }
     // Case 1:Victim of LSI 2 already waited enough to be considered LSI 3
     else if (g == 2 && te / 60 > pi2_3)
@@ -358,8 +386,12 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
         if (change_timestamp > current_time)
         {
             cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE!" << endl;
+            instance->updateCasualtyGravity(casualty_id, 3, change_timestamp, 1);
         }
-        instance->updateCasualtyGravity(casualty_id, 3, change_timestamp);
+        else
+        {
+            instance->updateCasualtyGravity(casualty_id, 3, change_timestamp, 0);
+        }
     }
     else
     {

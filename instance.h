@@ -69,7 +69,7 @@ public:
     float getCasualtyAdmittedAtHopsitalTime(int casualty_id);
 
     void updateCasualtyHospital(int casualty_id, int hospital_id);
-    void updateCasualtyGravity(int casualty_id, int g, float t);
+    void updateCasualtyGravity(int casualty_id, int g, float t, int inroute_flag);
     void updateCasualtyWaitingTime(int casualty_id, float t);
     void updateCasualtyAppearTime(int casualty_id, float t);
     void updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t);
@@ -81,6 +81,9 @@ public:
 
     void temporaryDeassignHospital(int hospital_id, int g);
     void temporaryDeassignVehicle(int veh_id, int veh_type);
+
+    void clearCasualtyResetFlag(int casualty_id);
+    void clearVehicleResetFlag(int veh_id, int veh_type);
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);
