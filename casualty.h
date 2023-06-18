@@ -25,8 +25,10 @@ public:
     void setCasualtyVehArrivedTime(float t);
     void setCasualtyStabilizedTime(float t);
     void setCasualtyAdmittedAtHospitalTime(float t);
+    void setCasualtyRound(int r);
     void addGravityChangeTimestamp(float t, int inroute_flag);
 
+    int getCasualtyRound();
     int getCasualtyID();
     int getCasualtyGravity();
     int getCasualtyAge();
@@ -60,6 +62,7 @@ private:
     float cas_time_to_heliport;
 
     // Changing values (assignment-specific)
+    int round = 0;
     float cas_priority_lambda;
     int g_inroute_flag = 0;
 

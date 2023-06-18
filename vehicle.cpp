@@ -137,9 +137,14 @@ void Vehicle::printOccupiedVector()
 void Vehicle::snapshotLastAssinment()
 {
     // save previous states as copies
-    veh_prev_total_rounds = veh_total_rounds;
-    veh_prev_curlocation = veh_curlocation;
-    veh_prev_occupied_until = veh_occupied_until;
+    // save prev state ONLY ONCE
+    if (yet_to_snapshot)
+    {
+        veh_prev_total_rounds = veh_total_rounds;
+        veh_prev_curlocation = veh_curlocation;
+        veh_prev_occupied_until = veh_occupied_until;
+    }
+    yet_to_snapshot = 0;
     // we want only the previous solution (if it exists at all)
     if (veh_curlocation.size() > 1)
     {
@@ -163,6 +168,13 @@ void Vehicle::clearResetFlag()
 // esta funcion se usa para deshacer nuevas rutas de metaheuristica y volver a la original con que se hizo un snapshpt
 void Vehicle::resetLastAssignment()
 {
+    std::cout << "BEFORE RESET OCCUPIED UNTIL WAS " << std::endl;
+    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+    {
+        std::cout << veh_occupied_until[i] << " ";
+    }
+    std::cout << std::endl;
+
     if (was_already_reset != 1)
     {
         // copye prev solution to current, empty the prevs, reset the cursors
@@ -173,7 +185,14 @@ void Vehicle::resetLastAssignment()
         veh_prev_occupied_until.clear();
         veh_prev_total_rounds.clear();
     }
+    std::cout << "BEFORE AFTER OCCUPIED UNTIL WAS " << std::endl;
+    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+    {
+        std::cout << veh_occupied_until[i] << " ";
+    }
+    std::cout << std::endl;
     was_already_reset = 1;
+    yet_to_snapshot = 1;
 }
 
 void Vehicle::saveLastAssignment()
@@ -183,6 +202,7 @@ void Vehicle::saveLastAssignment()
     veh_prev_curlocation.clear();
     veh_prev_occupied_until.clear();
     veh_prev_total_rounds.clear();
+    yet_to_snapshot = 1;
 }
 
 void Vehicle::printData()

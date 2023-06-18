@@ -55,6 +55,7 @@ private:
     float veh_land_TATe;
 
     int was_already_reset = 0;
+    int yet_to_snapshot = 1;
     int cursor_location;
     int cursor_occupied_until;
     std::vector<int> veh_total_rounds;

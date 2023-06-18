@@ -51,14 +51,20 @@ int Hospital::getHospitalAppearTime()
     return hosp_appear_time;
 }
 
-void Hospital::temporaryDeassign(int g)
+void Hospital::snapshotSolution(int g)
 {
+    if (yet_to_snapshot)
+    {
+        hosp_prev_capacity = hosp_curcapacity;
+    }
+    yet_to_snapshot = 0;
     hosp_curcapacity[g - 1]++;
 }
 
-void Hospital::resetTemporaryDeassign(int g)
+void Hospital::resetLastAssignment()
 {
-    hosp_curcapacity[g - 1]--;
+    hosp_curcapacity = hosp_prev_capacity;
+    yet_to_snapshot = 1;
 }
 
 void Hospital::printData()

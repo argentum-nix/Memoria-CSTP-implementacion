@@ -67,7 +67,8 @@ public:
     float getCasualtyVehArrivedTime(int casualty_id);
     float getCasualtyStabilizedTime(int casualty_id);
     float getCasualtyAdmittedAtHopsitalTime(int casualty_id);
-
+    int getCasualtyRound(int casualty_id);
+    void updateCasualtyRound(int casualty_id, int r);
     void updateCasualtyHospital(int casualty_id, int hospital_id);
     void updateCasualtyGravity(int casualty_id, int g, float t, int inroute_flag);
     void updateCasualtyWaitingTime(int casualty_id, float t);
@@ -79,7 +80,7 @@ public:
     void resetCasualtyLastAssignment(int casualty_id);
     void saveCasualtyLastAssignment(int casualty_id);
 
-    void temporaryDeassignHospital(int hospital_id, int g);
+    void snapshotHospitalLastAssignment(int hospital_id, int g);
     void temporaryDeassignVehicle(int veh_id, int veh_type);
 
     void clearCasualtyResetFlag(int casualty_id);
@@ -107,7 +108,7 @@ public:
     int getHospitalAppearTime(int hospital_id);
     int getHospitalCurCapacity(int hospital_id, int g);
     void updateHospitalBedCapacity(int hospital_id, int g, int beds);
-    void resetTemporaryDeassignHospital(int hospital_id, int g);
+    void resetHospitalLastAssignment(int hospital_id);
 
     // Print Instance-Specific values
     void printStabilizationTimeMatrix();

@@ -21,16 +21,18 @@ public:
     int getHospitalLocation();
     int getHospitalAppearTime();
 
-    void temporaryDeassign(int g);
-    void resetTemporaryDeassign(int g);
+    void resetLastAssignment();
+    void snapshotSolution(int g);
     void printData();
 
 private:
+    int yet_to_snapshot = 1;
     int hosp_id_h;
     int hosp_location;
     int hosp_appear_time;
     std::vector<int> hosp_maxcapacity{0, 0, 0};
     std::vector<int> hosp_curcapacity{0, 0, 0};
+    std::vector<int> hosp_prev_capacity;
 };
 
 #endif

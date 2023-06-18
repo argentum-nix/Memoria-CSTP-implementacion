@@ -12,7 +12,7 @@ public:
     ~Solver();
     float calculatePriority(float te, int g);
     void updateCasualtyState(int casualty_id, float te, float change_timestamp);
-    void greedyAssignment(char fleet_mode, int cursor);
+    void greedyAssignment(char fleet_mode, int cursor, int flag_save);
     int checkIfHighST(int casualty_id);
     void printTimestamp(float t);
 

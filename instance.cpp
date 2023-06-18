@@ -344,13 +344,23 @@ void Instance::resetCasualtyLastAssignment(int casualty_id)
     casualties[casualty_id - 1].resetLastAssignment();
 }
 
+void Instance::updateCasualtyRound(int casualty_id, int r)
+{
+    casualties[casualty_id].setCasualtyRound(r);
+}
+
+int Instance::getCasualtyRound(int casualty_id)
+{
+    return casualties[casualty_id].getCasualtyRound();
+}
+
 void Instance::saveCasualtyLastAssignment(int casualty_id)
 {
     casualties[casualty_id - 1].saveLastAssignment();
 }
-void Instance::temporaryDeassignHospital(int hospital_id, int g)
+void Instance::snapshotHospitalLastAssignment(int hospital_id, int g)
 {
-    hospitals[hospital_id - 1].temporaryDeassign(g);
+    hospitals[hospital_id - 1].snapshotSolution(g);
 }
 
 void Instance::updateVehicleLocation(int veh_id, int veh_type, int hospital_id)
@@ -456,10 +466,11 @@ int Instance::getHospitalAppearTime(int hospital_id)
 
 // Hospital-wrappers UPDATE/SET type
 
-void Instance::resetTemporaryDeassignHospital(int hospital_id, int g)
+void Instance::resetHospitalLastAssignment(int hospital_id)
 {
-    hospitals[hospital_id - 1].resetTemporaryDeassign(g);
+    hospitals[hospital_id - 1].resetLastAssignment();
 }
+
 void Instance::updateHospitalBedCapacity(int hospital_id, int g, int beds)
 {
     hospitals[hospital_id - 1].setHospitalCurCapacity(g, beds);

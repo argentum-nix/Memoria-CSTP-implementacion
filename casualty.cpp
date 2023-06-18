@@ -13,6 +13,13 @@ void Casualty::setCasualtyAge(int a)
 {
     cas_age_a = a;
 }
+
+void Casualty::setCasualtyRound(int r)
+{
+    std::cout << "SET ROUND FOR V" << cas_id_k << " EQUIAL TO " << r << std::endl;
+    round = r;
+}
+
 void Casualty::setCasualtyLocation(int node_id)
 {
     cas_curlocation = node_id;
@@ -82,6 +89,11 @@ void Casualty::setCasualtyAdmittedAtHospitalTime(float t)
 {
     cas_prev_h_time = cas_h_time;
     cas_h_time = t;
+}
+
+int Casualty::getCasualtyRound()
+{
+    return round;
 }
 
 float Casualty::getCasualtyVehArrivedTime()
