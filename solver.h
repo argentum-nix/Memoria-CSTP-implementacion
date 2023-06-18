@@ -3,6 +3,7 @@
 
 #include "instance.h"
 #include <algorithm>
+#include <vector>
 
 class Solver
 {
@@ -24,6 +25,9 @@ public:
 
     void printPriorityList();
 
+    void saveSolution(int casualty_id, float lambda, int veh_id, int veh_type, int r, int hospital_id, float wait_t, float arrive_t, float stabilize_t, float hospital_t);
+    void printSolutions();
+
     // PAIR: victim priority lambda,victim id
     std::vector<std::pair<float, int>> priority_list;
     // 7:41, first period start
@@ -32,6 +36,8 @@ public:
 
 private:
     Instance *instance;
+    // key: victim, vector: gravity, age, priority, stabilization time, veh_type, veh_id, mcc_id, appear, wait_till, arrive, stabilize, admit_at_hos;
+    std::map<int, std::vector<float>> solutions;
 };
 
 #endif

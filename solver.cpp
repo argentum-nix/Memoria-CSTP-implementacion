@@ -229,7 +229,8 @@ Solver::Solver(Instance *in)
                 instance->updateCasualtyAssignedVehicle(cursor, choosen_amb, TYPE_AMBULANCE);
                 // Guardar los tiempos
                 instance->updateCasualtyRouteTimes(cursor, waiting_till, veh_arrival_time, cas_st_timestamp, h_admit_timestamp);
-
+                // Save solution
+                saveSolution(cursor, priority_list[k].first, choosen_amb, veh_type, instance->getVehicleRound(choosen_amb, 0), closest_h, waiting_till, veh_arrival_time, cas_st_timestamp, h_admit_timestamp);
                 cout << "After: " << endl;
                 printCasualtyRouteRow(cursor);
                 cout << endl;
@@ -274,8 +275,14 @@ Solver::Solver(Instance *in)
                         prev_v = instance->getCasualtyAssignedVehicle(priority_list[c].second);
                         prev_v_type = instance->getCasualtyAssignedVehicleType(priority_list[c].second);
                         instance->saveVehicleLastAssignment(prev_v, prev_v_type);
+
+                        printCasualtyRouteRow(priority_list[c].second);
+                        cout << endl;
+                        cout << endl;
                     }
                 }
+                cout << "AT THE END OF THIS ITERATION FOR VICTIM V" << cursor << " THE FINAL SOLUTION WAS : " << endl;
+                printSolutions();
             }
         }
     }
@@ -771,5 +778,68 @@ void Solver::greedyAssignment(char fleet_mode, int cursor)
         cout << endl;
         cout << endl;
         instance->updateCasualtyRouteTimes(first_id, waiting_till, veh_arrival_time, cas_st_timestamp, h_admit_timestamp);
+        saveSolution(first_id, priority_list[i].first, closest_veh, veh_type, instance->getVehicleRound(closest_veh, veh_type), closest_h, waiting_till, veh_arrival_time, cas_st_timestamp, h_admit_timestamp);
+    }
+}
+
+void Solver::saveSolution(int casualty_id, float lambda, int veh_id, int veh_type, int r, int hospital_id, float wait_t, float arrive_t, float stabilize_t, float hospital_t)
+{
+    vector<float> data;
+    data.push_back(instance->getCasualtyGravity(casualty_id));
+    data.push_back(instance->getCasualtyAge(casualty_id));
+    data.push_back(lambda);
+    data.push_back(instance->getCasualtyStabilizationTime(casualty_id));
+    data.push_back(veh_type);
+    data.push_back(veh_id);
+    data.push_back(r);
+    data.push_back(hospital_id);
+    data.push_back(instance->getCasualtyAppearTime(casualty_id));
+    data.push_back(wait_t);
+    data.push_back(arrive_t);
+    data.push_back(stabilize_t);
+    data.push_back(hospital_t);
+    solutions[casualty_id] = data;
+}
+
+void Solver::printSolutions()
+{
+    int g, a, v, v_type, h, r;
+    float priority, st_t, appear_t, wait_t, arrive_t, stabilized_t, hospitalized_t;
+    for (const auto &route : solutions)
+    {
+        g = route.second[0];
+        a = route.second[1];
+        priority = route.second[2];
+        st_t = route.second[3];
+        v_type = route.second[4];
+        v = route.second[5];
+        r = route.second[6];
+        h = route.second[7];
+        appear_t = route.second[8];
+        wait_t = route.second[9];
+        arrive_t = route.second[10];
+        stabilized_t = route.second[11];
+        hospitalized_t = route.second[12];
+        cout << left << "V" << route.first << "    ";
+        cout << left << g << "    ";
+        cout << left << a << "    ";
+        cout << left << priority << "    ";
+        cout << left << st_t << "    ";
+        if (v_type == TYPE_HELICOPTER)
+        {
+            cout << left << "H" << v << "    ";
+        }
+        else if (v_type == TYPE_AMBULANCE)
+        {
+            cout << left << "A" << v << "    ";
+        }
+        cout << left << "ROUND " << r << "    ";
+        cout << left << "MCC" << h << "    ";
+        printTimestamp(appear_t);
+        printTimestamp(wait_t);
+        printTimestamp(arrive_t);
+        printTimestamp(stabilized_t);
+        printTimestamp(hospitalized_t);
+        cout << endl;
     }
 }
