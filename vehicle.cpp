@@ -138,6 +138,20 @@ void Vehicle::snapshotLastAssinment()
 {
     // save previous states as copies
     // save prev state ONLY ONCE
+    /*if (veh_type_e == 0)
+    {
+        std::cout << "A" << veh_id_m << " ";
+    }
+    else
+    {
+        std::cout << "H" << veh_id_m << " ";
+    }
+    std::cout << "BEFORE SNAPSHOT OCCUPIED UNTIL WAS " << std::endl;
+    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+    {
+        std::cout << veh_occupied_until[i] << " ";
+    }
+    std::cout << std::endl;*/
     if (yet_to_snapshot)
     {
         veh_prev_total_rounds = veh_total_rounds;
@@ -158,6 +172,12 @@ void Vehicle::snapshotLastAssinment()
     {
         veh_total_rounds.pop_back();
     }
+    /*std::cout << "AFTER SNAPSHOT OCCUPIED UNTIL WAS " << std::endl;
+    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+    {
+        std::cout << veh_occupied_until[i] << " ";
+    }
+    std::cout << std::endl;*/
 }
 
 void Vehicle::clearResetFlag()

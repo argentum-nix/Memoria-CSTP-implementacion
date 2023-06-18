@@ -205,6 +205,13 @@ Solver::Solver(Instance *in)
                 }
                 // TODO: make this a function that returns an ordered vector of pairs of ambs and their priority
                 // So that the algorithm can try with several ambulances, not only the head one
+                min_amb_priority = 9999999;
+                min_availability_veh = -1;
+                choosen_amb = -1;
+                min_dv_veh = -1;
+                closeness = -1;
+                amb_loc = -1;
+
                 cas_loc = instance->getCasualtyLocation(cursor);
                 for (int z = 1; z <= instance->qty_ambulances; z++)
                 {
