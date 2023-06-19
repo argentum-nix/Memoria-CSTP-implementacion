@@ -16,7 +16,7 @@ void Casualty::setCasualtyAge(int a)
 
 void Casualty::setCasualtyRound(int r)
 {
-    std::cout << "SET ROUND FOR V" << cas_id_k << " EQUIAL TO " << r << std::endl;
+    // std::cout << "SET ROUND FOR V" << cas_id_k << " EQUIAL TO " << r << std::endl;
     round = r;
 }
 
@@ -38,27 +38,30 @@ void Casualty::setCasualtyPriority(float lambda)
 }
 void Casualty::setCasualtyGravity(int g)
 {
-    cas_prev_prev_g = cas_prev_g;
     cas_prev_g = cas_curgravity_g;
-    cas_curgravity_g = g;
+    cas_curgravity_g.push_back(g);
 }
 void Casualty::setCasualtyAssignedHospital(int h)
 {
+    cas_prev_prev_hosp = cas_prev_hosp;
     cas_prev_hosp = cas_assigned_hosp;
     cas_assigned_hosp = h;
 }
 void Casualty::setCasualtyAssignedVehicle(int m)
 {
+    cas_prev_prev_veh = cas_prev_veh;
     cas_prev_veh = cas_assigned_veh;
     cas_assigned_veh = m;
 }
 void Casualty::setCasualtyAssignedVehicleType(int e)
 {
+    cas_prev_prev_veh_type = cas_prev_veh_type;
     cas_prev_veh_type = cas_assigned_veh_type;
     cas_assigned_veh_type = e;
 }
 void Casualty::setCasualtyWaitTime(float t)
 {
+    cas_prev_prev_wait_time = cas_prev_wait_time;
     cas_prev_wait_time = cas_wait_time;
     cas_wait_time = t;
 }
@@ -73,7 +76,7 @@ void Casualty::addGravityChangeTimestamp(float t, int inroute_flag)
         g_inroute_flag = 0;
     }
     cas_prev_g_change_timestamp = cas_g_change_timestamp;
-    cas_g_change_timestamp = t;
+    cas_g_change_timestamp.push_back(t);
 }
 void Casualty::setCasualtyVehArrivedTime(float t)
 {
@@ -132,7 +135,7 @@ float Casualty::getCasualtyTimeToHeliport()
 }
 int Casualty::getCasualtyGravity()
 {
-    return cas_curgravity_g;
+    return cas_curgravity_g.back();
 }
 float Casualty::getCasualtyPriority()
 {
@@ -156,25 +159,22 @@ float Casualty::getCasualtyWaitTime()
 }
 float Casualty::getLastGravityChange()
 {
-    return cas_g_change_timestamp;
+    return cas_g_change_timestamp.back();
 }
 void Casualty::resetGravityChange()
 {
-    cas_g_change_timestamp = cas_prev_g_change_timestamp;
-    cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
+    cas_prev_g = cas_curgravity_g;
+    cas_prev_g_change_timestamp = cas_g_change_timestamp;
     g_inroute_flag = 0;
 }
 
 void Casualty::resetLastAssignment()
 {
-    // reset gravity
+    // reset gravity only if an in-route change ocurred in this iteration, otherwise maintain current history of changes
     if (g_inroute_flag == 1)
     {
         cas_curgravity_g = cas_prev_g;
-        cas_prev_g = cas_prev_prev_g;
-        // timestamp of last gravity change
         cas_g_change_timestamp = cas_prev_g_change_timestamp;
-        cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
     }
     g_inroute_flag = 0;
 
@@ -215,7 +215,7 @@ void Casualty::clearResetFlag()
 void Casualty::saveLastAssignment()
 {
     g_inroute_flag = 0;
-    cas_prev_g = cas_prev_prev_g;
+    // cas_prev_g = cas_prev_prev_g;
     cas_prev_veh = cas_prev_prev_veh;
     cas_prev_veh_type = cas_prev_prev_veh_type;
     cas_prev_hosp = cas_prev_prev_hosp;
@@ -223,14 +223,14 @@ void Casualty::saveLastAssignment()
     cas_prev_arrival_time = cas_prev_prev_arrival_time;
     cas_prev_st_time = cas_prev_prev_st_time;
     cas_prev_h_time = cas_prev_prev_h_time;
-    cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
+    // cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
 }
 
 void Casualty::printData()
 {
     std::cout << "Casualty ID: " << cas_id_k;
     std::cout << " Age: " << cas_age_a;
-    std::cout << " Gravity: " << cas_curgravity_g;
+    std::cout << " Gravity: " << cas_curgravity_g.back();
     std::cout << " Location: " << cas_curlocation;
     std::cout << " Wait Time: " << cas_wait_time;
     std::cout << " Appear Time: " << cas_appear_time;

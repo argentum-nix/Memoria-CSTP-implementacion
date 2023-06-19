@@ -346,12 +346,12 @@ void Instance::resetCasualtyLastAssignment(int casualty_id)
 
 void Instance::updateCasualtyRound(int casualty_id, int r)
 {
-    casualties[casualty_id].setCasualtyRound(r);
+    casualties[casualty_id - 1].setCasualtyRound(r);
 }
 
 int Instance::getCasualtyRound(int casualty_id)
 {
-    return casualties[casualty_id].getCasualtyRound();
+    return casualties[casualty_id - 1].getCasualtyRound();
 }
 
 void Instance::saveCasualtyLastAssignment(int casualty_id)

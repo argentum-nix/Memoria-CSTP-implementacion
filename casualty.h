@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <vector>
 
 class Casualty
 {
@@ -52,6 +51,7 @@ public:
     void clearResetFlag();
     void resetLastAssignment();
     void saveLastAssignment();
+    void snapshotLastAssinment();
 
 private:
     // Static values
@@ -67,49 +67,47 @@ private:
     int g_inroute_flag = 0;
 
     // current gravity
-    int cas_curgravity_g;
-    int cas_prev_g = -1;
-    int cas_prev_prev_g = -1;
+    std::vector<int> cas_curgravity_g;
+    std::vector<int> cas_prev_g;
 
     // id of assigned vehicle
-    int cas_assigned_veh;
+    int cas_assigned_veh = -1;
     int cas_prev_veh = -1;
     int cas_prev_prev_veh = -1;
 
     // type of vehicle assigned
-    int cas_assigned_veh_type;
+    int cas_assigned_veh_type = -1;
     int cas_prev_veh_type = -1;
     int cas_prev_prev_veh_type = -1;
 
     // assigned hospital
-    int cas_assigned_hosp;
+    int cas_assigned_hosp = -1;
     int cas_prev_hosp = -1;
     int cas_prev_prev_hosp = -1;
 
     // victim has to wait until X to vehicle to be assigned to it
-    float cas_wait_time;
+    float cas_wait_time = -1;
     float cas_prev_wait_time = -1;
     float cas_prev_prev_wait_time = -1;
 
     // the vehicle arrives at victims location at X
-    float cas_arrival_time;
+    float cas_arrival_time = -1;
     float cas_prev_arrival_time = -1;
     float cas_prev_prev_arrival_time = -1;
 
     // victim is stabilized at X
-    float cas_st_time;
+    float cas_st_time = -1;
     float cas_prev_st_time = -1;
     float cas_prev_prev_st_time = -1;
 
     // victim is admitted to hospital at X
-    float cas_h_time;
+    float cas_h_time = -1;
     float cas_prev_h_time = -1;
     float cas_prev_prev_h_time = -1;
 
     // timestamp of last gravity change
-    float cas_g_change_timestamp;
-    float cas_prev_g_change_timestamp = -1;
-    float cas_prev_prev_g_change_timestamp = -1;
+    std::vector<float> cas_g_change_timestamp;
+    std::vector<float> cas_prev_g_change_timestamp;
 };
 
 #endif

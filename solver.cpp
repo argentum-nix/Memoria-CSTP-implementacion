@@ -26,7 +26,7 @@ Solver::Solver(Instance *in)
 
     // for every period...
     // change to instance->qty_periods
-    for (int p = 1; p <= 1; p++)
+    for (int p = 1; p <= instance->qty_periods; p++)
     {
         // clean the priority list, because every period should start with new list
         priority_list.clear();
@@ -145,7 +145,7 @@ Solver::Solver(Instance *in)
         cout << "Terminated greedy routes. Entering in Metaheuristic" << endl;
         for (int k = 0; k < int(priority_list.size()); k++)
         {
-            // FIRST: CLEAN ALL THE FLAGS FOR RESETTING SOLUTIONS
+            // FIRST: CLEAN FLAGS USED FOR RESETTING
             for (int i = 1; i < instance->qty_casualties; i++)
             {
                 instance->clearCasualtyResetFlag(i);
@@ -188,6 +188,8 @@ Solver::Solver(Instance *in)
                     prev_h = instance->getCasualtyAssignedHospital(priority_list[u].second);
                     instance->snapshotHospitalLastAssignment(prev_h, prev_g);
                     instance->snapshotVehicleLastAssignment(prev_v, prev_v_type);
+                    // snapshot and reset gravity changes (either from last iteration of heuristic, or greedy)
+                    instance->resetCasualtyGravity(priority_list[u].second, current_time);
                 }
                 cout << "HOSPITALS BEFORE META START (AFTER RESET): " << endl;
                 for (int h = 1; h <= instance->qty_hospitals; h++)
@@ -374,6 +376,7 @@ Solver::Solver(Instance *in)
         }
     }
     cout << "TOTAL: " << count_unatt << endl;
+    printSolutions();
 }
 
 void Solver::printCasualtyRouteRow(int casualty_id)
