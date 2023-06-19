@@ -146,10 +146,6 @@ Solver::Solver(Instance *in)
         for (int k = 0; k < int(priority_list.size()); k++)
         {
             // FIRST: CLEAN FLAGS USED FOR RESETTING
-            for (int i = 1; i < instance->qty_casualties; i++)
-            {
-                instance->clearCasualtyResetFlag(i);
-            }
             for (int i = 1; i < instance->qty_ambulances; i++)
             {
                 instance->clearVehicleResetFlag(i, TYPE_AMBULANCE);

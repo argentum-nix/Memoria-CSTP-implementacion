@@ -51,7 +51,7 @@ public:
     void clearResetFlag();
     void resetLastAssignment();
     void saveLastAssignment();
-    void snapshotLastAssinment();
+    void snapshotLastAssignment();
 
 private:
     // Static values

@@ -69,6 +69,7 @@ void Casualty::addGravityChangeTimestamp(float t, int inroute_flag)
 {
     if (inroute_flag == 1)
     {
+        std::cout << "CAPTURED INROUTE FOR V" << cas_id_k << std::endl;
         g_inroute_flag = 1;
     }
     else
@@ -161,10 +162,36 @@ float Casualty::getLastGravityChange()
 {
     return cas_g_change_timestamp.back();
 }
-void Casualty::resetGravityChange()
+void Casualty::snapshotLastAssignment()
 {
     cas_prev_g = cas_curgravity_g;
     cas_prev_g_change_timestamp = cas_g_change_timestamp;
+    g_inroute_flag = 0;
+}
+
+void Casualty::resetGravityChange()
+{
+    std::cout << "V" << cas_id_k << " INROUTE FLAG = " << g_inroute_flag << std::endl;
+    if (g_inroute_flag == 1)
+    {
+        std::cout << "INROUTE IF" << std::endl;
+        std::cout << "PREV GRAVITY FOR V" << cas_id_k << std::endl;
+        for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
+        {
+            std::cout << cas_curgravity_g[i] << " ";
+        }
+        std::cout << std::endl;
+
+        cas_curgravity_g = cas_prev_g;
+        cas_g_change_timestamp = cas_prev_g_change_timestamp;
+
+        std::cout << "CUR GRAVITY FOR V" << cas_id_k << std::endl;
+        for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
+        {
+            std::cout << cas_curgravity_g[i] << " ";
+        }
+        std::cout << std::endl;
+    }
     g_inroute_flag = 0;
 }
 
@@ -214,8 +241,8 @@ void Casualty::clearResetFlag()
 
 void Casualty::saveLastAssignment()
 {
-    g_inroute_flag = 0;
-    // cas_prev_g = cas_prev_prev_g;
+    // g_inroute_flag = 0;
+    //  cas_prev_g = cas_prev_prev_g;
     cas_prev_veh = cas_prev_prev_veh;
     cas_prev_veh_type = cas_prev_prev_veh_type;
     cas_prev_hosp = cas_prev_prev_hosp;
