@@ -51,6 +51,22 @@ int Hospital::getHospitalAppearTime()
     return hosp_appear_time;
 }
 
+void Hospital::snapshotSolution(int g)
+{
+    if (yet_to_snapshot)
+    {
+        hosp_prev_capacity = hosp_curcapacity;
+    }
+    yet_to_snapshot = 0;
+    hosp_curcapacity[g - 1]++;
+}
+
+void Hospital::resetLastAssignment()
+{
+    hosp_curcapacity = hosp_prev_capacity;
+    yet_to_snapshot = 1;
+}
+
 void Hospital::printData()
 {
     std::cout << "Hospital ID: " << hosp_id_h;

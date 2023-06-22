@@ -75,6 +75,11 @@ int Instance::getCasualtyGravity(int casualty_id)
     return casualties[casualty_id - 1].getCasualtyGravity();
 }
 
+float Instance::getCasualtyPriority(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyPriority();
+}
+
 int Instance::getCasualtyAge(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyAge();
@@ -102,6 +107,19 @@ float Instance::getCasualtyWaitingTime(int casualty_id)
 float Instance::getCasualtyAppearTime(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyAppearTime();
+}
+
+float Instance::getCasualtyVehArrivedTime(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyVehArrivedTime();
+}
+float Instance::getCasualtyStabilizedTime(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyStabilizedTime();
+}
+float Instance::getCasualtyAdmittedAtHopsitalTime(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyAdmittedAtHospitalTime();
 }
 
 float Instance::getDetFunctParam(int param, int g)
@@ -254,12 +272,28 @@ void Instance::addVehicleRound(int veh_id, int veh_type)
     if (veh_type == 0)
     {
         prev_round = ambulance_fleet[veh_id - 1].getVehicleRound();
-        ambulance_fleet[veh_id - 1].setVehicleRound(prev_round + 1);
+        if (prev_round == -1)
+        {
+            prev_round += 2;
+        }
+        else
+        {
+            prev_round += 1;
+        }
+        ambulance_fleet[veh_id - 1].setVehicleRound(prev_round);
     }
     else if (veh_type == 1)
     {
         prev_round = helicopter_fleet[veh_id - 1].getVehicleRound();
-        helicopter_fleet[veh_id - 1].setVehicleRound(prev_round + 1);
+        if (prev_round == -1)
+        {
+            prev_round += 2;
+        }
+        else
+        {
+            prev_round += 1;
+        }
+        helicopter_fleet[veh_id - 1].setVehicleRound(prev_round);
     }
 }
 
@@ -287,17 +321,101 @@ void Instance::updateCasualtyWaitingTime(int casualty_id, float t)
     casualties[casualty_id - 1].setCasualtyWaitTime(t);
 }
 
-void Instance::updateCasualtyGravity(int casualty_id, int g, float t)
+void Instance::updateCasualtyGravity(int casualty_id, int g, float t, int inroute_flag)
 {
     casualties[casualty_id - 1].setCasualtyGravity(g);
-    casualties[casualty_id - 1].addGravityChangeTimestamp(t);
+    casualties[casualty_id - 1].addGravityChangeTimestamp(t, inroute_flag);
 }
 
-void Instance::resetCasualtyGravity(int casualty_id, float current_time)
+void Instance::resetCasualtyGravity(int casualty_id, float current_time, int on_period_reset)
 {
     if (casualties[casualty_id - 1].getLastGravityChange() >= current_time)
     {
-        casualties[casualty_id - 1].resetGravityChange();
+        casualties[casualty_id - 1].resetGravityChange(on_period_reset);
+    }
+}
+void Instance::resetCasualtyLastAssignment(int casualty_id)
+{
+    casualties[casualty_id - 1].resetLastAssignment();
+}
+
+void Instance::updateCasualtyRound(int casualty_id, int r)
+{
+    casualties[casualty_id - 1].setCasualtyRound(r);
+}
+
+int Instance::getCasualtyRound(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCasualtyRound();
+}
+
+void Instance::saveCasualtyLastAssignment(int casualty_id)
+{
+    casualties[casualty_id - 1].saveLastAssignment();
+}
+void Instance::snapshotHospitalLastAssignment(int hospital_id, int g)
+{
+    hospitals[hospital_id - 1].snapshotSolution(g);
+}
+
+void Instance::updateVehicleLocation(int veh_id, int veh_type, int hospital_id)
+{
+    int node_id = hospitals[hospital_id - 1].getHospitalLocation();
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].setVehicleLocation(node_id);
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].setVehicleLocation(node_id);
+    }
+}
+
+void Instance::snapshotVehicleLastAssignment(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].snapshotLastAssinment();
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].snapshotLastAssinment();
+    }
+}
+
+void Instance::resetVehicleLastAssignment(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].resetLastAssignment();
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].resetLastAssignment();
+    }
+}
+
+void Instance::saveVehicleLastAssignment(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].saveLastAssignment();
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].saveLastAssignment();
+    }
+}
+
+void Instance::clearVehicleResetFlag(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].clearResetFlag();
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].clearResetFlag();
     }
 }
 
@@ -306,7 +424,15 @@ void Instance::updateCasualtyAppearTime(int casualty_id, float t)
     casualties[casualty_id - 1].setCasualtyAppearTime(t);
 }
 
-void Instance::updateCasualtyPriority(int casualty_id, int lambda)
+void Instance::updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t)
+{
+    casualties[casualty_id - 1].setCasualtyWaitTime(assign_t);
+    casualties[casualty_id - 1].setCasualtyVehArrivedTime(arrive_t);
+    casualties[casualty_id - 1].setCasualtyStabilizedTime(st_t);
+    casualties[casualty_id - 1].setCasualtyAdmittedAtHospitalTime(h_t);
+}
+
+void Instance::updateCasualtyPriority(int casualty_id, float lambda)
 {
     casualties[casualty_id - 1].setCasualtyPriority(lambda);
 }
@@ -316,6 +442,7 @@ void Instance::updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int ve
     casualties[casualty_id - 1].setCasualtyAssignedVehicle(veh_id);
     casualties[casualty_id - 1].setCasualtyAssignedVehicleType(veh_type);
 }
+
 // Hospital-wrappers GET type
 int Instance::getHospitalCurCapacity(int hospital_id, int g)
 {
@@ -333,6 +460,11 @@ int Instance::getHospitalAppearTime(int hospital_id)
 }
 
 // Hospital-wrappers UPDATE/SET type
+
+void Instance::resetHospitalLastAssignment(int hospital_id)
+{
+    hospitals[hospital_id - 1].resetLastAssignment();
+}
 
 void Instance::updateHospitalBedCapacity(int hospital_id, int g, int beds)
 {
@@ -591,7 +723,7 @@ int Instance::loadInstance()
                     vehicle.setVehicleLandingTime(g);
                     vehicle.setVehicleTakeoffTime(h);
                     vehicle.setVehicleOccupiedUntilTime(d);
-                    vehicle.setVehicleRound(1);
+                    vehicle.setVehicleRound(0);
                     addVehicle(vehicle);
                 }
             }
@@ -621,10 +753,14 @@ int Instance::loadInstance()
                     casualty.setCasualtyWaitTime(e);
                     casualty.setCasualtyAppearTime(e);
                     casualty.setCasualtyTimeToHeliport(f);
+                    casualty.addGravityChangeTimestamp(e, 0);
                     casualty.setCasualtyAssignedVehicle(-1);
+                    casualty.setCasualtyAssignedVehicleType(-1);
                     casualty.setCasualtyAssignedHospital(-1);
-                    casualty.setCasualtyPriority(0);
-                    casualty.addGravityChangeTimestamp(e);
+                    casualty.setCasualtyVehArrivedTime(-1);
+                    casualty.setCasualtyStabilizedTime(-1);
+                    casualty.setCasualtyAdmittedAtHospitalTime(-1);
+                    casualty.setCasualtyPriority(-1);
                     addCasualty(casualty);
                 }
             }
