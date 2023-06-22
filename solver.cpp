@@ -86,7 +86,7 @@ Solver::Solver(Instance *in)
                     // reassign waiting time to the start of new period
                     instance->updateCasualtyWaitingTime(i, current_time);
                     // reset the casualty gravity (if it was changed on current time or later in previous assignment)
-                    instance->resetCasualtyGravity(i, current_time);
+                    instance->resetCasualtyGravity(i, current_time, 1);
                     // recalculate the victims gravity using its new wait time (total of seconds of wait)
                     updateCasualtyState(i, instance->getCasualtyWaitingTime(i) - instance->getCasualtyAppearTime(i), current_time);
                     // update lambda with new data
@@ -185,7 +185,7 @@ Solver::Solver(Instance *in)
                     instance->snapshotHospitalLastAssignment(prev_h, prev_g);
                     instance->snapshotVehicleLastAssignment(prev_v, prev_v_type);
                     // snapshot and reset gravity changes (either from last iteration of heuristic, or greedy)
-                    instance->resetCasualtyGravity(priority_list[u].second, current_time);
+                    instance->resetCasualtyGravity(priority_list[u].second, current_time, 0);
                 }
                 cout << "HOSPITALS BEFORE META START (AFTER RESET): " << endl;
                 for (int h = 1; h <= instance->qty_hospitals; h++)

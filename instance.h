@@ -76,14 +76,13 @@ public:
     void updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t);
     void updateCasualtyPriority(int casualty_id, float lambda);
     void updateCasualtyAssignedVehicle(int casualty_id, int veh_id, int veh_type);
-    void resetCasualtyGravity(int casualty_id, float current_time);
+    void resetCasualtyGravity(int casualty_id, float current_time, int on_period_reset);
     void resetCasualtyLastAssignment(int casualty_id);
     void saveCasualtyLastAssignment(int casualty_id);
 
     void snapshotHospitalLastAssignment(int hospital_id, int g);
     void temporaryDeassignVehicle(int veh_id, int veh_type);
 
-    void clearCasualtyResetFlag(int casualty_id);
     void clearVehicleResetFlag(int veh_id, int veh_type);
 
     // Vehicle-class wrappers

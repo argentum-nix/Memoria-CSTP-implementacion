@@ -95,11 +95,6 @@ int Instance::getCasualtyAssignedHospital(int casualty_id)
     return casualties[casualty_id - 1].getCasualtyAssignedHospital();
 }
 
-void Instance::clearCasualtyResetFlag(int casualty_id)
-{
-    casualties[casualty_id - 1].clearResetFlag();
-}
-
 float Instance::getCasualtyTimeToHeliport(int casualty_id)
 {
     return casualties[casualty_id - 1].getCasualtyTimeToHeliport();
@@ -332,11 +327,11 @@ void Instance::updateCasualtyGravity(int casualty_id, int g, float t, int inrout
     casualties[casualty_id - 1].addGravityChangeTimestamp(t, inroute_flag);
 }
 
-void Instance::resetCasualtyGravity(int casualty_id, float current_time)
+void Instance::resetCasualtyGravity(int casualty_id, float current_time, int on_period_reset)
 {
     if (casualties[casualty_id - 1].getLastGravityChange() >= current_time)
     {
-        casualties[casualty_id - 1].resetGravityChange();
+        casualties[casualty_id - 1].resetGravityChange(on_period_reset);
     }
 }
 void Instance::resetCasualtyLastAssignment(int casualty_id)

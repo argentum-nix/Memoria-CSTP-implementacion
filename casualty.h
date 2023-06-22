@@ -44,14 +44,12 @@ public:
     float getCasualtyStabilizedTime();
     float getCasualtyAdmittedAtHospitalTime();
 
-    void resetGravityChange();
+    void resetGravityChange(int on_period_reset);
     void printData();
 
     // metaheuristic-specific functions for trying new solutions
-    void clearResetFlag();
     void resetLastAssignment();
     void saveLastAssignment();
-    void snapshotLastAssignment();
 
 private:
     // Static values
@@ -64,11 +62,10 @@ private:
     // Changing values (assignment-specific)
     int round = 0;
     float cas_priority_lambda;
-    int g_inroute_flag = 0;
 
-    // current gravity
-    std::vector<int> cas_curgravity_g;
-    std::vector<int> cas_prev_g;
+    int prev_prev_g_inroute_flag = 0;
+    int prev_g_inroute_flag = 0;
+    int g_inroute_flag = 0;
 
     // id of assigned vehicle
     int cas_assigned_veh = -1;
@@ -105,6 +102,9 @@ private:
     float cas_prev_h_time = -1;
     float cas_prev_prev_h_time = -1;
 
+    // current gravity
+    std::vector<int> cas_curgravity_g;
+    std::vector<int> cas_prev_g;
     // timestamp of last gravity change
     std::vector<float> cas_g_change_timestamp;
     std::vector<float> cas_prev_g_change_timestamp;

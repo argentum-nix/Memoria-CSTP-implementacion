@@ -67,14 +67,17 @@ void Casualty::setCasualtyWaitTime(float t)
 }
 void Casualty::addGravityChangeTimestamp(float t, int inroute_flag)
 {
+    // if only for cout
     if (inroute_flag == 1)
     {
-        std::cout << "CAPTURED INROUTE FOR V" << cas_id_k << std::endl;
-        g_inroute_flag = 1;
+        std::cout << "CAPTURED INROUTE GRAVITY CHANGE FOR V" << cas_id_k << std::endl;
     }
-    else
+
+    if (inroute_flag != g_inroute_flag)
     {
-        g_inroute_flag = 0;
+        prev_prev_g_inroute_flag = prev_g_inroute_flag;
+        prev_g_inroute_flag = g_inroute_flag;
+        g_inroute_flag = inroute_flag;
     }
     cas_prev_g_change_timestamp = cas_g_change_timestamp;
     cas_g_change_timestamp.push_back(t);
@@ -162,37 +165,46 @@ float Casualty::getLastGravityChange()
 {
     return cas_g_change_timestamp.back();
 }
-void Casualty::snapshotLastAssignment()
-{
-    cas_prev_g = cas_curgravity_g;
-    cas_prev_g_change_timestamp = cas_g_change_timestamp;
-    g_inroute_flag = 0;
-}
 
-void Casualty::resetGravityChange()
+void Casualty::resetGravityChange(int on_period_reset)
 {
-    std::cout << "V" << cas_id_k << " INROUTE FLAG = " << g_inroute_flag << std::endl;
-    if (g_inroute_flag == 1)
+    std::cout << "V" << cas_id_k << " BEFORE INROUTE FLAG = " << g_inroute_flag << std::endl;
+    std::cout << "PREV GRAVITY FOR V" << cas_id_k << std::endl;
+    for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
     {
-        std::cout << "INROUTE IF" << std::endl;
-        std::cout << "PREV GRAVITY FOR V" << cas_id_k << std::endl;
-        for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
+        std::cout << cas_curgravity_g[i] << " ";
+    }
+    std::cout << std::endl;
+
+    // RESET only if: its new period and reset is needed, or there was change in rerouting in the same period
+    if (on_period_reset || (g_inroute_flag != prev_g_inroute_flag))
+    {
+        if (on_period_reset)
         {
-            std::cout << cas_curgravity_g[i] << " ";
+            std::cout << "RESETTING FOR NEW PERIOD BECAUSE LAST CHANGE WAS AFTER NEW PERIOD START" << std::endl;
         }
-        std::cout << std::endl;
+        else if ((g_inroute_flag != prev_g_inroute_flag))
+        {
+            std::cout << "RESETTING BECAUSE FLAG != PREV ROUTE FLAG" << std::endl;
+        }
 
         cas_curgravity_g = cas_prev_g;
         cas_g_change_timestamp = cas_prev_g_change_timestamp;
-
+        prev_prev_g_inroute_flag = prev_g_inroute_flag;
+        prev_g_inroute_flag = g_inroute_flag;
+        g_inroute_flag = prev_prev_g_inroute_flag;
+        std::cout << "INROUTE FLAG RESET TO " << g_inroute_flag << std::endl;
         std::cout << "CUR GRAVITY FOR V" << cas_id_k << std::endl;
         for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
         {
             std::cout << cas_curgravity_g[i] << " ";
         }
-        std::cout << std::endl;
     }
-    g_inroute_flag = 0;
+    else
+    {
+        std::cout << "NO GRAVITY RESET NEEDED" << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 void Casualty::resetLastAssignment()
@@ -202,9 +214,9 @@ void Casualty::resetLastAssignment()
     {
         cas_curgravity_g = cas_prev_g;
         cas_g_change_timestamp = cas_prev_g_change_timestamp;
+        g_inroute_flag = prev_g_inroute_flag;
+        prev_g_inroute_flag = prev_prev_g_inroute_flag;
     }
-    g_inroute_flag = 0;
-
     // id of assigned vehicle
     cas_assigned_veh = cas_prev_veh;
     cas_prev_veh = cas_prev_prev_veh;
@@ -234,15 +246,11 @@ void Casualty::resetLastAssignment()
     cas_prev_h_time = cas_prev_prev_h_time;
 }
 
-void Casualty::clearResetFlag()
-{
-    g_inroute_flag = 0;
-}
-
 void Casualty::saveLastAssignment()
 {
     // g_inroute_flag = 0;
     //  cas_prev_g = cas_prev_prev_g;
+    prev_g_inroute_flag = prev_prev_g_inroute_flag;
     cas_prev_veh = cas_prev_prev_veh;
     cas_prev_veh_type = cas_prev_prev_veh_type;
     cas_prev_hosp = cas_prev_prev_hosp;
