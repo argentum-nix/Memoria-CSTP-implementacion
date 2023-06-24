@@ -67,11 +67,10 @@ void Casualty::setCasualtyWaitTime(float t)
 }
 void Casualty::addGravityChangeTimestamp(float t, int inroute_flag)
 {
-    // if only for cout
-    if (inroute_flag == 1)
+    /*if (inroute_flag == 1)
     {
         std::cout << "CAPTURED INROUTE GRAVITY CHANGE FOR V" << cas_id_k << std::endl;
-    }
+    }*/
 
     if (inroute_flag != g_inroute_flag)
     {
@@ -168,43 +167,44 @@ float Casualty::getLastGravityChange()
 
 void Casualty::resetGravityChange(int on_period_reset)
 {
-    std::cout << "V" << cas_id_k << " BEFORE INROUTE FLAG = " << g_inroute_flag << std::endl;
+    /*std::cout << "V" << cas_id_k << " BEFORE INROUTE FLAG = " << g_inroute_flag << std::endl;
     std::cout << "PREV GRAVITY FOR V" << cas_id_k << std::endl;
     for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
     {
         std::cout << cas_curgravity_g[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout << std::endl;*/
 
     // RESET only if: its new period and reset is needed, or there was change in rerouting in the same period
     if (on_period_reset || (g_inroute_flag != prev_g_inroute_flag))
     {
-        if (on_period_reset)
+        /*if (on_period_reset)
         {
             std::cout << "RESETTING FOR NEW PERIOD BECAUSE LAST CHANGE WAS AFTER NEW PERIOD START" << std::endl;
         }
         else if ((g_inroute_flag != prev_g_inroute_flag))
         {
             std::cout << "RESETTING BECAUSE FLAG != PREV ROUTE FLAG" << std::endl;
-        }
+        }*/
 
         cas_curgravity_g = cas_prev_g;
         cas_g_change_timestamp = cas_prev_g_change_timestamp;
         prev_prev_g_inroute_flag = prev_g_inroute_flag;
         prev_g_inroute_flag = g_inroute_flag;
         g_inroute_flag = prev_prev_g_inroute_flag;
-        std::cout << "INROUTE FLAG RESET TO " << g_inroute_flag << std::endl;
+        /*std::cout << "INROUTE FLAG RESET TO " << g_inroute_flag << std::endl;
         std::cout << "CUR GRAVITY FOR V" << cas_id_k << std::endl;
         for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
         {
             std::cout << cas_curgravity_g[i] << " ";
-        }
+        }*/
     }
+    /*
     else
     {
         std::cout << "NO GRAVITY RESET NEEDED" << std::endl;
     }
-    std::cout << std::endl;
+    std::cout << std::endl;*/
 }
 
 void Casualty::resetLastAssignment()
