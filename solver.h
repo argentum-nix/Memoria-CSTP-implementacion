@@ -14,10 +14,10 @@ public:
     ~Solver();
     float calculatePriority(float te, int g);
     void updateCasualtyState(int casualty_id, float te, float change_timestamp);
-    void greedyAssignment(char fleet_mode, int cursor, int flag_save, int GRASP_flag, int GRASP_window_size);
+    void greedyAssignment(char fleet_mode, int cursor, int flag_save, int GRASP_flag, int GRASP_window_size, int HOrder_flag);
     int checkIfHighST(int casualty_id);
     void printTimestamp(float t);
-    float calculateSolutionQuality();
+    float calculateSolutionQuality(char f);
     void printCasualtyRouteRow(int casualty_id);
     void printPriorityList();
     void printVictimsWithoutAssignment();
@@ -28,6 +28,7 @@ public:
     void greedyRouteCreator(int cas_id, char fleet_mode, int flag_save, float lambda);
 
     std::vector<std::pair<float, int>> priority_list;
+    std::vector<std::pair<float, int>> assignment_list;
     std::pair<int, float> findClosestHospitalWithBeds(int casualty_id, int id_closest_veh, int veh_type);
     std::pair<int, float> findClosestAvailableVehicle(int casualty_id, int veh_type);
     std::pair<int, float> findFirstAvailableVehicle(int veh_type);
