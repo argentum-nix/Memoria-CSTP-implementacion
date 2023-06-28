@@ -47,8 +47,8 @@ void Vehicle::setVehicleOccupiedUntilTime(float t)
 
 void Vehicle::setVehicleRound(int round)
 {
-    // std::cout << "SET ROUND " << round << " TO VEHICLE ";
-    /*if (veh_type_e == 0)
+    /*std::cout << "SET ROUND " << round << " TO VEHICLE ";
+    if (veh_type_e == 0)
     {
         std::cout << "A" << veh_id_m << std::endl;
     }

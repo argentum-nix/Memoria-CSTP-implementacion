@@ -82,7 +82,9 @@ public:
 
     void snapshotHospitalLastAssignment(int hospital_id, int g);
     void temporaryDeassignVehicle(int veh_id, int veh_type);
-
+    int getCasualtyInrouteFlag(int casualty_id);
+    void clearHospitalResetFlag(int hospital_id);
+    void saveHospitalLastAssignment(int hospital_id);
     void clearVehicleResetFlag(int veh_id, int veh_type);
 
     // Vehicle-class wrappers

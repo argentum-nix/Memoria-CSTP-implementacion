@@ -50,6 +50,7 @@ public:
     // metaheuristic-specific functions for trying new solutions
     void resetLastAssignment();
     void saveLastAssignment();
+    int getCurrentInrouteFlag();
 
 private:
     // Static values

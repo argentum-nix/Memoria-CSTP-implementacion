@@ -17,9 +17,15 @@ int Solver::checkIfHighST(int casualty_id)
     return 0;
 }
 
-Solver::Solver(Instance *in)
+Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, float availability_param)
 {
     instance = in;
+    useHeuristic = heuristic_flag;
+    useGrasp = grasp_flag;
+    graspWindowSize = grasp_window;
+    closeness_factor = closeness_param;
+    availability_factor = availability_param;
+    seed = s;
     float lambda;
     int prev_hospital, g, prev_vehicle, veh_type;
 
@@ -101,25 +107,28 @@ Solver::Solver(Instance *in)
              { return (l.first == r.first) ? l.second > r.second : l.first < r.first; });
         printPriorityList();
         cout << endl;
-        // cout << "=GREEDY=" << endl;
-        greedyAssignment('M', 0, 1, 1, 10, 0);
+        cout << "=GREEDY=" << endl;
+        greedyAssignment('M', 0, 1, useGrasp, graspWindowSize, 0);
         cout << "---" << endl;
         cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality('H') << endl;
         printSolutions();
         cout << "---" << endl;
-        /*for (int y = 0; y < int(assignment_list.size()); y++)
+        for (int y = 0; y < int(assignment_list.size()); y++)
         {
             cout << "(" << assignment_list[y].first << " " << assignment_list[y].second << "), ";
         }
-        cout << "Terminated greedy routes. Entering in Metaheuristic" << endl;*/
+        cout << "Terminated greedy routes. Entering in Metaheuristic" << endl;
 
-        heuristicProcedure(0.2, 0.8);
-
-        cout << "===" << endl;
-        cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality('H') << endl;
-        printSolutions();
-        cout << "===" << endl;
+        if (useHeuristic == 1)
+        {
+            heuristicProcedure(closeness_factor, availability_factor);
+            cout << "===" << endl;
+            cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality('H') << endl;
+            printSolutions();
+            cout << "===" << endl;
+        }
     }
+    printAllHospitalsStates();
     // printVictimsWithoutAssignment();
     // printSolutions();
     // cout << calculateSolutionQuality('H') << endl;
@@ -127,7 +136,6 @@ Solver::Solver(Instance *in)
 
 void Solver::heuristicProcedure(float closeness_factor, float availability_factor)
 {
-    // METAHEURISTIC PROCEDURE
     int cursor, amb_loc, cas_loc, choosen_amb, closest_h;
     int prev_v, prev_v_type, prev_h, prev_g;
     float closeness, availability, amb_priority;
@@ -147,6 +155,10 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
         {
             instance->clearVehicleResetFlag(i, TYPE_HELICOPTER);
         }
+        for (int i = 1; i < instance->qty_hospitals; i++)
+        {
+            instance->clearHospitalResetFlag(i);
+        }
 
         cursor = assignment_list[k].second;
         cout << "Trying for victim " << cursor << endl;
@@ -164,7 +176,17 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                 prev_v = instance->getCasualtyAssignedVehicle(assignment_list[u].second);
                 prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[u].second);
                 prev_h = instance->getCasualtyAssignedHospital(assignment_list[u].second);
-                instance->snapshotHospitalLastAssignment(prev_h, prev_g);
+
+                if (instance->getCasualtyInrouteFlag(assignment_list[u].second) == 1)
+                {
+                    // Note: this works when the change was of at most 1 level of triage
+                    instance->snapshotHospitalLastAssignment(prev_h, prev_g + 1);
+                }
+                else
+                {
+                    // if no gravity in-route change ocurred
+                    instance->snapshotHospitalLastAssignment(prev_h, prev_g);
+                }
                 instance->snapshotVehicleLastAssignment(prev_v, prev_v_type);
                 instance->resetCasualtyGravity(assignment_list[u].second, current_time, 0);
             }
@@ -237,12 +259,12 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                 cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
                 for (int c = k; c < int(assignment_list.size()); c++)
                 {
-                    cout << "Resetting victim V" << assignment_list[c].second << " on index " << c << " in priority list." << endl;
+                    // cout << "Resetting victim V" << assignment_list[c].second << " on index " << c << " in priority list." << endl;
                     prev_v = instance->getCasualtyAssignedVehicle(assignment_list[c].second);
                     prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[c].second);
                     prev_h = instance->getCasualtyAssignedHospital(assignment_list[c].second);
-                    cout << "BEFORE: " << endl;
-                    printCasualtyRouteRow(assignment_list[c].second);
+                    // cout << "BEFORE: " << endl;
+                    // printCasualtyRouteRow(assignment_list[c].second);
                     instance->resetHospitalLastAssignment(prev_h);
                     instance->resetVehicleLastAssignment(prev_v, prev_v_type);
                     instance->resetCasualtyLastAssignment(assignment_list[c].second);
@@ -263,6 +285,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[c].second);
                     instance->saveVehicleLastAssignment(prev_v, prev_v_type);
                     closest_h = instance->getCasualtyAssignedHospital(assignment_list[c].second);
+                    instance->saveHospitalLastAssignment(closest_h);
                     waiting_till = instance->getCasualtyWaitingTime(assignment_list[c].second);
                     veh_arrival_time = instance->getCasualtyVehArrivedTime(assignment_list[c].second);
                     cas_st_timestamp = instance->getCasualtyStabilizedTime(assignment_list[c].second);
@@ -401,7 +424,7 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
         // cout << endl;
         if (change_timestamp > current_time)
         {
-            // cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE!" << endl;
+            cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE!" << endl;
             instance->updateCasualtyGravity(casualty_id, 2, change_timestamp, 1);
         }
         else
@@ -417,7 +440,7 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
         // cout << endl;
         if (change_timestamp > current_time)
         {
-            // cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE!" << endl;
+            cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE! " << casualty_id << endl;
             instance->updateCasualtyGravity(casualty_id, 3, change_timestamp, 1);
         }
         else
@@ -425,10 +448,10 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
             instance->updateCasualtyGravity(casualty_id, 3, change_timestamp, 0);
         }
     }
-    else
+    /*else
     {
-        // cout << "OK NO CHANGE NEEDED";
-    }
+        cout << "OK NO CHANGE NEEDED";
+    }*/
 }
 
 float Solver::calculatePriority(float te, int g)
@@ -611,7 +634,7 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
     {
         if (instance->getCasualtyGravity(first_id) == 3)
         {
-            cout << "[NOTICE: Preferential mode ON.]" << endl;
+            // cout << "[NOTICE: Preferential mode ON.]" << endl;
             veh_type = TYPE_HELICOPTER;
         }
         else
@@ -628,7 +651,6 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
     // cout << "Searching for closest vehicle to pick up the casualty..." << endl;
     if (fleet_mode == 'M')
     {
-        // cout << "[NOTICE: Mixed mode ON]" << endl;
         res = findClosestAvailableVehicle(first_id, veh_type);
         // If no helicopters are currently available, try to find an ambulance
         if (res.first == -1)
@@ -688,7 +710,7 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
             min_availability_veh = res.second;
         }
 
-        /* cout << "->>>>Next available vehicle is";
+        /*cout << "->>>>Next available vehicle is";
         if (veh_type == TYPE_HELICOPTER)
         {
             cout << " H";
@@ -761,10 +783,10 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
     // Guardar la asignacion de vehiculo
     instance->updateCasualtyAssignedVehicle(first_id, closest_veh, veh_type);
     instance->updateCasualtyRound(first_id, instance->getVehicleRound(closest_veh, veh_type));
-    cout << endl;
+    /*cout << endl;
 
     // STEP FIVE: PRINT THE FINAL ASSIGNMENT
-    /*cout << left << "V" << first_id << "    ";
+    cout << left << "V" << first_id << "    ";
     cout << left << instance->getCasualtyGravity(first_id) << "    ";
     cout << left << instance->getCasualtyAge(first_id) << "    ";
     cout << left << instance->getCasualtyPriority(first_id) << "    ";
@@ -800,22 +822,21 @@ void Solver::greedyAssignment(char fleet_mode, int cursor, int flag_save, int GR
 {
     if (GRASP_flag == 0)
     {
-        // greedy-priority order
+        // priority order (only used for construction stage)
         if (HOrder_flag == 0)
         {
             for (int i = cursor; i < int(priority_list.size()); i++)
             {
-                cout << endl;
+                // cout << endl;
                 greedyRouteCreator(priority_list[i].second, fleet_mode, flag_save, priority_list[i].first);
             }
         }
-        // grasp-order
+        // assignment-order
         else
         {
-            // cout << "USING GRASP ORDER FOR HEURISTIC BASED GREEDY" << endl;
             for (int i = cursor; i < int(assignment_list.size()); i++)
             {
-                cout << endl;
+                // cout << endl;
                 greedyRouteCreator(assignment_list[i].second, fleet_mode, flag_save, assignment_list[i].first);
             }
         }
@@ -828,8 +849,7 @@ void Solver::greedyAssignment(char fleet_mode, int cursor, int flag_save, int GR
         int init = 0;
         int fin = GRASP_window_size - 1;
         set<int> visited;
-        std::random_device rd;
-        std::mt19937 gen(rd());
+        std::mt19937 gen(seed);
         // slide as many "whole" sized windows as we can
         // cout << "RUNNING GRASP CONSTRUCTION..." << endl;
         // cout << "LIST SIZE: " << priority_list.size() << " WINDOW SIZE: " << GRASP_window_size;
@@ -844,7 +864,7 @@ void Solver::greedyAssignment(char fleet_mode, int cursor, int flag_save, int GR
                 // rand between init and fin indices
                 choice = dis(gen);
                 // cout << "CHOSE INDEX " << choice << endl;
-                //  if not yet assigned
+                //   if not yet assigned
                 if (visited.count(priority_list[choice].second) == 0)
                 {
                     // cout << "NOT VISITED. STARTING GREEDY ROUTE." << endl;
@@ -866,7 +886,7 @@ void Solver::greedyAssignment(char fleet_mode, int cursor, int flag_save, int GR
                 // rand between init and last index of final window
                 choice = dis(gen);
                 // cout << "CHOSE INDEX " << choice << endl;
-                //  if not yet assigned
+                //   if not yet assigned
                 if (visited.count(priority_list[choice].second) == 0)
                 {
                     // cout << "NOT VISITED. STARTING GREEDY ROUTE." << endl;

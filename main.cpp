@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "solver.h"
 using namespace std;
 
@@ -8,7 +9,7 @@ int main(int argc, char const *argv[])
     {
         cout << "Error: Expected more parameters." << '\n';
         cout << "Follow the format: ./CSTPSolver directory instance_txt_name network_txt_name" << '\n';
-        cout << "Try: ./CSTPSolver ./instances/ instance1 network" << '\n';
+        cout << "Try: ./CSTPSolver ./instances/ instance1 network heuristicFlag graspFlag graspWindow seed closenessParam availabilityParam" << '\n';
         return 0;
     }
 
@@ -27,6 +28,6 @@ int main(int argc, char const *argv[])
         cout << "[ERROR]: Failed to load the instance txt." << endl;
         return 0;
     }
-    Solver solve(&cstp);
+    Solver solve(&cstp, stoi(argv[4]), stoi(argv[5]), stoi(argv[6]), stoi(argv[7]), stof(argv[8]), stof(argv[9]));
     return 0;
 }

@@ -261,6 +261,11 @@ void Casualty::saveLastAssignment()
     // cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
 }
 
+int Casualty::getCurrentInrouteFlag()
+{
+    return g_inroute_flag == 0 && prev_g_inroute_flag == 1;
+}
+
 void Casualty::printData()
 {
     std::cout << "Casualty ID: " << cas_id_k;

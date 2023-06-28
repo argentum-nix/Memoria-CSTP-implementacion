@@ -24,11 +24,14 @@ public:
     void resetLastAssignment();
     void snapshotSolution(int g);
     void printData();
+    void clearResetFlag();
+    void saveLastAssignment();
 
 private:
     int yet_to_snapshot = 1;
     int hosp_id_h;
     int hosp_location;
+    int was_already_reset = 1;
     int hosp_appear_time;
     std::vector<int> hosp_maxcapacity{0, 0, 0};
     std::vector<int> hosp_curcapacity{0, 0, 0};

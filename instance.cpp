@@ -56,6 +56,10 @@ void Instance::addVehicle(Vehicle v)
     }
 }
 
+int Instance::getCasualtyInrouteFlag(int casualty_id)
+{
+    return casualties[casualty_id - 1].getCurrentInrouteFlag();
+}
 int Instance::getDeteriorationTimeValue(int g)
 {
     return deterioration_time_pi[g - 1][0];
@@ -419,9 +423,18 @@ void Instance::clearVehicleResetFlag(int veh_id, int veh_type)
     }
 }
 
+void Instance::clearHospitalResetFlag(int hospital_id)
+{
+    hospitals[hospital_id - 1].clearResetFlag();
+}
 void Instance::updateCasualtyAppearTime(int casualty_id, float t)
 {
     casualties[casualty_id - 1].setCasualtyAppearTime(t);
+}
+
+void Instance::saveHospitalLastAssignment(int hospital_id)
+{
+    hospitals[hospital_id - 1].saveLastAssignment();
 }
 
 void Instance::updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t)

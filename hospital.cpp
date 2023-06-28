@@ -59,11 +59,31 @@ void Hospital::snapshotSolution(int g)
     }
     yet_to_snapshot = 0;
     hosp_curcapacity[g - 1]++;
+    if (hosp_curcapacity[g - 1] > hosp_maxcapacity[g - 1])
+    {
+        std::cout << "SUMA SUPERA LA CAPACIDAD MAXIMA" << std::endl;
+    }
+}
+
+void Hospital::clearResetFlag()
+{
+    was_already_reset = 0;
 }
 
 void Hospital::resetLastAssignment()
 {
-    hosp_curcapacity = hosp_prev_capacity;
+    if (was_already_reset != 1)
+    {
+        hosp_curcapacity = hosp_prev_capacity;
+        hosp_prev_capacity.clear();
+    }
+    was_already_reset = 1;
+    yet_to_snapshot = 1;
+}
+
+void Hospital::saveLastAssignment()
+{
+    hosp_prev_capacity.clear();
     yet_to_snapshot = 1;
 }
 
