@@ -177,7 +177,8 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                 prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[u].second);
                 prev_h = instance->getCasualtyAssignedHospital(assignment_list[u].second);
 
-                if (instance->getCasualtyInrouteFlag(assignment_list[u].second) == 1)
+                cout << "In snapshot for V" << assignment_list[u].second << " prevg=" << prev_g << " prev_h=" << prev_h << endl;
+                /*if (instance->getCasualtyInrouteFlag(assignment_list[u].second) == 1)
                 {
                     // Note: this works when the change was of at most 1 level of triage
                     instance->snapshotHospitalLastAssignment(prev_h, prev_g + 1);
@@ -186,9 +187,12 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                 {
                     // if no gravity in-route change ocurred
                     instance->snapshotHospitalLastAssignment(prev_h, prev_g);
-                }
+                }*/
+
+                instance->snapshotHospitalLastAssignment(prev_h, prev_g);
                 instance->snapshotVehicleLastAssignment(prev_v, prev_v_type);
-                instance->resetCasualtyGravity(assignment_list[u].second, current_time, 0);
+                instance->snapshotCasualtyLastAssignment(assignment_list[u].second);
+                // instance->resetCasualtyGravity(assignment_list[u].second, current_time, 0);
             }
             cout << "HOSPITALS BEFORE META START (AFTER RESET): " << endl;
             printAllHospitalsStates();

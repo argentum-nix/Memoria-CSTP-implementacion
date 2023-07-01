@@ -362,6 +362,11 @@ void Instance::snapshotHospitalLastAssignment(int hospital_id, int g)
     hospitals[hospital_id - 1].snapshotSolution(g);
 }
 
+void Instance::snapshotCasualtyLastAssignment(int casualty_id)
+{
+    casualties[casualty_id - 1].snapshotLastAssinment();
+}
+
 void Instance::updateVehicleLocation(int veh_id, int veh_type, int hospital_id)
 {
     int node_id = hospitals[hospital_id - 1].getHospitalLocation();

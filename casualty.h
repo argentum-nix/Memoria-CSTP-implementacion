@@ -9,7 +9,7 @@ class Casualty
 public:
     Casualty();
     ~Casualty();
-
+    void snapshotLastAssinment();
     void setCasualtyID(int id);
     void setCasualtyGravity(int g);
     void setCasualtyAge(int a);
@@ -54,6 +54,7 @@ public:
 
 private:
     // Static values
+    int yet_to_snapshot = 1;
     int cas_id_k;
     int cas_age_a;
     int cas_curlocation;

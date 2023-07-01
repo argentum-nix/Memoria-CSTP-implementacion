@@ -80,6 +80,7 @@ public:
     void resetCasualtyLastAssignment(int casualty_id);
     void saveCasualtyLastAssignment(int casualty_id);
 
+    void snapshotCasualtyLastAssignment(int casualty_id);
     void snapshotHospitalLastAssignment(int hospital_id, int g);
     void temporaryDeassignVehicle(int veh_id, int veh_type);
     int getCasualtyInrouteFlag(int casualty_id);
