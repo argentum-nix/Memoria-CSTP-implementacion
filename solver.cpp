@@ -110,7 +110,7 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         cout << "=GREEDY=" << endl;
         greedyAssignment('M', 0, 1, useGrasp, graspWindowSize, 0);
         cout << "---" << endl;
-        cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality('H') << endl;
+        cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality('H', 0) << endl;
         printSolutions();
         cout << "---" << endl;
         for (int y = 0; y < int(assignment_list.size()); y++)
@@ -123,15 +123,14 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         {
             heuristicProcedure(closeness_factor, availability_factor);
             cout << "===" << endl;
-            cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality('H') << endl;
+            cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality('H', 0) << endl;
             printSolutions();
             cout << "===" << endl;
         }
+        cout << "PERIOD " << p << " FINAL SOLUTION QUALITY " << calculateSolutionQuality('H', 1) << endl;
     }
     printAllHospitalsStates();
-    // printVictimsWithoutAssignment();
-    // printSolutions();
-    // cout << calculateSolutionQuality('H') << endl;
+    printVictimsWithoutAssignment();
 }
 
 void Solver::heuristicProcedure(float closeness_factor, float availability_factor)
@@ -164,7 +163,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
         cout << "Trying for victim " << cursor << endl;
         if (checkIfHighST(cursor))
         {
-            float prevsolq = calculateSolutionQuality('H');
+            float prevsolq = calculateSolutionQuality('H', 0);
             cout << "Eligible for reasignment. Current solution quality: " << prevsolq << endl;
 
             // BLOCK 2: Free the resources. Save previous best solution for easy reset. Reset gravity changes if any occured in this period.
@@ -257,7 +256,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             // BLOCK 6: Comprare solutions - reset if worse, save if better.
             cout << "HOSPITALS BEFORE RESET/SAVE: " << endl;
             printAllHospitalsStates();
-            float cursolq = calculateSolutionQuality('H');
+            float cursolq = calculateSolutionQuality('H', 0);
             if (cursolq > prevsolq)
             {
                 cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
@@ -367,29 +366,57 @@ void Solver::printCasualtyRouteRow(int casualty_id)
     cout << endl;
 }
 
-float Solver::calculateSolutionQuality(char f)
+float Solver::calculateSolutionQuality(char f, int total_flag)
 {
     float quality = 0;
-    float p;
+    float p, appear_t, wait_t, stabilized_t, hospitalized_t;
     int c;
-    for (unsigned int i = 0; i < priority_list.size(); i++)
+    if (total_flag == 0)
     {
-        p = priority_list[i].first;
-        c = priority_list[i].second;
-        // min TTAk - minimize the whole trajectory time, from appearance to hospital admittance
-        if (f == 'H')
+        for (unsigned int i = 0; i < priority_list.size(); i++)
         {
-            quality += p * (instance->getCasualtyAdmittedAtHopsitalTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+            p = priority_list[i].first;
+            c = priority_list[i].second;
+            // min TTAk - minimize the whole trajectory time, from appearance to hospital admittance
+            if (f == 'H')
+            {
+                quality += p * (instance->getCasualtyAdmittedAtHopsitalTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+            }
+            // min Ck - time necessary to get victim stabilized, taken from vehicle dispach (wait time) to stabilization accomplished
+            else if (f == 'C')
+            {
+                quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyWaitingTime(c) / 60.0);
+            }
+            // min Ck+ak - time necessary to get victim stabilized, taken from appearance in system up to ST accomplished moment
+            else if (f == 'S')
+            {
+                quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+            }
         }
-        // min Ck - time necessary to get victim stabilized, taken from vehicle dispach (wait time) to stabilization accomplished
-        else if (f == 'C')
+    }
+    else
+    {
+        for (const auto &route : solutions)
         {
-            quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyWaitingTime(c) / 60.0);
-        }
-        // min Ck+ak - time necessary to get victim stabilized, taken from appearance in system up to ST accomplished moment
-        else if (f == 'S')
-        {
-            quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+            p = route.second[2];
+            appear_t = route.second[8];
+            wait_t = route.second[9];
+            stabilized_t = route.second[11];
+            hospitalized_t = route.second[12];
+            if (f == 'H')
+            {
+                quality += p * (hospitalized_t / 60.0 - appear_t / 60.0);
+            }
+            // min Ck - time necessary to get victim stabilized, taken from vehicle dispach (wait time) to stabilization accomplished
+            else if (f == 'C')
+            {
+                quality += p * (stabilized_t / 60.0 - wait_t / 60.0);
+            }
+            // min Ck+ak - time necessary to get victim stabilized, taken from appearance in system up to ST accomplished moment
+            else if (f == 'S')
+            {
+                quality += p * (stabilized_t / 60.0 - appear_t / 60.0);
+            }
         }
     }
     return quality;

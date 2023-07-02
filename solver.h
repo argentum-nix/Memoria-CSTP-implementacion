@@ -17,7 +17,7 @@ public:
     void greedyAssignment(char fleet_mode, int cursor, int flag_save, int GRASP_flag, int GRASP_window_size, int HOrder_flag);
     int checkIfHighST(int casualty_id);
     void printTimestamp(float t);
-    float calculateSolutionQuality(char f);
+    float calculateSolutionQuality(char f, int total_flag);
     void printCasualtyRouteRow(int casualty_id);
     void printPriorityList();
     void printVictimsWithoutAssignment();
