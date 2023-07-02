@@ -1,10 +1,9 @@
 #include "vehicle.h"
 
-// Vehicle class constructor
 Vehicle::Vehicle() {}
-
-// Vehicle class destructor
 Vehicle::~Vehicle() {}
+
+const int DEBUG_MODE_VEHICLE = 0;
 
 void Vehicle::setVehicleID(int id)
 {
@@ -47,15 +46,6 @@ void Vehicle::setVehicleOccupiedUntilTime(float t)
 
 void Vehicle::setVehicleRound(int round)
 {
-    // std::cout << "SET ROUND " << round << " TO VEHICLE ";
-    /*if (veh_type_e == 0)
-    {
-        std::cout << "A" << veh_id_m << std::endl;
-    }
-    else if (veh_type_e == 1)
-    {
-        std::cout << "H" << veh_id_m << std::endl;
-    }*/
     veh_total_rounds.push_back(round);
 }
 
@@ -133,25 +123,25 @@ void Vehicle::printOccupiedVector()
     std::cout << std::endl;
 }
 
-// es la funcion que se usa antes de probar nuevas rutas
 void Vehicle::snapshotLastAssinment()
 {
-    // save previous states as copies
-    // save prev state ONLY ONCE
-    /*if (veh_type_e == 0)
+    if (DEBUG_MODE_VEHICLE)
     {
-        std::cout << "A" << veh_id_m << " ";
+        if (veh_type_e == TYPE_AMBULANCE)
+        {
+            std::cout << "A" << veh_id_m << " ";
+        }
+        else
+        {
+            std::cout << "H" << veh_id_m << " ";
+        }
+        std::cout << "BEFORE SNAPSHOT OCCUPIED UNTIL WAS " << std::endl;
+        for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+        {
+            std::cout << veh_occupied_until[i] << " ";
+        }
+        std::cout << std::endl;
     }
-    else
-    {
-        std::cout << "H" << veh_id_m << " ";
-    }
-    std::cout << "BEFORE SNAPSHOT OCCUPIED UNTIL WAS " << std::endl;
-    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
-    {
-        std::cout << veh_occupied_until[i] << " ";
-    }
-    std::cout << std::endl;*/
     if (yet_to_snapshot)
     {
         veh_prev_total_rounds = veh_total_rounds;
@@ -172,12 +162,16 @@ void Vehicle::snapshotLastAssinment()
     {
         veh_total_rounds.pop_back();
     }
-    /*std::cout << "AFTER SNAPSHOT OCCUPIED UNTIL WAS " << std::endl;
-    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+
+    if (DEBUG_MODE_VEHICLE)
     {
-        std::cout << veh_occupied_until[i] << " ";
+        std::cout << "AFTER SNAPSHOT OCCUPIED UNTIL WAS " << std::endl;
+        for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+        {
+            std::cout << veh_occupied_until[i] << " ";
+        }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;*/
 }
 
 void Vehicle::clearResetFlag()
@@ -185,19 +179,21 @@ void Vehicle::clearResetFlag()
     was_already_reset = 0;
 }
 
-// esta funcion se usa para deshacer nuevas rutas de metaheuristica y volver a la original con que se hizo un snapshpt
 void Vehicle::resetLastAssignment()
 {
-    std::cout << "BEFORE RESET OCCUPIED UNTIL WAS " << std::endl;
-    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+    if (DEBUG_MODE_VEHICLE)
     {
-        std::cout << veh_occupied_until[i] << " ";
+        std::cout << "BEFORE RESET OCCUPIED UNTIL WAS " << std::endl;
+        for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+        {
+            std::cout << veh_occupied_until[i] << " ";
+        }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
 
     if (was_already_reset != 1)
     {
-        // copye prev solution to current, empty the prevs, reset the cursors
+        // copy prev solution to current, empty the prevs, reset the cursors
         veh_curlocation = veh_prev_curlocation;
         veh_occupied_until = veh_prev_occupied_until;
         veh_total_rounds = veh_prev_total_rounds;
@@ -205,20 +201,22 @@ void Vehicle::resetLastAssignment()
         veh_prev_occupied_until.clear();
         veh_prev_total_rounds.clear();
     }
-    std::cout << "BEFORE AFTER OCCUPIED UNTIL WAS " << std::endl;
-    for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
-    {
-        std::cout << veh_occupied_until[i] << " ";
-    }
-    std::cout << std::endl;
     was_already_reset = 1;
     yet_to_snapshot = 1;
+
+    if (DEBUG_MODE_VEHICLE)
+    {
+        std::cout << "BEFORE AFTER OCCUPIED UNTIL WAS " << std::endl;
+        for (unsigned int i = 0; i < veh_occupied_until.size(); i++)
+        {
+            std::cout << veh_occupied_until[i] << " ";
+        }
+        std::cout << std::endl;
+    }
 }
 
 void Vehicle::saveLastAssignment()
 {
-    // empty the prev-state containers
-    // cur-state is the one we do not modify ("save")
     veh_prev_curlocation.clear();
     veh_prev_occupied_until.clear();
     veh_prev_total_rounds.clear();

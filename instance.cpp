@@ -327,12 +327,13 @@ void Instance::updateCasualtyGravity(int casualty_id, int g, float t, int inrout
     casualties[casualty_id - 1].addGravityChangeTimestamp(t, inroute_flag);
 }
 
-void Instance::resetCasualtyGravity(int casualty_id, float current_time, int on_period_reset)
+void Instance::resetCasualtyGravity(int casualty_id, float current_time)
 {
-    if (casualties[casualty_id - 1].getLastGravityChange() >= current_time)
+    /*if (casualties[casualty_id - 1].getLastGravityChange() >= current_time)
     {
         casualties[casualty_id - 1].resetGravityChange(on_period_reset);
-    }
+    }*/
+    casualties[casualty_id - 1].resetGravityChange(current_time);
 }
 void Instance::resetCasualtyLastAssignment(int casualty_id)
 {
@@ -356,6 +357,11 @@ void Instance::saveCasualtyLastAssignment(int casualty_id)
 void Instance::snapshotHospitalLastAssignment(int hospital_id, int g)
 {
     hospitals[hospital_id - 1].snapshotSolution(g);
+}
+
+void Instance::snapshotCasualtyLastAssignment(int casualty_id, int current_time)
+{
+    casualties[casualty_id - 1].snapshotLastAssinment(current_time);
 }
 
 void Instance::updateVehicleLocation(int veh_id, int veh_type, int hospital_id)
@@ -419,9 +425,18 @@ void Instance::clearVehicleResetFlag(int veh_id, int veh_type)
     }
 }
 
+void Instance::clearHospitalResetFlag(int hospital_id)
+{
+    hospitals[hospital_id - 1].clearResetFlag();
+}
 void Instance::updateCasualtyAppearTime(int casualty_id, float t)
 {
     casualties[casualty_id - 1].setCasualtyAppearTime(t);
+}
+
+void Instance::saveHospitalLastAssignment(int hospital_id)
+{
+    hospitals[hospital_id - 1].saveLastAssignment();
 }
 
 void Instance::updateCasualtyRouteTimes(int casualty_id, float assign_t, float arrive_t, float st_t, float h_t)
@@ -768,7 +783,7 @@ int Instance::loadInstance()
         // Prints the input data
         // printStabilizationTimeMatrix();
         // printDeteriorationParamMatrix();
-        printDeteriorationTimeMatrix();
+        // printDeteriorationTimeMatrix();
         // printAmbulances();
         // printHelicopters();
         // printHospitals();

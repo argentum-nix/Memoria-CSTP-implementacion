@@ -10,6 +10,7 @@ public:
     Casualty();
     ~Casualty();
 
+    // setters
     void setCasualtyID(int id);
     void setCasualtyGravity(int g);
     void setCasualtyAge(int a);
@@ -27,6 +28,7 @@ public:
     void setCasualtyRound(int r);
     void addGravityChangeTimestamp(float t, int inroute_flag);
 
+    // getters
     int getCasualtyRound();
     int getCasualtyID();
     int getCasualtyGravity();
@@ -44,10 +46,13 @@ public:
     float getCasualtyStabilizedTime();
     float getCasualtyAdmittedAtHospitalTime();
 
-    void resetGravityChange(int on_period_reset);
     void printData();
 
-    // metaheuristic-specific functions for trying new solutions
+    // period-change specific methods
+    void resetGravityChange(int current_time);
+
+    // metaheuristic-specific methods
+    void snapshotLastAssinment(int current_time);
     void resetLastAssignment();
     void saveLastAssignment();
 
@@ -102,9 +107,13 @@ private:
     float cas_prev_h_time = -1;
     float cas_prev_prev_h_time = -1;
 
+    // methauristic-specific
+    int yet_to_snapshot = 1;
+
     // current gravity
     std::vector<int> cas_curgravity_g;
     std::vector<int> cas_prev_g;
+
     // timestamp of last gravity change
     std::vector<float> cas_g_change_timestamp;
     std::vector<float> cas_prev_g_change_timestamp;

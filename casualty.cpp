@@ -1,7 +1,8 @@
 #include "casualty.h"
 
-Casualty::Casualty() {}
+const int DEBUG_MODE_CASUALTY = 0;
 
+Casualty::Casualty() {}
 Casualty::~Casualty() {}
 
 void Casualty::setCasualtyID(int id)
@@ -16,7 +17,6 @@ void Casualty::setCasualtyAge(int a)
 
 void Casualty::setCasualtyRound(int r)
 {
-    // std::cout << "SET ROUND FOR V" << cas_id_k << " EQUIAL TO " << r << std::endl;
     round = r;
 }
 
@@ -38,8 +38,11 @@ void Casualty::setCasualtyPriority(float lambda)
 }
 void Casualty::setCasualtyGravity(int g)
 {
-    cas_prev_g = cas_curgravity_g;
-    cas_curgravity_g.push_back(g);
+    // dont add duplicates, and add any value en first appearance
+    if (cas_curgravity_g.size() == 0 || cas_curgravity_g.back() != g)
+    {
+        cas_curgravity_g.push_back(g);
+    }
 }
 void Casualty::setCasualtyAssignedHospital(int h)
 {
@@ -65,21 +68,10 @@ void Casualty::setCasualtyWaitTime(float t)
     cas_prev_wait_time = cas_wait_time;
     cas_wait_time = t;
 }
+
 void Casualty::addGravityChangeTimestamp(float t, int inroute_flag)
 {
-    // if only for cout
-    if (inroute_flag == 1)
-    {
-        std::cout << "CAPTURED INROUTE GRAVITY CHANGE FOR V" << cas_id_k << std::endl;
-    }
-
-    if (inroute_flag != g_inroute_flag)
-    {
-        prev_prev_g_inroute_flag = prev_g_inroute_flag;
-        prev_g_inroute_flag = g_inroute_flag;
-        g_inroute_flag = inroute_flag;
-    }
-    cas_prev_g_change_timestamp = cas_g_change_timestamp;
+    g_inroute_flag = inroute_flag;
     cas_g_change_timestamp.push_back(t);
 }
 void Casualty::setCasualtyVehArrivedTime(float t)
@@ -166,57 +158,103 @@ float Casualty::getLastGravityChange()
     return cas_g_change_timestamp.back();
 }
 
-void Casualty::resetGravityChange(int on_period_reset)
+void Casualty::resetGravityChange(int current_time)
 {
-    std::cout << "V" << cas_id_k << " BEFORE INROUTE FLAG = " << g_inroute_flag << std::endl;
-    std::cout << "PREV GRAVITY FOR V" << cas_id_k << std::endl;
-    for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
+
+    if (g_inroute_flag)
     {
-        std::cout << cas_curgravity_g[i] << " ";
+        int index = cas_g_change_timestamp.size() - 1;
+        int flag = 1;
+        while (flag)
+        {
+            // find the closest value smaller or equal to current period
+            // and save the pointer - its the last g-change value we want to preserve
+            if (cas_g_change_timestamp[index] <= current_time)
+            {
+                flag = 0;
+            }
+            else
+            {
+                index--;
+            }
+        }
+        cas_curgravity_g.erase(cas_curgravity_g.begin() + index + 1, cas_curgravity_g.end());
+        cas_g_change_timestamp.erase(cas_g_change_timestamp.begin() + index + 1, cas_g_change_timestamp.end());
     }
-    std::cout << std::endl;
+    g_inroute_flag = prev_g_inroute_flag;
+    prev_prev_g_inroute_flag = 0;
+    prev_g_inroute_flag = 0;
 
-    // RESET only if: its new period and reset is needed, or there was change in rerouting in the same period
-    if (on_period_reset || (g_inroute_flag != prev_g_inroute_flag))
+    if (DEBUG_MODE_CASUALTY)
     {
-        if (on_period_reset)
-        {
-            std::cout << "RESETTING FOR NEW PERIOD BECAUSE LAST CHANGE WAS AFTER NEW PERIOD START" << std::endl;
-        }
-        else if ((g_inroute_flag != prev_g_inroute_flag))
-        {
-            std::cout << "RESETTING BECAUSE FLAG != PREV ROUTE FLAG" << std::endl;
-        }
-
-        cas_curgravity_g = cas_prev_g;
-        cas_g_change_timestamp = cas_prev_g_change_timestamp;
-        prev_prev_g_inroute_flag = prev_g_inroute_flag;
-        prev_g_inroute_flag = g_inroute_flag;
-        g_inroute_flag = prev_prev_g_inroute_flag;
-        std::cout << "INROUTE FLAG RESET TO " << g_inroute_flag << std::endl;
-        std::cout << "CUR GRAVITY FOR V" << cas_id_k << std::endl;
+        std::cout << "g_inroute=" << g_inroute_flag << " p_g_inroute=" << prev_g_inroute_flag << " pp_g_inroute=" << prev_prev_g_inroute_flag;
+        std::cout << " cur_g=[";
         for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
         {
             std::cout << cas_curgravity_g[i] << " ";
         }
+        std::cout << "] prev_g=[";
+        for (unsigned int i = 0; i < cas_prev_g.size(); i++)
+        {
+            std::cout << cas_prev_g[i] << " ";
+        }
+        std::cout << "] cur_ts=[";
+        for (unsigned int i = 0; i < cas_g_change_timestamp.size(); i++)
+        {
+            std::cout << cas_g_change_timestamp[i] << " ";
+        }
+        std::cout << "] prev_ts=[";
+        for (unsigned int i = 0; i < cas_prev_g_change_timestamp.size(); i++)
+        {
+            std::cout << cas_prev_g_change_timestamp[i] << " ";
+        }
+        std::cout << "]" << std::endl;
     }
-    else
+}
+
+void Casualty::snapshotLastAssinment(int current_time)
+{
+    if (yet_to_snapshot)
     {
-        std::cout << "NO GRAVITY RESET NEEDED" << std::endl;
+        prev_prev_g_inroute_flag = prev_g_inroute_flag;
+        prev_g_inroute_flag = g_inroute_flag;
+        cas_prev_g = cas_curgravity_g;
+        cas_prev_g_change_timestamp = cas_g_change_timestamp;
+
+        if (g_inroute_flag)
+        {
+            int index = cas_g_change_timestamp.size() - 1;
+            int flag = 1;
+            while (flag)
+            {
+                // find the closest value smaller or equal to current period
+                // and save the pointer - its the last g-change value we want to preserve
+                if (cas_g_change_timestamp[index] <= current_time)
+                {
+                    flag = 0;
+                }
+                else
+                {
+                    index--;
+                }
+            }
+            cas_curgravity_g.erase(cas_curgravity_g.begin() + index + 1, cas_curgravity_g.end());
+            cas_g_change_timestamp.erase(cas_g_change_timestamp.begin() + index + 1, cas_g_change_timestamp.end());
+        }
     }
-    std::cout << std::endl;
+    g_inroute_flag = 0;
+    yet_to_snapshot = 0;
 }
 
 void Casualty::resetLastAssignment()
 {
-    // reset gravity only if an in-route change ocurred in this iteration, otherwise maintain current history of changes
-    if (g_inroute_flag == 1)
-    {
-        cas_curgravity_g = cas_prev_g;
-        cas_g_change_timestamp = cas_prev_g_change_timestamp;
-        g_inroute_flag = prev_g_inroute_flag;
-        prev_g_inroute_flag = prev_prev_g_inroute_flag;
-    }
+    cas_g_change_timestamp = cas_prev_g_change_timestamp;
+    g_inroute_flag = prev_g_inroute_flag;
+    prev_g_inroute_flag = prev_prev_g_inroute_flag;
+    cas_curgravity_g = cas_prev_g;
+    cas_prev_g.clear();
+    cas_prev_g_change_timestamp.clear();
+
     // id of assigned vehicle
     cas_assigned_veh = cas_prev_veh;
     cas_prev_veh = cas_prev_prev_veh;
@@ -244,12 +282,41 @@ void Casualty::resetLastAssignment()
     // victim is admitted to hospital at X
     cas_h_time = cas_prev_h_time;
     cas_prev_h_time = cas_prev_prev_h_time;
+
+    yet_to_snapshot = 1;
+
+    if (DEBUG_MODE_CASUALTY)
+    {
+        std::cout << "POST RESET V" << cas_id_k << "values: ";
+        std::cout << "g_inroute=" << g_inroute_flag << " p_g_inroute=" << prev_g_inroute_flag << " pp_g_inroute=" << prev_prev_g_inroute_flag;
+        std::cout << " cur_g=[";
+        for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
+        {
+            std::cout << cas_curgravity_g[i] << " ";
+        }
+        std::cout << "] prev_g=[";
+        for (unsigned int i = 0; i < cas_prev_g.size(); i++)
+        {
+            std::cout << cas_prev_g[i] << " ";
+        }
+        std::cout << "] cur_ts=[";
+        for (unsigned int i = 0; i < cas_g_change_timestamp.size(); i++)
+        {
+            std::cout << cas_g_change_timestamp[i] << " ";
+        }
+        std::cout << "] prev_ts=[";
+        for (unsigned int i = 0; i < cas_prev_g_change_timestamp.size(); i++)
+        {
+            std::cout << cas_prev_g_change_timestamp[i] << " ";
+        }
+        std::cout << "]" << std::endl;
+    }
 }
 
 void Casualty::saveLastAssignment()
 {
-    // g_inroute_flag = 0;
-    //  cas_prev_g = cas_prev_prev_g;
+    cas_prev_g.clear();
+    cas_prev_g_change_timestamp.clear();
     prev_g_inroute_flag = prev_prev_g_inroute_flag;
     cas_prev_veh = cas_prev_prev_veh;
     cas_prev_veh_type = cas_prev_prev_veh_type;
@@ -258,7 +325,34 @@ void Casualty::saveLastAssignment()
     cas_prev_arrival_time = cas_prev_prev_arrival_time;
     cas_prev_st_time = cas_prev_prev_st_time;
     cas_prev_h_time = cas_prev_prev_h_time;
-    // cas_prev_g_change_timestamp = cas_prev_prev_g_change_timestamp;
+    yet_to_snapshot = 1;
+
+    if (DEBUG_MODE_CASUALTY)
+    {
+        std::cout << "POST SAVE V" << cas_id_k << "values: ";
+        std::cout << "g_inroute=" << g_inroute_flag << " p_g_inroute=" << prev_g_inroute_flag << " pp_g_inroute=" << prev_prev_g_inroute_flag;
+        std::cout << " cur_g=[";
+        for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
+        {
+            std::cout << cas_curgravity_g[i] << " ";
+        }
+        std::cout << "] prev_g=[";
+        for (unsigned int i = 0; i < cas_prev_g.size(); i++)
+        {
+            std::cout << cas_prev_g[i] << " ";
+        }
+        std::cout << "] cur_ts=[";
+        for (unsigned int i = 0; i < cas_g_change_timestamp.size(); i++)
+        {
+            std::cout << cas_g_change_timestamp[i] << " ";
+        }
+        std::cout << "] prev_ts=[";
+        for (unsigned int i = 0; i < cas_prev_g_change_timestamp.size(); i++)
+        {
+            std::cout << cas_prev_g_change_timestamp[i] << " ";
+        }
+        std::cout << "]" << std::endl;
+    }
 }
 
 void Casualty::printData()

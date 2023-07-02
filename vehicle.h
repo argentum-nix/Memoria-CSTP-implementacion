@@ -12,6 +12,8 @@ class Vehicle
 public:
     Vehicle();
     ~Vehicle();
+
+    // setters
     void setVehicleID(int id);
     void setVehicleType(int type);
     void setVehicleCapacity(int q);
@@ -23,6 +25,7 @@ public:
     void setVehicleRound(int round);
     void setVehicleAppearTime(int t);
 
+    // getters
     int getVehicleID();
     int getVehicleType();
     int getVehicleCapacity();
@@ -34,18 +37,20 @@ public:
     float getVehicleLandingTime();
     float getVehicleOccupiedUntilTime();
 
+    // period-change specific methods
     void resetOccuipedToFirstAvailability(int period_start);
 
     void printData();
     void printOccupiedVector();
 
-    // metaheuristic-specific functions for trying new solutions
+    // metaheuristic-specific methods
     void snapshotLastAssinment();
     void resetLastAssignment();
     void saveLastAssignment();
     void clearResetFlag();
 
 private:
+    // Static values
     int veh_id_m;
     int veh_capacity_q;
     int veh_type_e;
@@ -54,16 +59,22 @@ private:
     float veh_takeoff_TDSe;
     float veh_land_TATe;
 
-    int was_already_reset = 0;
-    int yet_to_snapshot = 1;
-    int cursor_location;
-    int cursor_occupied_until;
+    // Changing values (assignment-specific)
     std::vector<int> veh_total_rounds;
     std::vector<int> veh_prev_total_rounds;
-    std::vector<int> veh_prev_curlocation;
+
     std::vector<int> veh_curlocation;
-    std::vector<float> veh_prev_occupied_until;
+    std::vector<int> veh_prev_curlocation;
+
     std::vector<float> veh_occupied_until;
+    std::vector<float> veh_prev_occupied_until;
+
+    int cursor_location;
+    int cursor_occupied_until;
+
+    // methauristic-specific
+    int was_already_reset = 0;
+    int yet_to_snapshot = 1;
 };
 
 #endif

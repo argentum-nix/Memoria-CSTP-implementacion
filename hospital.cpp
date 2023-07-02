@@ -1,9 +1,6 @@
 #include "hospital.h"
 
-// Hospital class constructor
 Hospital::Hospital() {}
-
-// Hospital class destructor
 Hospital::~Hospital() {}
 
 void Hospital::setHospitalID(int id)
@@ -61,9 +58,25 @@ void Hospital::snapshotSolution(int g)
     hosp_curcapacity[g - 1]++;
 }
 
+void Hospital::clearResetFlag()
+{
+    was_already_reset = 0;
+}
+
 void Hospital::resetLastAssignment()
 {
-    hosp_curcapacity = hosp_prev_capacity;
+    if (was_already_reset != 1)
+    {
+        hosp_curcapacity = hosp_prev_capacity;
+        hosp_prev_capacity.clear();
+    }
+    was_already_reset = 1;
+    yet_to_snapshot = 1;
+}
+
+void Hospital::saveLastAssignment()
+{
+    hosp_prev_capacity.clear();
     yet_to_snapshot = 1;
 }
 
