@@ -56,10 +56,6 @@ void Instance::addVehicle(Vehicle v)
     }
 }
 
-int Instance::getCasualtyInrouteFlag(int casualty_id)
-{
-    return casualties[casualty_id - 1].getCurrentInrouteFlag();
-}
 int Instance::getDeteriorationTimeValue(int g)
 {
     return deterioration_time_pi[g - 1][0];
@@ -331,12 +327,13 @@ void Instance::updateCasualtyGravity(int casualty_id, int g, float t, int inrout
     casualties[casualty_id - 1].addGravityChangeTimestamp(t, inroute_flag);
 }
 
-void Instance::resetCasualtyGravity(int casualty_id, float current_time, int on_period_reset)
+void Instance::resetCasualtyGravity(int casualty_id, float current_time)
 {
-    if (casualties[casualty_id - 1].getLastGravityChange() >= current_time)
+    /*if (casualties[casualty_id - 1].getLastGravityChange() >= current_time)
     {
         casualties[casualty_id - 1].resetGravityChange(on_period_reset);
-    }
+    }*/
+    casualties[casualty_id - 1].resetGravityChange(current_time);
 }
 void Instance::resetCasualtyLastAssignment(int casualty_id)
 {
@@ -362,9 +359,9 @@ void Instance::snapshotHospitalLastAssignment(int hospital_id, int g)
     hospitals[hospital_id - 1].snapshotSolution(g);
 }
 
-void Instance::snapshotCasualtyLastAssignment(int casualty_id)
+void Instance::snapshotCasualtyLastAssignment(int casualty_id, int current_time)
 {
-    casualties[casualty_id - 1].snapshotLastAssinment();
+    casualties[casualty_id - 1].snapshotLastAssinment(current_time);
 }
 
 void Instance::updateVehicleLocation(int veh_id, int veh_type, int hospital_id)
@@ -786,7 +783,7 @@ int Instance::loadInstance()
         // Prints the input data
         // printStabilizationTimeMatrix();
         // printDeteriorationParamMatrix();
-        printDeteriorationTimeMatrix();
+        // printDeteriorationTimeMatrix();
         // printAmbulances();
         // printHelicopters();
         // printHospitals();

@@ -1,9 +1,6 @@
 #include "hospital.h"
 
-// Hospital class constructor
 Hospital::Hospital() {}
-
-// Hospital class destructor
 Hospital::~Hospital() {}
 
 void Hospital::setHospitalID(int id)
@@ -59,10 +56,6 @@ void Hospital::snapshotSolution(int g)
     }
     yet_to_snapshot = 0;
     hosp_curcapacity[g - 1]++;
-    if (hosp_curcapacity[g - 1] > hosp_maxcapacity[g - 1])
-    {
-        std::cout << "SUMA SUPERA LA CAPACIDAD MAXIMA" << std::endl;
-    }
 }
 
 void Hospital::clearResetFlag()
