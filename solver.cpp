@@ -3,7 +3,7 @@
 #include <iomanip>
 using namespace std;
 
-Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, float availability_param)
+Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, float availability_param, char f)
 {
     instance = in;
     useHeuristic = heuristic_flag;
@@ -12,6 +12,7 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
     closeness_factor = closeness_param;
     availability_factor = availability_param;
     seed = s;
+    functionMode = f;
     float lambda;
     int prev_hospital, g, prev_vehicle, veh_type;
 
@@ -104,7 +105,7 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         greedyAssignment('M', 0, 1, useGrasp, graspWindowSize, 0);
 
         cout << "---" << endl;
-        cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality('H', 0) << endl;
+        cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
         printSolutions();
         cout << "---" << endl;
 
@@ -118,11 +119,11 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         {
             heuristicProcedure(closeness_factor, availability_factor);
             cout << "===" << endl;
-            cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality('H', 0) << endl;
+            cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
             printSolutions();
             cout << "===" << endl;
         }
-        cout << "PERIOD " << p << " FINAL SOLUTION QUALITY " << calculateSolutionQuality('H', 1) << endl;
+        cout << "PERIOD " << p << " FINAL SOLUTION QUALITY " << calculateSolutionQuality(functionMode, 1) << endl;
     }
     printAllHospitalsStates();
     printVictimsWithoutAssignment();
@@ -172,7 +173,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
         // cout << "Trying for victim " << cursor << endl;
         if (checkIfHighST(cursor))
         {
-            float prevsolq = calculateSolutionQuality('H', 0);
+            float prevsolq = calculateSolutionQuality(functionMode, 0);
             // cout << "V" << cursor << " eligible for reasignment. Current solution quality: " << prevsolq << endl;
 
             // BLOCK 2: Free the resources. Save previous best solution for easy reset. Reset gravity changes if any occured in this period.
@@ -255,7 +256,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             // BLOCK 6: Comprare solutions - reset if worse, save if better.
             // cout << "HOSPITALS BEFORE RESET/SAVE: " << endl;
             // printAllHospitalsStates();
-            float cursolq = calculateSolutionQuality('H', 0);
+            float cursolq = calculateSolutionQuality(functionMode, 0);
             if (cursolq > prevsolq)
             {
                 // cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
