@@ -67,19 +67,6 @@ void Hospital::resetLastAssignment()
 {
     if (was_already_reset != 1)
     {
-        std::cout << "RESET LAST ASSIGNMENT"
-                  << "MCC" << hosp_id_h << "hosp_curcapacity";
-        for (int i = 0; i < hosp_curcapacity.size(); i++)
-        {
-            std::cout << hosp_curcapacity[i] << " ";
-        }
-        std::cout << std::endl;
-        std::cout << "RESET LAST ASSIGNMENT prev_capacity";
-        for (int i = 0; i < hosp_prev_capacity.size(); i++)
-        {
-            std::cout << hosp_prev_capacity[i] << " ";
-        }
-        std::cout << std::endl;
         hosp_curcapacity = hosp_prev_capacity;
         hosp_prev_capacity.clear();
     }

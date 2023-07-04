@@ -85,6 +85,7 @@ public:
     void clearHospitalResetFlag(int hospital_id);
     void saveHospitalLastAssignment(int hospital_id);
     void clearVehicleResetFlag(int veh_id, int veh_type);
+    void temporaryVehicleHistoryReset(int veh_id, int veh_type);
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);

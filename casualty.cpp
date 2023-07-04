@@ -1,6 +1,6 @@
 #include "casualty.h"
 
-const int DEBUG_MODE_CASUALTY = 1;
+const int DEBUG_MODE_CASUALTY = 0;
 
 Casualty::Casualty() {}
 Casualty::~Casualty() {}
@@ -337,7 +337,6 @@ void Casualty::resetLastAssignment()
         }
         std::cout << "]" << std::endl;
     }
-    printData();
 }
 
 void Casualty::saveLastAssignment()

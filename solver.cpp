@@ -3,7 +3,7 @@
 #include <iomanip>
 using namespace std;
 
-const int DEBUG_MODE_SOLVER = 1;
+const int DEBUG_MODE_SOLVER = 0;
 
 Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, float availability_param, char f)
 {
@@ -105,8 +105,11 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
             }
         }
 
-        cout << "STATE OF THE HOSPITALS AFTER RESET:" << endl;
-        printAllHospitalsStates();
+        if (DEBUG_MODE_SOLVER)
+        {
+            cout << "STATE OF THE HOSPITALS AFTER RESET:" << endl;
+            printAllHospitalsStates();
+        }
 
         sort(priority_list.rbegin(), priority_list.rend(), [](const auto &l, const auto &r)
              { return (l.first == r.first) ? l.second > r.second : l.first < r.first; });
@@ -122,7 +125,6 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
         printSolutions();
         cout << "---" << endl;
-        printAllHospitalsStates();
         /*for (int y = 0; y < int(assignment_list.size()); y++)
         {
             cout << "(" << assignment_list[y].first << " " << assignment_list[y].second << "), ";
@@ -203,10 +205,20 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                 printAllHospitalsStates();
             }
 
-            // force update all hospitals
+            // force update all hospitals and vehicles
             for (int m = 1; m <= instance->qty_hospitals; m++)
             {
                 instance->snapshotHospitalLastAssignment(m);
+            }
+
+            for (int m = 1; m <= instance->qty_ambulances; m++)
+            {
+                instance->snapshotVehicleLastAssignment(m, TYPE_AMBULANCE);
+            }
+
+            for (int m = 1; m <= instance->qty_helicopters; m++)
+            {
+                instance->snapshotVehicleLastAssignment(m, TYPE_HELICOPTER);
             }
 
             for (int u = k; u < int(assignment_list.size()); u++)
@@ -215,11 +227,8 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                 prev_v = instance->getCasualtyAssignedVehicle(assignment_list[u].second);
                 prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[u].second);
                 prev_h = instance->getCasualtyAssignedHospital(assignment_list[u].second);
-                cout << "Victima " << assignment_list[u].second << " g=" << prev_g << " h=" << prev_h << endl;
-                cout << "Updating bed at MCC" << prev_h << " to " << instance->getHospitalCurCapacity(prev_h, prev_g) + 1 << endl;
                 instance->updateHospitalBedCapacity(prev_h, prev_g, instance->getHospitalCurCapacity(prev_h, prev_g) + 1);
-                // instance->snapshotHospitalLastAssignment(prev_h, prev_g);
-                instance->snapshotVehicleLastAssignment(prev_v, prev_v_type);
+                instance->temporaryVehicleHistoryReset(prev_v, prev_v_type);
                 instance->snapshotCasualtyLastAssignment(assignment_list[u].second, current_time);
             }
 
@@ -305,18 +314,26 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             {
                 if (DEBUG_MODE_SOLVER)
                     cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
+                // force reset all hospitals and vehicles
                 for (int m = 1; m <= instance->qty_hospitals; m++)
                 {
                     instance->resetHospitalLastAssignment(m);
                 }
+                for (int m = 1; m <= instance->qty_ambulances; m++)
+                {
+                    instance->resetVehicleLastAssignment(m, TYPE_AMBULANCE);
+                }
+
+                for (int m = 1; m <= instance->qty_helicopters; m++)
+                {
+                    instance->resetVehicleLastAssignment(m, TYPE_HELICOPTER);
+                }
+
                 for (int c = k; c < int(assignment_list.size()); c++)
                 {
                     prev_v = instance->getCasualtyAssignedVehicle(assignment_list[c].second);
                     prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[c].second);
-                    // prev_h = instance->getCasualtyAssignedHospital(assignment_list[c].second);
-                    // cout << "RESET V" << assignment_list[c].second << " MCC" << prev_h << endl;
-                    //  instance->resetHospitalLastAssignment(prev_h);
-                    instance->resetVehicleLastAssignment(prev_v, prev_v_type);
+                    // instance->resetVehicleLastAssignment(prev_v, prev_v_type);
                     instance->resetCasualtyLastAssignment(assignment_list[c].second);
                 }
 
@@ -330,10 +347,22 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             {
                 if (DEBUG_MODE_SOLVER)
                     cout << "Current solution is BETTER than prev sol: " << cursolq << " vs " << prevsolq << endl;
+
+                // force save all hospitals and vehicles
                 for (int m = 1; m <= instance->qty_hospitals; m++)
                 {
                     instance->saveHospitalLastAssignment(closest_h);
                 }
+                for (int m = 1; m <= instance->qty_ambulances; m++)
+                {
+                    instance->saveVehicleLastAssignment(m, TYPE_AMBULANCE);
+                }
+
+                for (int m = 1; m <= instance->qty_helicopters; m++)
+                {
+                    instance->saveVehicleLastAssignment(m, TYPE_HELICOPTER);
+                }
+
                 for (int c = k; c < int(assignment_list.size()); c++)
                 {
                     // save the new solution as current solution
@@ -342,7 +371,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     // prev variables are actually current values, just reused some vars to create less data
                     prev_v = instance->getCasualtyAssignedVehicle(assignment_list[c].second);
                     prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[c].second);
-                    instance->saveVehicleLastAssignment(prev_v, prev_v_type);
+                    // instance->saveVehicleLastAssignment(prev_v, prev_v_type);
                     closest_h = instance->getCasualtyAssignedHospital(assignment_list[c].second);
                     // instance->saveHospitalLastAssignment(closest_h);
                     waiting_till = instance->getCasualtyWaitingTime(assignment_list[c].second);

@@ -425,6 +425,18 @@ void Instance::clearVehicleResetFlag(int veh_id, int veh_type)
     }
 }
 
+void Instance::temporaryVehicleHistoryReset(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].popLastHistory();
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].popLastHistory();
+    }
+}
+
 void Instance::clearHospitalResetFlag(int hospital_id)
 {
     hospitals[hospital_id - 1].clearResetFlag();
