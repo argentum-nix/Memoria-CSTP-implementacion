@@ -60,10 +60,10 @@ En la heurística se seleccionan las víctimas para el re-enrutamiento forzado b
 
 Si la víctima cumple con estas condiciones, se re-enruta con una ambulancia. La selección de esta se hace, minimizando el valor de "prioridad" calculado como:
 
-`X * cercanía + Y * tiempo_de_siguiente_disponibilidad`
+`X * cercanía + Y * disponibilidad`
 Donde X e Y son parámetros pasados al ejecutable. 
 
 - cercanía - cantidad de minutos de viaje desde la posición de una ambulancia hasta la víctima
-- tiempo de siguiente disponibilidad - cantidad de minutos, calculada como `hora_en_que_ambulancia_puede_hacer_nueva_ruta - hora_actual`
+- disponibilidad - cantidad de minutos, calculada como `hora_en_que_ambulancia_puede_hacer_nueva_ruta - hora_actual`
 
 Se selecciona una ambulancia cuyo valor total de cálculo anterior es mínimo y esta se ocupa con la víctima seleccionada.En base a esta asignacion, se reasignan todas las víctimas posteriores a la analizada para el periodo actual.
