@@ -36,15 +36,15 @@ Donde:
 - `0.8` - es el valor de la importancia de cercanía de un vehículo a la hora de calcular su "prioridad de selección". Se toma en cuenta solo si flag de heurística no es nulo.
 - `0.2` - es el valor de la importancia de disponibilidad de un vehículo a la hora de calcular su "prioridad de selección". Se toma en cuenta solo si flag de heurística no es nulo.
 - `H` - indica que se debe minimizar el trayecto total, desde aparición de la víctima hasta el momento de su hospitalización. Posibles valores:
-    - `H` (minimizar trayecto total)
+    - `H` (minimizar trayecto total - desde aparición en sistema hasta hospitalización)
     - `S` (minimizar tiempo entre aparición y estabilización lograda)
     - `C` (minimizar tiempo entre asignación de vehículo y estabilización lograda)
 ##### Ejemplos de comandos de ejecución:
 
 Nota: en los ejemplos, `output.txt` es un archivo a cual se redirigen los cout con soluciones obtenidas.
   
-*  `./CSTPSolver ./instances/ 1 network 0 0 10 123 0.8 0.2 H > output.txt` - se utilizará Greedy no aleatorizado sin heurística de mejora
-* `./CSTPSolver ./instances/ 1 network 0 1 10 123 0.8 0.2 C > output.txt` - utlizará solo GRASP con ventana 10 y semilla 123, sin heurística de mejora
+*  `./CSTPSolver ./instances/ 1 network 0 0 10 123 0.8 0.2 H > output.txt` - se utilizará Greedy no aleatorizado sin heurística de mejora, con función que minimiza el tiempo total de trayecto de víctima 
+* `./CSTPSolver ./instances/ 1 network 0 1 10 123 0.8 0.2 C > output.txt` - utlizará solo GRASP con ventana 10 y semilla 123, sin heurística de mejora, minimizando tiempo entre asignación de vehículo y estabilziación lograda
 
 ## Sobre el cálculo de la calidad de solución
 El programa utiliza dos formas de cálculo (sin depender de si se usa heurística, grasp, greedy no aleatorizado, etc). 
