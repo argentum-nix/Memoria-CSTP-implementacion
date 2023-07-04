@@ -48,6 +48,7 @@ public:
     void resetLastAssignment();
     void saveLastAssignment();
     void clearResetFlag();
+    void popLastHistory();
 
 private:
     // Static values

@@ -29,7 +29,7 @@ public:
     // metaheuristic-specific methods
     void clearResetFlag();
     void resetLastAssignment();
-    void snapshotSolution(int g);
+    void snapshotSolution();
     void saveLastAssignment();
 
 private:
@@ -43,7 +43,7 @@ private:
     std::vector<int> hosp_curcapacity{0, 0, 0};
 
     // methauristic-specific
-    int was_already_reset = 1;
+    int was_already_reset = 0;
     int yet_to_snapshot = 1;
     std::vector<int> hosp_prev_capacity;
 };

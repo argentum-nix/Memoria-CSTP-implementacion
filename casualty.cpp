@@ -46,26 +46,18 @@ void Casualty::setCasualtyGravity(int g)
 }
 void Casualty::setCasualtyAssignedHospital(int h)
 {
-    cas_prev_prev_hosp = cas_prev_hosp;
-    cas_prev_hosp = cas_assigned_hosp;
     cas_assigned_hosp = h;
 }
 void Casualty::setCasualtyAssignedVehicle(int m)
 {
-    cas_prev_prev_veh = cas_prev_veh;
-    cas_prev_veh = cas_assigned_veh;
     cas_assigned_veh = m;
 }
 void Casualty::setCasualtyAssignedVehicleType(int e)
 {
-    cas_prev_prev_veh_type = cas_prev_veh_type;
-    cas_prev_veh_type = cas_assigned_veh_type;
     cas_assigned_veh_type = e;
 }
 void Casualty::setCasualtyWaitTime(float t)
 {
-    cas_prev_prev_wait_time = cas_prev_wait_time;
-    cas_prev_wait_time = cas_wait_time;
     cas_wait_time = t;
 }
 
@@ -76,17 +68,14 @@ void Casualty::addGravityChangeTimestamp(float t, int inroute_flag)
 }
 void Casualty::setCasualtyVehArrivedTime(float t)
 {
-    cas_prev_arrival_time = cas_arrival_time;
     cas_arrival_time = t;
 }
 void Casualty::setCasualtyStabilizedTime(float t)
 {
-    cas_prev_st_time = cas_st_time;
     cas_st_time = t;
 }
 void Casualty::setCasualtyAdmittedAtHospitalTime(float t)
 {
-    cas_prev_h_time = cas_h_time;
     cas_h_time = t;
 }
 
@@ -185,6 +174,34 @@ void Casualty::resetGravityChange(int current_time)
     prev_prev_g_inroute_flag = 0;
     prev_g_inroute_flag = 0;
 
+    // cas_assigned_hosp = -1;
+    // cas_prev_prev_hosp = -1;
+    cas_prev_hosp = -1;
+
+    // cas_assigned_veh = -1;
+    // cas_prev_prev_veh = -1;
+    cas_prev_veh = -1;
+
+    // cas_assigned_veh_type = -1;
+    // cas_prev_prev_veh_type = -1;
+    cas_prev_veh_type = -1;
+
+    // cas_wait_time = -1;
+    // cas_prev_prev_wait_time = -1;
+    cas_prev_wait_time = -1;
+
+    // cas_arrival_time = -1;
+    // cas_prev_prev_arrival_time = -1;
+    cas_prev_arrival_time = -1;
+
+    // cas_st_time = -1;
+    // cas_prev_prev_st_time = -1;
+    cas_prev_st_time = -1;
+
+    // cas_h_time = -1;
+    // cas_prev_prev_h_time = -1;
+    cas_prev_h_time = -1;
+
     if (DEBUG_MODE_CASUALTY)
     {
         std::cout << "g_inroute=" << g_inroute_flag << " p_g_inroute=" << prev_g_inroute_flag << " pp_g_inroute=" << prev_prev_g_inroute_flag;
@@ -218,8 +235,17 @@ void Casualty::snapshotLastAssinment(int current_time)
     {
         prev_prev_g_inroute_flag = prev_g_inroute_flag;
         prev_g_inroute_flag = g_inroute_flag;
+
         cas_prev_g = cas_curgravity_g;
         cas_prev_g_change_timestamp = cas_g_change_timestamp;
+
+        cas_prev_hosp = cas_assigned_hosp;
+        cas_prev_veh = cas_assigned_veh;
+        cas_prev_veh_type = cas_assigned_veh_type;
+        cas_prev_wait_time = cas_wait_time;
+        cas_prev_arrival_time = cas_arrival_time;
+        cas_prev_st_time = cas_st_time;
+        cas_prev_h_time = cas_h_time;
 
         if (g_inroute_flag)
         {
@@ -250,44 +276,44 @@ void Casualty::resetLastAssignment()
 {
     cas_g_change_timestamp = cas_prev_g_change_timestamp;
     g_inroute_flag = prev_g_inroute_flag;
-    prev_g_inroute_flag = prev_prev_g_inroute_flag;
+    prev_g_inroute_flag = 0;
     cas_curgravity_g = cas_prev_g;
     cas_prev_g.clear();
     cas_prev_g_change_timestamp.clear();
 
     // id of assigned vehicle
     cas_assigned_veh = cas_prev_veh;
-    cas_prev_veh = cas_prev_prev_veh;
+    cas_prev_veh = -1;
 
     // type of vehicle assigned
     cas_assigned_veh_type = cas_prev_veh_type;
-    cas_prev_veh_type = cas_prev_prev_veh_type;
+    cas_prev_veh_type = -1;
 
     // assigned hospital
     cas_assigned_hosp = cas_prev_hosp;
-    cas_prev_hosp = cas_prev_prev_hosp;
+    cas_prev_hosp = -1;
 
     // victim has to wait until X to vehicle to be assigned to it
     cas_wait_time = cas_prev_wait_time;
-    cas_prev_wait_time = cas_prev_prev_wait_time;
+    cas_prev_wait_time = -1;
 
     // the vehicle arrives at victims location at X
     cas_arrival_time = cas_prev_arrival_time;
-    cas_prev_arrival_time = cas_prev_prev_arrival_time = -1;
+    cas_prev_arrival_time = -1;
 
     // victim is stabilized at X
     cas_st_time = cas_prev_st_time;
-    cas_prev_st_time = cas_prev_prev_st_time;
+    cas_prev_st_time = -1;
 
     // victim is admitted to hospital at X
     cas_h_time = cas_prev_h_time;
-    cas_prev_h_time = cas_prev_prev_h_time;
+    cas_prev_h_time = -1;
 
     yet_to_snapshot = 1;
 
     if (DEBUG_MODE_CASUALTY)
     {
-        std::cout << "POST RESET V" << cas_id_k << "values: ";
+        std::cout << "POST RESET V" << cas_id_k << " values: ";
         std::cout << "g_inroute=" << g_inroute_flag << " p_g_inroute=" << prev_g_inroute_flag << " pp_g_inroute=" << prev_prev_g_inroute_flag;
         std::cout << " cur_g=[";
         for (unsigned int i = 0; i < cas_curgravity_g.size(); i++)
@@ -318,13 +344,13 @@ void Casualty::saveLastAssignment()
     cas_prev_g.clear();
     cas_prev_g_change_timestamp.clear();
     prev_g_inroute_flag = prev_prev_g_inroute_flag;
-    cas_prev_veh = cas_prev_prev_veh;
-    cas_prev_veh_type = cas_prev_prev_veh_type;
-    cas_prev_hosp = cas_prev_prev_hosp;
-    cas_prev_wait_time = cas_prev_prev_wait_time;
-    cas_prev_arrival_time = cas_prev_prev_arrival_time;
-    cas_prev_st_time = cas_prev_prev_st_time;
-    cas_prev_h_time = cas_prev_prev_h_time;
+    cas_prev_veh = cas_prev_prev_veh = -1;
+    cas_prev_veh_type = cas_prev_prev_veh_type = -1;
+    cas_prev_hosp = cas_prev_prev_hosp = -1;
+    cas_prev_wait_time = cas_prev_prev_wait_time = -1;
+    cas_prev_arrival_time = cas_prev_prev_arrival_time = -1;
+    cas_prev_st_time = cas_prev_prev_st_time = -1;
+    cas_prev_h_time = cas_prev_prev_h_time = -1;
     yet_to_snapshot = 1;
 
     if (DEBUG_MODE_CASUALTY)

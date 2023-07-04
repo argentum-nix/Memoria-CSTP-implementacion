@@ -123,6 +123,22 @@ void Vehicle::printOccupiedVector()
     std::cout << std::endl;
 }
 
+void Vehicle::popLastHistory()
+{
+    if (veh_curlocation.size() > 1)
+    {
+        veh_curlocation.pop_back();
+    }
+    if (veh_occupied_until.size() > 1)
+    {
+        veh_occupied_until.pop_back();
+    }
+    if (veh_total_rounds.size() > 1)
+    {
+        veh_total_rounds.pop_back();
+    }
+}
+
 void Vehicle::snapshotLastAssinment()
 {
     if (DEBUG_MODE_VEHICLE)
@@ -150,18 +166,6 @@ void Vehicle::snapshotLastAssinment()
     }
     yet_to_snapshot = 0;
     // we want only the previous solution (if it exists at all)
-    if (veh_curlocation.size() > 1)
-    {
-        veh_curlocation.pop_back();
-    }
-    if (veh_occupied_until.size() > 1)
-    {
-        veh_occupied_until.pop_back();
-    }
-    if (veh_total_rounds.size() > 1)
-    {
-        veh_total_rounds.pop_back();
-    }
 
     if (DEBUG_MODE_VEHICLE)
     {
@@ -177,6 +181,7 @@ void Vehicle::snapshotLastAssinment()
 void Vehicle::clearResetFlag()
 {
     was_already_reset = 0;
+    yet_to_snapshot = 1;
 }
 
 void Vehicle::resetLastAssignment()
@@ -221,6 +226,7 @@ void Vehicle::saveLastAssignment()
     veh_prev_occupied_until.clear();
     veh_prev_total_rounds.clear();
     yet_to_snapshot = 1;
+    was_already_reset = 0;
 }
 
 void Vehicle::printData()

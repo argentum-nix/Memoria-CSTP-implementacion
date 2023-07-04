@@ -81,10 +81,11 @@ public:
     void saveCasualtyLastAssignment(int casualty_id);
 
     void snapshotCasualtyLastAssignment(int casualty_id, int current_time);
-    void snapshotHospitalLastAssignment(int hospital_id, int g);
+    void snapshotHospitalLastAssignment(int hospital_id);
     void clearHospitalResetFlag(int hospital_id);
     void saveHospitalLastAssignment(int hospital_id);
     void clearVehicleResetFlag(int veh_id, int veh_type);
+    void temporaryVehicleHistoryReset(int veh_id, int veh_type);
 
     // Vehicle-class wrappers
     int getVehicleLocation(int veh_id, int veh_type);

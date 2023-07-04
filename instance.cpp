@@ -354,9 +354,9 @@ void Instance::saveCasualtyLastAssignment(int casualty_id)
 {
     casualties[casualty_id - 1].saveLastAssignment();
 }
-void Instance::snapshotHospitalLastAssignment(int hospital_id, int g)
+void Instance::snapshotHospitalLastAssignment(int hospital_id)
 {
-    hospitals[hospital_id - 1].snapshotSolution(g);
+    hospitals[hospital_id - 1].snapshotSolution();
 }
 
 void Instance::snapshotCasualtyLastAssignment(int casualty_id, int current_time)
@@ -422,6 +422,18 @@ void Instance::clearVehicleResetFlag(int veh_id, int veh_type)
     else if (veh_type == 1)
     {
         helicopter_fleet[veh_id - 1].clearResetFlag();
+    }
+}
+
+void Instance::temporaryVehicleHistoryReset(int veh_id, int veh_type)
+{
+    if (veh_type == 0)
+    {
+        ambulance_fleet[veh_id - 1].popLastHistory();
+    }
+    else if (veh_type == 1)
+    {
+        helicopter_fleet[veh_id - 1].popLastHistory();
     }
 }
 
