@@ -48,18 +48,18 @@ int Hospital::getHospitalAppearTime()
     return hosp_appear_time;
 }
 
-void Hospital::snapshotSolution(int g)
+void Hospital::snapshotSolution()
 {
     if (yet_to_snapshot)
     {
         hosp_prev_capacity = hosp_curcapacity;
     }
     yet_to_snapshot = 0;
-    hosp_curcapacity[g - 1]++;
 }
 
 void Hospital::clearResetFlag()
 {
+    yet_to_snapshot = 1;
     was_already_reset = 0;
 }
 
@@ -67,6 +67,19 @@ void Hospital::resetLastAssignment()
 {
     if (was_already_reset != 1)
     {
+        std::cout << "RESET LAST ASSIGNMENT"
+                  << "MCC" << hosp_id_h << "hosp_curcapacity";
+        for (int i = 0; i < hosp_curcapacity.size(); i++)
+        {
+            std::cout << hosp_curcapacity[i] << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "RESET LAST ASSIGNMENT prev_capacity";
+        for (int i = 0; i < hosp_prev_capacity.size(); i++)
+        {
+            std::cout << hosp_prev_capacity[i] << " ";
+        }
+        std::cout << std::endl;
         hosp_curcapacity = hosp_prev_capacity;
         hosp_prev_capacity.clear();
     }
@@ -77,6 +90,7 @@ void Hospital::resetLastAssignment()
 void Hospital::saveLastAssignment()
 {
     hosp_prev_capacity.clear();
+    was_already_reset = 0;
     yet_to_snapshot = 1;
 }
 

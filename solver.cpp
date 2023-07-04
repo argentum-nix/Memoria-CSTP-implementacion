@@ -3,6 +3,8 @@
 #include <iomanip>
 using namespace std;
 
+const int DEBUG_MODE_SOLVER = 1;
+
 Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, float availability_param, char f)
 {
     instance = in;
@@ -28,9 +30,12 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         }
         current_time = instance->getPeriod(p);
 
-        // cout << "CURRENT PERIOD: " << p << " TIMESTAMP: " << current_time << endl;
-        // cout << "STATE OF THE HOSPITALS BEFORE RESET:" << endl;
-        // printAllHospitalsStates();
+        if (DEBUG_MODE_SOLVER)
+        {
+            cout << "CURRENT PERIOD: " << p << " TIMESTAMP: " << current_time << endl;
+            cout << "STATE OF THE HOSPITALS BEFORE RESET:" << endl;
+            printAllHospitalsStates();
+        }
 
         // create new prioririty list with current and prev periods
         for (int i = 1; i <= instance->qty_casualties; i++)
@@ -49,24 +54,34 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
                 // if the wait is so that the victim is still waiting at start of the new period
                 if (instance->getCasualtyWaitingTime(i) >= current_time)
                 {
-                    // cout << "Old casualty " << i << " is ready for new assignment.";
+                    if (DEBUG_MODE_SOLVER)
+                        cout << "Old casualty " << i << " is ready for new assignment.";
                     //  free the occupied bed
                     g = instance->getCasualtyGravity(i);
                     prev_hospital = instance->getCasualtyAssignedHospital(i);
                     if (prev_hospital != -1)
                     {
                         instance->updateHospitalBedCapacity(prev_hospital, g, instance->getHospitalCurCapacity(prev_hospital, g) + 1);
+
                         // de-assign the hospital
                         instance->updateCasualtyHospital(i, -1);
-                        // cout << " Freed bed at MCC" << prev_hospital << " for G=" << g;
+                        if (DEBUG_MODE_SOLVER)
+                            cout << " Freed bed at MCC" << prev_hospital << " for G=" << g;
                     }
                     else
                     {
-                        // cout << "This victim could not be assigned a hospital on prev iteration";
+                        if (DEBUG_MODE_SOLVER)
+                            cout << "This victim could not be assigned a hospital on prev iteration";
                     }
                     // reassign waiting time to the start of new period
                     instance->updateCasualtyWaitingTime(i, current_time);
                     // reset the casualty gravity (if it was changed on current time or later in previous assignment)
+                    // free the occupied vehicle and make its available time equal to prev assignment
+                    prev_vehicle = instance->getCasualtyAssignedVehicle(i);
+                    veh_type = instance->getCasualtyAssignedVehicleType(i);
+                    // de-assign the vehicle
+                    instance->resetVehicleOccuipedUntil(prev_vehicle, veh_type, current_time);
+                    // reset gravity
                     instance->resetCasualtyGravity(i, current_time);
                     // recalculate the victims gravity using its new wait time (total of seconds of wait)
                     updateCasualtyState(i, instance->getCasualtyWaitingTime(i) - instance->getCasualtyAppearTime(i), current_time);
@@ -74,46 +89,47 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
                     lambda = calculatePriority(instance->getCasualtyWaitingTime(i) - instance->getCasualtyAppearTime(i), g);
                     instance->updateCasualtyPriority(i, lambda);
                     priority_list.push_back(make_pair(lambda, i));
-                    // free the occupied vehicle and make its available time equal to prev assignment
-                    prev_vehicle = instance->getCasualtyAssignedVehicle(i);
-                    veh_type = instance->getCasualtyAssignedVehicleType(i);
-                    // de-assign the vehicle
-                    instance->resetVehicleOccuipedUntil(prev_vehicle, veh_type, current_time);
 
-                    /*
-                    if (veh_type == TYPE_AMBULANCE)
+                    if (DEBUG_MODE_SOLVER)
                     {
-                        cout << ".Freed A" << prev_vehicle << endl;
+                        if (veh_type == TYPE_AMBULANCE)
+                        {
+                            cout << ".Freed A" << prev_vehicle << endl;
+                        }
+                        else if (veh_type == TYPE_HELICOPTER)
+                        {
+                            cout << ".Freed H" << prev_vehicle << endl;
+                        }
                     }
-                    else if (veh_type == TYPE_HELICOPTER)
-                    {
-                        cout << ".Freed H" << prev_vehicle << endl;
-                    }*/
                 }
             }
         }
 
-        // cout << "STATE OF THE HOSPITALS AFTER RESET:" << endl;
-        // printAllHospitalsStates();
+        cout << "STATE OF THE HOSPITALS AFTER RESET:" << endl;
+        printAllHospitalsStates();
 
         sort(priority_list.rbegin(), priority_list.rend(), [](const auto &l, const auto &r)
              { return (l.first == r.first) ? l.second > r.second : l.first < r.first; });
 
-        // printPriorityList();
+        if (DEBUG_MODE_SOLVER)
+            printPriorityList();
         cout << endl;
-        // cout << "=GREEDY=" << endl;
+        if (DEBUG_MODE_SOLVER)
+            cout << "=GREEDY=" << endl;
         greedyAssignment('M', 0, 1, useGrasp, graspWindowSize, 0);
 
         cout << "---" << endl;
         cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
         printSolutions();
         cout << "---" << endl;
-
+        printAllHospitalsStates();
         /*for (int y = 0; y < int(assignment_list.size()); y++)
         {
             cout << "(" << assignment_list[y].first << " " << assignment_list[y].second << "), ";
-        }
-        cout << "Terminated greedy routes. Entering in Metaheuristic" << endl;*/
+        }*/
+
+        if (DEBUG_MODE_SOLVER)
+            cout << "Terminated greedy routes. Entering in Metaheuristic" << endl;
 
         if (useHeuristic == 1)
         {
@@ -155,31 +171,43 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
     pair<int, float> res;
     for (int k = 0; k < int(assignment_list.size()); k++)
     {
-        // BLOCK 1: Clean up the flags used for reassignments
-        for (int i = 1; i < instance->qty_ambulances; i++)
-        {
-            instance->clearVehicleResetFlag(i, TYPE_AMBULANCE);
-        }
-        for (int i = 1; i < instance->qty_helicopters; i++)
-        {
-            instance->clearVehicleResetFlag(i, TYPE_HELICOPTER);
-        }
-        for (int i = 1; i < instance->qty_hospitals; i++)
-        {
-            instance->clearHospitalResetFlag(i);
-        }
 
         cursor = assignment_list[k].second;
         // cout << "Trying for victim " << cursor << endl;
         if (checkIfHighST(cursor))
         {
             float prevsolq = calculateSolutionQuality(functionMode, 0);
-            // cout << "V" << cursor << " eligible for reasignment. Current solution quality: " << prevsolq << endl;
+
+            if (DEBUG_MODE_SOLVER)
+                cout << "V" << cursor << " eligible for reasignment. Current solution quality: " << prevsolq << endl;
+
+            // BLOCK 1: Clean up the flags used for reassignments
+            for (int i = 1; i <= instance->qty_ambulances; i++)
+            {
+                instance->clearVehicleResetFlag(i, TYPE_AMBULANCE);
+            }
+            for (int i = 1; i <= instance->qty_helicopters; i++)
+            {
+                instance->clearVehicleResetFlag(i, TYPE_HELICOPTER);
+            }
+            for (int i = 1; i <= instance->qty_hospitals; i++)
+            {
+                instance->clearHospitalResetFlag(i);
+            }
 
             // BLOCK 2: Free the resources. Save previous best solution for easy reset. Reset gravity changes if any occured in this period.
 
-            // cout << "HOSPITALS BEFORE META START: " << endl;
-            // printAllHospitalsStates();
+            if (DEBUG_MODE_SOLVER)
+            {
+                cout << "HOSPITALS BEFORE META START: " << endl;
+                printAllHospitalsStates();
+            }
+
+            // force update all hospitals
+            for (int m = 1; m <= instance->qty_hospitals; m++)
+            {
+                instance->snapshotHospitalLastAssignment(m);
+            }
 
             for (int u = k; u < int(assignment_list.size()); u++)
             {
@@ -187,13 +215,19 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                 prev_v = instance->getCasualtyAssignedVehicle(assignment_list[u].second);
                 prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[u].second);
                 prev_h = instance->getCasualtyAssignedHospital(assignment_list[u].second);
-                instance->snapshotHospitalLastAssignment(prev_h, prev_g);
+                cout << "Victima " << assignment_list[u].second << " g=" << prev_g << " h=" << prev_h << endl;
+                cout << "Updating bed at MCC" << prev_h << " to " << instance->getHospitalCurCapacity(prev_h, prev_g) + 1 << endl;
+                instance->updateHospitalBedCapacity(prev_h, prev_g, instance->getHospitalCurCapacity(prev_h, prev_g) + 1);
+                // instance->snapshotHospitalLastAssignment(prev_h, prev_g);
                 instance->snapshotVehicleLastAssignment(prev_v, prev_v_type);
                 instance->snapshotCasualtyLastAssignment(assignment_list[u].second, current_time);
             }
 
-            // cout << "HOSPITALS BEFORE META START (AFTER RESET): " << endl;
-            // printAllHospitalsStates();
+            if (DEBUG_MODE_SOLVER)
+            {
+                cout << "HOSPITALS BEFORE META START (AFTER RESET): " << endl;
+                printAllHospitalsStates();
+            }
 
             // BLOCK 3: Find an ambulance to assign, minimizing "priority" calculated using closeness to victim and time of first availability
             min_amb_priority = 9999999;
@@ -222,11 +256,14 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     choosen_amb = z;
                 }
             }
-            // cout << "Choosing ambulance A" << choosen_amb << " with min_av= " << min_availability_veh << " cl= " << min_dv_veh << " of priority " << min_amb_priority << endl;
 
             // BLOCK 4: Assign the choosen ambulance to casualty, just as in Greedy Procedure
-            // cout << "Assigning the new route to the eligible casualty V" << cursor << ". Before:" << endl;
-            // printCasualtyRouteRow(cursor);
+            if (DEBUG_MODE_SOLVER)
+            {
+                cout << "Choosing ambulance A" << choosen_amb << " with min_av= " << min_availability_veh << " cl= " << min_dv_veh << " of priority " << min_amb_priority << endl;
+                cout << "Assigning the new route to the eligible casualty V" << cursor << ". Before:" << endl;
+                printCasualtyRouteRow(cursor);
+            }
             appear_time = instance->getCasualtyAppearTime(cursor);
             waiting_till = min_availability_veh;
             veh_arrival_time = min_dv_veh * 60 + waiting_till;
@@ -245,39 +282,58 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             instance->updateCasualtyAssignedVehicle(cursor, choosen_amb, TYPE_AMBULANCE);
             instance->updateCasualtyRouteTimes(cursor, waiting_till, veh_arrival_time, cas_st_timestamp, h_admit_timestamp);
 
-            // cout << "After: " << endl;
-            // printCasualtyRouteRow(cursor);
-            // cout << endl;
+            if (DEBUG_MODE_SOLVER)
+            {
+                cout << "After: " << endl;
+                printCasualtyRouteRow(cursor);
+                cout << endl;
+            }
 
             // BLOCK 5: Run normal greedy for every other victim after current one in priority list
-            // cout << "STARTING SLICED GREEDY FROM VICTIM V" << cursor << ", PRIORITY LIST POSITION =" << k + 1 << endl;
+            if (DEBUG_MODE_SOLVER)
+                cout << "STARTING SLICED GREEDY FROM VICTIM V" << cursor << ", PRIORITY LIST POSITION =" << k + 1 << endl;
             greedyAssignment('M', k + 1, 0, 0, 0, 1);
 
             // BLOCK 6: Comprare solutions - reset if worse, save if better.
-            // cout << "HOSPITALS BEFORE RESET/SAVE: " << endl;
-            // printAllHospitalsStates();
+            if (DEBUG_MODE_SOLVER)
+            {
+                cout << "HOSPITALS BEFORE RESET/SAVE: " << endl;
+                printAllHospitalsStates();
+            }
             float cursolq = calculateSolutionQuality(functionMode, 0);
             if (cursolq > prevsolq)
             {
-                // cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
+                if (DEBUG_MODE_SOLVER)
+                    cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
+                for (int m = 1; m <= instance->qty_hospitals; m++)
+                {
+                    instance->resetHospitalLastAssignment(m);
+                }
                 for (int c = k; c < int(assignment_list.size()); c++)
                 {
-                    // cout << "Resetting victim V" << assignment_list[c].second << " on index " << c << " in priority list." << endl;
                     prev_v = instance->getCasualtyAssignedVehicle(assignment_list[c].second);
                     prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[c].second);
-                    prev_h = instance->getCasualtyAssignedHospital(assignment_list[c].second);
-                    // cout << "BEFORE: " << endl;
-                    // printCasualtyRouteRow(assignment_list[c].second);
-                    instance->resetHospitalLastAssignment(prev_h);
+                    // prev_h = instance->getCasualtyAssignedHospital(assignment_list[c].second);
+                    // cout << "RESET V" << assignment_list[c].second << " MCC" << prev_h << endl;
+                    //  instance->resetHospitalLastAssignment(prev_h);
                     instance->resetVehicleLastAssignment(prev_v, prev_v_type);
                     instance->resetCasualtyLastAssignment(assignment_list[c].second);
                 }
-                // cout << "HOSPITALS WORSE SOLUTION RESET: " << endl;
-                // printAllHospitalsStates();
+
+                if (DEBUG_MODE_SOLVER)
+                {
+                    cout << "HOSPITALS WORSE SOLUTION RESET: " << endl;
+                    printAllHospitalsStates();
+                }
             }
             else
             {
-                // cout << "Current solution is BETTER than prev sol: " << cursolq << " vs " << prevsolq << endl;
+                if (DEBUG_MODE_SOLVER)
+                    cout << "Current solution is BETTER than prev sol: " << cursolq << " vs " << prevsolq << endl;
+                for (int m = 1; m <= instance->qty_hospitals; m++)
+                {
+                    instance->saveHospitalLastAssignment(closest_h);
+                }
                 for (int c = k; c < int(assignment_list.size()); c++)
                 {
                     // save the new solution as current solution
@@ -288,7 +344,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     prev_v_type = instance->getCasualtyAssignedVehicleType(assignment_list[c].second);
                     instance->saveVehicleLastAssignment(prev_v, prev_v_type);
                     closest_h = instance->getCasualtyAssignedHospital(assignment_list[c].second);
-                    instance->saveHospitalLastAssignment(closest_h);
+                    // instance->saveHospitalLastAssignment(closest_h);
                     waiting_till = instance->getCasualtyWaitingTime(assignment_list[c].second);
                     veh_arrival_time = instance->getCasualtyVehArrivedTime(assignment_list[c].second);
                     cas_st_timestamp = instance->getCasualtyStabilizedTime(assignment_list[c].second);
@@ -296,11 +352,17 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     // save it in dictionary for easy access
                     saveSolution(assignment_list[c].second, assignment_list[c].first, prev_v, prev_v_type, instance->getCasualtyRound(assignment_list[c].second), closest_h, waiting_till, veh_arrival_time, cas_st_timestamp, h_admit_timestamp);
                 }
-                // cout << "HOSPITALS BETTER SOLUTION SAVE: " << endl;
-                // printAllHospitalsStates();
+                if (DEBUG_MODE_SOLVER)
+                {
+                    cout << "HOSPITALS BETTER SOLUTION SAVE: " << endl;
+                    printAllHospitalsStates();
+                }
             }
-            // cout << "AT THE END OF THIS ITERATION FOR VICTIM V" << cursor << " THE FINAL SOLUTION WAS : " << endl;
-            // printSolutions();
+            if (DEBUG_MODE_SOLVER)
+            {
+                cout << "AT THE END OF THIS ITERATION FOR VICTIM V" << cursor << " THE FINAL SOLUTION WAS : " << endl;
+                printSolutions();
+            }
         }
     }
 }
@@ -450,12 +512,16 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
     // cout << "Waiting time in minutes is " << te / 60 << ".";
     if (g == 1 && te / 60 > pi1_2)
     {
-        // cout << "V" << casualty_id << " deteriorated to GRAVITY 2 AT TIMESTAMP ";
-        // printTimestamp(change_timestamp);
-        // cout << endl;
+        if (DEBUG_MODE_SOLVER)
+        {
+            cout << "V" << casualty_id << " deteriorated to GRAVITY 2 AT TIMESTAMP ";
+            printTimestamp(change_timestamp);
+            cout << endl;
+        }
         if (change_timestamp > current_time)
         {
-            // cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE! 1->2 " << casualty_id << endl;
+            if (DEBUG_MODE_SOLVER)
+                cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE! 1->2 " << casualty_id << endl;
             instance->updateCasualtyGravity(casualty_id, 2, change_timestamp, 1);
         }
         else
@@ -466,12 +532,16 @@ void Solver::updateCasualtyState(int casualty_id, float te, float change_timesta
     // Case 1:Victim of LSI 2 already waited enough to be considered LSI 3
     else if (g == 2 && te / 60 > pi2_3)
     {
-        // cout << "V" << casualty_id << " deteriorated to GRAVITY 3 AT TIMESTAMP ";
-        // printTimestamp(change_timestamp);
-        // cout << endl;
+        if (DEBUG_MODE_SOLVER)
+        {
+            cout << "V" << casualty_id << " deteriorated to GRAVITY 3 AT TIMESTAMP ";
+            printTimestamp(change_timestamp);
+            cout << endl;
+        }
         if (change_timestamp > current_time)
         {
-            // cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE! 2->3 " << casualty_id << endl;
+            if (DEBUG_MODE_SOLVER)
+                cout << "IT WAS AN IN-ROUTE GRAVITY CHANGE! 2->3 " << casualty_id << endl;
             instance->updateCasualtyGravity(casualty_id, 3, change_timestamp, 1);
         }
         else
@@ -511,22 +581,25 @@ pair<int, float> Solver::findClosestHospitalWithBeds(int casualty_id, int id_clo
             // if this hospital can attend such gravity then
             if (h_capacity > 0)
             {
-                /*cout << "[Victim->Hospital ";
-                if (veh_type == TYPE_AMBULANCE)
-                {
-                    cout << "in ambulance] ";
-                }
-                else if (veh_type == TYPE_HELICOPTER)
-                {
-                    cout << "in helicopter] ";
-                }
-                cout << instance->getCasualtyLocation(casualty_id) << " -> " << instance->getHospitalLocation(h) << " = ";
-                cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getHospitalLocation(h), veh_type);*/
+                /*
+                    cout << "[Victim->Hospital ";
+                    if (veh_type == TYPE_AMBULANCE)
+                    {
+                        cout << "in ambulance] ";
+                    }
+                    else if (veh_type == TYPE_HELICOPTER)
+                    {
+                        cout << "in helicopter] ";
+                    }
+                    cout << instance->getCasualtyLocation(casualty_id) << " -> " << instance->getHospitalLocation(h) << " = ";
+                    cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getHospitalLocation(h), veh_type);
+                */
                 actual_time = instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getHospitalLocation(h), veh_type);
                 if (veh_type == TYPE_HELICOPTER)
                 {
                     actual_time += instance->getVehicleLandingTime(id_closest_veh, veh_type) + instance->getVehicleTakeoffTime(id_closest_veh, veh_type);
                 }
+
                 // cout << " and with takeoff/landing: " << actual_time << endl;
 
                 if (actual_time < min_dh)
@@ -558,15 +631,17 @@ pair<int, float> Solver::findFirstAvailableVehicle(int veh_type)
         // searching solo among ambulances available for operations currently
         if (instance->getVehicleAppearTime(v, veh_type) <= current_time)
         {
-            /*if (veh_type == TYPE_AMBULANCE)
-            {
-                cout << "[Ambulance A";
-            }
-            else if (veh_type == TYPE_HELICOPTER)
-            {
-                cout << "[Helicopter H";
-            }
-            cout << v << "] occupied until " << instance->getVehicleOccupiedUntilTime(v, veh_type) / 60 << endl;*/
+            /*
+                if (veh_type == TYPE_AMBULANCE)
+                {
+                    cout << "[Ambulance A";
+                }
+                else if (veh_type == TYPE_HELICOPTER)
+                {
+                    cout << "[Helicopter H";
+                }
+                cout << v << "] occupied until " << instance->getVehicleOccupiedUntilTime(v, veh_type) / 60 << endl;
+            */
             if (instance->getVehicleOccupiedUntilTime(v, veh_type) < min_availability)
             {
                 min_availability = instance->getVehicleOccupiedUntilTime(v, veh_type);
@@ -598,17 +673,19 @@ pair<int, float> Solver::findClosestAvailableVehicle(int casualty_id, int veh_ty
         if (instance->getVehicleOccupiedUntilTime(v, veh_type) <= current_time && instance->getVehicleAppearTime(v, veh_type) <= current_time)
         {
             available_vehicles++;
-            /*cout << "[Pickup->Victim for";
-            if (veh_type == TYPE_AMBULANCE)
-            {
-                cout << " A";
-            }
-            else if (veh_type == TYPE_HELICOPTER)
-            {
-                cout << " H";
-            }
-            cout << v << "] " << instance->getVehicleLocation(v, veh_type) << " -> " << instance->getCasualtyLocation(casualty_id) << " = ";
-            cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getVehicleLocation(v, veh_type), veh_type) << endl;*/
+            /*
+                cout << "[Pickup->Victim for";
+                if (veh_type == TYPE_AMBULANCE)
+                {
+                    cout << " A";
+                }
+                else if (veh_type == TYPE_HELICOPTER)
+                {
+                    cout << " H";
+                }
+                cout << v << "] " << instance->getVehicleLocation(v, veh_type) << " -> " << instance->getCasualtyLocation(casualty_id) << " = ";
+                cout << instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getVehicleLocation(v, veh_type), veh_type) << endl;
+            */
             actual_time = instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getVehicleLocation(v, veh_type), veh_type);
             // If helicopter, add landing, takeoff and running to the casualty location on foot
             if (veh_type == TYPE_HELICOPTER)
@@ -741,17 +818,18 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
             min_availability_veh = res.second;
         }
 
-        /*cout << "->>>>Next available vehicle is";
-        if (veh_type == TYPE_HELICOPTER)
-        {
-            cout << " H";
-        }
-        else
-        {
-            cout << " A";
-        }
-        cout << next_available_veh << " in " << (min_availability_veh) / 60;
-        cout << " (" << int(min_availability_veh) / 3600 << ":" << (int(min_availability_veh) / 60) % 60 << ":" << int(min_availability_veh) % 60 << ")" << endl;*/
+        /*out << "->>>>Next available vehicle is";
+            if (veh_type == TYPE_HELICOPTER)
+            {
+                cout << " H";
+            }
+            else
+            {
+                cout << " A";
+            }
+            cout << next_available_veh << " in " << (min_availability_veh) / 60;
+            cout << " (" << int(min_availability_veh) / 3600 << ":" << (int(min_availability_veh) / 60) % 60 << ":" << int(min_availability_veh) % 60 << ")" << endl;
+        */
         closest_veh = next_available_veh;
         min_dv_veh = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_veh, veh_type), veh_type);
     }
@@ -779,8 +857,10 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
     cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(first_id) * 60;
 
     // STEP THREE: Find a hospital (using the actual gravity of the victim at arrival of the medical group, not the initial one)
-    // cout << endl;
-    // cout << "Searching for closest hospital with beds..." << endl;
+    /*
+        cout << endl;
+        cout << "Searching for closest hospital with beds..." << endl;
+    */
     res = findClosestHospitalWithBeds(first_id, closest_veh, veh_type);
     closest_h = res.first;
     min_dh_veh = res.second;

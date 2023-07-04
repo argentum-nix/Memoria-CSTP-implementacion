@@ -177,6 +177,7 @@ void Vehicle::snapshotLastAssinment()
 void Vehicle::clearResetFlag()
 {
     was_already_reset = 0;
+    yet_to_snapshot = 1;
 }
 
 void Vehicle::resetLastAssignment()
@@ -221,6 +222,7 @@ void Vehicle::saveLastAssignment()
     veh_prev_occupied_until.clear();
     veh_prev_total_rounds.clear();
     yet_to_snapshot = 1;
+    was_already_reset = 0;
 }
 
 void Vehicle::printData()

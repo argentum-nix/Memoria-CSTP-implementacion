@@ -354,9 +354,9 @@ void Instance::saveCasualtyLastAssignment(int casualty_id)
 {
     casualties[casualty_id - 1].saveLastAssignment();
 }
-void Instance::snapshotHospitalLastAssignment(int hospital_id, int g)
+void Instance::snapshotHospitalLastAssignment(int hospital_id)
 {
-    hospitals[hospital_id - 1].snapshotSolution(g);
+    hospitals[hospital_id - 1].snapshotSolution();
 }
 
 void Instance::snapshotCasualtyLastAssignment(int casualty_id, int current_time)
