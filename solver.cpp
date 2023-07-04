@@ -256,7 +256,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     closeness += instance->getVehiclePrepTime(z, TYPE_AMBULANCE);
                 }
                 availability = instance->getVehicleOccupiedUntilTime(z, 0);
-                amb_priority = closeness * closeness_factor + availability * availability_factor;
+                amb_priority = closeness * closeness_factor + (availability / 60.0) * availability_factor;
                 if (amb_priority < min_amb_priority && instance->getVehicleAppearTime(z, TYPE_AMBULANCE) <= current_time)
                 {
                     min_amb_priority = amb_priority;
@@ -265,7 +265,6 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     choosen_amb = z;
                 }
             }
-
             // BLOCK 4: Assign the choosen ambulance to casualty, just as in Greedy Procedure
             if (DEBUG_MODE_SOLVER)
             {
