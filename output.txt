@@ -1,6 +1,7 @@
 instance_txt_name = 1
 load_directory = ./instances/
 network_txt_name = network
+CURRENT PERIOD: 1 TIMESTAMP: 27660
 
 ---
 PERIOD 1 GREEDY SOLUTION WITH QUALITY 15835
@@ -69,14 +70,6 @@ V62    1    1    0.371828    14.98    H1    ROUND 15    MCC1    461 (7:41:0)    
 V63    1    2    0.371828    15.04    A4    ROUND 8    MCC1    461 (7:41:0)    996.422 (16:36:25)    1012.72 (16:52:42)    1027.76 (17:7:45)    1053.5 (17:33:29)    
 V64    1    2    0.371828    15.04    H2    ROUND 17    MCC1    461 (7:41:0)    1012.96 (16:52:57)    1013.51 (16:53:30)    1028.55 (17:8:32)    1033.67 (17:13:40)    
 ---
-Choosing ambulance A1 with min_av= 27660 cl= 28.4631 of priority 22.7705
-Choosing ambulance A1 with min_av= 27660 cl= 23.6298 of priority 18.9038
-Choosing ambulance A2 with min_av= 27660 cl= 30.1853 of priority 24.1483
-Choosing ambulance A3 with min_av= 32359.4 cl= 17.8724 of priority 29.9628
-Choosing ambulance A1 with min_av= 32690.1 cl= 23.9053 of priority 35.8914
-Choosing ambulance A4 with min_av= 42423.2 cl= 18.0391 of priority 63.642
-Choosing ambulance A3 with min_av= 42945.7 cl= 35.928 of priority 79.6947
-Choosing ambulance A4 with min_av= 50175 cl= 23.0947 of priority 93.5257
 ===
 PERIOD 1 HEURISTIC SOLUTION WITH QUALITY 15525.6
 V1    3    1    5.10496    93.3    A1    ROUND 2    MCC1    461 (7:41:0)    544.836 (9:4:50)    565.796 (9:25:47)    659.096 (10:59:5)    686.56 (11:26:33)    
@@ -145,6 +138,7 @@ V63    1    2    0.371828    15.04    H2    ROUND 17    MCC1    461 (7:41:0)    
 V64    1    2    0.371828    15.04    A1    ROUND 7    MCC1    461 (7:41:0)    1000.52 (16:40:31)    1004.17 (16:44:10)    1019.21 (16:59:12)    1029.9 (17:9:53)    
 ===
 PERIOD 1 FINAL SOLUTION QUALITY 15525.6
+CURRENT PERIOD: 2 TIMESTAMP: 33960
 
 ---
 PERIOD 2 GREEDY SOLUTION WITH QUALITY 29476.8
@@ -257,9 +251,6 @@ V106    1    2    0.371828    15.04    H1    ROUND 19    MCC2    566 (9:26:0)   
 V107    1    2    0.371828    15.04    H2    ROUND 20    MCC2    566 (9:26:0)    1183.47 (19:43:28)    1185.15 (19:45:9)    1200.19 (20:0:11)    1206.2 (20:6:11)    
 V108    1    2    0.371828    15.04    A2    ROUND 17    MCC2    566 (9:26:0)    1167.82 (19:27:49)    1176.74 (19:36:44)    1191.78 (19:51:47)    1207.08 (20:7:4)    
 ---
-Choosing ambulance A2 with min_av= 37159.3 cl= 5.50538 of priority 15.0687
-Choosing ambulance A4 with min_av= 49789.2 cl= 4.66128 of priority 56.4931
-Choosing ambulance A3 with min_av= 50952.3 cl= 16.4276 of priority 69.783
 ===
 PERIOD 2 HEURISTIC SOLUTION WITH QUALITY 29126.9
 V1    3    1    5.10496    93.3    A1    ROUND 2    MCC1    461 (7:41:0)    544.836 (9:4:50)    565.796 (9:25:47)    659.096 (10:59:5)    686.56 (11:26:33)    
@@ -372,6 +363,7 @@ V107    1    2    0.371828    15.04    H2    ROUND 22    MCC2    566 (9:26:0)   
 V108    1    2    0.371828    15.04    A4    ROUND 13    MCC2    566 (9:26:0)    1146.43 (19:6:25)    1155.36 (19:15:21)    1170.4 (19:30:23)    1185.69 (19:45:41)    
 ===
 PERIOD 2 FINAL SOLUTION QUALITY 33541.4
+CURRENT PERIOD: 3 TIMESTAMP: 42360
 
 ---
 PERIOD 3 GREEDY SOLUTION WITH QUALITY 39535.7
@@ -525,11 +517,6 @@ V147    1    2    0.371828    15.04    H1    ROUND 21    MCC2    706 (11:46:0)  
 V148    1    1    0.371828    14.98    A7    ROUND 12    MCC2    706 (11:46:0)    1199.99 (19:59:59)    1226.09 (20:26:5)    1241.07 (20:41:4)    1267.16 (21:7:9)    
 V149    1    2    0.371828    15.04    A4    ROUND 13    MCC1    706 (11:46:0)    1227.03 (20:27:1)    1244.9 (20:44:54)    1259.94 (20:59:56)    1282.24 (21:22:14)    
 ---
-Choosing ambulance A2 with min_av= 47416.6 cl= 4.66128 of priority 20.5843
-Choosing ambulance A2 with min_av= 50988.6 cl= 16.4276 of priority 41.904
-Choosing ambulance A1 with min_av= 55190.9 cl= 21.7053 of priority 60.1341
-Choosing ambulance A6 with min_av= 55424.5 cl= 14.7609 of priority 55.3571
-Choosing ambulance A5 with min_av= 58656.9 cl= 8.66128 of priority 61.252
 ===
 PERIOD 3 HEURISTIC SOLUTION WITH QUALITY 39183.5
 V1    3    1    5.10496    93.3    A1    ROUND 2    MCC1    461 (7:41:0)    544.836 (9:4:50)    565.796 (9:25:47)    659.096 (10:59:5)    686.56 (11:26:33)    
@@ -683,6 +670,7 @@ V148    1    1    0.371828    14.98    A3    ROUND 13    MCC2    706 (11:46:0)  
 V149    1    2    0.371828    15.04    H2    ROUND 23    MCC1    706 (11:46:0)    1225.99 (20:25:59)    1227.92 (20:27:55)    1242.96 (20:42:57)    1251.38 (20:51:22)    
 ===
 PERIOD 3 FINAL SOLUTION QUALITY 51807.1
+CURRENT PERIOD: 4 TIMESTAMP: 48360
 
 ---
 PERIOD 4 GREEDY SOLUTION WITH QUALITY 46957.1
@@ -867,11 +855,6 @@ V178    1    1    0.371828    14.98    A3    ROUND 16    MCC1    806 (13:26:0)  
 V179    1    2    0.371828    15.04    H1    ROUND 28    MCC1    806 (13:26:0)    1426.09 (23:46:5)    1426.39 (23:46:23)    1441.43 (24:1:25)    1456.57 (24:16:34)    
 V180    1    2    0.371828    15.04    A2    ROUND 17    MCC1    806 (13:26:0)    1423.87 (23:43:52)    1447.36 (24:7:21)    1462.4 (24:22:24)    1484.09 (24:44:5)    
 ---
-Choosing ambulance A7 with min_av= 52513.8 cl= 12.872 of priority 24.1437
-Choosing ambulance A1 with min_av= 52777.8 cl= 11.5942 of priority 24.0012
-Choosing ambulance A5 with min_av= 55918 cl= 14.7609 of priority 37.0019
-Choosing ambulance A3 with min_av= 62857 cl= 18.5947 of priority 63.1991
-Choosing ambulance A3 with min_av= 62857 cl= 17.6502 of priority 62.4435
 ===
 PERIOD 4 HEURISTIC SOLUTION WITH QUALITY 45888.7
 V1    3    1    5.10496    93.3    A1    ROUND 2    MCC1    461 (7:41:0)    544.836 (9:4:50)    565.796 (9:25:47)    659.096 (10:59:5)    686.56 (11:26:33)    
@@ -1056,6 +1039,7 @@ V179    1    2    0.371828    15.04    H2    ROUND 28    MCC1    806 (13:26:0)  
 V180    1    2    0.371828    15.04    A7    ROUND 14    MCC1    806 (13:26:0)    1405.07 (23:25:4)    1426.76 (23:46:45)    1441.8 (24:1:47)    1463.48 (24:23:28)    
 ===
 PERIOD 4 FINAL SOLUTION QUALITY 71661.7
+CURRENT PERIOD: 5 TIMESTAMP: 56160
 
 ---
 PERIOD 5 GREEDY SOLUTION WITH QUALITY 50959.1
@@ -1257,9 +1241,6 @@ V195    1    2    0.371828    15.04    A5    ROUND 15    MCC1    936 (15:36:0)  
 V196    1    2    0.371828    15.04    H2    ROUND 31    MCC1    936 (15:36:0)    1499.46 (24:59:27)    1501.56 (25:1:33)    1516.6 (25:16:35)    1522.56 (25:22:33)    
 V197    1    1    0.371828    14.98    H2    ROUND 32    MCC6    936 (15:36:0)    1522.56 (25:22:33)    1524.49 (25:24:29)    1539.47 (25:39:28)    1548.14 (25:48:8)    
 ---
-Choosing ambulance A4 with min_av= 57861.3 cl= 29.7409 of priority 29.4635
-Choosing ambulance A6 with min_av= 60678 cl= 18.0391 of priority 29.4913
-Choosing ambulance A3 with min_av= 70495.4 cl= 8.66128 of priority 54.7136
 ===
 PERIOD 5 HEURISTIC SOLUTION WITH QUALITY 50561.5
 V1    3    1    5.10496    93.3    A1    ROUND 2    MCC1    461 (7:41:0)    544.836 (9:4:50)    565.796 (9:25:47)    659.096 (10:59:5)    686.56 (11:26:33)    
@@ -1461,6 +1442,7 @@ V196    1    2    0.371828    15.04    H2    ROUND 30    MCC1    936 (15:36:0)  
 V197    1    1    0.371828    14.98    H3    ROUND 27    MCC6    936 (15:36:0)    1515.37 (25:15:22)    1517.3 (25:17:18)    1532.28 (25:32:17)    1540.95 (25:40:56)    
 ===
 PERIOD 5 FINAL SOLUTION QUALITY 88756.2
+CURRENT PERIOD: 6 TIMESTAMP: 65760
 
 ---
 PERIOD 6 GREEDY SOLUTION WITH QUALITY 47810.2
@@ -1674,10 +1656,6 @@ V207    1    2    0.371828    15.04    H3    ROUND 28    MCC6    1096 (18:16:0) 
 V208    1    2    0.371828    15.04    A2    ROUND 18    MCC1    1096 (18:16:0)    1561.41 (26:1:24)    1587.87 (26:27:52)    1602.91 (26:42:54)    1629.37 (27:9:22)    
 V209    1    2    0.371828    15.04    H2    ROUND 34    MCC6    1096 (18:16:0)    1579.24 (26:19:14)    1581.17 (26:21:10)    1596.21 (26:36:12)    1604.92 (26:44:55)    
 ---
-Choosing ambulance A6 with min_av= 66929.9 cl= 26.4631 of priority 25.0701
-Choosing ambulance A4 with min_av= 67850.8 cl= 29.1853 of priority 30.3177
-Choosing ambulance A3 with min_av= 68313.2 cl= 24.0742 of priority 27.7702
-Choosing ambulance A7 with min_av= 71718.3 cl= 29.7409 of priority 43.6537
 ===
 PERIOD 6 HEURISTIC SOLUTION WITH QUALITY 47443.4
 V1    3    1    5.10496    93.3    A1    ROUND 2    MCC1    461 (7:41:0)    544.836 (9:4:50)    565.796 (9:25:47)    659.096 (10:59:5)    686.56 (11:26:33)    
@@ -1891,6 +1869,7 @@ V208    1    2    0.371828    15.04    H3    ROUND 28    MCC1    1096 (18:16:0) 
 V209    1    2    0.371828    15.04    A1    ROUND 16    MCC6    1096 (18:16:0)    1568.83 (26:8:50)    1591.13 (26:31:7)    1606.17 (26:46:10)    1630.27 (27:10:16)    
 ===
 PERIOD 6 FINAL SOLUTION QUALITY 100373
+CURRENT PERIOD: 7 TIMESTAMP: 70560
 
 ---
 PERIOD 7 GREEDY SOLUTION WITH QUALITY 45054.6
@@ -2109,7 +2088,6 @@ V212    2    2    0.895303    29.9    A7    ROUND 7    MCC6    1176 (19:36:0)   
 V213    1    2    0.371828    15.04    H3    ROUND 27    MCC6    1176 (19:36:0)    1565.76 (26:5:45)    1567.69 (26:7:41)    1582.73 (26:22:43)    1591.39 (26:31:23)    
 V214    1    2    0.371828    15.04    A5    ROUND 18    MCC6    1176 (19:36:0)    1575.95 (26:15:56)    1605.13 (26:45:7)    1620.17 (27:0:10)    1651.16 (27:31:9)    
 ---
-Choosing ambulance A3 with min_av= 73722.1 cl= 31.5437 of priority 35.7755
 ===
 PERIOD 7 HEURISTIC SOLUTION WITH QUALITY 45054.6
 V1    3    1    5.10496    93.3    A1    ROUND 2    MCC1    461 (7:41:0)    544.836 (9:4:50)    565.796 (9:25:47)    659.096 (10:59:5)    686.56 (11:26:33)    

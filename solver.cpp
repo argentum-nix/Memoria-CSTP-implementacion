@@ -30,9 +30,9 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         }
         current_time = instance->getPeriod(p);
 
+        cout << "CURRENT PERIOD: " << p << " TIMESTAMP: " << current_time << endl;
         if (DEBUG_MODE_SOLVER)
         {
-            cout << "CURRENT PERIOD: " << p << " TIMESTAMP: " << current_time << endl;
             cout << "STATE OF THE HOSPITALS BEFORE RESET:" << endl;
             printAllHospitalsStates();
         }
