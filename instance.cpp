@@ -784,10 +784,10 @@ int Instance::loadInstance()
                     casualty.setCasualtyAssignedVehicle(-1);
                     casualty.setCasualtyAssignedVehicleType(-1);
                     casualty.setCasualtyAssignedHospital(-1);
-                    casualty.setCasualtyVehArrivedTime(-1);
-                    casualty.setCasualtyStabilizedTime(-1);
-                    casualty.setCasualtyAdmittedAtHospitalTime(-1);
-                    casualty.setCasualtyPriority(-1);
+                    casualty.setCasualtyVehArrivedTime(999999);
+                    casualty.setCasualtyStabilizedTime(999999);
+                    casualty.setCasualtyAdmittedAtHospitalTime(999999);
+                    casualty.setCasualtyPriority(999999);
                     addCasualty(casualty);
                 }
             }
