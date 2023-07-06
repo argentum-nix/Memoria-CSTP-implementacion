@@ -884,7 +884,6 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
     updateCasualtyState(first_id, veh_arrival_time - appear_time, veh_arrival_time);
     // Get the timestamp at which the casualty is stabilized (based on real gravity at arrival of medical group)
     cas_st_timestamp = veh_arrival_time + instance->getCasualtyStabilizationTime(first_id) * 60;
-
     // STEP THREE: Find a hospital (using the actual gravity of the victim at arrival of the medical group, not the initial one)
     /*
         cout << endl;
@@ -900,8 +899,8 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
         if (DEBUG_MODE_SOLVER)
         {
             cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;
-            return;
         }
+        return;
     }
 
     // STEP THREE: CALCULATE Hospital-related timestamp
@@ -1012,6 +1011,7 @@ void Solver::greedyAssignment(char fleet_mode, int cursor, int flag_save, int GR
                 {
                     // cout << "NOT VISITED. STARTING GREEDY ROUTE." << endl;
                     greedyRouteCreator(priority_list[choice].second, fleet_mode, flag_save, priority_list[choice].first);
+
                     visited.insert(priority_list[choice].second);
                 }
             }
