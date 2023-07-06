@@ -897,8 +897,11 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
     // No hospitals available
     if (closest_h == -1)
     {
-        cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;
-        return;
+        if (DEBUG_MODE_SOLVER)
+        {
+            cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;
+            return;
+        }
     }
 
     // STEP THREE: CALCULATE Hospital-related timestamp
