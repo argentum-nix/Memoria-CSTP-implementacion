@@ -22,7 +22,7 @@ Ejecutar el siguiente comando en el directorio principal:
 
 #### Ejecución: 
 El programa recibe varios parámetros. Un ejemplo de comando de ejecución es:
-`./CSTPSolver ./instances/ 1 network 1 1 10 123 0.8 0.2 H > output.txt`
+`./CSTPSolver ./instances/ 1 network 1 1 10 123 0.8 H > output.txt`
 
 Donde:
 - `./CSTPSolver` es el archivo ejecutable creado en la fase de compilación por el makefile
@@ -33,8 +33,7 @@ Donde:
 - `1` - flag de GRASP. Valor 1 indica que se debe usar procedimiento de Greedy Aleatorizado en la fase de construcción. 0 eoc.
 - `10` - tamaño de la ventana a utilizarse en el procedimiento de GRASP. Se toma en cuenta solo si el flag de GRASP no es nulo.
 - `123` - valor de la semilla a utilizar en el procedimiento de GRASP. Se toma en cuenta solo si el flag de GRASP no es nulo.
-- `0.8` - es el valor de la importancia de cercanía de un vehículo a la hora de calcular su "prioridad de selección". Se toma en cuenta solo si flag de heurística no es nulo.
-- `0.2` - es el valor de la importancia de disponibilidad de un vehículo a la hora de calcular su "prioridad de selección". Se toma en cuenta solo si flag de heurística no es nulo.
+- `0.8` - es el valor de la importancia de cercanía de un vehículo a la hora de calcular su "prioridad de selección". Se toma en cuenta solo si flag de heurística no es nulo. **En base a este valor se calcula el complemento - la importancia de disponibilidad de vehiculo**
 - `H` - indica que se debe minimizar el trayecto total, desde aparición de la víctima hasta el momento de su hospitalización. Posibles valores:
     - `H` (minimizar trayecto total - desde aparición en sistema hasta hospitalización)
     - `S` (minimizar tiempo entre aparición y estabilización lograda)
@@ -43,8 +42,8 @@ Donde:
 
 Nota: en los ejemplos, `output.txt` es un archivo a cual se redirigen los cout con soluciones obtenidas.
   
-*  `./CSTPSolver ./instances/ 1 network 0 0 10 123 0.8 0.2 H > output.txt` - se utilizará Greedy no aleatorizado sin heurística de mejora, con función que minimiza el tiempo total de trayecto de víctima 
-* `./CSTPSolver ./instances/ 1 network 0 1 10 123 0.8 0.2 C > output.txt` - utlizará solo GRASP con ventana 10 y semilla 123, sin heurística de mejora, minimizando tiempo entre asignación de vehículo y estabilziación lograda
+*  `./CSTPSolver ./instances/ 1 network 0 0 10 123 0.8 H > output.txt` - se utilizará Greedy no aleatorizado sin heurística de mejora, con función que minimiza el tiempo total de trayecto de víctima 
+* `./CSTPSolver ./instances/ 1 network 0 1 10 123 0.8 C > output.txt` - utlizará solo GRASP con ventana 10 y semilla 123, sin heurística de mejora, minimizando tiempo entre asignación de vehículo y estabilziación lograda
 
 ## Sobre el cálculo de la calidad de solución
 El programa utiliza dos formas de cálculo (sin depender de si se usa heurística, grasp, greedy no aleatorizado, etc). 
@@ -60,8 +59,8 @@ En la heurística se seleccionan las víctimas para el re-enrutamiento forzado b
 
 Si la víctima cumple con estas condiciones, se re-enruta con una ambulancia. La selección de esta se hace, minimizando el valor de "prioridad" calculado como:
 
-`X * cercanía + Y * disponibilidad`
-Donde X e Y son parámetros pasados al ejecutable. 
+`X * cercanía + (1-X) * disponibilidad`
+Donde X es el parametro de importancia de cercania pasada al ejecutable y 1-X es su complemento. El valor de X es de 0 a 1.
 
 - cercanía - cantidad de minutos de viaje desde la posición de una ambulancia hasta la víctima
 - disponibilidad - cantidad de minutos, calculada como `hora_en_que_ambulancia_puede_hacer_nueva_ruta - hora_actual`
