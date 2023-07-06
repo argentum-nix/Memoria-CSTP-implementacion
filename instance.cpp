@@ -10,9 +10,9 @@ Instance::Instance(std::string instance_directory, std::string instance_name, st
     load_directory = instance_directory;
     network_txt_name = network_name;
 
-    DEBUG(instance_txt_name);
-    DEBUG(load_directory);
-    DEBUG(network_txt_name);
+    // DEBUG(instance_txt_name);
+    // DEBUG(load_directory);
+    // DEBUG(network_txt_name);
 }
 
 void Instance::setDeteriorationTime(float time, int g)

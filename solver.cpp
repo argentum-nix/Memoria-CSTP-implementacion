@@ -30,9 +30,9 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         }
         current_time = instance->getPeriod(p);
 
-        cout << "CURRENT PERIOD: " << p << " TIMESTAMP: " << current_time << endl;
         if (DEBUG_MODE_SOLVER)
         {
+            cout << "CURRENT PERIOD: " << p << " TIMESTAMP: " << current_time << endl;
             cout << "STATE OF THE HOSPITALS BEFORE RESET:" << endl;
             printAllHospitalsStates();
         }
@@ -116,15 +116,15 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
 
         if (DEBUG_MODE_SOLVER)
             printPriorityList();
-        cout << endl;
+
         if (DEBUG_MODE_SOLVER)
             cout << "=GREEDY=" << endl;
         greedyAssignment('M', 0, 1, useGrasp, graspWindowSize, 0);
 
-        cout << "---" << endl;
-        cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
-        printSolutions();
-        cout << "---" << endl;
+        // cout << "---" << endl;
+        // cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
+        // printSolutions();
+        // cout << "---" << endl;
         /*for (int y = 0; y < int(assignment_list.size()); y++)
         {
             cout << "(" << assignment_list[y].first << " " << assignment_list[y].second << "), ";
@@ -136,15 +136,16 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         if (useHeuristic == 1)
         {
             heuristicProcedure(closeness_factor, availability_factor);
-            cout << "===" << endl;
-            cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
-            printSolutions();
-            cout << "===" << endl;
+            // cout << "===" << endl;
+            // cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
+            // printSolutions();
+            // cout << "===" << endl;
         }
-        cout << "PERIOD " << p << " FINAL SOLUTION QUALITY " << calculateSolutionQuality(functionMode, 1) << endl;
+        // cout << "PERIOD " << p << " FINAL SOLUTION QUALITY " << calculateSolutionQuality(functionMode, 1) << endl;
     }
-    printAllHospitalsStates();
-    printVictimsWithoutAssignment();
+    cout << calculateSolutionQuality(functionMode, 1) << endl;
+    // printAllHospitalsStates();
+    // printVictimsWithoutAssignment();
 }
 
 int Solver::checkIfHighST(int casualty_id)
