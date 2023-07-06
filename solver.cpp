@@ -4,15 +4,15 @@
 using namespace std;
 
 const int DEBUG_MODE_SOLVER = 0;
+const int PRINTOUT_MODE_SOLVER = 0;
 
-Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, float availability_param, char f)
+Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, char f)
 {
     instance = in;
     useHeuristic = heuristic_flag;
     useGrasp = grasp_flag;
     graspWindowSize = grasp_window;
     closeness_factor = closeness_param;
-    availability_factor = availability_param;
     seed = s;
     functionMode = f;
     float lambda;
@@ -121,10 +121,13 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
             cout << "=GREEDY=" << endl;
         greedyAssignment('M', 0, 1, useGrasp, graspWindowSize, 0);
 
-        // cout << "---" << endl;
-        // cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
-        // printSolutions();
-        // cout << "---" << endl;
+        if (PRINTOUT_MODE_SOLVER)
+        {
+            cout << "---" << endl;
+            cout << "PERIOD " << p << " GREEDY SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
+            printSolutions();
+            cout << "---" << endl;
+        }
         /*for (int y = 0; y < int(assignment_list.size()); y++)
         {
             cout << "(" << assignment_list[y].first << " " << assignment_list[y].second << "), ";
@@ -135,17 +138,26 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
 
         if (useHeuristic == 1)
         {
-            heuristicProcedure(closeness_factor, availability_factor);
-            // cout << "===" << endl;
-            // cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
-            // printSolutions();
-            // cout << "===" << endl;
+            heuristicProcedure(closeness_factor, (1 - closeness_factor));
+            if (PRINTOUT_MODE_SOLVER)
+            {
+                cout << "===" << endl;
+                cout << "PERIOD " << p << " HEURISTIC SOLUTION WITH QUALITY " << calculateSolutionQuality(functionMode, 0) << endl;
+                printSolutions();
+                cout << "===" << endl;
+            }
         }
-        // cout << "PERIOD " << p << " FINAL SOLUTION QUALITY " << calculateSolutionQuality(functionMode, 1) << endl;
+        if (PRINTOUT_MODE_SOLVER)
+        {
+            cout << "PERIOD " << p << " FINAL SOLUTION QUALITY " << calculateSolutionQuality(functionMode, 1) << endl;
+        }
     }
     cout << calculateSolutionQuality(functionMode, 1) << endl;
-    // printAllHospitalsStates();
-    // printVictimsWithoutAssignment();
+    if (PRINTOUT_MODE_SOLVER)
+    {
+        printAllHospitalsStates();
+        printVictimsWithoutAssignment();
+    }
 }
 
 int Solver::checkIfHighST(int casualty_id)
@@ -257,7 +269,9 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     closeness += instance->getVehiclePrepTime(z, TYPE_AMBULANCE);
                 }
                 availability = instance->getVehicleOccupiedUntilTime(z, 0);
+                // cout << "A" << z << " " << closeness_factor << " " << availability_factor << " " << "closeness: " << closeness << " availability in: " << (availability - current_time) / 60.0;
                 amb_priority = closeness * closeness_factor + ((availability - current_time) / 60.0) * availability_factor;
+                // cout << " priority=" << amb_priority << " available: " << (instance->getVehicleAppearTime(z, TYPE_AMBULANCE) <= current_time) << endl;
                 if (amb_priority < min_amb_priority && instance->getVehicleAppearTime(z, TYPE_AMBULANCE) <= current_time)
                 {
                     min_amb_priority = amb_priority;
@@ -266,7 +280,8 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
                     choosen_amb = z;
                 }
             }
-            // BLOCK 4: Assign the choosen ambulance to casualty, just as in Greedy Procedure
+            // cout << "selected: " << "A" << choosen_amb << " priority " << min_amb_priority << endl;
+            //  BLOCK 4: Assign the choosen ambulance to casualty, just as in Greedy Procedure
             if (DEBUG_MODE_SOLVER)
             {
                 cout << "Choosing ambulance A" << choosen_amb << " with min_av= " << min_availability_veh << " cl= " << min_dv_veh << " of priority " << min_amb_priority << endl;
@@ -468,45 +483,65 @@ float Solver::calculateSolutionQuality(char f, int total_flag)
         {
             p = priority_list[i].first;
             c = priority_list[i].second;
-            // min TTAk - minimize the whole trajectory time, from appearance to hospital admittance
-            if (f == 'H')
+            // fixed very high penalty for death (asumming that its independent on casualty's gravity 1,2 or 3)
+            if (instance->getCasualtyAssignedHospital(c) == -1)
             {
-                quality += p * (instance->getCasualtyAdmittedAtHopsitalTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+                quality += 99999;
             }
-            // min Ck - time necessary to get victim stabilized, taken from vehicle dispach (wait time) to stabilization accomplished
-            else if (f == 'C')
+            else
             {
-                quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyWaitingTime(c) / 60.0);
-            }
-            // min Ck+ak - time necessary to get victim stabilized, taken from appearance in system up to ST accomplished moment
-            else if (f == 'S')
-            {
-                quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+                // min TTAk - minimize the whole trajectory time, from appearance to hospital admittance
+                if (f == 'H')
+                {
+                    quality += p * (instance->getCasualtyAdmittedAtHopsitalTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+                }
+                // min Ck - time necessary to get victim stabilized, taken from vehicle dispach (wait time) to stabilization accomplished
+                else if (f == 'C')
+                {
+                    quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyWaitingTime(c) / 60.0);
+                }
+                // min Ck+ak - time necessary to get victim stabilized, taken from appearance in system up to ST accomplished moment
+                else if (f == 'S')
+                {
+                    quality += p * (instance->getCasualtyStabilizedTime(c) / 60.0 - instance->getCasualtyAppearTime(c) / 60.0);
+                }
             }
         }
     }
     else
     {
+
         for (const auto &route : solutions)
         {
+
             p = route.second[2];
             appear_t = route.second[8];
             wait_t = route.second[9];
             stabilized_t = route.second[11];
             hospitalized_t = route.second[12];
-            if (f == 'H')
+            // fixed very high penalty for death (asumming that its independent on casualty's gravity 1,2 or 3)
+            if (route.second[7] == -1)
             {
-                quality += p * (hospitalized_t / 60.0 - appear_t / 60.0);
+                if (DEBUG_MODE_SOLVER)
+                    cout << "V" << route.first << " DEATH PENALTY!" << endl;
+                quality += 99999;
             }
-            // min Ck - time necessary to get victim stabilized, taken from vehicle dispach (wait time) to stabilization accomplished
-            else if (f == 'C')
+            else
             {
-                quality += p * (stabilized_t / 60.0 - wait_t / 60.0);
-            }
-            // min Ck+ak - time necessary to get victim stabilized, taken from appearance in system up to ST accomplished moment
-            else if (f == 'S')
-            {
-                quality += p * (stabilized_t / 60.0 - appear_t / 60.0);
+                if (f == 'H')
+                {
+                    quality += p * (hospitalized_t / 60.0 - appear_t / 60.0);
+                }
+                // min Ck - time necessary to get victim stabilized, taken from vehicle dispach (wait time) to stabilization accomplished
+                else if (f == 'C')
+                {
+                    quality += p * (stabilized_t / 60.0 - wait_t / 60.0);
+                }
+                // min Ck+ak - time necessary to get victim stabilized, taken from appearance in system up to ST accomplished moment
+                else if (f == 'S')
+                {
+                    quality += p * (stabilized_t / 60.0 - appear_t / 60.0);
+                }
             }
         }
     }
@@ -896,6 +931,11 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
     // No hospitals available
     if (closest_h == -1)
     {
+        instance->updateCasualtyHospital(first_id, -1);
+        instance->updateCasualtyAssignedVehicle(first_id, -1, -1);
+        instance->updateCasualtyRound(first_id, -1);
+        instance->updateCasualtyRouteTimes(first_id, 999999, 999999, 999999, 999999);
+        saveSolution(first_id, lambda, -1, -1, -1, -1, 999999, 999999, 999999, 999999);
         if (DEBUG_MODE_SOLVER)
         {
             cout << "No hospitals can attend this victim. Victim: V" << first_id << " G=" << instance->getCasualtyGravity(first_id) << endl;

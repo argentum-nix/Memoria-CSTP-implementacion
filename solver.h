@@ -10,7 +10,7 @@
 class Solver
 {
 public:
-    Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, float availability_param, char f);
+    Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, char f);
     ~Solver();
     float calculatePriority(float te, int g);
     void updateCasualtyState(int casualty_id, float te, float change_timestamp);
@@ -42,7 +42,6 @@ private:
     int useHeuristic;
     int graspWindowSize;
     float closeness_factor;
-    float availability_factor;
     char functionMode;
     unsigned int seed;
     // key: victim, vector: gravity, age, priority, stabilization time, veh_type, veh_id, mcc_id, appear, wait_till, arrive, stabilize, admit_at_hos;
