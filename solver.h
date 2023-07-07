@@ -27,6 +27,8 @@ public:
     void printSolutions();
     void greedyRouteCreator(int cas_id, char fleet_mode, int flag_save, float lambda);
 
+    float calculateTimeWithSpeedDecrease(float time);
+
     std::vector<std::pair<float, int>> priority_list;
     std::vector<std::pair<float, int>> assignment_list;
     std::pair<int, float> findClosestHospitalWithBeds(int casualty_id, int id_closest_veh, int veh_type);
@@ -43,6 +45,7 @@ private:
     int graspWindowSize;
     float closeness_factor;
     char functionMode;
+    float speed_decrease;
     unsigned int seed;
     // key: victim, vector: gravity, age, priority, stabilization time, veh_type, veh_id, mcc_id, appear, wait_till, arrive, stabilize, admit_at_hos;
     std::map<int, std::vector<float>> solutions;

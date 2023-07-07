@@ -20,6 +20,8 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
 
     for (int p = 1; p <= instance->qty_periods; p++)
     {
+        // get speed decrease
+        speed_decrease = instance->getSpeedDecrease(p);
         // clean the priority list, because every period should start with new list
         priority_list.clear();
         assignment_list.clear();
@@ -160,6 +162,13 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
     }
 }
 
+float Solver::calculateTimeWithSpeedDecrease(float time)
+{
+    if (DEBUG_MODE_SOLVER)
+        cout << "time = " << time << " with speed_decrease of " << speed_decrease << " is = " << (0.3 / (1 - speed_decrease)) * time << endl;
+    return (0.3 / (1 - speed_decrease)) * time;
+}
+
 int Solver::checkIfHighST(int casualty_id)
 {
     int g = instance->getCasualtyGravity(casualty_id);
@@ -262,7 +271,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             for (int z = 1; z <= instance->qty_ambulances; z++)
             {
                 amb_loc = instance->getVehicleLocation(z, 0);
-                closeness = instance->getTimeBetweenNodes(amb_loc, cas_loc, 0);
+                closeness = calculateTimeWithSpeedDecrease(instance->getTimeBetweenNodes(amb_loc, cas_loc, 0));
                 // Add prepare time to vehicle if it is its first asignment
                 if (instance->getVehicleOccupiedUntilTime(z, TYPE_AMBULANCE) == instance->getVehicleAppearTime(z, TYPE_AMBULANCE))
                 {
@@ -663,6 +672,11 @@ pair<int, float> Solver::findClosestHospitalWithBeds(int casualty_id, int id_clo
                 {
                     actual_time += instance->getVehicleLandingTime(id_closest_veh, veh_type) + instance->getVehicleTakeoffTime(id_closest_veh, veh_type);
                 }
+                // if ambulance, calculate speed decrease-increase
+                else if (veh_type == TYPE_AMBULANCE)
+                {
+                    actual_time = calculateTimeWithSpeedDecrease(actual_time);
+                }
 
                 // cout << " and with takeoff/landing: " << actual_time << endl;
 
@@ -756,6 +770,11 @@ pair<int, float> Solver::findClosestAvailableVehicle(int casualty_id, int veh_ty
             {
                 actual_time += instance->getVehicleLandingTime(v, veh_type) + instance->getVehicleTakeoffTime(v, veh_type);
                 actual_time += instance->getCasualtyTimeToHeliport(casualty_id);
+            }
+            // calculate ambulance with speed decrease/increase applied
+            else if (veh_type == TYPE_AMBULANCE)
+            {
+                actual_time = calculateTimeWithSpeedDecrease(actual_time);
             }
             // if its first operating of the vehicle, add the prep time too
             if (instance->getVehicleOccupiedUntilTime(v, veh_type) == instance->getVehicleAppearTime(v, veh_type))
@@ -882,7 +901,9 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
             min_availability_veh = res.second;
         }
 
-        /*out << "->>>>Next available vehicle is";
+        if (DEBUG_MODE_SOLVER)
+        {
+            cout << "->>>>Next available vehicle is";
             if (veh_type == TYPE_HELICOPTER)
             {
                 cout << " H";
@@ -893,9 +914,13 @@ void Solver::greedyRouteCreator(int first_id, char fleet_mode, int flag_save, fl
             }
             cout << next_available_veh << " in " << (min_availability_veh) / 60;
             cout << " (" << int(min_availability_veh) / 3600 << ":" << (int(min_availability_veh) / 60) % 60 << ":" << int(min_availability_veh) % 60 << ")" << endl;
-        */
+        }
         closest_veh = next_available_veh;
         min_dv_veh = instance->getTimeBetweenNodes(instance->getCasualtyLocation(first_id), instance->getVehicleLocation(closest_veh, veh_type), veh_type);
+        if (veh_type == TYPE_AMBULANCE)
+        {
+            min_dv_veh = calculateTimeWithSpeedDecrease(min_dv_veh);
+        }
     }
     // STEP TWO: Calculate Vehicle-arrival related timestamps
     veh_arrival_time = 0;
