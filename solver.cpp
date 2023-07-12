@@ -779,11 +779,12 @@ pair<int, float> Solver::findClosestAvailableVehicle(int casualty_id, int veh_ty
             // if its first operating of the vehicle, add the prep time too
             if (instance->getVehicleOccupiedUntilTime(v, veh_type) == instance->getVehicleAppearTime(v, veh_type))
             {
+
                 actual_time += instance->getVehiclePrepTime(v, veh_type);
             }
             if (actual_time < min_dv)
             {
-                min_dv = instance->getTimeBetweenNodes(instance->getCasualtyLocation(casualty_id), instance->getVehicleLocation(v, 0), 0);
+                min_dv = actual_time;
                 closest_v = v;
             }
         }
