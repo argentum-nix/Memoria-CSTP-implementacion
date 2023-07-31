@@ -4,7 +4,7 @@
 using namespace std;
 
 const int DEBUG_MODE_SOLVER = 0;
-const int PRINTOUT_MODE_SOLVER = 1;
+const int PRINTOUT_MODE_SOLVER = 0;
 const char GREEDY_MODE = 'M';
 
 Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, char f)

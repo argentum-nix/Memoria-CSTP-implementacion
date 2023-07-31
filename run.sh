@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Valores de a, b y c
-a=(3)
+a=(6)
 b=(102 9 23 345 8919 10 34 29 11 784 379 9 999 78 23 4576 98 32 66 666 1000)
-c=(0.8)
+c=(0.12)
 
 # Archivo para guardar la salida
 output_file="output.txt"
