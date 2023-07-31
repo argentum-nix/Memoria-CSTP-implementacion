@@ -5,6 +5,7 @@ using namespace std;
 
 const int DEBUG_MODE_SOLVER = 0;
 const int PRINTOUT_MODE_SOLVER = 0;
+const char GREEDY_MODE = 'M';
 
 Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, char f)
 {
@@ -121,7 +122,7 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
 
         if (DEBUG_MODE_SOLVER)
             cout << "=GREEDY=" << endl;
-        greedyAssignment('M', 0, 1, useGrasp, graspWindowSize, 0);
+        greedyAssignment(GREEDY_MODE, 0, 1, useGrasp, graspWindowSize, 0);
 
         if (PRINTOUT_MODE_SOLVER)
         {
@@ -325,7 +326,7 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             // BLOCK 5: Run normal greedy for every other victim after current one in priority list
             if (DEBUG_MODE_SOLVER)
                 cout << "STARTING SLICED GREEDY FROM VICTIM V" << cursor << ", PRIORITY LIST POSITION =" << k + 1 << endl;
-            greedyAssignment('M', k + 1, 0, 0, 0, 1);
+            greedyAssignment(GREEDY_MODE, k + 1, 0, 0, 0, 1);
 
             // BLOCK 6: Comprare solutions - reset if worse, save if better.
             if (DEBUG_MODE_SOLVER)
@@ -337,7 +338,13 @@ void Solver::heuristicProcedure(float closeness_factor, float availability_facto
             if (cursolq > prevsolq)
             {
                 if (DEBUG_MODE_SOLVER)
+                {
                     cout << "Current solution is WORSE than prev sol: " << cursolq << " vs " << prevsolq << endl;
+                    /*for (int i = 1; i <= instance->qty_casualties; i++)
+                    {
+                        printCasualtyRouteRow(i);
+                    }*/
+                }
                 // force reset all hospitals and vehicles
                 for (int m = 1; m <= instance->qty_hospitals; m++)
                 {
