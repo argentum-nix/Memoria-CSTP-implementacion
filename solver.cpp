@@ -4,7 +4,7 @@
 using namespace std;
 
 const int DEBUG_MODE_SOLVER = 0;
-const int PRINTOUT_MODE_SOLVER = 0;
+const int PRINTOUT_MODE_SOLVER = 1;
 const char GREEDY_MODE = 'M';
 
 Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_window, int s, float closeness_param, char f)
@@ -33,9 +33,12 @@ Solver::Solver(Instance *in, int heuristic_flag, int grasp_flag, int grasp_windo
         }
         current_time = instance->getPeriod(p);
 
-        if (DEBUG_MODE_SOLVER)
+        if (PRINTOUT_MODE_SOLVER)
         {
             cout << "CURRENT PERIOD: " << p << " TIMESTAMP: " << current_time << endl;
+        }
+        if (DEBUG_MODE_SOLVER)
+        {
             cout << "STATE OF THE HOSPITALS BEFORE RESET:" << endl;
             printAllHospitalsStates();
         }
@@ -1058,56 +1061,28 @@ void Solver::greedyAssignment(char fleet_mode, int cursor, int flag_save, int GR
     }
     else
     {
-        int last_window_size = priority_list.size() % GRASP_window_size;
-        int number_of_windows = priority_list.size() / float(GRASP_window_size);
         int choice;
         int init = 0;
         int fin = GRASP_window_size - 1;
         set<int> visited;
         std::mt19937 gen(seed);
-        // slide as many "whole" sized windows as we can
-        // cout << "RUNNING GRASP CONSTRUCTION..." << endl;
-        // cout << "LIST SIZE: " << priority_list.size() << " WINDOW SIZE: " << GRASP_window_size;
-        // cout << " NUMBER OF WHOLE WINDOWS: " << number_of_windows << " LAST WINDOWS SIZE: " << last_window_size << endl;
-        for (int j = 0; j < number_of_windows; j++)
+        if (GRASP_window_size > int(priority_list.size()))
         {
-            // cout << "WINDOW " << j + 1 << " FROM " << init << " TO " << fin << " INDICES" << endl;
-            uniform_int_distribution<> dis(init, fin);
-            // assign ALL the victims inside the window
-            while (int(visited.size()) < GRASP_window_size)
-            {
-                // rand between init and fin indices
-                choice = dis(gen);
-                // cout << "CHOSE INDEX " << choice << endl;
-                //   if not yet assigned
-                if (visited.count(priority_list[choice].second) == 0)
-                {
-                    // cout << "NOT VISITED. STARTING GREEDY ROUTE." << endl;
-                    greedyRouteCreator(priority_list[choice].second, fleet_mode, flag_save, priority_list[choice].first);
-
-                    visited.insert(priority_list[choice].second);
-                }
-            }
-            init = fin + 1;
-            fin += GRASP_window_size;
-            visited.clear();
+            fin = int(priority_list.size()) - 1;
         }
-        // if vector size was not divisible by GRASP_windows_size
-        if (last_window_size != 0)
+        // while not all visited
+        while (visited.size() != priority_list.size())
         {
-            uniform_int_distribution<> dis(init, init + last_window_size - 1);
-            // cout << "RUNNING FOR LAST WINDOW. GENERATING NUMBERS BETWEEN " << init << " AND " << init + last_window_size - 1 << endl;
-            while (int(visited.size()) != last_window_size)
+            uniform_int_distribution<> dis(init, fin);
+            choice = dis(gen);
+
+            if (visited.count(choice) == 0)
             {
-                // rand between init and last index of final window
-                choice = dis(gen);
-                // cout << "CHOSE INDEX " << choice << endl;
-                //   if not yet assigned
-                if (visited.count(priority_list[choice].second) == 0)
+                greedyRouteCreator(priority_list[choice].second, fleet_mode, flag_save, priority_list[choice].first);
+                visited.insert(choice);
+                if (fin < int(priority_list.size()) - 1)
                 {
-                    // cout << "NOT VISITED. STARTING GREEDY ROUTE." << endl;
-                    greedyRouteCreator(priority_list[choice].second, fleet_mode, flag_save, priority_list[choice].first);
-                    visited.insert(priority_list[choice].second);
+                    fin++;
                 }
             }
         }
